@@ -28,6 +28,7 @@ namespace SoulRunProject
 
         public override void Fire()
         {
+            Debug.Log("発射");
             //プレイヤーのポジションから発射させたい
             _playerTransform ??= Object.FindObjectOfType<PlayerManager>().transform;
             _playerForwardMover ??= Object.FindObjectOfType<PlayerForwardMover>();

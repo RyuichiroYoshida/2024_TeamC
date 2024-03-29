@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace SoulRunProject.Common
 {
@@ -22,19 +23,19 @@ namespace SoulRunProject.Common
         List<IUniqueParameter> _uniqueParameters;
 
         /// <summary>
-        /// ScriptableObjectのデータを上書きせずに、ランタイム時に変更したいためこのような書き方をしている。
+        /// ランタイム時に変更したいためこのような書き方をしている。
         /// </summary>
         [NonSerialized] public int Amount;
-        [NonSerialized] public float FireInterval;
+        //[NonSerialized] public float FireInterval;
         [NonSerialized] public float AttackDamage;
         [NonSerialized] public float Range;
         [NonSerialized] public float Speed;
         [NonSerialized] public int Penetration;
         [NonSerialized] public List<IUniqueParameter> UniqueParameters;
 
-        public override void InitializeParam()
+        public override void InitializeParamOnSceneLoaded()
         {
-            base.InitializeParam();
+            base.InitializeParamOnSceneLoaded();
             Amount = _amount;
             AttackDamage = _attackDamage;
             Range = _range;
