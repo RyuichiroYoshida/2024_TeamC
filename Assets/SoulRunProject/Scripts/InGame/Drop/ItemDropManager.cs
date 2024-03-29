@@ -14,7 +14,7 @@ namespace SoulRunProject.InGame
         [SerializeField] int _preloadCount = 5;
         [SerializeField] int _threshold = 5;
         readonly Dictionary<DropBase, DropPool> _dropPoolDictionary = new();
-        public void Drop(LootTable.LootTable lootTable, Status playerStatus, Vector3 pos)
+        public void Drop(LootTable lootTable, Vector3 pos, Status playerStatus = null)
         {
             foreach (var dropData in lootTable.Choose(playerStatus))
             {
