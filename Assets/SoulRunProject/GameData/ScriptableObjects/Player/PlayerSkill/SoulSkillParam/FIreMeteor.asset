@@ -9,17 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f9dfbc2eaa1a02439c65a10e6be6216, type: 3}
-  m_Name: ProjectileSkillA
+  m_Script: {fileID: 11500000, guid: fd67ee76e5906b3479c8b5ba63883a46, type: 3}
+  m_Name: FIreMeteor
   m_EditorClassIdentifier: 
-  _coolTime: 1.5
-  _lifeTime: 2
-  _amount: 1
-  _attackDamage: 100
-  _range: 2
-  _speed: 10
-  _penetration: 1
-  _uniqueParameters: []
-  references:
-    version: 2
-    RefIds: []
+  _skillType: 0
+  _coolTime: 0
+  _lifeTime: 0
