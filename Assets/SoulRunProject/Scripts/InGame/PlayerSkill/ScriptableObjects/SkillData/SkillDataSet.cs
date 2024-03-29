@@ -10,8 +10,7 @@ namespace SoulRunProject
     [CreateAssetMenu(menuName = "SoulRunProject/PlayerSkill/SkillDataSet")]
     public class SkillDataSet : ScriptableObject
     {
-        [SerializeReference, SubclassSelector, Header("スキルリスト")]  List<SkillBase> _skills;
-
-        public List<SkillBase> Skills => _skills;
+        [SerializeField, Header("スキルリスト")] private List<SkillData> _skills;
+        public List<SkillData> Skills => _skills;
     }
 }

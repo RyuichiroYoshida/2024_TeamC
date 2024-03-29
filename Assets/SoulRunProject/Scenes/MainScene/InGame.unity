@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0019524717, g: 0.003835365, b: 0.008846895, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8639,7 +8639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 342fd8d87ed91b84f80c0ffc379a1d5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _skillDataSet: {fileID: 11400000, guid: b46d97e22cc1e804d9e82f91f50ebb47, type: 2}
+  _skillDataSet: {fileID: 11400000, guid: bd1df6d49e5d4e947848631660768137, type: 2}
   _preloadCount: 5
   _threshold: 5
   _useDontDestroyOnLoad: 0
@@ -9072,8 +9072,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 20
-  _jumpPower: 20
-  _grav: 30
+  _jumpPower: 30
+  _grav: 80
   _yAxisGroundLine: 1.49
   _moveRangeMin: -47
   _moveRangeMax: 47
@@ -9274,7 +9274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6075843f4893e842bfcc7a2cfcae3dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _skillDataSet: {fileID: 11400000, guid: b46d97e22cc1e804d9e82f91f50ebb47, type: 2}
+  _skillDataSet: {fileID: 11400000, guid: bd1df6d49e5d4e947848631660768137, type: 2}
 --- !u!114 &1420106450
 MonoBehaviour:
   m_ObjectHideFlags: 0
