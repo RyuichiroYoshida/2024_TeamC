@@ -8553,6 +8553,7 @@ GameObject:
   - component: {fileID: 1174502019}
   - component: {fileID: 1174502020}
   - component: {fileID: 1174502021}
+  - component: {fileID: 1174502022}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -8642,6 +8643,20 @@ MonoBehaviour:
   _preloadCount: 5
   _threshold: 5
   _useDontDestroyOnLoad: 0
+--- !u!114 &1174502022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174502016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fffaba4efc1d1b49b61acc970f88722, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _preloadCount: 5
+  _threshold: 5
 --- !u!4 &1180136328 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4164151997940843940, guid: 54942ca6699e8764a8b2eb58690cf15d,
@@ -14619,7 +14634,7 @@ PrefabInstance:
     - target: {fileID: 2976286264063094494, guid: bb9e0b7ed13b5d741ad32191db07c964,
         type: 3}
       propertyPath: managedReferences[336611744612614150]._spawnCount
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2976286264063094494, guid: bb9e0b7ed13b5d741ad32191db07c964,
         type: 3}
@@ -14639,7 +14654,7 @@ PrefabInstance:
     - target: {fileID: 2976286264063094494, guid: bb9e0b7ed13b5d741ad32191db07c964,
         type: 3}
       propertyPath: managedReferences[336611744612614150]._spawnRadiusRange
-      value: 0
+      value: 13.29
       objectReference: {fileID: 0}
     - target: {fileID: 8747319268006015908, guid: bb9e0b7ed13b5d741ad32191db07c964,
         type: 3}
