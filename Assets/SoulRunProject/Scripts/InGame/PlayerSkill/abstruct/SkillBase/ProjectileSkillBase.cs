@@ -30,12 +30,14 @@ namespace SoulRunProject
         {
             Debug.Log("発射");
             //プレイヤーのポジションから発射させたい
-            _playerTransform ??= Object.FindObjectOfType<PlayerManager>().transform;
-            _playerForwardMover ??= Object.FindObjectOfType<PlayerForwardMover>();
+            if (_playerTransform)
+                _playerTransform = Object.FindObjectOfType<PlayerManager>().transform;
             if (_playerForwardMover)
             {
+                _playerForwardMover = Object.FindObjectOfType<PlayerForwardMover>();
                 _playerMoveSpeed = _playerForwardMover.Speed;
             }
+            
             if (SkillBaseParam is ProjectileSkillParameter param)
             {
                 // 弾の生成
