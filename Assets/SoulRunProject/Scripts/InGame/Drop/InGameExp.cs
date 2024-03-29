@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace SoulRunProject.InGame
 {
+    /// <summary>
+    /// 経験値
+    /// </summary>
     public class InGameExp : DropBase
     {
         [SerializeField] private int _exp;

@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace SoulRunProject.InGame
 {
+    /// <summary>
+    /// コイン
+    /// </summary>
     public class InGameCoin : DropBase
     {
         [SerializeField] private int _coin;
