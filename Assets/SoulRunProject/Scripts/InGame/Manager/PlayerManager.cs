@@ -22,6 +22,11 @@ namespace SoulRunProject.Common
         private HitDamageEffectManager _hitDamageEffectManager;
         public FloatReactiveProperty CurrentHp { get; private set; }
         public float MaxHp => _status.Hp;
+        public Status PlayerStatus
+        {
+            get => _status;
+            set => _status = value;
+        }
 
         private void Awake()
         {
