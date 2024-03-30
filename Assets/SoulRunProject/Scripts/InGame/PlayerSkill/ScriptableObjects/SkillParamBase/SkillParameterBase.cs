@@ -8,7 +8,7 @@ namespace SoulRunProject.Common
     /// <summary>
     /// スキルのパラメーター
     /// </summary>
-    [Serializable ]
+    [Serializable , Name("基底クラス")]
     public abstract class SkillParameterBase
     {
         [SerializeField, Header("スキルの名前")] private PlayerSkill _skillType;

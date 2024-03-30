@@ -18,7 +18,7 @@ namespace SoulRunProject.Common
     /// <summary>
     /// スキルの基底クラス
     /// </summary>
-    [Serializable]
+    [Serializable , Name("基底クラス(名前をオーバーライドしてください)")]
     public class SkillBase 
     {
         [SerializeField , Header("スキルの最大レベル")] public int MaxSkillLevel = 5;

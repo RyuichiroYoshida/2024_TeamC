@@ -9,8 +9,7 @@ namespace SoulRunProject.Common
     /// <summary>
     /// スキルのパラメーター
     /// </summary>
-    [Serializable]
-    [CreateAssetMenu(menuName = "SoulRunProject/PlayerSkill/ProjectionSkillParameter")]
+    [Serializable , Name("発射スキルパラメータ")]
     public class ProjectileSkillParameter : SkillParameterBase
     {
         [SerializeField, Header("同時発射するオブジェクトの数")] int _amount;
