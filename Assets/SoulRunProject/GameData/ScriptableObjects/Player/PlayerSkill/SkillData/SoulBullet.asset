@@ -44,7 +44,7 @@ MonoBehaviour:
         _lifeTime: 2
         _amount: 1
         _attackDamage: 50
-        _range: 1.5
+        _range: 4
         _speed: 100
         _penetration: 0
         _uniqueParameters: []
