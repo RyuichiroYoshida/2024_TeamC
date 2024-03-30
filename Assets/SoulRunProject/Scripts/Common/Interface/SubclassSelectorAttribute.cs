@@ -3,6 +3,11 @@ using UnityEngine;
 
 namespace SoulRunProject.Common
 {
+    public class NameAttribute : Attribute
+    {
+        public string GetName { get; }
+        public NameAttribute(string name) => GetName = name;
+    }
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
     public class SubclassSelectorAttribute : PropertyAttribute
     {
