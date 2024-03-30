@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using SoulRunProject.Common;
 using UniRx;
 using VContainer.Unity;
 using Random = UnityEngine.Random;
@@ -7,14 +8,18 @@ namespace SoulRunProject.InGame
 {
     public class LevelUpUIPresenter : IInitializable
     {
+        private PlayerManager _playerManager;
         private readonly LevelUpState _levelUpState;
         private readonly LevelUpItemManager _levelUpItemManager;
         private readonly LevelUpView _levelUpView;
         private SkillManager _skillManager;
         private CompositeDisposable _disposableOnUpdateUI = new();
         
-        public LevelUpUIPresenter(LevelUpState levelUpState, LevelUpItemManager levelUpItemManager, LevelUpView levelUpView, SkillManager skillManager)
+        public LevelUpUIPresenter
+            (PlayerManager playerManager, LevelUpState levelUpState, LevelUpItemManager levelUpItemManager,
+                LevelUpView levelUpView, SkillManager skillManager)
         {
+            _playerManager = playerManager;
             _levelUpState = levelUpState;
             _levelUpItemManager = levelUpItemManager;
             _levelUpView = levelUpView;
@@ -34,13 +39,23 @@ namespace SoulRunProject.InGame
                 _levelUpView.SetLevelUpPanelVisibility(false);
             };
             
-            // upgradeされたらStateに送る
+            // upgradeされたら元のステートに戻る
             foreach (var upgradeButton in _levelUpView.UpgradeButtons)
             {
                 upgradeButton.InputUIButton.onClick.AsObservable().Subscribe(_ => _levelUpState.SelectedSkill()).AddTo(_levelUpView);
             }
 
             _disposableOnUpdateUI.AddTo(_levelUpView);
+
+            // アイテムに参照を渡す
+            foreach (var skillLevelUpItem in _levelUpItemManager.SkillLevelUpItems)
+            {
+                skillLevelUpItem.GetReference(_skillManager);
+            }
+            foreach (var statusUpItem in _levelUpItemManager.StatusUpItems)
+            {
+                statusUpItem.GetReference(_playerManager);
+            }
         }
 
         /// <summary>
@@ -63,7 +78,7 @@ namespace SoulRunProject.InGame
                 indexList.Add(i);
             }
             StatusUpItem[] selectedStatusUpItems = new StatusUpItem[2];
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 2; i++) // ランダムに２つ取得する
             {
                 int index = Random.Range(0, indexList.Count);
                 selectedStatusUpItems[i] = _levelUpItemManager.StatusUpItems[indexList[index]];

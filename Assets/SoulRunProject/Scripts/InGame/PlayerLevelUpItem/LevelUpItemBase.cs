@@ -80,52 +80,52 @@ namespace SoulRunProject.InGame
                 switch (_statusToUp)
                 {
                     case StatusType.Hp:
-                        playerManager.PlayerStatus.Hp += (int)_upValue;
+                        playerManager.CurrentStatus.Hp += (int)_upValue;
                         return;
                     case StatusType.攻撃力:
-                        playerManager.PlayerStatus.Attack += (int)_upValue;
+                        playerManager.CurrentStatus.Attack += (int)_upValue;
                         return;
                     case StatusType.防御力:
-                        playerManager.PlayerStatus.Defence += (int)_upValue;
+                        playerManager.CurrentStatus.Defence += (int)_upValue;
                         return;
                     case StatusType.クールタイム減少率:
-                        playerManager.PlayerStatus.CoolTime += _upValue;
+                        playerManager.CurrentStatus.CoolTime += _upValue;
                         return;
                     case StatusType.スキル範囲増加率:
-                        playerManager.PlayerStatus.Range += _upValue;
+                        playerManager.CurrentStatus.Range += _upValue;
                         return;
                     case StatusType.弾速増加率:
-                        playerManager.PlayerStatus.BulletSpeed += _upValue;
+                        playerManager.CurrentStatus.BulletSpeed += _upValue;
                         return;
                     case StatusType.追加効果時間:
-                        playerManager.PlayerStatus.EffectTime += _upValue;
+                        playerManager.CurrentStatus.EffectTime += _upValue;
                         return;
                     case StatusType.追加弾数:
-                        playerManager.PlayerStatus.BulletNum += (int)_upValue;
+                        playerManager.CurrentStatus.BulletNum += (int)_upValue;
                         return;
                     case StatusType.貫通力:
-                        playerManager.PlayerStatus.Penetration += _upValue;
+                        playerManager.CurrentStatus.Penetration += _upValue;
                         return;
                     case StatusType.移動スピード:
-                        playerManager.PlayerStatus.MoveSpeed += _upValue;
+                        playerManager.CurrentStatus.MoveSpeed += _upValue;
                         return;
                     case StatusType.成長速度:
-                        playerManager.PlayerStatus.GrowthSpeed += _upValue;
+                        playerManager.CurrentStatus.GrowthSpeed += _upValue;
                         return;
                     case StatusType.金運:
-                        playerManager.PlayerStatus.Luck += _upValue;
+                        playerManager.CurrentStatus.Luck += _upValue;
                         return;
                     case StatusType.クリティカル率:
-                        playerManager.PlayerStatus.CriticalRate += _upValue;
+                        playerManager.CurrentStatus.CriticalRate += _upValue;
                         return;
                     case StatusType.クリティカルダメージ倍率:
-                        playerManager.PlayerStatus.CriticalDamageRate += _upValue;
+                        playerManager.CurrentStatus.CriticalDamageRate += _upValue;
                         return;
                     case StatusType.ソウル吸収力:
-                        playerManager.PlayerStatus.SoulAbsorption += _upValue;
+                        playerManager.CurrentStatus.SoulAbsorption += _upValue;
                         return;
                     case StatusType.ソウル獲得率:
-                        playerManager.PlayerStatus.SoulAcquisition += _upValue;
+                        playerManager.CurrentStatus.SoulAcquisition += _upValue;
                         return;
                 }
             }
