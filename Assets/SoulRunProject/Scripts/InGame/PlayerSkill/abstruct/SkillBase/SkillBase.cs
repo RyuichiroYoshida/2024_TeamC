@@ -30,6 +30,8 @@ namespace SoulRunProject.Common
         public virtual void InitializeParamOnSceneLoaded()
         {
             SkillBaseParam.InitializeParamOnSceneLoaded();
+            _currentLevel = 1;
+            _currentCoolTime = 0f;
         }
         
         private int _currentLevel = 1;
