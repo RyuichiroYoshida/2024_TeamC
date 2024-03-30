@@ -25,7 +25,6 @@ namespace SoulRunProject.Common
         public PlayerResourceContainer ResourceContainer => _resourceContainer;
         public float MaxHp => _status.Hp;
         public Status CurrentStatus => _status;
-        
 
         private void Awake()
         {

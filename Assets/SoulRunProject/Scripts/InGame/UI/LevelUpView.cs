@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using SoulRun.InGame;
 using UnityEngine;
 using UnityEngine.UI;
@@ -35,8 +34,11 @@ namespace SoulRunProject.InGame
         [Serializable]
         public class ButtonAndView
         {
-            public InputUIButton InputUIButton;
-            public Text ButtonText;
+            [SerializeField] private InputUIButton _inputUIButton;
+            [SerializeField] private Text _buttonText;
+            
+            public InputUIButton InputUIButton => _inputUIButton;
+            public Text ButtonText => _buttonText;
         }
     }
 }
