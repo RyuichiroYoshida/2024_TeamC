@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SoulRunProject.Common
 {
-    [Serializable]
+    [Serializable, Name("抽象クラス")]
     public abstract class AoELevelUpEvent : ILevelUpEvent
     {
         public void LevelUp(in SkillParameterBase skillParameterBase)
@@ -20,7 +20,7 @@ namespace SoulRunProject.Common
         public abstract void LevelUpParam(in AoESkillParameter param);
     }
     
-    [Serializable]
+    [Serializable, Name("ダメージ量上昇")]
     public class LevelUpEventAoEAttackDamage : AoELevelUpEvent
     {
         [SerializeField, Header("1秒間で与えるダメージ増加")] float _increaseDamage;
@@ -30,7 +30,7 @@ namespace SoulRunProject.Common
             param.AttackDamage += _increaseDamage;
         }
     }
-    [Serializable]
+    [Serializable, Name("AoE範囲上昇")]
     public class LevelUpEventAoERange : AoELevelUpEvent
     {
         [SerializeField, Header("範囲をどれだけ増加させるか")] float _increaseRange;

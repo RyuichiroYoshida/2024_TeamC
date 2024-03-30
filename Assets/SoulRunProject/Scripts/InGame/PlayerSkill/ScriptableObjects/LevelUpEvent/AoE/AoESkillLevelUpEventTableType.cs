@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace SoulRunProject.Common
 {
+    [Serializable, Name("範囲スキルイベント")]
     public class AoESkillLevelUpEventTableType : ILevelUpEventTableType
     {
         [SerializeField, Header("レベルアップイベントテーブル")] 
