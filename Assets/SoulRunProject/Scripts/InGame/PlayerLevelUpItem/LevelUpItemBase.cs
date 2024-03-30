@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using SoulRunProject.Common;
+using Unity.Burst;
 
 namespace SoulRunProject.InGame
 {
@@ -82,49 +83,49 @@ namespace SoulRunProject.InGame
                     case StatusType.Hp:
                         playerManager.CurrentStatus.Hp += (int)_upValue;
                         return;
-                    case StatusType.攻撃力:
+                    case StatusType.Attack:
                         playerManager.CurrentStatus.Attack += (int)_upValue;
                         return;
-                    case StatusType.防御力:
+                    case StatusType.Defence:
                         playerManager.CurrentStatus.Defence += (int)_upValue;
                         return;
-                    case StatusType.クールタイム減少率:
+                    case StatusType.CoolTime:
                         playerManager.CurrentStatus.CoolTime += _upValue;
                         return;
-                    case StatusType.スキル範囲増加率:
+                    case StatusType.Range:
                         playerManager.CurrentStatus.Range += _upValue;
                         return;
-                    case StatusType.弾速増加率:
+                    case StatusType.BulletSpeed:
                         playerManager.CurrentStatus.BulletSpeed += _upValue;
                         return;
-                    case StatusType.追加効果時間:
+                    case StatusType.EffectTime:
                         playerManager.CurrentStatus.EffectTime += _upValue;
                         return;
-                    case StatusType.追加弾数:
+                    case StatusType.BulletNum:
                         playerManager.CurrentStatus.BulletNum += (int)_upValue;
                         return;
-                    case StatusType.貫通力:
+                    case StatusType.Penetration:
                         playerManager.CurrentStatus.Penetration += _upValue;
                         return;
-                    case StatusType.移動スピード:
+                    case StatusType.MoveSpeed:
                         playerManager.CurrentStatus.MoveSpeed += _upValue;
                         return;
-                    case StatusType.成長速度:
+                    case StatusType.GrowthSpeed:
                         playerManager.CurrentStatus.GrowthSpeed += _upValue;
                         return;
-                    case StatusType.金運:
+                    case StatusType.Luck:
                         playerManager.CurrentStatus.Luck += _upValue;
                         return;
-                    case StatusType.クリティカル率:
+                    case StatusType.CriticalRate:
                         playerManager.CurrentStatus.CriticalRate += _upValue;
                         return;
-                    case StatusType.クリティカルダメージ倍率:
+                    case StatusType.CriticalDamageRate:
                         playerManager.CurrentStatus.CriticalDamageRate += _upValue;
                         return;
-                    case StatusType.ソウル吸収力:
+                    case StatusType.SoulAbsorption:
                         playerManager.CurrentStatus.SoulAbsorption += _upValue;
                         return;
-                    case StatusType.ソウル獲得率:
+                    case StatusType.SoulAcquisition:
                         playerManager.CurrentStatus.SoulAcquisition += _upValue;
                         return;
                 }
@@ -135,20 +136,20 @@ namespace SoulRunProject.InGame
     public enum StatusType
     {
         Hp,
-        攻撃力,
-        防御力,
-        クールタイム減少率,
-        スキル範囲増加率,
-        弾速増加率,
-        追加効果時間,
-        追加弾数,
-        貫通力,
-        移動スピード,
-        成長速度,
-        金運,
-        クリティカル率,
-        クリティカルダメージ倍率,
-        ソウル吸収力,
-        ソウル獲得率
+        [InspectorName("攻撃力")]　Attack,
+        [InspectorName("防御力")]　Defence,
+        [InspectorName("クールタイム減少率")]　CoolTime,
+        [InspectorName("スキル範囲増加率")]　Range,
+        [InspectorName("弾速増加率")]　BulletSpeed,
+        [InspectorName("追加効果時間")]　EffectTime,
+        [InspectorName("追加弾数")]　BulletNum,
+        [InspectorName("貫通力")]　Penetration,
+        [InspectorName("移動スピード")]　MoveSpeed,
+        [InspectorName("成長速度")]　GrowthSpeed,
+        [InspectorName("金運")]　Luck,
+        [InspectorName("クリティカル率")]　CriticalRate,
+        [InspectorName("クリティカルダメージ倍率")]　CriticalDamageRate,
+        [InspectorName("ソウル吸収力")]　SoulAbsorption,
+        [InspectorName("ソウル獲得率")]　SoulAcquisition
     }
 }

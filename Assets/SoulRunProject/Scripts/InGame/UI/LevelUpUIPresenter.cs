@@ -10,18 +10,18 @@ namespace SoulRunProject.InGame
     {
         private PlayerManager _playerManager;
         private readonly LevelUpState _levelUpState;
-        private readonly LevelUpItemManager _levelUpItemManager;
+        private readonly LevelUpItemData _levelUpItemData;
         private readonly LevelUpView _levelUpView;
         private SkillManager _skillManager;
         private CompositeDisposable _disposableOnUpdateUI = new();
         
         public LevelUpUIPresenter
-            (PlayerManager playerManager, LevelUpState levelUpState, LevelUpItemManager levelUpItemManager,
+            (PlayerManager playerManager, LevelUpState levelUpState, LevelUpItemData levelUpItemData,
                 LevelUpView levelUpView, SkillManager skillManager)
         {
             _playerManager = playerManager;
             _levelUpState = levelUpState;
-            _levelUpItemManager = levelUpItemManager;
+            _levelUpItemData = levelUpItemData;
             _levelUpView = levelUpView;
             _skillManager = skillManager;
         }
@@ -48,11 +48,11 @@ namespace SoulRunProject.InGame
             _disposableOnUpdateUI.AddTo(_levelUpView);
 
             // アイテムに参照を渡す
-            foreach (var skillLevelUpItem in _levelUpItemManager.SkillLevelUpItems)
+            foreach (var skillLevelUpItem in _levelUpItemData.SkillLevelUpItems)
             {
                 skillLevelUpItem.GetReference(_skillManager);
             }
-            foreach (var statusUpItem in _levelUpItemManager.StatusUpItems)
+            foreach (var statusUpItem in _levelUpItemData.StatusUpItems)
             {
                 statusUpItem.GetReference(_playerManager);
             }
@@ -67,13 +67,13 @@ namespace SoulRunProject.InGame
             
             // ランダムにアイテムを選択し、ボタンに適用する
             // skill
-            SkillLevelUpItem selectedSkillUpItem = _levelUpItemManager.SkillLevelUpItems[Random.Range(0, _levelUpItemManager.SkillLevelUpItems.Length)];
+            SkillLevelUpItem selectedSkillUpItem = _levelUpItemData.SkillLevelUpItems[Random.Range(0, _levelUpItemData.SkillLevelUpItems.Length)];
             _levelUpView.UpgradeButtons[0].InputUIButton.onClick.AsObservable()
                 .Subscribe(_ => selectedSkillUpItem.ItemEffect()).AddTo(_disposableOnUpdateUI);
             _levelUpView.UpgradeButtons[0].ButtonText.text = selectedSkillUpItem.ItemName;
             // passive
             List<int> indexList = new();
-            for (int i = 0; i < _levelUpItemManager.StatusUpItems.Length; i++)
+            for (int i = 0; i < _levelUpItemData.StatusUpItems.Length; i++)
             {
                 indexList.Add(i);
             }
@@ -81,7 +81,7 @@ namespace SoulRunProject.InGame
             for (int i = 0; i < 2; i++) // ランダムに２つ取得する
             {
                 int index = Random.Range(0, indexList.Count);
-                selectedStatusUpItems[i] = _levelUpItemManager.StatusUpItems[indexList[index]];
+                selectedStatusUpItems[i] = _levelUpItemData.StatusUpItems[indexList[index]];
                 indexList.RemoveAt(index);
             }
             _levelUpView.UpgradeButtons[1].InputUIButton.onClick.AsObservable()
