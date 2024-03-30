@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace SoulRunProject.Common
 {
@@ -10,7 +9,6 @@ namespace SoulRunProject.Common
     /// スキルのパラメーター
     /// </summary>
     [Serializable]
-    [CreateAssetMenu(menuName = "SoulRunProject/PlayerSkill/ProjectionSkillParameter")]
     public class ProjectileSkillParameter : SkillParameterBase
     {
         [SerializeField, Header("同時発射するオブジェクトの数")] int _amount;

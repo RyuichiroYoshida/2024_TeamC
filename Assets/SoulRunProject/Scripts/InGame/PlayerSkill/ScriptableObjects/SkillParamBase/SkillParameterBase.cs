@@ -1,14 +1,13 @@
 using System;
 using System.Text;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace SoulRunProject.Common
 {
     /// <summary>
     /// スキルのパラメーター
     /// </summary>
-    [Serializable ]
+    [Serializable]
     public abstract class SkillParameterBase
     {
         [SerializeField, Header("スキルの名前")] private PlayerSkill _skillType;
