@@ -10,7 +10,7 @@ namespace SoulRunProject.Common
     public class SkillLevelUpEvent
     {
         //TODO リストのリスト化
-        [SerializeReference, SubclassSelector, Header("レベルアップイベントタイプ")]  ILevenUpEventTableType _levelUpType;
+        [SerializeReference, SubclassSelector, Header("レベルアップイベントタイプ")] ILevenUpEventTableType _levelUpType;
         public void LevelUp(int level , SkillParameterBase currentParam)
         {
             //　2レベルになってからレベルテーブルを使うため。
@@ -34,7 +34,7 @@ namespace SoulRunProject.Common
         public List<ILevelUpEventGroup> LevelUpTable { get; }
     }
 
-    [Serializable]
+    [Serializable, Name("発射スキルイベント")]
     public class ProjectileSkillLevelUpEventTableType : ILevenUpEventTableType
     {
         [SerializeField, Header("レベルアップイベントテーブル")]  List<ProjectileSkillLevelUpEventGroup> _levelUpTable;
