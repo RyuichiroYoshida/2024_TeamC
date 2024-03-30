@@ -49,14 +49,18 @@ namespace SoulRunProject.InGame
             _playerManager = playerManager;
         }
         
-        public void Damage(int damage)
+        public void Damage(float damage)
         {
             _status.Hp -= damage;
             if (_status.Hp <= 0)
             {
                 Death();
             }
-            _hitDamageEffectManager.HitFadeBlinkWhite();
+
+            if (_hitDamageEffectManager)
+            {
+                _hitDamageEffectManager.HitFadeBlinkWhite();
+            }
         }
         
         void Death()
