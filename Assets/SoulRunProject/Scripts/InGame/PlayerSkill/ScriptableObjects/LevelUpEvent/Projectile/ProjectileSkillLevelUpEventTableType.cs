@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace SoulRunProject.Common
 {
-    [Serializable]
+    [Serializable, Name("発射スキルイベント")]
     public class ProjectileSkillLevelUpEventTableType : ILevelUpEventTableType
     {
         [SerializeField, Header("レベルアップイベントテーブル")] 
