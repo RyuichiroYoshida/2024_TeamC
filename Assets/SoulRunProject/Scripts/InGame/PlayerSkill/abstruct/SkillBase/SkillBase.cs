@@ -30,6 +30,8 @@ namespace SoulRunProject.Common
         public virtual void InitializeParamOnSceneLoaded()
         {
             SkillBaseParam.InitializeParamOnSceneLoaded();
+            _currentLevel = 1;
+            _currentCoolTime = 0f;
         }
         
         private int _currentLevel = 1;
@@ -61,6 +63,8 @@ namespace SoulRunProject.Common
         {
             Debug.Log("発射");
         }
+        /// <summary>レベルアップ時イベント</summary>
+        public virtual void OnLevelUp(){}
         
         /// <summary>スキル進化</summary>
         public void LevelUp()
@@ -69,6 +73,7 @@ namespace SoulRunProject.Common
             if (CanLevelUp())
             {
                 SkillLevelUpEvent.LevelUp(_currentLevel , SkillBaseParam);
+                OnLevelUp();
             }
             else
             {
