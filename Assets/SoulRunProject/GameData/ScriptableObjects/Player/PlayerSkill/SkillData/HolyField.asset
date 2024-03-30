@@ -13,25 +13,42 @@ MonoBehaviour:
   m_Name: HolyField
   m_EditorClassIdentifier: 
   _skill:
-    rid: 7688072956877471753
+    rid: 7688072956877471760
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
-    - rid: 7688072956877471753
-      type: {class: AoESkillBase, ns: SoulRunProject.Common, asm: Assembly-CSharp}
+    - rid: 7688072956877471760
+      type: {class: HolyField, ns: SoulRunProject.Skill, asm: Assembly-CSharp}
       data:
         MaxSkillLevel: 5
         SkillLevelUpEvent:
           _levelUpType:
-            rid: 7688072956877471756
+            rid: 7688072956877471761
         SkillBaseParam:
-          rid: 7688072956877471755
+          rid: 7688072956877471762
         _original: {fileID: 158674725360675817, guid: 75a84e6cba64bf448a7f1dd12ad33ca1,
           type: 3}
         _groundHeight: 0.01
-    - rid: 7688072956877471755
+    - rid: 7688072956877471761
+      type: {class: AoESkillLevelUpEventTableType, ns: SoulRunProject.Common, asm: Assembly-CSharp}
+      data:
+        _levelUpTable:
+        - _levelUpEventType:
+          - rid: 7688072956877471763
+          - rid: 7688072956877471764
+        - _levelUpEventType:
+          - rid: 7688072956877471763
+          - rid: 7688072956877471764
+        - _levelUpEventType:
+          - rid: 7688072956877471763
+          - rid: 7688072956877471764
+        - _levelUpEventType:
+          - rid: 7688072956877471763
+          - rid: 7688072956877471764
+        - _levelUpEventType:
+          - rid: 7688072956877471763
+          - rid: 7688072956877471764
+    - rid: 7688072956877471762
       type: {class: AoESkillParameter, ns: SoulRunProject.Common, asm: Assembly-CSharp}
       data:
         _skillType: 1
@@ -39,9 +56,11 @@ MonoBehaviour:
         _lifeTime: 0
         _attackDamage: 10
         _range: 8
-    - rid: 7688072956877471756
-      type: {class: AoESkillLevelUpEventTableType, ns: SoulRunProject.Common, asm: Assembly-CSharp}
+    - rid: 7688072956877471763
+      type: {class: LevelUpEventAoEAttackDamage, ns: SoulRunProject.Common, asm: Assembly-CSharp}
       data:
-        _levelUpTable:
-        - _levelUpEventType:
-          - rid: -2
+        _increaseDamage: 5
+    - rid: 7688072956877471764
+      type: {class: LevelUpEventAoERange, ns: SoulRunProject.Common, asm: Assembly-CSharp}
+      data:
+        _increaseRange: 4

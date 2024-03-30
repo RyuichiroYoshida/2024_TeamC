@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SoulRunProject.Common
 {
-    [Serializable]
+    [Serializable , Name("範囲スキルパラメータ")]
     public class AoESkillParameter : SkillParameterBase
     {
         [SerializeField, Header("敵にヒットしたときに与えるダメージ")] float _attackDamage;
