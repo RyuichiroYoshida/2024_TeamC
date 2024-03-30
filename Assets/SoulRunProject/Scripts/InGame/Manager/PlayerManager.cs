@@ -1,4 +1,5 @@
-﻿using SoulRunProject.InGame;
+﻿using System;
+using SoulRunProject.InGame;
 using SoulRunProject.SoulMixScene;
 using UniRx;
 using UnityEngine;
@@ -94,11 +95,7 @@ namespace SoulRunProject.Common
             //SwitchPause(true);
         }
 
-        /// <summary>
-        /// 仮の当たり判定関数
-        /// </summary>
-        /// <param name="other"></param>
-        private void OnCollisionEnter(Collision other)
+        private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.TryGetComponent(out FieldEntityController fieldEntityController))
             {

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Skelton
   m_EditorClassIdentifier: 
   _hp: 23525
-  _attack: 0
+  _attack: 1
   _defence: 0
   _coolTime: 0
   _range: 0
