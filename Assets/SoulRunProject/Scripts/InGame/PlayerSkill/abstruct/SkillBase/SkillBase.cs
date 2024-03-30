@@ -63,6 +63,8 @@ namespace SoulRunProject.Common
         {
             Debug.Log("発射");
         }
+        /// <summary>レベルアップ時イベント</summary>
+        public virtual void OnLevelUp(){}
         
         /// <summary>スキル進化</summary>
         public void LevelUp()
@@ -71,6 +73,7 @@ namespace SoulRunProject.Common
             if (CanLevelUp())
             {
                 SkillLevelUpEvent.LevelUp(_currentLevel , SkillBaseParam);
+                OnLevelUp();
             }
             else
             {
