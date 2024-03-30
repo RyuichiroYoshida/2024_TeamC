@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cfab0d6b02607134d92580570dbb59ed, type: 3}
-  m_Name: SoulBallet
+  m_Name: SoulBullet
   m_EditorClassIdentifier: 
   _skill:
     rid: 4571640270207844355
@@ -33,7 +33,17 @@ MonoBehaviour:
       type: {class: ProjectileSkillLevelUpEventTableType, ns: SoulRunProject.Common,
         asm: Assembly-CSharp}
       data:
-        _levelUpTable: []
+        _levelUpTable:
+        - _levelUpEventType:
+          - rid: 7688072956877471757
+        - _levelUpEventType:
+          - rid: 7688072956877471757
+        - _levelUpEventType:
+          - rid: 7688072956877471757
+        - _levelUpEventType:
+          - rid: 7688072956877471757
+        - _levelUpEventType:
+          - rid: 7688072956877471757
     - rid: 4571640270207844357
       type: {class: ProjectileSkillParameter, ns: SoulRunProject.Common, asm: Assembly-CSharp}
       data:
@@ -43,6 +53,10 @@ MonoBehaviour:
         _amount: 1
         _attackDamage: 50
         _range: 4
-        _speed: 100
+        _speed: 15
         _penetration: 0
         _uniqueParameters: []
+    - rid: 7688072956877471757
+      type: {class: LevelUpEventProjectileCoolTime, ns: SoulRunProject.Common, asm: Assembly-CSharp}
+      data:
+        _reduceCoolTime: 10

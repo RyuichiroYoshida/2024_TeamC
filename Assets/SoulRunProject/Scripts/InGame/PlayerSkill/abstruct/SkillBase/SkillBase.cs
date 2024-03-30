@@ -1,13 +1,12 @@
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace SoulRunProject.Common
 {
     public enum PlayerSkill
     {
          SoulBullet = 0 ,
-         HollyField = 1 ,
+         HolyField = 1 ,
          SoulSword = 2 ,
          SoulShell = 3 ,
          SoulRay = 4 ,
