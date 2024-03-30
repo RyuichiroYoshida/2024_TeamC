@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace SoulRunProject.Common
 {
@@ -18,12 +19,20 @@ namespace SoulRunProject.Common
     /// スキルの基底クラス
     /// </summary>
     [Serializable]
-    public abstract class SkillBase 
+    public class SkillBase 
     {
         [SerializeField , Header("スキルの最大レベル")] public int MaxSkillLevel = 5;
         [SerializeField, Header("レベルアップイベントデータ")] protected SkillLevelUpEvent SkillLevelUpEvent;
-        [SerializeField , Header("スキルのパラメーターデータ")] protected SkillParameterBase SkillBaseParam;
+        [SerializeReference,SubclassSelector , Header("スキルのパラメーターデータ")] protected SkillParameterBase SkillBaseParam;
 
+        /// <summary>
+        /// シーンロード時にパラメータを初期化するように登録する。
+        /// </summary>
+        public virtual void InitializeParamOnSceneLoaded()
+        {
+            SkillBaseParam.InitializeParamOnSceneLoaded();
+        }
+        
         private int _currentLevel = 1;
         private float _currentCoolTime;
         
@@ -35,7 +44,7 @@ namespace SoulRunProject.Common
             return _currentLevel <= MaxSkillLevel;
         }
 
-        public abstract void StartSkill();
+        public virtual void StartSkill(){}
         public virtual void UpdateSkill(float deltaTime)
         {
             if (_currentCoolTime < SkillBaseParam.CoolTime)
@@ -44,8 +53,8 @@ namespace SoulRunProject.Common
             }
             else
             {
-                Fire();
                 _currentCoolTime = 0;
+                Fire();
             }
         }
 

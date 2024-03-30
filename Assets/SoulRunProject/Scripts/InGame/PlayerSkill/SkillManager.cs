@@ -45,10 +45,10 @@ namespace SoulRunProject.InGame
         /// <param name="skillType">スキル名</param>
         public void AddSkill(PlayerSkill skillType)
         {
-            var skillBase = _skillData.Skills.FirstOrDefault(x => x.SkillType == skillType);
-            if (skillBase != null)
+            var skillData = _skillData.Skills.FirstOrDefault(x => x.Skill.SkillType == skillType);
+            if (skillData != null)
             {
-                _currentSkills.Add(skillBase);
+                _currentSkills.Add(skillData.Skill);
             }
             else
             {

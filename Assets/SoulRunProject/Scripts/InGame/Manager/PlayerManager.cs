@@ -20,13 +20,11 @@ namespace SoulRunProject.Common
         private SoulSkillManager _soulSkillManager;
         private PlayerMovement _playerMovement;
         private HitDamageEffectManager _hitDamageEffectManager;
+        private PlayerResourceContainer _resourceContainer;
         public FloatReactiveProperty CurrentHp { get; private set; }
+        public PlayerResourceContainer ResourceContainer => _resourceContainer;
         public float MaxHp => _status.Hp;
-        public Status PlayerStatus
-        {
-            get => _status;
-            set => _status = value;
-        }
+        public Status CurrentStatus => _status;
 
         private void Awake()
         {
@@ -38,6 +36,7 @@ namespace SoulRunProject.Common
             _soulSkillManager = GetComponent<SoulSkillManager>();
             _playerMovement = GetComponent<PlayerMovement>();
             _hitDamageEffectManager = GetComponent<HitDamageEffectManager>();
+            _resourceContainer = new();
             
             InitializeInput();
         }
