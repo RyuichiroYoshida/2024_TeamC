@@ -7,6 +7,7 @@ using UnityEditor;
 
 namespace SoulRunProject.Editor
 {
+
     [CustomPropertyDrawer(typeof(SubclassSelectorAttribute))]
     public class SubclassSelectorDrawer : PropertyDrawer
     {
@@ -60,7 +61,18 @@ namespace SoulRunProject.Editor
 
         private void GetInheritedTypeNameArrays()
         {
-            _typePopupNameArray = _inheritedTypes.Select(type => type == null ? "<null>" : type.ToString()).ToArray();
+            _typePopupNameArray = _inheritedTypes.Select(type =>
+            {
+                if (type == null)
+                    return "<null>";
+                if (type.IsDefined(typeof(NameAttribute)) && 
+                    type.GetCustomAttribute(typeof(NameAttribute)) is NameAttribute nameAttribute)
+                {
+                    return nameAttribute.GetName;
+                }
+                return type.ToString();
+
+            }).ToArray();
             _typeFullNameArray = _inheritedTypes.Select(type =>
                     type == null ? "" : string.Format("{0} {1}", type.Assembly.ToString().Split(',')[0], type.FullName))
                 .ToArray();

@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0019524717, g: 0.003835365, b: 0.008846895, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8553,6 +8553,7 @@ GameObject:
   - component: {fileID: 1174502019}
   - component: {fileID: 1174502020}
   - component: {fileID: 1174502021}
+  - component: {fileID: 1174502022}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -8638,10 +8639,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 342fd8d87ed91b84f80c0ffc379a1d5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _skillDataSet: {fileID: 11400000, guid: b46d97e22cc1e804d9e82f91f50ebb47, type: 2}
+  _skillDataSet: {fileID: 11400000, guid: bd1df6d49e5d4e947848631660768137, type: 2}
   _preloadCount: 5
   _threshold: 5
   _useDontDestroyOnLoad: 0
+--- !u!114 &1174502022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174502016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fffaba4efc1d1b49b61acc970f88722, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _preloadCount: 5
+  _threshold: 5
 --- !u!4 &1180136328 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4164151997940843940, guid: 54942ca6699e8764a8b2eb58690cf15d,
@@ -9057,8 +9072,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 20
-  _jumpPower: 20
-  _grav: 30
+  _jumpPower: 30
+  _grav: 80
   _yAxisGroundLine: 1.49
   _moveRangeMin: -47
   _moveRangeMax: 47
@@ -9259,7 +9274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6075843f4893e842bfcc7a2cfcae3dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _skillDataSet: {fileID: 11400000, guid: b46d97e22cc1e804d9e82f91f50ebb47, type: 2}
+  _skillDataSet: {fileID: 11400000, guid: bd1df6d49e5d4e947848631660768137, type: 2}
 --- !u!114 &1420106450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14619,7 +14634,7 @@ PrefabInstance:
     - target: {fileID: 2976286264063094494, guid: bb9e0b7ed13b5d741ad32191db07c964,
         type: 3}
       propertyPath: managedReferences[336611744612614150]._spawnCount
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2976286264063094494, guid: bb9e0b7ed13b5d741ad32191db07c964,
         type: 3}
@@ -14639,7 +14654,7 @@ PrefabInstance:
     - target: {fileID: 2976286264063094494, guid: bb9e0b7ed13b5d741ad32191db07c964,
         type: 3}
       propertyPath: managedReferences[336611744612614150]._spawnRadiusRange
-      value: 0
+      value: 13.29
       objectReference: {fileID: 0}
     - target: {fileID: 8747319268006015908, guid: bb9e0b7ed13b5d741ad32191db07c964,
         type: 3}
