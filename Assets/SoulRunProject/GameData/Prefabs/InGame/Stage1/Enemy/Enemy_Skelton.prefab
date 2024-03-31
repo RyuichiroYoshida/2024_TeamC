@@ -124,7 +124,7 @@ MonoBehaviour:
   _attacker:
     rid: -2
   _mover:
-    rid: 336611744612614145
+    rid: 336611771449606144
   _status: {fileID: 11400000, guid: bc21bffee40270242a797af70295e78b, type: 2}
   _lootTable: {fileID: 11400000, guid: 336e4d9ca71d4f8498bc390b9e894732, type: 2}
   _playerManager: {fileID: 0}
@@ -134,8 +134,10 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 336611744612614145
-      type: {class: StraightMover, ns: SoulRunProject.InGame, asm: Assembly-CSharp}
+    - rid: 336611771449606144
+      type: {class: FollowingMover, ns: SoulRunProject.InGame, asm: Assembly-CSharp}
+      data:
+        _canVerticalMove: 0
 --- !u!65 &4104162914166171959
 BoxCollider:
   m_ObjectHideFlags: 0

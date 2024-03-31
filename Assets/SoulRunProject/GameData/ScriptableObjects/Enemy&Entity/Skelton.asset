@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b114a7cc77c94d6f82983505cdecf1d3, type: 3}
   m_Name: Skelton
   m_EditorClassIdentifier: 
-  _hp: 20
-  _attack: 0
+  _hp: 23525
+  _attack: 1
   _defence: 0
   _coolTime: 0
   _range: 0
