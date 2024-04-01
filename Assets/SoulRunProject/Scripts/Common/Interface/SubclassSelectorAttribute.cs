@@ -8,6 +8,7 @@ namespace SoulRunProject.Common
         public string GetName { get; }
         public NameAttribute(string name) => GetName = name;
     }
+
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
     public class SubclassSelectorAttribute : PropertyAttribute
     {
@@ -22,5 +23,11 @@ namespace SoulRunProject.Common
         {
             return _mIncludeMono;
         }
+    }
+
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
+    public class HideInEditorAttribute : Attribute
+    {
+        // 特に中身を定義する必要はありません
     }
 }
