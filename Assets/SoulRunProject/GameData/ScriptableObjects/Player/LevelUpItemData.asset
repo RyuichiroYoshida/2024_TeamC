@@ -13,13 +13,21 @@ MonoBehaviour:
   m_Name: LevelUpItemData
   m_EditorClassIdentifier: 
   _skillLevelUpItems:
-  - _itemName: 
+  - _itemName: SoulBulletUp
     _itemImage: {fileID: 0}
     _skillToLevelUp: 0
   _statusUpItems:
-  - _itemName: 
+  - _itemName: "\u30D1\u30C3\u30B7\u30D61"
     _itemImage: {fileID: 0}
-    ItemEffects: []
-  - _itemName: 
+    ItemEffects:
+    - _statusToUp: 1
+      _upValue: 1
+    - _statusToUp: 4
+      _upValue: 1
+  - _itemName: "\u30D1\u30C3\u30B7\u30D62"
     _itemImage: {fileID: 0}
-    ItemEffects: []
+    ItemEffects:
+    - _statusToUp: 5
+      _upValue: 1
+    - _statusToUp: 7
+      _upValue: 1

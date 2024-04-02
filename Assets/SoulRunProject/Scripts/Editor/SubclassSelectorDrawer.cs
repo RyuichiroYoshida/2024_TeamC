@@ -7,7 +7,6 @@ using UnityEditor;
 
 namespace SoulRunProject.Editor
 {
-
     [CustomPropertyDrawer(typeof(SubclassSelectorAttribute))]
     public class SubclassSelectorDrawer : PropertyDrawer
     {
@@ -49,12 +48,15 @@ namespace SoulRunProject.Editor
             _currentTypeIndex = Array.IndexOf(_typeFullNameArray, typeFullName);
         }
 
+
         private void GetAllInheritedTypes(Type baseType, bool includeMono)
         {
             Type monoType = typeof(MonoBehaviour);
             _inheritedTypes = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(s => s.GetTypes())
-                .Where(p => baseType.IsAssignableFrom(p) && p.IsClass && (!monoType.IsAssignableFrom(p) || includeMono))
+                .Where(p => baseType.IsAssignableFrom(p) && p.IsClass &&
+                            (!p.IsDefined(typeof(HideInEditorAttribute), false)) &&
+                            (!monoType.IsAssignableFrom(p) || includeMono))
                 .Prepend(null)
                 .ToArray();
         }
@@ -65,13 +67,13 @@ namespace SoulRunProject.Editor
             {
                 if (type == null)
                     return "<null>";
-                if (type.IsDefined(typeof(NameAttribute)) && 
+                if (type.IsDefined(typeof(NameAttribute)) &&
                     type.GetCustomAttribute(typeof(NameAttribute)) is NameAttribute nameAttribute)
                 {
                     return nameAttribute.GetName;
                 }
-                return type.ToString();
 
+                return type.ToString();
             }).ToArray();
             _typeFullNameArray = _inheritedTypes.Select(type =>
                     type == null ? "" : string.Format("{0} {1}", type.Assembly.ToString().Split(',')[0], type.FullName))
