@@ -8,23 +8,23 @@ namespace SoulRunProject
     public class CameraRotate : MonoBehaviour
     {
         [SerializeField] private Transform _cameraLookAt;
-        [SerializeField, Header("回転制限")] private float _crampRotateY;
+        [SerializeField, Header("回転制限")] private float _crampRotateZ;
         [SerializeField , Header("上昇率")] private float _improveRate;
         [SerializeField , Header("減衰率")] private float _decreaseRate;
 
-        private float _currentRotateY;
+        private float _currentRotateZ;
         private void Update()
         {
             float input = Input.GetAxis("Horizontal");
             Debug.Log(input);
-            _currentRotateY += input * _improveRate * Time.deltaTime;
+            _currentRotateZ += input * _improveRate * Time.deltaTime;
             //回転制限
-            _currentRotateY = Mathf.Clamp(_currentRotateY, -_crampRotateY, _crampRotateY);
+            _currentRotateZ = Mathf.Clamp(_currentRotateZ, -_crampRotateZ, _crampRotateZ);
             //減衰補完
-            _currentRotateY = Mathf.Lerp(_currentRotateY, 0f, _decreaseRate * Time.deltaTime);
+            _currentRotateZ = Mathf.Lerp(_currentRotateZ, 0f, _decreaseRate * Time.deltaTime);
 
             var myRotation = this.transform.rotation;
-            this.transform.rotation = Quaternion.Euler(myRotation.x , _currentRotateY , myRotation.z);
+            this.transform.rotation = Quaternion.Euler(myRotation.x , myRotation.y , _currentRotateZ);
             
         }
     }
