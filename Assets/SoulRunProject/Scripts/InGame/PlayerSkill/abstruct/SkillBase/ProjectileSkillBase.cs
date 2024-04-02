@@ -39,6 +39,7 @@ namespace SoulRunProject
                 // 弾の生成
                 var bullet = _bulletPool.Rent();
                 bullet.transform.position = _playerTransform.position + _muzzleOffset;
+                bullet.transform.forward = _playerTransform.forward;
                 bullet.Initialize(param.LifeTime , param.AttackDamage , param.Range , param.Speed + _playerMoveSpeed , param.Penetration);
                 bullet.OnFinishedAsync.Take(1)
                     .Subscribe(_ =>
