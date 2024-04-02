@@ -79,7 +79,7 @@ namespace SoulRunProject.InGame
 
         public virtual void Move()
         {
-            transform.position += Vector3.forward * (_speed * Time.fixedDeltaTime);
+            transform.position += transform.forward * (_speed * Time.fixedDeltaTime);
         }
 
         void OnTriggerEnter(Collider other)
