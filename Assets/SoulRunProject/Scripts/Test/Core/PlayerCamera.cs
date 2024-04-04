@@ -42,6 +42,7 @@ namespace SoulRunProject
 
         public async UniTask DoStartIngameMove(CancellationToken cts)
         {
+            return;
             transform.position = _firstPos;
             await this.transform.DOMove(_player.position + _offset, 2f).WithCancellation(cts);
         }
