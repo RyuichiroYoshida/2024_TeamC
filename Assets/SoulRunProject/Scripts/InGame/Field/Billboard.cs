@@ -20,7 +20,7 @@ namespace SoulRunProject
             // transform.LookAt(_mainCamera.transform.position, Vector3.up);
             // transform.rotation *= Quaternion.Euler(0, transform.rotation.y, 0);
             
-            var direction = transform.position - _mainCamera.transform.position ;
+            var direction = _mainCamera.transform.forward ;
             direction.y = 0;
  
             var lookRotation = Quaternion.LookRotation(direction, Vector3.up);

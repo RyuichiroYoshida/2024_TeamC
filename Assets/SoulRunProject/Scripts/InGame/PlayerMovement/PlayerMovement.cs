@@ -71,6 +71,7 @@ namespace SoulRunProject.InGame
         {
             if (_inPause) return;
             _playerVelocity.x = moveInput.x * _moveSpeed;
+            _playerVelocity.z = moveInput.y * _moveSpeed;
             if (_canZAxisMovement) _playerVelocity.z = moveInput.y * _zAxisMoveSpeed;
         }
 
@@ -167,15 +168,15 @@ namespace SoulRunProject.InGame
             
             if (input.x > 0)
             {
-                transform.DORotate(new Vector3(0, 0, -_rotateAngle), _rotateTime);
+                transform.DORotate(new Vector3(0, -_rotateAngle, 0), _rotateTime);
             }
             else if ( input.x < 0)
             {
-                transform.DORotate(new Vector3(0, 0, _rotateAngle), _rotateTime);
+                transform.DORotate(new Vector3(0, _rotateAngle, 0), _rotateTime);
             }
             else
             {
-                transform.DORotate(new Vector3(0, 0, 0), _rotateTime);
+                transform.DORotate(new Vector3(transform.rotation.x, 0, transform.rotation.y), _rotateTime);
             }
         }
         
