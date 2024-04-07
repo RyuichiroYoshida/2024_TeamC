@@ -33,11 +33,11 @@ namespace SoulRunProject
         
         public void StartFollowPlayer()
         {
-            this.LateUpdateAsObservable().Subscribe(_ =>
-            {
-                var pos = _player.position + _offset;
-                transform.position = new Vector3(pos.x, transform.position.y, pos.z);
-            }).AddTo(_player.gameObject);
+            // this.LateUpdateAsObservable().Subscribe(_ =>
+            // {
+            //     var pos = _player.position + _offset;
+            //     transform.position = new Vector3(pos.x, transform.position.y, pos.z);
+            // }).AddTo(_player.gameObject);
         }
     }
 }

@@ -28,7 +28,7 @@ MonoBehaviour:
           rid: 4571640270207844357
         _bullet: {fileID: 7496366539032194065, guid: 93ebba11e021a9d4b92b90f0aeb5ef5b,
           type: 3}
-        _muzzleOffset: {x: 0, y: 0, z: 0}
+        _muzzleOffset: {x: 0, y: 0, z: 3}
     - rid: 4571640270207844356
       type: {class: ProjectileSkillLevelUpEventTableType, ns: SoulRunProject.Common,
         asm: Assembly-CSharp}
@@ -48,7 +48,7 @@ MonoBehaviour:
       type: {class: ProjectileSkillParameter, ns: SoulRunProject.Common, asm: Assembly-CSharp}
       data:
         _skillType: 0
-        _coolTime: 3
+        _coolTime: 0.3
         _lifeTime: 2
         _amount: 1
         _attackDamage: 50
