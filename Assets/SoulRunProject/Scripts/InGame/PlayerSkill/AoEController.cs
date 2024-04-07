@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using SoulRunProject.InGame;
@@ -19,20 +20,18 @@ namespace SoulRunProject.Common
         {
             _attackDamage = attackDamage;
             transform.localScale = new Vector3(range, range, range);
-            this.FixedUpdateAsObservable()
-                .TakeUntilDisable(this)
-                .TakeUntilDestroy(this)
-                .Subscribe(_ =>
-                {
-                    // OnTriggerExitする前にDestroyすることがあるので、
-                    // Whereでnullチェックしてからダメージ処理
-                    foreach (var entity in _entities.Where(entity => entity))
-                    {
-                        entity.Damage(_attackDamage * Time.fixedDeltaTime);
-                    }
-                });
         }
-        
+
+        void FixedUpdate()
+        {
+            // OnTriggerExitする前にDestroyすることがあるので、
+            // Whereでnullチェックしてからダメージ処理
+            foreach (var entity in _entities.Where(entity => entity))
+            {
+                entity.Damage(_attackDamage * Time.fixedDeltaTime);
+            }
+        }
+
         void OnTriggerEnter(Collider other)
         {
             if (other.TryGetComponent(out FieldEntityController entity))

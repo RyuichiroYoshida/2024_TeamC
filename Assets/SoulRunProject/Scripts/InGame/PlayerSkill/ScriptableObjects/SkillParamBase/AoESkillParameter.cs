@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace SoulRunProject.Common
 {
-    [Serializable]
-    public class AoESkillParameter : SkillParameterBase
+    [Serializable , Name("範囲スキルパラメータ")]
+    public class AoESkillParameter : ISkillParameter
     {
         [SerializeField, Header("敵にヒットしたときに与えるダメージ")] float _attackDamage;
         [SerializeField, Header("スキルのオブジェクトの大きさ")] float _range;
@@ -12,9 +12,8 @@ namespace SoulRunProject.Common
         [NonSerialized] public float AttackDamage;
         [NonSerialized] public float Range;
         
-        public override void InitializeParamOnSceneLoaded()
+        public void InitializeParamOnSceneLoaded()
         {
-            base.InitializeParamOnSceneLoaded();
             AttackDamage = _attackDamage;
             Range = _range;
         }
