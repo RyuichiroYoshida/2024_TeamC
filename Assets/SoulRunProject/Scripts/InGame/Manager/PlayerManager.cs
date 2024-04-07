@@ -16,6 +16,7 @@ namespace SoulRunProject.Common
     {
         [SerializeField] private PlayerInput _playerInput;
         [SerializeField] private Status _status;
+        [SerializeField] private PlayerCamera _playerCamera;
         
         private IInGameTime[] _inGameTimes;
         private PlayerLevelManager _pLevelManager;
@@ -52,6 +53,7 @@ namespace SoulRunProject.Common
         private void InitializeInput()
         {
             _playerInput.MoveInput.Subscribe(input => _playerMovement.InputMove(input));
+            _playerInput.MoveInput.Subscribe(input => _playerMovement.RotatePlayer(input));
             _playerInput.JumpInput.Where(x => x).Subscribe(_ => _playerMovement.Jump()).AddTo(this);
             _playerInput.ShiftInput.Where(x => x).Subscribe(_ => UseSoulSkill()).AddTo(this);
         }
@@ -87,6 +89,7 @@ namespace SoulRunProject.Common
                 }
             }
             CurrentHp.Value -= damage;
+            _playerCamera.DamageCam();
             if (CurrentHp.Value <= 0)
             {
                 Death();
