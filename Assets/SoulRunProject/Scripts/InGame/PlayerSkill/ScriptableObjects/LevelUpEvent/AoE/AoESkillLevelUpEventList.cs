@@ -6,10 +6,10 @@ using UnityEngine;
 namespace SoulRunProject.Common
 {
     [Serializable]
-    public class AoESkillLevelUpEventGroup : ILevelUpEventGroup
+    public class AoESkillLevelUpEventList : ILevelUpEventList
     {
         [SerializeReference, SubclassSelector, Header("範囲スキルレベルアップイベント")] 
-        List<AoELevelUpEvent> _levelUpEventType;
-        public List<ILevelUpEvent> LevelUpType => _levelUpEventType.OfType<ILevelUpEvent>().ToList();
+        List<AoELevelUpEvent> _levelUpEventList;
+        public List<ILevelUpEvent> LevelUpEventList => _levelUpEventList.OfType<ILevelUpEvent>().ToList();
     }
 }

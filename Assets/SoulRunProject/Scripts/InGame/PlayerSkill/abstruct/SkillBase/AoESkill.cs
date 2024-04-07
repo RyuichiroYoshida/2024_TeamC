@@ -3,20 +3,27 @@ using UnityEngine;
 namespace SoulRunProject.Common
 {
     /// <summary>
-    /// 範囲攻撃スキル実行クラス
+    /// 範囲攻撃スキル
     /// </summary>
-    public class AoESkillBase : SkillBase
+    [CreateAssetMenu(menuName = "SoulRunProject/PlayerSkill/AoESkill")]
+    public class AoESkill : SkillBase
     {
         [SerializeField, Tooltip("InstantiateするAoEプレハブ")] AoEController _original;
         [SerializeField, Tooltip("地面の高さ、y座標")] float _groundHeight;
         static Transform _playerTransform;
         AoEController _aoeController;
+
+        AoESkill()
+        {
+            _skillParam = new AoESkillParameter();
+            SkillLevelUpEvent = new SkillLevelUpEvent(new AoESkillLevelUpEventListList());
+        }
         /// <summary>
         /// パラメーターを適用する
         /// </summary>
-        void ParameterSet()
+        void ApplyParameter()
         {
-            if (SkillBaseParam is AoESkillParameter param)
+            if (_skillParam is AoESkillParameter param)
             {
                 _aoeController.Initialize(param.AttackDamage, param.Range);
             }
@@ -29,7 +36,7 @@ namespace SoulRunProject.Common
         {
             _playerTransform = Object.FindObjectOfType<PlayerManager>().transform;
             _aoeController = Object.Instantiate(_original);
-            ParameterSet();
+            ApplyParameter();
         }
 
         public override void UpdateSkill(float deltaTime)
@@ -42,7 +49,7 @@ namespace SoulRunProject.Common
 
         public override void OnLevelUp()
         {
-            ParameterSet();
+            ApplyParameter();
         }
     }
 }
