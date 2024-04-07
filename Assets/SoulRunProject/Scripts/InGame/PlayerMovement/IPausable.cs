@@ -3,12 +3,12 @@ namespace SoulRunProject.InGame
     /// <summary>
     /// ゲーム内時間で動いているクラス
     /// </summary>
-    public interface IInGameTime
+    public interface IPausable
     {
         /// <summary>
         /// Trueでとめる、Falseでうごかす
         /// </summary>
-        /// <param name="toPause"></param>
-        void SwitchPause(bool toPause);
+        /// <param name="isPause"></param>
+        void Pause(bool isPause);
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace SoulRunProject.InGame
 {
-    public class SkillManager : MonoBehaviour, IInGameTime
+    public class SkillManager : MonoBehaviour, IPausable
     {
         [SerializeField , Header("スキルデータセット")] private SkillDataSet _skillDataSet;
         private SkillDataSet _skillData;
@@ -70,9 +70,9 @@ namespace SoulRunProject.InGame
             }
         }
         
-        public void SwitchPause(bool toPause)
+        public void Pause(bool isPause)
         {
-            _isPause = toPause;
+            _isPause = isPause;
         }
     }
 }

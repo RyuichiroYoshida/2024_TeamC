@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0019500202, g: 0.0038314078, b: 0.008843157, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8780,6 +8780,7 @@ GameObject:
   - component: {fileID: 1174502020}
   - component: {fileID: 1174502021}
   - component: {fileID: 1174502022}
+  - component: {fileID: 1174502023}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -8884,6 +8885,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _preloadCount: 5
   _threshold: 5
+--- !u!114 &1174502023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174502016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 045038d950594de3a6925ec6f77da0d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1180136328 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4164151997940843940, guid: 54942ca6699e8764a8b2eb58690cf15d,
@@ -9384,7 +9397,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerInput: {fileID: 1420106445}
   _status: {fileID: 11400000, guid: d50a16b38666d804883e3040b335a638, type: 2}
-  _camera: {fileID: 1484104527}
 --- !u!114 &1420106445
 MonoBehaviour:
   m_ObjectHideFlags: 0

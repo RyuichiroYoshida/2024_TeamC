@@ -10,12 +10,12 @@ namespace SoulRunProject.Common
     /// プレイヤーを管理するクラス
     /// </summary>
     [RequireComponent(typeof(HitDamageEffectManager))]
-    public class PlayerManager : MonoBehaviour
+    public class PlayerManager : MonoBehaviour , IPausable
     {
         [SerializeField] private PlayerInput _playerInput;
         [SerializeField] private Status _status;
         
-        private IInGameTime[] _inGameTimes;
+        private IPausable[] _inGameTimes;
         private PlayerLevelManager _pLevelManager;
         private SkillManager _skillManager;
         private SoulSkillManager _soulSkillManager;
@@ -31,7 +31,7 @@ namespace SoulRunProject.Common
         {
             _status = _status.Copy();
             CurrentHp = new FloatReactiveProperty(_status.Hp);
-            _inGameTimes = GetComponents<IInGameTime>();
+            //_inGameTimes = GetComponents<IPausable>();
             _pLevelManager = GetComponent<PlayerLevelManager>();
             _skillManager = GetComponent<SkillManager>();
             _soulSkillManager = GetComponent<SoulSkillManager>();
@@ -56,12 +56,12 @@ namespace SoulRunProject.Common
         /// Pauseの切替
         /// </summary>
         /// <param name="toPause"></param>
-        public void SwitchPause(bool toPause)
+        public void Pause(bool toPause)
         {
-            foreach (var inGameTime in _inGameTimes)
-            {
-                inGameTime.SwitchPause(toPause);
-            }
+            // foreach (var inGameTime in _inGameTimes)
+            // {
+            //     inGameTime.Pause(toPause);
+            // }
         }
 
         /// <summary>
@@ -127,5 +127,6 @@ namespace SoulRunProject.Common
         }
 
         #endregion
+        
     }
 }
