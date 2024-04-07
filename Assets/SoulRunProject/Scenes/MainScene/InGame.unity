@@ -604,6 +604,7 @@ GameObject:
   m_Component:
   - component: {fileID: 165873040}
   - component: {fileID: 165873041}
+  - component: {fileID: 165873042}
   m_Layer: 0
   m_Name: CameraController
   m_TagString: Untagged
@@ -643,7 +644,29 @@ MonoBehaviour:
   _cameraLookAt: {fileID: 1185619573}
   _crampRotateZ: 5
   _improveRate: 50
-  _decreaseRate: 3
+  _decreaseRate: 6
+--- !u!114 &165873042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165873039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc6a0ff9f4ca4c34bac1d94e85af1139, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 1185619573}
+  _offset: {x: 0, y: 0, z: 0}
+  _firstPos: {x: 0, y: 0, z: 0}
+  _shakeObj: {fileID: 1185619573}
+  _shakeDur: 0.25
+  _shakePower: 100
+  _shakeVib: 30
+  _shakeRand: 5
+  _isSnap: 0
+  _isFade: 1
 --- !u!1 &166217700
 GameObject:
   m_ObjectHideFlags: 0
@@ -4967,7 +4990,7 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
-  _camera: {fileID: 1484104527}
+  _camera: {fileID: 165873042}
   _playerManager: {fileID: 1420106444}
   _playerLevelManager: {fileID: 1420106446}
   _soulSkillManager: {fileID: 1420106450}
@@ -6500,7 +6523,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerInput: {fileID: 1420106445}
   _status: {fileID: 11400000, guid: d50a16b38666d804883e3040b335a638, type: 2}
-  _playerCamera: {fileID: 0}
+  _playerCamera: {fileID: 165873042}
 --- !u!114 &1420106445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6951,7 +6974,6 @@ GameObject:
   - component: {fileID: 1484104524}
   - component: {fileID: 1484104523}
   - component: {fileID: 1484104526}
-  - component: {fileID: 1484104527}
   - component: {fileID: 1484104528}
   m_Layer: 0
   m_Name: Main Camera
@@ -7078,28 +7100,6 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
---- !u!114 &1484104527
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1484104522}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc6a0ff9f4ca4c34bac1d94e85af1139, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _player: {fileID: 1420106439}
-  _offset: {x: 0, y: 0, z: 0}
-  _firstPos: {x: 0, y: 14, z: -6.61}
-  _shakeObj: {fileID: 1185619573}
-  _shakeDur: 0
-  _shakePower: 0
-  _shakeVib: 0
-  _shakeRand: 0
-  _isSnap: 0
-  _isFade: 0
 --- !u!114 &1484104528
 MonoBehaviour:
   m_ObjectHideFlags: 0

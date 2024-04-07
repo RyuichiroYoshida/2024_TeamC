@@ -17,9 +17,6 @@ namespace SoulRunProject
         // Update is called once per frame
         void Update()
         {
-            // transform.LookAt(_mainCamera.transform.position, Vector3.up);
-            // transform.rotation *= Quaternion.Euler(0, transform.rotation.y, 0);
-            
             var direction = _mainCamera.transform.forward ;
             direction.y = 0;
  
