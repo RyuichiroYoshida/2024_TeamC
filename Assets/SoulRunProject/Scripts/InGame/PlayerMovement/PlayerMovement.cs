@@ -67,7 +67,7 @@ namespace SoulRunProject.InGame
         {
             if (_inPause) return;
             _playerVelocity.x = moveInput.x * _moveSpeed;
-            _playerVelocity.z = moveInput.y * _moveSpeed;
+            //_playerVelocity.z = moveInput.y * _moveSpeed;
             if (_canZAxisMovement) _playerVelocity.z = moveInput.y * _zAxisMoveSpeed;
         }
 
