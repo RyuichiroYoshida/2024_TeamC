@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using SoulRunProject.InGame;
 using SoulRunProject.SoulMixScene;
 using UniRx;
@@ -27,6 +29,8 @@ namespace SoulRunProject.Common
         public PlayerResourceContainer ResourceContainer => _resourceContainer;
         public float MaxHp => _status.Hp;
         public Status CurrentStatus => _status;
+        /// <summary>ダメージを無効化出来るかどうかの条件を格納するリスト</summary>
+        public List<Func<bool>> IgnoreDamagePredicates { get; } = new();
 
         private void Awake()
         {
@@ -42,7 +46,7 @@ namespace SoulRunProject.Common
             
             InitializeInput();
         }
-
+        
         /// <summary>
         /// 入力を受け付けるクラスに対して入力と紐づける
         /// </summary>
@@ -77,6 +81,13 @@ namespace SoulRunProject.Common
         
         public void Damage(int damage)
         {
+            foreach (var predicate in IgnoreDamagePredicates.Where(cond=> cond != null))
+            {
+                if (predicate())
+                {
+                    return;
+                }
+            }
             CurrentHp.Value -= damage;
             _playerCamera.DamageCam();
             if (CurrentHp.Value <= 0)
