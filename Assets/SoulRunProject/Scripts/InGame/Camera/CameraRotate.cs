@@ -23,8 +23,7 @@ namespace SoulRunProject
             _currentRotateZ = Mathf.Lerp(_currentRotateZ, 0f, _decreaseRate * Time.deltaTime);
 
             var myRotation = _cameraLookAt.transform.rotation;
-            _cameraLookAt.transform.rotation = Quaternion.AngleAxis(_currentRotateZ, Vector3.forward);
-            if (myRotation.z > _currentRotateZ) _cameraLookAt.transform.rotation = Quaternion.AngleAxis(_currentRotateZ, Vector3.forward);
+            _cameraLookAt.transform.rotation  = Quaternion.AngleAxis(_currentRotateZ, Vector3.forward);
             
         }
     }

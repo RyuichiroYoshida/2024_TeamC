@@ -23,10 +23,6 @@ namespace SoulRunProject.InGame
         [SerializeField, HideInInspector] private float _zAxisMoveSpeed;
         [SerializeField, HideInInspector] private float _zMoveRangeMin;
         [SerializeField, HideInInspector] private float _zMoveRangeMax;
-        
-        [Header("テスト")] 
-        [SerializeField] float _rotateAngle = 30;
-        [SerializeField] float _rotateTime = 0.5f;
 
         private Rigidbody _rb;
         private readonly BoolReactiveProperty _isGround = new BoolReactiveProperty(true);
@@ -166,18 +162,18 @@ namespace SoulRunProject.InGame
         public void RotatePlayer(Vector2 input)
         {
             
-            if (input.x > 0)
-            {
-                transform.DORotate(new Vector3(0, -_rotateAngle, 0), _rotateTime);
-            }
-            else if ( input.x < 0)
-            {
-                transform.DORotate(new Vector3(0, _rotateAngle, 0), _rotateTime);
-            }
-            else
-            {
-                transform.DORotate(new Vector3(transform.rotation.x, 0, transform.rotation.y), _rotateTime);
-            }
+            // if (input.x > 0)
+            // {
+            //     transform.DORotate(new Vector3(0, -_rotateAngle, 0), _rotateTime);
+            // }
+            // else if ( input.x < 0)
+            // {
+            //     transform.DORotate(new Vector3(0, _rotateAngle, 0), _rotateTime);
+            // }
+            // else
+            // {
+            //     transform.DORotate(new Vector3(transform.rotation.x, 0, transform.rotation.y), _rotateTime);
+            // }
         }
         
         #if UNITY_EDITOR

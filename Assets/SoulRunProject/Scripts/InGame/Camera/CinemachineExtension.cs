@@ -18,7 +18,7 @@ namespace SoulRunProject
             {
                 var pos = state.RawPosition;
                 pos.y = m_YPosition;
-                pos.z = m_ZPosition;
+                //pos.z = m_ZPosition;
                 state.RawPosition = pos;
             }
         }
