@@ -7,6 +7,7 @@ namespace SoulRunProject
     public class LockCameraY : CinemachineExtension
     {
         [Tooltip("カメラのY座標を固定する値")]
+        public float m_ZPosition = 10;
         public float m_YPosition = 10;
  
         protected override void PostPipelineStageCallback(
@@ -17,6 +18,7 @@ namespace SoulRunProject
             {
                 var pos = state.RawPosition;
                 pos.y = m_YPosition;
+                pos.z = m_ZPosition;
                 state.RawPosition = pos;
             }
         }

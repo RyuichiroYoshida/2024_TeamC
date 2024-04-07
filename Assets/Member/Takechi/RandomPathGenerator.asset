@@ -37,12 +37,12 @@ MonoBehaviour:
   restrictYaw: 1
   restrictRoll: 0
   usePitch: 1
-  useYaw: 0
+  useYaw: 1
   useRoll: 0
   useColors: 0
   useSizes: 0
-  minOrientation: {x: -30, y: -15, z: 0}
-  maxOrientation: {x: 30, y: 15, z: 0}
+  minOrientation: {x: -30, y: -105.2, z: 0}
+  maxOrientation: {x: 30, y: 79.74, z: 0}
   minRandomStep: {x: 20, y: 10, z: 0}
   maxRandomStep: {x: 40, y: 30, z: 0}
   minTurnRate: {x: 2, y: 2, z: 0}

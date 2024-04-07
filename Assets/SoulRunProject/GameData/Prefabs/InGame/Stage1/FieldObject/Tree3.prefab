@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5824268631843854957}
   - component: {fileID: -8307266297739542644}
   - component: {fileID: 2358446251508100875}
+  - component: {fileID: 6554509360312225382}
   m_Layer: 0
   m_Name: Tree3
   m_TagString: Untagged
@@ -43,7 +44,7 @@ SpriteRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 871129033906405150}
   m_Enabled: 1
-  m_CastShadows: 0
+  m_CastShadows: 1
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -55,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 170bc916c9774b5468aa3b1cd2d11fbf, type: 2}
+  - {fileID: 2100000, guid: c8845d518ce8858439c0833c18103612, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -125,6 +126,7 @@ MonoBehaviour:
   _mover:
     rid: -2
   _status: {fileID: 11400000, guid: 636ca8158c3b7414686bf190d78e73ee, type: 2}
+  _lootTable: {fileID: 0}
   _playerManager: {fileID: 0}
   _hitDamageEffectManager: {fileID: 0}
   references:
@@ -146,4 +148,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _duration: 0.1
   _loopCount: 1
-  _renderer: {fileID: 6314510511226595143}
+--- !u!114 &6554509360312225382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 871129033906405150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34bcda0e185e7794494ad7f78ba809e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

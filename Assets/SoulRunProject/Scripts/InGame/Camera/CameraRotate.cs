@@ -16,15 +16,15 @@ namespace SoulRunProject
         private void Update()
         {
             float input = Input.GetAxis("Horizontal");
-            Debug.Log(input);
-            _currentRotateZ += input * _improveRate * Time.deltaTime;
+            _currentRotateZ += -input * _improveRate * Time.deltaTime;
             //回転制限
             _currentRotateZ = Mathf.Clamp(_currentRotateZ, -_crampRotateZ, _crampRotateZ);
             //減衰補完
             _currentRotateZ = Mathf.Lerp(_currentRotateZ, 0f, _decreaseRate * Time.deltaTime);
 
-            var myRotation = this.transform.rotation;
-            this.transform.rotation = Quaternion.Euler(myRotation.x , myRotation.y , _currentRotateZ);
+            var myRotation = _cameraLookAt.transform.rotation;
+            _cameraLookAt.transform.rotation = Quaternion.AngleAxis(_currentRotateZ, Vector3.forward);
+            if (myRotation.z > _currentRotateZ) _cameraLookAt.transform.rotation = Quaternion.AngleAxis(_currentRotateZ, Vector3.forward);
             
         }
     }
