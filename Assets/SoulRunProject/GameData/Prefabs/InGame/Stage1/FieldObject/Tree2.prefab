@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4846434995772148466}
   - component: {fileID: 8356024473883139272}
   - component: {fileID: 8886523578831790948}
-  - component: {fileID: -4550613041142796618}
+  - component: {fileID: -4232712402408240597}
   m_Layer: 0
   m_Name: Tree2
   m_TagString: Untagged
@@ -125,14 +125,15 @@ MonoBehaviour:
   _mover:
     rid: -2
   _status: {fileID: 11400000, guid: 636ca8158c3b7414686bf190d78e73ee, type: 2}
+  _lootTable: {fileID: 0}
   _playerManager: {fileID: 0}
-  _hitDamageEffectManager: {fileID: 0}
+  _hitDamageEffectManager: {fileID: -4232712402408240597}
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
---- !u!114 &-4550613041142796618
+--- !u!114 &-4232712402408240597
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,9 +142,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2896465790406250595}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e91850b292134f24a8ef6e7ce567f766, type: 3}
+  m_Script: {fileID: 11500000, guid: 50ade48ebdc62294e9934c95787b8c4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _duration: 0.1
   _loopCount: 1
-  _renderer: {fileID: 4846434995772148466}
+  _lightestColor: {r: 0.7372549, g: 0.7372549, b: 0.7372549, a: 1}
+  _darkestColor: {r: 0.1882353, g: 0.25490198, b: 0.4509804, a: 1}
+  _minVariableDistance: 15
+  _maxVariableDistance: 40
