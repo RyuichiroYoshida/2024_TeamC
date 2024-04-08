@@ -7,7 +7,8 @@ namespace SoulRunProject.InGame
     /// <summary>
     /// 木の色彩をプレイヤーからの距離に応じて変える
     /// </summary>
-    public class ChangeTreeChroma : HitDamageEffectManager
+    [RequireComponent(typeof(HitDamageEffectManager))]
+    public class ChangeTreeChroma : MonoBehaviour
     {
         [SerializeField, Tooltip("最も明るい色")] private Color _lightestColor;
         [SerializeField, Tooltip("最も暗い色")] private Color _darkestColor;
@@ -15,22 +16,22 @@ namespace SoulRunProject.InGame
         [SerializeField, HideInInspector] private float _maxVariableDistance;
 
         private Transform _playerTransform;
+        private HitDamageEffectManager _effectManager;
 
-        protected override void Awake()
+        private void Awake()
         {
-            base.Awake();
-
             _playerTransform = FindObjectOfType<PlayerManager>().transform;
+            _effectManager = GetComponent<HitDamageEffectManager>();
         }
 
         private void Update()
         {
-            if (!_hitFadeBlinking) // HitEffect中は色を変えない
+            if (!_effectManager.HitFadeBlinking) // HitEffect中は色を変えない
             {
                 float xDistance = Vector3.Distance(transform.position, _playerTransform.position);
                 float value = Mathf.Clamp((xDistance - _minVariableDistance) / (_maxVariableDistance - _minVariableDistance), 0, 1);
-                _defaultColor = Color.Lerp(_lightestColor, _darkestColor, value);
-                _copyMaterial.SetColor(PramID, _defaultColor);
+                _effectManager.DefaultColor = Color.Lerp(_lightestColor, _darkestColor, value);
+                _effectManager.CopyMaterial.SetColor(HitDamageEffectManager.PramID, _effectManager.DefaultColor);
             }
         }
 
