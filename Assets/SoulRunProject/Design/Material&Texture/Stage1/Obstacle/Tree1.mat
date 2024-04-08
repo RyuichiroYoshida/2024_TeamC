@@ -21,13 +21,13 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Tree1
-  m_Shader: {fileID: -6465566751694194690, guid: be0d019c8dff6204bbbf44cd7acf8cbe,
+  m_Shader: {fileID: -6465566751694194690, guid: 82a14a24f198f3e4d9b92454ac73f37e,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
-  m_LightmapFlags: 4
+  m_LightmapFlags: 0
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
