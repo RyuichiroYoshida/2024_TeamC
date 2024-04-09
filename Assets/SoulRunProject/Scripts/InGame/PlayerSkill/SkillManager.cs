@@ -75,7 +75,7 @@ namespace SoulRunProject.InGame
             _isPause = isPause;
             foreach (var skill in _currentSkills)
             {
-                skill.SwitchPause(isPause);
+                skill.Pause(isPause);
             }
         }
     }

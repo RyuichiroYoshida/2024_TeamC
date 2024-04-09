@@ -22,7 +22,7 @@ namespace SoulRunProject.Common
     /// </summary>
     [Serializable]
     [Name("スキルの基底クラス")]
-    public abstract class SkillBase : ScriptableObject, IInGameTime
+    public abstract class SkillBase : ScriptableObject, IPausable
     {
         [SerializeField] PlayerSkill _skillType;
         [SerializeField] [Header("スキルの最大レベル")] public int MaxSkillLevel = 5;
@@ -98,10 +98,10 @@ namespace SoulRunProject.Common
             }
         }
 
-        public void SwitchPause(bool toPause)
+        public void Pause(bool isPause)
         {
-            _isPause = toPause;
-            OnSwitchPause(toPause);
+            _isPause = isPause;
+            OnSwitchPause(isPause);
         }
         protected virtual void OnSwitchPause(bool toPause){}
     }
