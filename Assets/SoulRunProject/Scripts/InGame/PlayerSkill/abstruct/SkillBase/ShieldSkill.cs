@@ -16,7 +16,6 @@ namespace SoulRunProject.Skill
         [SerializeField, Tooltip("プレハブ")] GameObject _original;
         PlayerManager _playerManager;
         Transform _instantiatedObject;
-        CancellationTokenSource _cts;
         CancellationTokenSource _linkedTokenSource;
         Tweener _tweener;
         ShieldSkillParameter _shieldSkillParameter;
@@ -40,7 +39,6 @@ namespace SoulRunProject.Skill
             else
                 Debug.LogError($"パラメータが　{nameof(ShieldSkillParameter)}　ではありません　");
             _playerManager.IgnoreDamagePredicates.Add(IncreaseDamageCount);
-            _cts = new CancellationTokenSource();
             ActiveSkill();
             _instantiatedObject.position = _playerTransform.position;
         }
@@ -95,9 +93,8 @@ namespace SoulRunProject.Skill
             //  再度チェックしてシールド枚数以上ならクールダウンを開始してreturn true
             if (_damageCount >= _shieldSkillParameter.ShieldCount)
             {
-                _linkedTokenSource =
-                    CancellationTokenSource.CreateLinkedTokenSource(_cts.Token,
-                        _instantiatedObject.GetCancellationTokenOnDestroy());
+                _linkedTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
+                    _instantiatedObject.GetCancellationTokenOnDestroy());
                 CoolDown(_linkedTokenSource.Token).Forget();
             }
 
