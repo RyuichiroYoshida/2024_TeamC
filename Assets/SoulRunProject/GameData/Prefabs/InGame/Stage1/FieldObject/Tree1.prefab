@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5844823972712441080}
   - component: {fileID: 43744766646832521}
   - component: {fileID: 3464868641710493916}
-  - component: {fileID: -7488017950343310659}
+  - component: {fileID: 1436361737371542902}
   m_Layer: 0
   m_Name: Tree1
   m_TagString: Untagged
@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34bcda0e185e7794494ad7f78ba809e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-7488017950343310659
+--- !u!114 &1436361737371542902
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -175,9 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ade48ebdc62294e9934c95787b8c4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _duration: 0
-  _loopCount: 0
-  _lightestColor: {r: 0, g: 0, b: 0, a: 0}
-  _darkestColor: {r: 0, g: 0, b: 0, a: 0}
-  _minVariableDistance: 0
-  _maxVariableDistance: 0
+  _lightestColor: {r: 0.7372549, g: 0.7372549, b: 0.7372549, a: 1}
+  _darkestColor: {r: 0.1882353, g: 0.25490198, b: 0.4509804, a: 1}
+  _minVariableDistance: 15
+  _maxVariableDistance: 40
