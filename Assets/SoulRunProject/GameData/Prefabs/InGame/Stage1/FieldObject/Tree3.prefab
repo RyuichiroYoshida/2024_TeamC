@@ -129,7 +129,7 @@ MonoBehaviour:
   _status: {fileID: 11400000, guid: 636ca8158c3b7414686bf190d78e73ee, type: 2}
   _lootTable: {fileID: 0}
   _playerManager: {fileID: 0}
-  _hitDamageEffectManager: {fileID: 0}
+  _hitDamageEffectManager: {fileID: 2358446251508100875}
   _useKnockBack:
     rid: -2
   references:

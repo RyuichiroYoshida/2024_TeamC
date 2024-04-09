@@ -85336,7 +85336,6 @@ Transform:
   - {fileID: 7042547246329978442}
   - {fileID: 5133750328519478374}
   - {fileID: 169810173692656836}
-  - {fileID: 4394996795906835577}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &3289044842709185903
@@ -86697,11 +86696,11 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.0009860769, y: 0.0000000860452, z: 0.000087260094, w: 0.9999995}
   m_LocalPosition: {x: -2.07, y: 1.5, z: -31.4}
-  m_LocalScale: {x: 0.20381863, y: 0.2038186, z: 0.20381866}
+  m_LocalScale: {x: 0.20381863, y: 0.20381859, z: 0.20381865}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6209891370194409355}
-  m_Father: {fileID: 3280933977363125039}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -0.113, y: 0, z: 0.01}
 --- !u!23 &4408716848437567111
 MeshRenderer:
@@ -91836,8 +91835,6 @@ MonoBehaviour:
   _zAxisMoveSpeed: 5
   _zMoveRangeMin: 0
   _zMoveRangeMax: 10
-  _rotateAngle: 0
-  _rotateTime: 2
 --- !u!212 &8962532374590909370
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -92370,3 +92367,4 @@ SceneRoots:
   - {fileID: 2281599572666061293}
   - {fileID: 1624294823}
   - {fileID: 1015273789}
+  - {fileID: 4394996795906835577}

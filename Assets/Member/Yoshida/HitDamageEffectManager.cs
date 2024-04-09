@@ -10,7 +10,7 @@ namespace SoulRunProject.InGame
     public class HitDamageEffectManager : MonoBehaviour
     {
         // シェーダーのカラープロパティ取得
-        public static readonly int PramID = Shader.PropertyToID("_BaseColor");
+        public static readonly int PramID = Shader.PropertyToID("_Color");
 
         // 良い感じの白色
         static readonly Color WhiteColor = new(0.85f, 0.85f, 0.85f, 0.6f);

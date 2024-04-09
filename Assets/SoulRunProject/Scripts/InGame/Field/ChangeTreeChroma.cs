@@ -28,6 +28,7 @@ namespace SoulRunProject.InGame
         {
             if (!_effectManager.HitFadeBlinking) // HitEffect中は色を変えない
             {
+                _effectManager.CopyMaterial.SetBool("_Boolean", true);
                 float xDistance = Vector3.Distance(transform.position, _playerTransform.position);
                 float value = Mathf.Clamp((xDistance - _minVariableDistance) / (_maxVariableDistance - _minVariableDistance), 0, 1);
                 _effectManager.DefaultColor = Color.Lerp(_lightestColor, _darkestColor, value);
