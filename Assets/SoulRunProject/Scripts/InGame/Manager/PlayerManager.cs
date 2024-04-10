@@ -1,5 +1,6 @@
 ﻿using System;
-using Cysharp.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
 using SoulRunProject.InGame;
 using SoulRunProject.SoulMixScene;
 using UniRx;
@@ -10,18 +11,26 @@ namespace SoulRunProject.Common
     /// <summary>
     /// プレイヤーを管理するクラス
     /// </summary>
+    [RequireComponent(typeof(HitDamageEffectManager))]
     public class PlayerManager : MonoBehaviour
     {
         [SerializeField] private PlayerInput _playerInput;
         [SerializeField] private Status _status;
+        [SerializeField] private PlayerCamera _playerCamera;
         
         private IInGameTime[] _inGameTimes;
         private PlayerLevelManager _pLevelManager;
         private SkillManager _skillManager;
         private SoulSkillManager _soulSkillManager;
         private PlayerMovement _playerMovement;
+        private HitDamageEffectManager _hitDamageEffectManager;
+        private PlayerResourceContainer _resourceContainer;
         public FloatReactiveProperty CurrentHp { get; private set; }
+        public PlayerResourceContainer ResourceContainer => _resourceContainer;
         public float MaxHp => _status.Hp;
+        public Status CurrentStatus => _status;
+        /// <summary>ダメージを無効化出来るかどうかの条件を格納するリスト</summary>
+        public List<Func<bool>> IgnoreDamagePredicates { get; } = new();
 
         private void Awake()
         {
@@ -32,16 +41,19 @@ namespace SoulRunProject.Common
             _skillManager = GetComponent<SkillManager>();
             _soulSkillManager = GetComponent<SoulSkillManager>();
             _playerMovement = GetComponent<PlayerMovement>();
+            _hitDamageEffectManager = GetComponent<HitDamageEffectManager>();
+            _resourceContainer = new();
             
             InitializeInput();
         }
-
+        
         /// <summary>
         /// 入力を受け付けるクラスに対して入力と紐づける
         /// </summary>
         private void InitializeInput()
         {
-            _playerInput.HorizontalInput.Subscribe(input => _playerMovement.InputHorizontal(input)).AddTo(this);
+            _playerInput.MoveInput.Subscribe(input => _playerMovement.InputMove(input));
+            _playerInput.MoveInput.Subscribe(input => _playerMovement.RotatePlayer(input));
             _playerInput.JumpInput.Where(x => x).Subscribe(_ => _playerMovement.Jump()).AddTo(this);
             _playerInput.ShiftInput.Where(x => x).Subscribe(_ => UseSoulSkill()).AddTo(this);
         }
@@ -69,33 +81,39 @@ namespace SoulRunProject.Common
         
         public void Damage(int damage)
         {
-            _status.Hp -= damage;
-            if (_status.Hp <= 0)
+            foreach (var predicate in IgnoreDamagePredicates.Where(cond=> cond != null))
+            {
+                if (predicate())
+                {
+                    return;
+                }
+            }
+            CurrentHp.Value -= damage;
+            _playerCamera.DamageCam();
+            if (CurrentHp.Value <= 0)
             {
                 Death();
             }
+            // 白色点滅メソッド
+            _hitDamageEffectManager.HitFadeBlinkWhite();
         }
 
         /// <summary>
         /// Skillを追加する
         /// </summary>
-        /// <param name="skill"></param>
-        public void AddSkill(SkillBase skill)
+        /// <param name="skillType"></param>
+        public void AddSkill(PlayerSkill skillType)
         {
-            _skillManager.AddSkill(skill);
+            _skillManager.AddSkill(skillType);
         }
         
         private void Death()
         {
             Debug.Log("GameOver");
-            SwitchPause(true);
+            //SwitchPause(true);
         }
 
-        /// <summary>
-        /// 仮の当たり判定関数
-        /// </summary>
-        /// <param name="other"></param>
-        private void OnCollisionEnter(Collision other)
+        private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.TryGetComponent(out FieldEntityController fieldEntityController))
             {
@@ -121,7 +139,6 @@ namespace SoulRunProject.Common
         {
             _soulSkillManager.AddSoul(soul);
         }
-        
 
         #endregion
     }
