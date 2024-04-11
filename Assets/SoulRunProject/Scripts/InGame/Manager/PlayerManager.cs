@@ -98,6 +98,12 @@ namespace SoulRunProject.Common
             _hitDamageEffectManager.HitFadeBlinkWhite();
         }
 
+        public void Heal(float value)
+        {
+            CurrentHp.Value += value;
+            CurrentHp.Value = Mathf.Clamp(CurrentHp.Value, 0, MaxHp);
+        }
+
         /// <summary>
         /// Skillを追加する
         /// </summary>
