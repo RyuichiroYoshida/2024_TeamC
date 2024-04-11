@@ -1,6 +1,7 @@
 using System;
 using SoulRunProject.InGame;
 using UnityEditor;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -105,6 +106,7 @@ namespace SoulRunProject.Common
         }
         protected virtual void OnSwitchPause(bool toPause){}
     }
+    #if UNITY_EDITOR
     /// <summary>
     /// エラーを出さないためのエディタ拡張クラス、SKillBaseクラスの派生クラスにも適応される
     /// https://forum.unity.com/threads/nullreferenceexception-serializedobject-of-serializedproperty-has-been-disposed.1431907/
@@ -112,10 +114,36 @@ namespace SoulRunProject.Common
     [CustomEditor(typeof(SkillBase), true)]
     public class SkillBaseEditor : Editor
     {
+        private SerializedProperty _skillTypeProperty;
+        private SerializedProperty _levelUpEventListListProperty;
+        private SerializedProperty _skillParamProperty;
+        
+        private void OnEnable()
+        {
+            _skillTypeProperty = serializedObject.FindProperty("_skillType");
+            _levelUpEventListListProperty =
+                serializedObject.FindProperty("SkillLevelUpEvent._levelUpType._levelUpEventListList");
+            _skillParamProperty = serializedObject.FindProperty("_skillParam");
+        }
+
         public override void OnInspectorGUI()
         {
+            serializedObject.Update();
+            //スクリプト参照(ScriptableObject) MonoBehaviourは別の方法で取得
+            using(new EditorGUI.DisabledGroupScope(true))
+            {
+                EditorGUILayout.ObjectField("Script", MonoScript.FromScriptableObject((ScriptableObject)target), typeof(ScriptableObject), false);
+            }
+            
+            //enumの入力
+            _skillTypeProperty.enumValueIndex = 
+                (int)(PlayerSkill)EditorGUILayout.EnumPopup("スキルタイプ", (PlayerSkill)_skillTypeProperty.enumValueIndex);
+            // ExampleCustomList list = new ExampleCustomList(_levelUpEventListListProperty);
+            // list.DoLayoutList();
+            EditorGUILayout.PropertyField(_levelUpEventListListProperty, new GUIContent("レベルアップデータ") , true);
+            EditorGUILayout.PropertyField(_skillParamProperty , new GUIContent("スキルパラメーター") , true);
             serializedObject.ApplyModifiedProperties();
-            base.OnInspectorGUI();
         }
     }
+    #endif
 }
