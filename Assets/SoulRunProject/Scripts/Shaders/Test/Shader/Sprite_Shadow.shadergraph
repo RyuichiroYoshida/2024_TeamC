@@ -558,10 +558,10 @@
     "m_Guid": {
         "m_GuidSerialized": "6ec9a66d-262c-45a1-92e0-9eca427640fd"
     },
-    "m_Name": "DamageColar",
+    "m_Name": "DamageColor",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "DamageColar",
-    "m_DefaultReferenceName": "_DamageColar",
+    "m_RefNameGeneratedByDisplayName": "DamageColor",
+    "m_DefaultReferenceName": "_DamageColor",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -772,7 +772,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
     "m_ObjectId": "518f9307a2e9439f96828e70bf962a31",
     "m_Id": 0,
-    "m_DisplayName": "DamageColar",
+    "m_DisplayName": "DamageColor",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
