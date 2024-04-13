@@ -37,7 +37,13 @@ namespace SoulRunProject.InGame
             //TODO: スキル、スコア、コインの表示を追加
             //playerManager.OnSkillIconChanged += (index, sprite) => _view.SetSkillIcon(index, sprite);
             //playerManager. += score => _view.SetScoreText(score);
-            //playerManager.OnCoinChanged += coin => _view.SetCoinText(coin);
+            Observable.EveryUpdate()
+                .Select(_ => _playerManager.ResourceContainer.Coin)
+                .Subscribe(coin =>
+                {
+                    _view.SetCoinText(coin);
+                }).AddTo(_view);
+            
         }
     }
 }
