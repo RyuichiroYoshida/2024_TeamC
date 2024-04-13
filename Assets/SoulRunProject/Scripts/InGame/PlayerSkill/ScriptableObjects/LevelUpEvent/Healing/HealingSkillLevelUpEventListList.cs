@@ -1,15 +1,15 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using System.Linq;
 
 namespace SoulRunProject.Common
 {
     [Serializable]
-    public class ShieldSkillLevelUpEventListList : ILevelUpEventListList
+    public class HealingSkillLevelUpEventListList : ILevelUpEventListList
     {
-        [SerializeField, EnumDrawer(typeof(SkillLevelLabel))] 
-        List<ShieldSkillLevelUpEventList> _levelUpEventListList;
+        [SerializeField, Header("レベルアップイベントテーブル")] 
+        List<HealingSkillLevelUpEventList> _levelUpEventListList;
         public List<ILevelUpEventList> LevelUpEventListList => 
             _levelUpEventListList.OfType<ILevelUpEventList>().ToList();
     }

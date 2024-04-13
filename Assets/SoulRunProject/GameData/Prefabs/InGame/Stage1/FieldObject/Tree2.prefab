@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ade48ebdc62294e9934c95787b8c4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lightestColor: {r: 0.7372549, g: 0.7372549, b: 0.7372549, a: 1}
-  _darkestColor: {r: 0.1882353, g: 0.25490198, b: 0.4509804, a: 1}
+  _lightestColor: {r: 1, g: 1, b: 1, a: 1}
+  _darkestColor: {r: 0.41960785, g: 0.43137255, b: 0.48235294, a: 1}
   _minVariableDistance: 15
-  _maxVariableDistance: 40
+  _maxVariableDistance: 60
