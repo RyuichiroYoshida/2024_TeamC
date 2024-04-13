@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace SoulRunProject.InGame
 {
-    public class SkillManager : MonoBehaviour, IPausable
+    public class SkillManager : MonoBehaviour, IPlayerPausable
     {
         [SerializeField , Header("スキルデータセット")] private SkillData _skillData;
         private SkillData _skillDataCopy;

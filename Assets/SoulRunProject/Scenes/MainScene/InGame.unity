@@ -4950,7 +4950,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.6933962, g: 0.7024446, b: 1, a: 1}
+  m_Color: {r: 0.504717, g: 0.6103775, b: 1, a: 1}
   m_Intensity: 2.32
   m_Range: 10
   m_SpotAngle: 30
@@ -4994,7 +4994,7 @@ Light:
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_ColorTemperature: 15202
+  m_ColorTemperature: 12486
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
@@ -7983,7 +7983,6 @@ GameObject:
   - component: {fileID: 1420106439}
   - component: {fileID: 1420106444}
   - component: {fileID: 1420106440}
-  - component: {fileID: 1420106443}
   - component: {fileID: 1420106445}
   - component: {fileID: 1420106446}
   - component: {fileID: 1420106449}
@@ -7995,6 +7994,7 @@ GameObject:
   - component: {fileID: 1420106451}
   - component: {fileID: 1420106452}
   - component: {fileID: 1420106453}
+  - component: {fileID: 1420106454}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -8089,20 +8089,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5.5953226, y: 14.840268, z: 4.070615}
   m_Center: {x: -0.32153147, y: 0.66866845, z: -0.51260656}
---- !u!114 &1420106443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1420106435}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ced7365974afd3948b2dfeb54467d835, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _isPause: 1
-  _speed: 20
 --- !u!114 &1420106444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8297,6 +8283,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12183c37e81776d47a2249fbaa0217d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1420106454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420106435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ced7365974afd3948b2dfeb54467d835, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isPause: 0
+  _speed: 1
 --- !u!1 &1423281886
 GameObject:
   m_ObjectHideFlags: 0

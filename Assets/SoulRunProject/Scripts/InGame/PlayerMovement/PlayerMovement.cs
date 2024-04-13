@@ -11,7 +11,7 @@ namespace SoulRunProject.InGame
     /// プレイヤー移動
     /// </summary>
     [RequireComponent(typeof(Rigidbody))]
-    public class PlayerMovement : MonoBehaviour, IPausable
+    public class PlayerMovement : MonoBehaviour, IPlayerPausable
     {
         [SerializeField] private float _moveSpeed;
         [SerializeField] private float _jumpPower;

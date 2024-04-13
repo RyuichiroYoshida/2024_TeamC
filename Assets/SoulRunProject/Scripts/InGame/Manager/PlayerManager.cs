@@ -18,7 +18,7 @@ namespace SoulRunProject.Common
         [SerializeField] private Status _status;
         [SerializeField] private PlayerCamera _playerCamera;
         
-        private IPausable[] _inGameTimes;
+        private IPlayerPausable[] _inGameTimes;
         private PlayerLevelManager _pLevelManager;
         private SkillManager _skillManager;
         private SoulSkillManager _soulSkillManager;
@@ -36,7 +36,7 @@ namespace SoulRunProject.Common
         {
             _status = _status.Copy();
             CurrentHp = new FloatReactiveProperty(_status.Hp);
-            //_inGameTimes = GetComponents<IPausable>();
+            _inGameTimes = GetComponents<IPlayerPausable>();
             _pLevelManager = GetComponent<PlayerLevelManager>();
             _skillManager = GetComponent<SkillManager>();
             _soulSkillManager = GetComponent<SoulSkillManager>();
@@ -64,10 +64,10 @@ namespace SoulRunProject.Common
         /// <param name="toPause"></param>
         public void Pause(bool toPause)
         {
-            // foreach (var inGameTime in _inGameTimes)
-            // {
-            //     inGameTime.Pause(toPause);
-            // }
+            foreach (var inGameTime in _inGameTimes)
+            {
+                inGameTime.Pause(toPause);
+            }
         }
 
         /// <summary>
