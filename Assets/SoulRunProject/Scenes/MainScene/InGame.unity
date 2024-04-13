@@ -356,7 +356,7 @@ PrefabInstance:
     - target: {fileID: 1781910314973959378, guid: 54942ca6699e8764a8b2eb58690cf15d,
         type: 3}
       propertyPath: _moveSpeed
-      value: 40
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2711219284186675852, guid: 54942ca6699e8764a8b2eb58690cf15d,
         type: 3}
@@ -2174,7 +2174,7 @@ PrefabInstance:
     - target: {fileID: 1781910314973959378, guid: 54942ca6699e8764a8b2eb58690cf15d,
         type: 3}
       propertyPath: _moveSpeed
-      value: 40
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2711219284186675852, guid: 54942ca6699e8764a8b2eb58690cf15d,
         type: 3}
@@ -2260,7 +2260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd44edb12caf7f4380bb46b0d53a663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 40
+  _moveSpeed: 20
 --- !u!1 &367831986
 GameObject:
   m_ObjectHideFlags: 0
@@ -4870,7 +4870,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd44edb12caf7f4380bb46b0d53a663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 40
+  _moveSpeed: 20
 --- !u!1 &827930037 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6450742444439805585, guid: 937629548c19b1c4aaa149d2946f59bc,
@@ -4895,7 +4895,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd44edb12caf7f4380bb46b0d53a663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 40
+  _moveSpeed: 20
 --- !u!1 &845002281 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2852024871530092459, guid: d1904c00fa7c5af4d868fc3945204e44,
@@ -4920,7 +4920,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd44edb12caf7f4380bb46b0d53a663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 40
+  _moveSpeed: 20
 --- !u!1 &864433313
 GameObject:
   m_ObjectHideFlags: 0
@@ -5456,7 +5456,7 @@ PrefabInstance:
     - target: {fileID: 1781910314973959378, guid: 54942ca6699e8764a8b2eb58690cf15d,
         type: 3}
       propertyPath: _moveSpeed
-      value: 40
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1809984144736046490, guid: 54942ca6699e8764a8b2eb58690cf15d,
         type: 3}
@@ -6051,7 +6051,7 @@ PrefabInstance:
     - target: {fileID: 1781910314973959378, guid: 54942ca6699e8764a8b2eb58690cf15d,
         type: 3}
       propertyPath: _moveSpeed
-      value: 40
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2711219284186675852, guid: 54942ca6699e8764a8b2eb58690cf15d,
         type: 3}
@@ -8130,15 +8130,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelUpTable:
     Table:
-    - CurrentLevel: 0
-      ExpToNextLevel: 1
     - CurrentLevel: 1
-      ExpToNextLevel: 2
+      ExpToNextLevel: 1
     - CurrentLevel: 2
-      ExpToNextLevel: 3
+      ExpToNextLevel: 2
     - CurrentLevel: 3
-      ExpToNextLevel: 4
+      ExpToNextLevel: 3
     - CurrentLevel: 4
+      ExpToNextLevel: 4
+    - CurrentLevel: 5
       ExpToNextLevel: 5
 --- !u!212 &1420106447
 SpriteRenderer:
@@ -10501,7 +10501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd44edb12caf7f4380bb46b0d53a663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 40
+  _moveSpeed: 20
 --- !u!1001 &1756418829
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11599,7 +11599,7 @@ PrefabInstance:
     - target: {fileID: 1781910314973959378, guid: 54942ca6699e8764a8b2eb58690cf15d,
         type: 3}
       propertyPath: _moveSpeed
-      value: 40
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2711219284186675852, guid: 54942ca6699e8764a8b2eb58690cf15d,
         type: 3}
@@ -11953,7 +11953,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd44edb12caf7f4380bb46b0d53a663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 40
+  _moveSpeed: 20
 --- !u!1 &1962700604
 GameObject:
   m_ObjectHideFlags: 0
@@ -12765,7 +12765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd44edb12caf7f4380bb46b0d53a663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 40
+  _moveSpeed: 20
 --- !u!1001 &8331651501663953076
 PrefabInstance:
   m_ObjectHideFlags: 0
