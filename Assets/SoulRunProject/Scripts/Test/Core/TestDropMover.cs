@@ -6,7 +6,7 @@ namespace SoulRunProject
 {
     public class TestDropMover : MonoBehaviour
     {
-        private float _speed = 10.0f;
+        private float _speed = 20.0f;
 
         // Update is called once per frame
         void Update()

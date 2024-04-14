@@ -19,6 +19,9 @@ namespace SoulRunProject.InGame
 
         [SerializeField, Tooltip("敵のパラメータを設定する")]
         protected Status _status;
+        
+        [SerializeField, Header("スコア")]
+        private int _score = 100;
 
         [SerializeField, Tooltip("ドロップデータ")] LootTable _lootTable;
         [SerializeField] protected PlayerManager _playerManager;
@@ -91,7 +94,7 @@ namespace SoulRunProject.InGame
             {
                 ItemDropManager.Instance.Drop(_lootTable, transform.position, _playerManager.CurrentStatus);
             }
-
+            PlayerScoreManager.Instance.AddScore(_score);   // スコア加算
             _attacker?.Stop();
             _mover?.Stop();
             Destroy(gameObject);
