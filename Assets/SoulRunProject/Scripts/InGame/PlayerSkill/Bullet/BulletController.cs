@@ -85,7 +85,7 @@ namespace SoulRunProject.InGame
 
         void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.TryGetComponent(out FieldEntityController entity))
+            if (other.gameObject.TryGetComponent(out DamageableEntity entity))
             {
                 entity.Damage((int)_attackDamage);
                 _hitCount++;
