@@ -79,7 +79,7 @@ namespace SoulRunProject.Common
             _pLevelManager.AddExp(exp);
         }
         
-        public void Damage(int damage)
+        public void Damage(float damage)
         {
             foreach (var predicate in IgnoreDamagePredicates.Where(cond=> cond != null))
             {
@@ -115,9 +115,9 @@ namespace SoulRunProject.Common
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.TryGetComponent(out FieldEntityController fieldEntityController))
+            if (other.gameObject.TryGetComponent(out DamageableEntity fieldEntityController))
             {
-                Damage(fieldEntityController.Status.Attack);
+                Damage(fieldEntityController.CollisionDamage);
             }
         }
 

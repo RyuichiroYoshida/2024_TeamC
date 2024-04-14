@@ -10,7 +10,7 @@ namespace SoulRunProject.InGame
     public class EntitySpawnController : MonoBehaviour
     {
         [SerializeField, Tooltip("生成するEntity")]
-        List<FieldEntityController> _fieldEntity;
+        List<DamageableEntity> _fieldEntity;
 
         [SerializeField, Tooltip("生成開始距離(緑の範囲)")] float _spawnerEnableRange;
 
@@ -61,7 +61,7 @@ namespace SoulRunProject.InGame
                 // TODO 複数種出す場合、それらを選択するロジックを考える
                 var entity = Instantiate(_fieldEntity[spawnIndex], transform);
                 entity.transform.position = transform.position + pos;
-                entity.SetPlayer(_playerManager);
+                //entity.SetPlayer(_playerManager);
                 spawnIndex++;
             }
         }

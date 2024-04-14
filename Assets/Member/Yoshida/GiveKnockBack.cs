@@ -5,7 +5,7 @@ namespace SoulRunProject.Common
     /// <summary>
     /// 与ノックバック処理のクラス
     /// </summary>
-    public class SkillKnockBackController : MonoBehaviour
+    public class GiveKnockBack : MonoBehaviour
     {
         [SerializeField, Range(0, 1)] float _power;
 
