@@ -10,31 +10,39 @@ namespace SoulRunProject.InGame
     public class HitDamageEffectManager : MonoBehaviour
     {
         // シェーダーのカラープロパティ取得
-        protected static readonly int PramID = Shader.PropertyToID("_Color");
+        private int PramID = Shader.PropertyToID("_DamageColor");
 
         // 良い感じの白色
         static readonly Color WhiteColor = new(0.85f, 0.85f, 0.85f, 0.6f);
         [SerializeField, Tooltip("点滅時間")] float _duration;
         [SerializeField, Tooltip("点滅回数")] int _loopCount;
         Renderer _renderer;
-        protected Material _copyMaterial;
+        Material _copyMaterial;
         Sequence _sequence;
-        protected Color _defaultColor;
-        protected bool _hitFadeBlinking;
+        Color _defaultColor;
+        bool _hitFadeBlinking;
+
+        public Material CopyMaterial => _copyMaterial;
 
         /// <summary>
         /// マテリアルの複製を行う
         /// </summary>
-        protected virtual void Awake()
+        protected void Awake()
         {
             if (!TryGetComponent(out _renderer))
             {
                 Debug.LogWarning($"{gameObject.name} のレンダラーがアタッチされていません");
                 return;
             }
-
+            
             var material = new Material(_renderer.material);
             _copyMaterial = material;
+
+            if (!material.HasColor(PramID)) // パラメータ名が存在しているか
+            {
+                PramID = Shader.PropertyToID("_Color");
+            }
+            
             _defaultColor = material.GetColor(PramID);
             _renderer.material = _copyMaterial;
 
