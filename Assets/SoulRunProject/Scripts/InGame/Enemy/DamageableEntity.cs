@@ -14,7 +14,7 @@ namespace SoulRunProject.InGame
     {
         [SerializeField , Header("HP")] private float _hp = 30;
         [SerializeField, Header("衝突ダメージ")] private float _collisionDamage;
-        [SerializeField, Header("ノックバック方向(テスト用)")] private Vector3 _direction = Vector3.one;
+        [SerializeField, Header("ノックバック方向")] private Vector3 _direction = Vector3.one;
         [SerializeField ,Header("ノックバック処理")] TakeKnockBack _takeKnockBack;
         [SerializeField, Header("ドロップデータ")] LootTable _lootTable;
         [SerializeField, Header("ダメージエフェクト")] HitDamageEffectManager _hitDamageEffectManager;

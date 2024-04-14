@@ -12,5 +12,9 @@ namespace SoulRunProject.Common
         List<HealingSkillLevelUpEventList> _levelUpEventListList;
         public List<ILevelUpEventList> LevelUpEventListList => 
             _levelUpEventListList.OfType<ILevelUpEventList>().ToList();
+        public void RefreshElement()
+        {
+            _levelUpEventListList[^1] = new();
+        }
     }
 }
