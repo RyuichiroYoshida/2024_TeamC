@@ -2707,7 +2707,7 @@ PrefabInstance:
     - target: {fileID: 8160015286760555117, guid: 3e8a0f84499af1d42be217e12dfa6d9e,
         type: 3}
       propertyPath: _takeKnockBack._resistanceValue
-      value: 86.7
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
