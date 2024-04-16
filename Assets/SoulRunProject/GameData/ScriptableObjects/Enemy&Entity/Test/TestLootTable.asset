@@ -15,7 +15,7 @@ MonoBehaviour:
   _pools:
   - _rolls:
       rid: 7688072899076554755
-    _bonusRolls: 0
+    _bonusRolls: 3
     _entries:
     - _drop: {fileID: 3413531040011444656, guid: 0dce8baa8685daf41b982149b3e0a88e,
         type: 3}
