@@ -8,7 +8,7 @@ namespace SoulRunProject.Common
     {
         //TODO リストのリスト化
         [SerializeReference] ILevelUpEventListList _levelUpType;
-
+        public ILevelUpEventListList LevelUpType => _levelUpType;
         public SkillLevelUpEvent(ILevelUpEventListList levelUpType)
         {
             _levelUpType = levelUpType;

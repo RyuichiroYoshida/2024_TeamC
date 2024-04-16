@@ -21,7 +21,7 @@ MonoBehaviour:
         type: 3}
       _count:
         rid: 7688072899076554757
-      _countQuality: 0
+      _countQuality: 1
       _weight: 1
       _weightQuality: 0
   - _rolls:
@@ -32,7 +32,7 @@ MonoBehaviour:
         type: 3}
       _count:
         rid: 7688072899076554758
-      _countQuality: 0
+      _countQuality: 1
       _weight: 1
       _weightQuality: 0
   references:
