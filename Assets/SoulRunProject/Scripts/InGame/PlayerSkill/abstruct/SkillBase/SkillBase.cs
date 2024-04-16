@@ -39,10 +39,26 @@ namespace SoulRunProject.Common
         int _currentLevel = 1;
 
         public PlayerSkill SkillType => _skillType;
-        
+
+        private int _elementCount;
+        private void OnValidate()
+        {
+            int currentElementCount = SkillLevelUpEvent.LevelUpType.LevelUpEventListList.Count;
+            if (_elementCount != currentElementCount)
+            {
+                if (_elementCount < currentElementCount)
+                {
+                    Debug.Log("RefreshElement");
+                    SkillLevelUpEvent.LevelUpType.RefreshElement();
+                }
+                _elementCount = currentElementCount;
+            }
+        }
+
         void OnEnable()
         {
             SceneManager.sceneLoaded += OnSceneLoaded;
+            _elementCount = SkillLevelUpEvent.LevelUpType.LevelUpEventListList.Count;
         }
 
         void OnDisable()
@@ -117,12 +133,14 @@ namespace SoulRunProject.Common
         private SerializedProperty _skillTypeProperty;
         private SerializedProperty _levelUpEventListListProperty;
         private SerializedProperty _skillParamProperty;
-        
+
+        private int _levelUpListLastIndex;
         private void OnEnable()
         {
             _skillTypeProperty = serializedObject.FindProperty("_skillType");
             _levelUpEventListListProperty =
                 serializedObject.FindProperty("SkillLevelUpEvent._levelUpType._levelUpEventListList");
+            _levelUpListLastIndex = _levelUpEventListListProperty.arraySize - 1;
             _skillParamProperty = serializedObject.FindProperty("_skillParam");
         }
 
@@ -144,6 +162,7 @@ namespace SoulRunProject.Common
             EditorGUILayout.PropertyField(_skillParamProperty , new GUIContent("スキルパラメーター") , true);
             serializedObject.ApplyModifiedProperties();
         }
+        
     }
     #endif
 }
