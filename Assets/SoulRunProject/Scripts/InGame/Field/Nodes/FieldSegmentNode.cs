@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using GraphProcessor;
-using SoulRunProject.InGame.Field;
+using SoulRunProject.InGame;
 using UnityEngine;
 
 namespace SoulRunProject.Common

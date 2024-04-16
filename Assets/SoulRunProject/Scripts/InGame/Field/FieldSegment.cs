@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace SoulRunProject.InGame.Field
+namespace SoulRunProject.InGame
 {
     /// <summary>
     ///     Field Moverで道を扱うためのクラス

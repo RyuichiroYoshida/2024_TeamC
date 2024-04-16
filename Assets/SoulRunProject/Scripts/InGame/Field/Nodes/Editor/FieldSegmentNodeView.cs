@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.UIElements;
 using GraphProcessor;
-using SoulRunProject.InGame.Field;
+using SoulRunProject.InGame;
 using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
 
