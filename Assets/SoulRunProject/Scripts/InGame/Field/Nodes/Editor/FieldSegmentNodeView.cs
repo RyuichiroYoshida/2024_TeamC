@@ -3,12 +3,11 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.UIElements;
 using GraphProcessor;
-using SoulRunProject.Common;
 using SoulRunProject.InGame.Field;
 using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
 
-namespace SoulRunProject.Editor
+namespace SoulRunProject.Common
 {
     [NodeCustomEditor(typeof(FieldSegmentNode))]
     public class FieldSegmentNodeView : BaseNodeView

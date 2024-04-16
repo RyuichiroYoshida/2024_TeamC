@@ -1,11 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using GraphProcessor;
-using SoulRunProject.Common;
 using Unity.Jobs;
-using UnityEngine;
 
-namespace SoulRunProject.Editor
+namespace SoulRunProject.Common
 {
     public class AdjacentGraphProcessor : BaseGraphProcessor
     {

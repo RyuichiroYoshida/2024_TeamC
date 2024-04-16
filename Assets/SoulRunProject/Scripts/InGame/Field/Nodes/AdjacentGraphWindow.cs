@@ -1,8 +1,8 @@
 using System.IO;
 using UnityEngine;
-using UnityEditor;
 using GraphProcessor;
-using SoulRunProject.InGame.Field;
+#if UNITY_EDITOR
+using UnityEditor;
 using UnityEngine.Assertions;
 
 namespace SoulRunProject.Common
@@ -25,3 +25,4 @@ namespace SoulRunProject.Common
         }
     }
 }
+#endif

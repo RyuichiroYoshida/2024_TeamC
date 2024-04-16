@@ -1,8 +1,7 @@
-using SoulRunProject.Common;
 using UnityEngine;
 using UnityEditor;
 
-namespace SoulRunProject.Editor
+namespace SoulRunProject.Common
 {
     [CustomEditor(typeof(AdjacentGraph))]
     public class AdjacentGraphEditor : UnityEditor.Editor
