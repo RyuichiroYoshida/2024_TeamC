@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: SoulBullet
   m_EditorClassIdentifier: 
   _skillType: 0
+  _skillName: "\u30BD\u30A6\u30EB\u30D0\u30EC\u30C3\u30C8"
+  _explanatoryText: "\u30BD\u30A6\u30EB\u30D0\u30EC\u30C3\u30C8\u8AAC\u660E\u6587"
+  _skillIcon: {fileID: 21300000, guid: 49d775a25ad824a4f87b433e62a01744, type: 3}
   MaxSkillLevel: 5
   SkillLevelUpEvent:
     _levelUpType:
