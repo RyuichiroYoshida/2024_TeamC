@@ -791,11 +791,17 @@ MonoBehaviour:
   _levelUpPanel: {fileID: 193391968}
   _upgradeButtons:
   - _inputUIButton: {fileID: 1930517547}
-    _buttonText: {fileID: 1770022761}
+    _nameAndLevelText: {fileID: 1770022761}
+    _explanatoryText: {fileID: 1436108015}
+    _buttonIconImage: {fileID: 385831711}
   - _inputUIButton: {fileID: 1723782469}
-    _buttonText: {fileID: 302484958}
+    _nameAndLevelText: {fileID: 302484958}
+    _explanatoryText: {fileID: 1776637969}
+    _buttonIconImage: {fileID: 367831988}
   - _inputUIButton: {fileID: 1785972698}
-    _buttonText: {fileID: 2123411760}
+    _nameAndLevelText: {fileID: 2123411760}
+    _explanatoryText: {fileID: 1364571158}
+    _buttonIconImage: {fileID: 908667175}
 --- !u!1 &193391968
 GameObject:
   m_ObjectHideFlags: 0
@@ -3472,18 +3478,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36e8fdec0a21ddc4c9ff68fbc6305570, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelUpTable:
-    Table:
-    - CurrentLevel: 0
-      ExpToNextLevel: 1
-    - CurrentLevel: 1
-      ExpToNextLevel: 2
-    - CurrentLevel: 2
-      ExpToNextLevel: 3
-    - CurrentLevel: 3
-      ExpToNextLevel: 4
-    - CurrentLevel: 4
-      ExpToNextLevel: 5
+  _initialLevel: 1
+  _expToNextLevel: 
 --- !u!212 &1420106447
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3570,6 +3566,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skillData: {fileID: 11400000, guid: bd1df6d49e5d4e947848631660768137, type: 2}
+  _skillIconImage:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &1420106450
 MonoBehaviour:
   m_ObjectHideFlags: 0
