@@ -5879,8 +5879,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _patterns:
+  - _isInfinity: 0
+    _seconds: 60
+    _isRandom: 0
+    _fieldSegments:
+    - {fileID: 8385212075687332779, guid: 8a783ddf48dccd5499fe9f76581216f0, type: 3}
   - _isInfinity: 1
-    _seconds: 0
+    _seconds: 60
     _isRandom: 1
     _fieldSegments: []
   _adjacentGraph: {fileID: 11400000, guid: 47a803795c6066442861898c5a868b0b, type: 2}
