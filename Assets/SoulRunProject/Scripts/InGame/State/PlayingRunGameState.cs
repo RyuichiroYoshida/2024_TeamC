@@ -44,7 +44,7 @@ namespace SoulRunProject.InGame
                 })
                 .AddTo(_compositeDisposable);
             
-            _playerLevelManager.OnCurrentLevelDataChanged
+            _playerLevelManager.OnLevelUp
                 .SkipLatestValueOnSubscribe()
                 .Subscribe(_ =>
                 {

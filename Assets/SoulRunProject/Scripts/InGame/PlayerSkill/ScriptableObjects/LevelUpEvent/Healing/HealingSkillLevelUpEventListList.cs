@@ -8,7 +8,7 @@ namespace SoulRunProject.Common
     [Serializable]
     public class HealingSkillLevelUpEventListList : ILevelUpEventListList
     {
-        [SerializeField, Header("レベルアップイベントテーブル")] 
+        [SerializeField, EnumDrawer(typeof(SkillLevelLabel))] 
         List<HealingSkillLevelUpEventList> _levelUpEventListList;
         public List<ILevelUpEventList> LevelUpEventListList => 
             _levelUpEventListList.OfType<ILevelUpEventList>().ToList();
