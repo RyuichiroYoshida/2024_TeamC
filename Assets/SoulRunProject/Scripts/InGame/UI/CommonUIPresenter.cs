@@ -31,8 +31,8 @@ namespace SoulRunProject.InGame
                 DebugClass.Instance.ShowLog(hp.ToString());
                 _view.SetHpGauge(hp, _playerManager.MaxHp);
             }).AddTo(_view);
-            _playerLevelManager.OnCurrentExpChanged.Subscribe(exp => _view.SetExpGauge(exp, _playerLevelManager.CurrentMaxExp)).AddTo(_view);
-            _playerLevelManager.OnCurrentLevelDataChanged.Subscribe(data => _view.SetLevelText(data.CurrentLevel)).AddTo(_view);
+            _playerLevelManager.OnCurrentExpChanged.Subscribe(exp => _view.SetExpGauge(exp, _playerLevelManager.CurrentExpToNextLevel)).AddTo(_view);
+            _playerLevelManager.OnLevelUp.Subscribe(level => _view.SetLevelText(level)).AddTo(_view);
             _soulSkillManager.CurrentSoul?.Subscribe(current => _view.SetSoulGauge(current, _soulSkillManager.RequiredSoul)).AddTo(_view);
             //TODO: スキル、スコア、コインの表示を追加
             //playerManager.OnSkillIconChanged += (index, sprite) => _view.SetSkillIcon(index, sprite);
