@@ -12432,6 +12432,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5844823972712441080, guid: 8d613e1c99a2f5e42b796cf8ef39300a,
+        type: 3}
+      propertyPath: _takeKnockBack._resistanceValue
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12515,6 +12520,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tree2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8886523578831790948, guid: 3a22f40f39b42ca49855f7b419f1aaeb,
+        type: 3}
+      propertyPath: _takeKnockBack._resistanceValue
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12600,6 +12610,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree2_4
       objectReference: {fileID: 0}
+    - target: {fileID: 8886523578831790948, guid: 3a22f40f39b42ca49855f7b419f1aaeb,
+        type: 3}
+      propertyPath: _takeKnockBack._resistanceValue
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12619,6 +12634,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5997917095716202524}
     m_Modifications:
+    - target: {fileID: -8307266297739542644, guid: 13e35f3c03bc45a40bab0890f943a980,
+        type: 3}
+      propertyPath: _takeKnockBack._resistanceValue
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 871129033906405150, guid: 13e35f3c03bc45a40bab0890f943a980,
         type: 3}
       propertyPath: m_Name
@@ -12768,6 +12788,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree2_2
       objectReference: {fileID: 0}
+    - target: {fileID: 8886523578831790948, guid: 3a22f40f39b42ca49855f7b419f1aaeb,
+        type: 3}
+      propertyPath: _takeKnockBack._resistanceValue
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12851,6 +12876,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tree2_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8886523578831790948, guid: 3a22f40f39b42ca49855f7b419f1aaeb,
+        type: 3}
+      propertyPath: _takeKnockBack._resistanceValue
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12936,6 +12966,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5844823972712441080, guid: 8d613e1c99a2f5e42b796cf8ef39300a,
+        type: 3}
+      propertyPath: _takeKnockBack._resistanceValue
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13020,6 +13055,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5844823972712441080, guid: 8d613e1c99a2f5e42b796cf8ef39300a,
+        type: 3}
+      propertyPath: _takeKnockBack._resistanceValue
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13039,6 +13079,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5997917095716202524}
     m_Modifications:
+    - target: {fileID: -8307266297739542644, guid: 13e35f3c03bc45a40bab0890f943a980,
+        type: 3}
+      propertyPath: _takeKnockBack._resistanceValue
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 871129033906405150, guid: 13e35f3c03bc45a40bab0890f943a980,
         type: 3}
       propertyPath: m_Name
@@ -13188,6 +13233,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5844823972712441080, guid: 8d613e1c99a2f5e42b796cf8ef39300a,
+        type: 3}
+      propertyPath: _takeKnockBack._resistanceValue
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13271,6 +13321,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tree2_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8886523578831790948, guid: 3a22f40f39b42ca49855f7b419f1aaeb,
+        type: 3}
+      propertyPath: _takeKnockBack._resistanceValue
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13356,6 +13411,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5844823972712441080, guid: 8d613e1c99a2f5e42b796cf8ef39300a,
+        type: 3}
+      propertyPath: _takeKnockBack._resistanceValue
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13375,6 +13435,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5997917095716202524}
     m_Modifications:
+    - target: {fileID: -8307266297739542644, guid: 13e35f3c03bc45a40bab0890f943a980,
+        type: 3}
+      propertyPath: _takeKnockBack._resistanceValue
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 871129033906405150, guid: 13e35f3c03bc45a40bab0890f943a980,
         type: 3}
       propertyPath: m_Name
@@ -13459,6 +13524,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5997917095716202524}
     m_Modifications:
+    - target: {fileID: -8307266297739542644, guid: 13e35f3c03bc45a40bab0890f943a980,
+        type: 3}
+      propertyPath: _takeKnockBack._resistanceValue
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 871129033906405150, guid: 13e35f3c03bc45a40bab0890f943a980,
         type: 3}
       propertyPath: m_Name
@@ -13608,6 +13678,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5844823972712441080, guid: 8d613e1c99a2f5e42b796cf8ef39300a,
+        type: 3}
+      propertyPath: _takeKnockBack._resistanceValue
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13692,6 +13767,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5844823972712441080, guid: 8d613e1c99a2f5e42b796cf8ef39300a,
+        type: 3}
+      propertyPath: _takeKnockBack._resistanceValue
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13711,6 +13791,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5997917095716202524}
     m_Modifications:
+    - target: {fileID: -8307266297739542644, guid: 13e35f3c03bc45a40bab0890f943a980,
+        type: 3}
+      propertyPath: _takeKnockBack._resistanceValue
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 871129033906405150, guid: 13e35f3c03bc45a40bab0890f943a980,
         type: 3}
       propertyPath: m_Name

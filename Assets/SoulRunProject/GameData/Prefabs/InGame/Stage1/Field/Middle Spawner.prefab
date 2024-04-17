@@ -125,7 +125,7 @@ MonoBehaviour:
   _collisionDamage: 0
   _direction: {x: 1, y: 1, z: 1}
   _takeKnockBack:
-    _resistanceValue: 0
+    _resistanceValue: 100
     _knockBackTime: 0.5
   _lootTable: {fileID: 0}
   _hitDamageEffectManager: {fileID: 0}
@@ -386,7 +386,7 @@ MonoBehaviour:
   _collisionDamage: 0
   _direction: {x: 1, y: 1, z: 1}
   _takeKnockBack:
-    _resistanceValue: 0
+    _resistanceValue: 100
     _knockBackTime: 0.5
   _lootTable: {fileID: 0}
   _hitDamageEffectManager: {fileID: 848953181594020009}
@@ -442,7 +442,7 @@ Transform:
   m_GameObject: {fileID: 557152649445856046}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 2.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -601,7 +601,7 @@ MonoBehaviour:
   _collisionDamage: 0
   _direction: {x: 1, y: 1, z: 1}
   _takeKnockBack:
-    _resistanceValue: 0
+    _resistanceValue: 100
     _knockBackTime: 0.5
   _lootTable: {fileID: 0}
   _hitDamageEffectManager: {fileID: 0}
@@ -3684,7 +3684,7 @@ MonoBehaviour:
   _collisionDamage: 0
   _direction: {x: 1, y: 1, z: 1}
   _takeKnockBack:
-    _resistanceValue: 0
+    _resistanceValue: 100
     _knockBackTime: 0.5
   _lootTable: {fileID: 0}
   _hitDamageEffectManager: {fileID: 3450147979392603487}
@@ -3839,7 +3839,7 @@ MonoBehaviour:
   _collisionDamage: 0
   _direction: {x: 1, y: 1, z: 1}
   _takeKnockBack:
-    _resistanceValue: 0
+    _resistanceValue: 100
     _knockBackTime: 0.5
   _lootTable: {fileID: 0}
   _hitDamageEffectManager: {fileID: 679671968064809422}
@@ -5796,7 +5796,7 @@ MonoBehaviour:
   _collisionDamage: 0
   _direction: {x: 1, y: 1, z: 1}
   _takeKnockBack:
-    _resistanceValue: 0
+    _resistanceValue: 100
     _knockBackTime: 0.5
   _lootTable: {fileID: 0}
   _hitDamageEffectManager: {fileID: 0}
@@ -5951,7 +5951,7 @@ MonoBehaviour:
   _collisionDamage: 0
   _direction: {x: 1, y: 1, z: 1}
   _takeKnockBack:
-    _resistanceValue: 0
+    _resistanceValue: 100
     _knockBackTime: 0.5
   _lootTable: {fileID: 0}
   _hitDamageEffectManager: {fileID: 1095938686900127518}
@@ -7060,7 +7060,7 @@ MonoBehaviour:
   _collisionDamage: 0
   _direction: {x: 1, y: 1, z: 1}
   _takeKnockBack:
-    _resistanceValue: 0
+    _resistanceValue: 100
     _knockBackTime: 0.5
   _lootTable: {fileID: 0}
   _hitDamageEffectManager: {fileID: 0}
@@ -7215,7 +7215,7 @@ MonoBehaviour:
   _collisionDamage: 0
   _direction: {x: 1, y: 1, z: 1}
   _takeKnockBack:
-    _resistanceValue: 0
+    _resistanceValue: 100
     _knockBackTime: 0.5
   _lootTable: {fileID: 0}
   _hitDamageEffectManager: {fileID: 2348793795107245632}
@@ -7582,7 +7582,7 @@ MonoBehaviour:
   _collisionDamage: 0
   _direction: {x: 1, y: 1, z: 1}
   _takeKnockBack:
-    _resistanceValue: 0
+    _resistanceValue: 100
     _knockBackTime: 0.5
   _lootTable: {fileID: 0}
   _hitDamageEffectManager: {fileID: 8466999097343824896}
@@ -7737,7 +7737,7 @@ MonoBehaviour:
   _collisionDamage: 0
   _direction: {x: 1, y: 1, z: 1}
   _takeKnockBack:
-    _resistanceValue: 0
+    _resistanceValue: 100
     _knockBackTime: 0.5
   _lootTable: {fileID: 0}
   _hitDamageEffectManager: {fileID: 0}
@@ -7998,7 +7998,7 @@ MonoBehaviour:
   _collisionDamage: 0
   _direction: {x: 1, y: 1, z: 1}
   _takeKnockBack:
-    _resistanceValue: 0
+    _resistanceValue: 100
     _knockBackTime: 0.5
   _lootTable: {fileID: 0}
   _hitDamageEffectManager: {fileID: 0}
@@ -8926,7 +8926,7 @@ MonoBehaviour:
   _collisionDamage: 0
   _direction: {x: 1, y: 1, z: 1}
   _takeKnockBack:
-    _resistanceValue: 0
+    _resistanceValue: 100
     _knockBackTime: 0.5
   _lootTable: {fileID: 0}
   _hitDamageEffectManager: {fileID: 1862807023864506520}
