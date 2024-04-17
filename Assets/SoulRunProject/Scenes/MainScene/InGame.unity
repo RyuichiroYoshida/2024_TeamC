@@ -3794,11 +3794,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _skillData: {fileID: 11400000, guid: bd1df6d49e5d4e947848631660768137, type: 2}
   _skillIconImage:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1698915878}
+  - {fileID: 1639702815}
+  - {fileID: 457890127}
+  - {fileID: 664621295}
+  - {fileID: 1755627449}
 --- !u!114 &1420106450
 MonoBehaviour:
   m_ObjectHideFlags: 0
