@@ -338,7 +338,7 @@ MonoBehaviour:
   _direction: {x: 1, y: 1, z: 1}
   _takeKnockBack:
     _resistanceValue: 100
-    _coolTime: 0
+    _knockBackTime: 0.5
   _lootTable: {fileID: 0}
   _hitDamageEffectManager: {fileID: 4788927668367051538}
 --- !u!114 &4788927668367051538
@@ -599,7 +599,7 @@ MonoBehaviour:
   _direction: {x: 1, y: 1, z: 1}
   _takeKnockBack:
     _resistanceValue: 100
-    _coolTime: 0
+    _knockBackTime: 0.5
   _lootTable: {fileID: 0}
   _hitDamageEffectManager: {fileID: 0}
 --- !u!114 &7959195045160660513
@@ -1496,7 +1496,7 @@ MonoBehaviour:
   _direction: {x: 1, y: 1, z: 1}
   _takeKnockBack:
     _resistanceValue: 100
-    _coolTime: 0
+    _knockBackTime: 0.5
   _lootTable: {fileID: 0}
   _hitDamageEffectManager: {fileID: 7542971456057260053}
 --- !u!114 &7542971456057260053
@@ -1757,7 +1757,7 @@ MonoBehaviour:
   _direction: {x: 1, y: 1, z: 1}
   _takeKnockBack:
     _resistanceValue: 100
-    _coolTime: 0
+    _knockBackTime: 0.5
   _lootTable: {fileID: 0}
   _hitDamageEffectManager: {fileID: 0}
 --- !u!114 &2155033915256037724
@@ -6853,7 +6853,7 @@ MonoBehaviour:
   _direction: {x: 1, y: 1, z: 1}
   _takeKnockBack:
     _resistanceValue: 100
-    _coolTime: 0
+    _knockBackTime: 0.5
   _lootTable: {fileID: 0}
   _hitDamageEffectManager: {fileID: 8110571535419445754}
 --- !u!114 &8110571535419445754
@@ -7114,7 +7114,7 @@ MonoBehaviour:
   _direction: {x: 1, y: 1, z: 1}
   _takeKnockBack:
     _resistanceValue: 100
-    _coolTime: 0
+    _knockBackTime: 0.5
   _lootTable: {fileID: 0}
   _hitDamageEffectManager: {fileID: 5190939700754088777}
 --- !u!114 &5190939700754088777
@@ -8117,7 +8117,7 @@ MonoBehaviour:
   _direction: {x: 1, y: 1, z: 1}
   _takeKnockBack:
     _resistanceValue: 100
-    _coolTime: 0
+    _knockBackTime: 0.5
   _lootTable: {fileID: 0}
   _hitDamageEffectManager: {fileID: 2626898646148212853}
 --- !u!114 &2626898646148212853
@@ -8590,7 +8590,7 @@ MonoBehaviour:
   _direction: {x: 1, y: 1, z: 1}
   _takeKnockBack:
     _resistanceValue: 100
-    _coolTime: 0
+    _knockBackTime: 0.5
   _lootTable: {fileID: 0}
   _hitDamageEffectManager: {fileID: 0}
 --- !u!114 &3804507241914362767
@@ -9942,7 +9942,7 @@ MonoBehaviour:
   _direction: {x: 1, y: 1, z: 1}
   _takeKnockBack:
     _resistanceValue: 100
-    _coolTime: 0
+    _knockBackTime: 0.5
   _lootTable: {fileID: 0}
   _hitDamageEffectManager: {fileID: 0}
 --- !u!114 &7023797805086302842
@@ -10839,7 +10839,7 @@ MonoBehaviour:
   _direction: {x: 1, y: 1, z: 1}
   _takeKnockBack:
     _resistanceValue: 100
-    _coolTime: 0
+    _knockBackTime: 0.5
   _lootTable: {fileID: 0}
   _hitDamageEffectManager: {fileID: 0}
 --- !u!114 &7395188697490452848
@@ -11100,7 +11100,7 @@ MonoBehaviour:
   _direction: {x: 1, y: 1, z: 1}
   _takeKnockBack:
     _resistanceValue: 100
-    _coolTime: 0
+    _knockBackTime: 0.5
   _lootTable: {fileID: 0}
   _hitDamageEffectManager: {fileID: 693055539829406238}
 --- !u!114 &693055539829406238
@@ -11255,7 +11255,7 @@ MonoBehaviour:
   _direction: {x: 1, y: 1, z: 1}
   _takeKnockBack:
     _resistanceValue: 100
-    _coolTime: 0
+    _knockBackTime: 0.5
   _lootTable: {fileID: 0}
   _hitDamageEffectManager: {fileID: 0}
 --- !u!114 &1136023042078961838
@@ -11410,7 +11410,7 @@ MonoBehaviour:
   _direction: {x: 1, y: 1, z: 1}
   _takeKnockBack:
     _resistanceValue: 100
-    _coolTime: 0
+    _knockBackTime: 0.5
   _lootTable: {fileID: 0}
   _hitDamageEffectManager: {fileID: 1691601496586288734}
 --- !u!114 &1691601496586288734
@@ -11671,7 +11671,7 @@ MonoBehaviour:
   _direction: {x: 1, y: 1, z: 1}
   _takeKnockBack:
     _resistanceValue: 100
-    _coolTime: 0
+    _knockBackTime: 0.5
   _lootTable: {fileID: 0}
   _hitDamageEffectManager: {fileID: 3476854881828850149}
 --- !u!114 &3476854881828850149
