@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _skillType: 1
   _skillName: "\u30DB\u30FC\u30EA\u30FC\u30D5\u30A3\u30FC\u30EB\u30C9"
-  _explanatoryText: "\u307B\u308A\u30D5\u30A3\u30FC\u30EB\u30C9\u8AAC\u660E\u6587"
+  _explanatoryText: "\u9B54\u6CD5\u9663\u4E0A\u306B\u4E57\u3063\u305F\u6575\u306B\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u3089\u308C\u308B\u3002"
   _skillIcon: {fileID: 21300000, guid: 49d775a25ad824a4f87b433e62a01744, type: 3}
   MaxSkillLevel: 5
   SkillLevelUpEvent:

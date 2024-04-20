@@ -48,7 +48,7 @@ MonoBehaviour:
         _coolTime: 0.3
         _lifeTime: 5
         _amount: 0
-        _attackDamage: 10
+        _attackDamage: 100
         _range: 4
         _speed: 20
         _penetration: 0
