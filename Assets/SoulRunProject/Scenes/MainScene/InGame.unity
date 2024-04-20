@@ -5934,7 +5934,7 @@ MonoBehaviour:
     _isRandom: 1
     _fieldSegments: []
   _adjacentGraph: {fileID: 11400000, guid: 47a803795c6066442861898c5a868b0b, type: 2}
-  _minSegmentCount: 5
+  _minSegmentCount: 2
   _scrollSpeed: 30
 --- !u!1 &1990613036
 GameObject:
