@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using SoulRunProject.Common;
+using SoulRunProject.Common.Interface;
 using UnityEngine;
 
 namespace SoulRunProject.InGame
@@ -8,13 +9,13 @@ namespace SoulRunProject.InGame
     /// <summary>
     /// Entityの生成管理クラス
     /// </summary>
-    public class EntitySpawnController : MonoBehaviour
+    public class EntitySpawnerController : MonoBehaviour
     {
         [SerializeField, CustomLabel("生成するEntity")]
         List<DamageableEntity> _fieldEntity;
 
-        [SerializeField, CustomLabel("生成開始距離 (緑の範囲)"), Range(0, 100)]
-        float _spawnerEnableRange;
+        [SerializeReference, SubclassSelector, CustomLabel("生成条件")]
+        ISpawnerEnableType _spawnerType;
 
         [SerializeField, CustomLabel("生成インターバル (ミリ秒)"), Range(0, 1000)]
         float _spawnInterval;
@@ -28,17 +29,17 @@ namespace SoulRunProject.InGame
         //現状はヒットしたplayerの参照をヒット時に格納する
         PlayerManager _playerManager;
         bool _spawnFlag;
-        public ISpawnPattern SpawnPattern => _spawnPattern;
+        public ISpawnerEnableType SpawnerType => _spawnerType;
 
         void Start()
         {
-            _playerManager = FindObjectOfType<PlayerManager>();
+            GameObject.FindWithTag("Player").TryGetComponent(out _playerManager);
         }
 
         void Update()
         {
             if (_spawnFlag) return;
-            if (Vector3.Distance(_playerManager.transform.position, transform.position) < _spawnerEnableRange)
+            if (_spawnerType.IsEnable(_playerManager.transform.position, transform.position))
             {
                 StartCoroutine(SpawnEntity());
                 _spawnFlag = true;
@@ -84,28 +85,10 @@ namespace SoulRunProject.InGame
             }
         }
 
-        /// <summary>
-        /// 2D円形のGizmosを描画するメソッド
-        /// </summary>
-        public static void DrawWireDisk(Vector3 position, float radius, Color color)
-        {
-            const float gizmoDiskThickness = 0.01f;
-            // 参考 https://discussions.unity.com/t/draw-2d-circle-with-gizmos/123578/2
-            var oldColor = Gizmos.color;
-            Gizmos.color = color;
-            var oldMatrix = Gizmos.matrix;
-            Gizmos.matrix = Matrix4x4.TRS(position, Quaternion.identity, new Vector3(1, gizmoDiskThickness, 1));
-            Gizmos.DrawWireSphere(Vector3.zero, radius);
-            Gizmos.matrix = oldMatrix;
-            Gizmos.color = oldColor;
-        }
-
 #if UNITY_EDITOR
         void OnDrawGizmos()
         {
-            var position = transform.position;
-            _spawnPattern.DrawGizmos(position);
-            DrawWireDisk(position, _spawnerEnableRange, Color.green);
+            _spawnerType?.DrawSpawnerArea(transform.position);
 
             // TODO シーン上で生成パターンを見れるようにしたいね
             // _spawnFlag = false;
