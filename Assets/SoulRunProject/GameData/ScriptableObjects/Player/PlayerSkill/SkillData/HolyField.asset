@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HolyField
   m_EditorClassIdentifier: 
   _skillType: 1
-  _skillName: "\u307B\u308A\u30D5\u30A3\u30FC\u30EB\u3068"
+  _skillName: "\u30DB\u30FC\u30EA\u30FC\u30D5\u30A3\u30FC\u30EB\u30C9"
   _explanatoryText: "\u307B\u308A\u30D5\u30A3\u30FC\u30EB\u30C9\u8AAC\u660E\u6587"
   _skillIcon: {fileID: 21300000, guid: 49d775a25ad824a4f87b433e62a01744, type: 3}
   MaxSkillLevel: 5
@@ -44,9 +44,7 @@ MonoBehaviour:
         - _levelUpEventList:
           - rid: 4051172700801204280
           - rid: 4051172700801204281
-        - _levelUpEventList:
-          - rid: 4051172700801204280
-          - rid: 4051172700801204281
+        - _levelUpEventList: []
     - rid: 4051172700801204279
       type: {class: AoESkillParameter, ns: SoulRunProject.Common, asm: Assembly-CSharp}
       data:
