@@ -24,7 +24,7 @@ MonoBehaviour:
     rid: 4051172700801204279
   _original: {fileID: 158674725360675817, guid: 75a84e6cba64bf448a7f1dd12ad33ca1,
     type: 3}
-  _groundHeight: 0.01
+  _groundHeight: 0.05
   references:
     version: 2
     RefIds:
@@ -49,7 +49,7 @@ MonoBehaviour:
       type: {class: AoESkillParameter, ns: SoulRunProject.Common, asm: Assembly-CSharp}
       data:
         _attackDamage: 10
-        _range: 4
+        _range: 2
     - rid: 4051172700801204280
       type: {class: LevelUpEventAoERange, ns: SoulRunProject.Common, asm: Assembly-CSharp}
       data:
