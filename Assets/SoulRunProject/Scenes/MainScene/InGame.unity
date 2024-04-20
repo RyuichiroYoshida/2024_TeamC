@@ -5928,7 +5928,7 @@ MonoBehaviour:
     _seconds: 60
     _isRandom: 0
     _fieldSegments:
-    - {fileID: 8385212075687332779, guid: 8a783ddf48dccd5499fe9f76581216f0, type: 3}
+    - {fileID: 2752528944075337817, guid: 54942ca6699e8764a8b2eb58690cf15d, type: 3}
   - _isInfinity: 1
     _seconds: 60
     _isRandom: 1
