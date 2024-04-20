@@ -1,4 +1,6 @@
+using System;
 using SoulRunProject.Common;
+using UnityEditor;
 using UnityEngine;
 
 namespace SoulRunProject.Skill
@@ -51,5 +53,26 @@ namespace SoulRunProject.Skill
             _playerManager.Heal(_healingSkillParam.HealAmount);
             _healParticle.Play();
         }
+        
+        #if UNITY_EDITOR
+        [CustomEditor(typeof(HealingSkill))]
+        public class HealingSkillEditor : SkillBaseEditor
+        {
+            private HealingSkill _healingSkill;
+            
+            private void Awake()
+            {
+                _healingSkill = target as HealingSkill;
+            }
+
+            public override void OnInspectorGUI()
+            {
+                base.OnInspectorGUI();
+
+                _healingSkill._healParticle = 
+                    EditorGUILayout.ObjectField("エフェクト", _healingSkill._healParticle, typeof(ParticleSystem), true) as ParticleSystem;
+            }
+        }
+        #endif
     }
 }
