@@ -26,6 +26,7 @@ namespace SoulRunProject.InGame
         public void Damage(float damage)
         {
             _hp -= damage;
+            CriAudioManager.Instance.PlaySE(CriAudioManager.CueSheet.Se, "SE_Hit");
             if (_hp <= 0)
             {
                 Death();
