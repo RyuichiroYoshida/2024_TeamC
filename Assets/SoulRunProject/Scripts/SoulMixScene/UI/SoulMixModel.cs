@@ -10,7 +10,7 @@ namespace SoulRunProject.SoulMixScene
     public class SoulMixModel : MonoBehaviour
     {
         [SerializeField] private SoulCombiner _soulCombiner;
-        public ReactiveCollection<SoulCardData> OwnedCards = new ReactiveCollection<SoulCardData>();
+        public ReactiveCollection<SoulCardMasterData> OwnedCards = new ReactiveCollection<SoulCardMasterData>();
         private SoulCardManager _soulCardManager;
 
         // ログメッセージを発行するためのReactiveProperty
