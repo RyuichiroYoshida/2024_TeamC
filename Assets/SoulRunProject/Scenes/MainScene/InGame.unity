@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0019500202, g: 0.0038314078, b: 0.008843157, a: 1}
+  m_IndirectSpecularColor: {r: 0.0019524717, g: 0.003835365, b: 0.008846895, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2945,6 +2945,7 @@ GameObject:
   - component: {fileID: 1174502020}
   - component: {fileID: 1174502021}
   - component: {fileID: 1174502022}
+  - component: {fileID: 1174502023}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -3049,6 +3050,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _preloadCount: 5
   _threshold: 5
+--- !u!114 &1174502023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174502016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3723f97fa54d1aa78e67ec2ad6b2a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  streamingAssetsPathAcf: Glab2024-C
+  cueSheetBGM: BGM
+  cueSheetSe: SE
+  cueSheetVoice: Voice
 --- !u!1 &1185619572
 GameObject:
   m_ObjectHideFlags: 0
