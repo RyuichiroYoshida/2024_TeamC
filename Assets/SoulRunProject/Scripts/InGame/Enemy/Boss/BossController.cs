@@ -1,11 +1,9 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using SoulRunProject.Common;
 using SoulRunProject.SoulMixScene;
 using UnityEngine;
 
-namespace SoulRunProject
+namespace SoulRunProject.InGame
 {
     /// <summary>
     /// ボスの行動を管理するクラス
@@ -22,24 +20,47 @@ namespace SoulRunProject
         protected Status _status;
         
         [SerializeField] LootTable _lootTable;
-        [Header("ボスの行動"), SerializeReference, SubclassSelector] List<IBossBahavior> _bossBahaviors;
+        [Header("ボスの行動"), SerializeReference, SubclassSelector] List<IBossBehavior> _bossBehaviors;
+
+        private BossState _currentState = BossState.Animation;
 
         private void Start()
         {
             _status = _status.Copy();
+
+            foreach (var behavior in _bossBehaviors)
+            {
+                behavior.Initialize();
+            }
+
+            _bossBehaviors[0].BeginAction();
         }
         
         private void Update()
         {
+            if (Input.GetMouseButtonDown(1))
+            {
+                _bossBehaviors[0].BeginAction();
+            }
             
+            _bossBehaviors[0].UpdateAction(Time.deltaTime);
+        }
+
+        private enum BossState
+        {
+            Animation, // 登場時などのAnimation中
+            Standby, // 行動待機中
+            InAction // IBossBehaviorのAction中
         }
     }
     
     /// <summary>
     /// ボスの行動が持つインターフェース
     /// </summary>
-    public interface IBossBahavior
+    public interface IBossBehavior
     {
-        void DoAction();
+        void Initialize();
+        void BeginAction();
+        void UpdateAction(float deltaTime);
     }
 }
