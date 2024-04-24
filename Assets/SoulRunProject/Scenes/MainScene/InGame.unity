@@ -3763,7 +3763,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c77eda4c25f42df42900dfed143ab44a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soulSkill: {fileID: 0}
+  _soulSkill: {fileID: 11400000, guid: 95369f5c160473b4287d5a8e74d1fc47, type: 2}
   _currentSoul:
     value: 17.08
 --- !u!114 &1420106451
