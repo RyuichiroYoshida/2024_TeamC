@@ -11,7 +11,7 @@ namespace SoulRunProject.SoulMixScene
     public class SoulCardManager : AbstractSingletonMonoBehaviour<SoulCardManager>
     {
         protected override bool UseDontDestroyOnLoad => false;
-        [SerializeField] private SoulCardList _soulCardListSo; // ゲームに登場する全てのソウルカード
+        [SerializeField] private SoulCardMasterDataList _soulCardMasterDataListSo; // ゲームに登場する全てのソウルカード
         [SerializeField] private SoulMixModel _soulMixModel; // エディターから設定する
 
         private SaveAndLoadManager _saveAndLoadManager;
@@ -29,29 +29,29 @@ namespace SoulRunProject.SoulMixScene
             SaveAndLoadManager.PlayerData playerData = _saveAndLoadManager.GetPlayerData();
 
             // PlayerDataからソウルカードをロードしてOwnedCardsに追加
-            foreach (SoulCardData soulCardData in playerData.CurrentSoulCardDataList)
+            foreach (SoulCardMasterData soulCardData in playerData.CurrentSoulCardDataList)
             {
                 _soulMixModel.OwnedCards.Add(soulCardData);
             }
         }
 
         // ソウルカードをリストに追加する処理は、OwnedCards.Addを直接使用
-        public void AddSoulCard(SoulCardData soulCardData)
+        public void AddSoulCard(SoulCardMasterData soulCardMasterData)
         {
-            if (!_soulMixModel.OwnedCards.Contains(soulCardData))
+            if (!_soulMixModel.OwnedCards.Contains(soulCardMasterData))
             {
-                _soulMixModel.OwnedCards.Add(soulCardData);
+                _soulMixModel.OwnedCards.Add(soulCardMasterData);
             }
         }
 
         // ソウルカードをリストから削除する処理は、OwnedCards.Removeを直接使用
-        public void RemoveSoulCard(SoulCardData soulCard)
+        public void RemoveSoulCard(SoulCardMasterData soulCardMaster)
         {
-            _soulMixModel.OwnedCards.Remove(soulCard);
+            _soulMixModel.OwnedCards.Remove(soulCardMaster);
         }
 
         // IDでソウルカードを検索する処理
-        public SoulCardData FindSoulCardByID(int cardID)
+        public SoulCardMasterData FindSoulCardByID(int cardID)
         {
             return _soulMixModel.OwnedCards.FirstOrDefault(card => card.CardID == cardID);
         }
