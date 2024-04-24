@@ -42,7 +42,7 @@ namespace SoulRunProject.Common
             else
             {
                 _dataStorage.playerData = new PlayerData();
-                _dataStorage.playerData.CurrentSoulCardDataList = new List<SoulCardData>();
+                _dataStorage.playerData.CurrentSoulCardDataList = new List<SoulCardMasterData>();
                 // その他のプレイヤーデータを初期化
             }
         }
@@ -79,7 +79,7 @@ namespace SoulRunProject.Common
         /// プレイヤーデータにSoulCardDataを追加する
         /// </summary>
         /// <param name="soulCardData"></param>
-        public void AddSoulCardToPlayerData(SoulCardData soulCardData)
+        public void AddSoulCardToPlayerData(SoulCardMasterData soulCardData)
         {
             _dataStorage.playerData.CurrentSoulCardDataList.Add(soulCardData);
         }
@@ -88,7 +88,7 @@ namespace SoulRunProject.Common
         /// プレイヤーデータからSoulCardDataを削除する
         /// </summary>
         /// <param name="soulCardData"></param>
-        public void RemoveSoulCardFromPlayerData(SoulCardData soulCardData)
+        public void RemoveSoulCardFromPlayerData(SoulCardMasterData soulCardData)
         {
             _dataStorage.playerData.CurrentSoulCardDataList.Remove(soulCardData);
         }
@@ -119,9 +119,9 @@ namespace SoulRunProject.Common
         [System.Serializable]
         public class MasterData
         {
-            public List<SoulCardData> soulCardDataList; // ソウルカードのマスターデータ
+            public List<SoulCardMasterData> soulCardDataList; // ソウルカードのマスターデータ
 
-            public List<SoulCardData> soulCardDataCombinations; // ソウルカードの組み合わせのマスターデータ
+            public List<SoulCardMasterData> soulCardDataCombinations; // ソウルカードの組み合わせのマスターデータ
             // エネミーのマスターデータ
             // アイテムのマスターデータ
         }
@@ -131,7 +131,7 @@ namespace SoulRunProject.Common
         {
             public int MaxScore; //最高スコア
             public int CurrentMoney; //所持金
-            public List<SoulCardData> CurrentSoulCardDataList; //所持しているもの
+            public List<SoulCardMasterData> CurrentSoulCardDataList; //所持しているもの
         }
     }
 }
