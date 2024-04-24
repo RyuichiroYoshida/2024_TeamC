@@ -64,7 +64,6 @@ namespace SoulRunProject.InGame
 
         public void OnBeforeSerialize()
         {
-            _currentPlayTime = 0;
             _particleInstance = null;
             _meteorParticle = null;
             _playerTransform = null;
