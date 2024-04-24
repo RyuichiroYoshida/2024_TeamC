@@ -11,8 +11,6 @@ namespace SoulRunProject.InGame
     public class SoulSkillManager : MonoBehaviour
     {
         [SerializeField] SoulSkillBase _soulSkill;
-        
-        
         [SerializeField] private FloatReactiveProperty _currentSoul = new FloatReactiveProperty(0);
         SoulSkillBase _currentSoulSkill;
         public float RequiredSoul => _currentSoulSkill.RequiredSoul;
@@ -48,6 +46,5 @@ namespace SoulRunProject.InGame
             _currentSoul.Value -= RequiredSoul;
             _currentSoulSkill.StartSoulSkill();
         }
-        
     }
 }
