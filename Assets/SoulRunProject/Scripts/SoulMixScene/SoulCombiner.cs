@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using SoulRun.InGame;
+using SoulRunProject.SoulRunProject.Scripts.Common.Core.Singleton;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -13,9 +14,16 @@ namespace SoulRunProject.SoulMixScene
     [Serializable]
     public class SoulCombiner : MonoBehaviour
     {
-        public SoulCardMasterDataList ownedSelectSouls; // 所持しているかつ選んだソウルリスト
+        private List<SoulCardMasterData> ownedSelectSouls;
         public List<SoulCombination> combinations; // ソウルの組み合わせリスト
 
+        private void Start()
+        {
+            if (MyRepository.Instance.TryGetDataList<SoulCardMasterData>(out var dataList))
+            {
+                ownedSelectSouls = dataList;
+            }
+        }
 
         /// <summary> ソウルを選択する </summary>
         public SoulCardMasterData SelectSoul()
@@ -33,7 +41,7 @@ namespace SoulRunProject.SoulMixScene
         /// <summary> 所持しているソウルカードの中から合成可能なソウルカードを探す </summary>
         public SoulCardMasterData SearchCombinableSoul(SoulCardMasterData selectedSoul)
         {
-            return ownedSelectSouls.soulCardList.FirstOrDefault(ownedSoul => 
+            return ownedSelectSouls.FirstOrDefault(ownedSoul => 
                     ownedSoul != selectedSoul && IsValidCombination(selectedSoul, ownedSoul));
         }
         
@@ -84,8 +92,8 @@ namespace SoulRunProject.SoulMixScene
             // 新しいソウルカードのデータを設定
             //SetData(newSoul, combination.Result);
 
-            ownedSelectSouls.soulCardList.Remove(selectSoul1);
-            ownedSelectSouls.soulCardList.Remove(selectSoul2);
+            // ownedSelectSouls.SoulCardMasterDataList.Remove(selectSoul1);
+            // ownedSelectSouls.SoulCardMasterDataList.Remove(selectSoul2);
 
             return newSoul;
         }

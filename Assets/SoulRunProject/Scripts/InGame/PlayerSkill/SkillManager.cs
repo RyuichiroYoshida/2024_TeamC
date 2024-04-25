@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using SoulRunProject.Common;
+using SoulRunProject.SoulRunProject.Scripts.Common.Core.Singleton;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,7 +13,7 @@ namespace SoulRunProject.InGame
     {
         [SerializeField , Header("スキルデータセット")] private SkillData _skillData;
         [SerializeField, HideInInspector] private Image[] _skillIconImage = new Image[5];
-        private SkillData _skillDataCopy;
+        private List<SkillBase> _skillDataCopy;
         private readonly List<SkillBase> _currentSkills = new(5);
 
         public SkillData SkillData => _skillData;
@@ -26,7 +27,11 @@ namespace SoulRunProject.InGame
         public void Start()
         {
             //Instantiateしないと、ScriptableObject内のクラスが生成されない。
-            _skillDataCopy = Instantiate(_skillData);
+            if (MyRepository.Instance.TryGetDataList<SkillBase>(out var dataSet))
+            {
+                _skillDataCopy = dataSet ;
+            }
+             
             AddSkill(PlayerSkill.SoulBullet);
         }
         
@@ -47,7 +52,7 @@ namespace SoulRunProject.InGame
         /// <param name="skillType">スキル名</param>
         public void AddSkill(PlayerSkill skillType)
         {
-            var skill = _skillDataCopy.Skills.FirstOrDefault(x => x.SkillType == skillType);
+            var skill = _skillDataCopy.FirstOrDefault(x => x.SkillType == skillType);
             if (skill != null)
             {
                 _currentSkills.Add(skill);
