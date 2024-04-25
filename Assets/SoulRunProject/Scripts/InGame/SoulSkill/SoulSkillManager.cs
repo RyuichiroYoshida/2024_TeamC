@@ -1,5 +1,6 @@
 using System;
 using SoulRunProject.Framework;
+using SoulRunProject.SoulRunProject.Scripts.Common.Core.Singleton;
 using UniRx;
 using UnityEngine;
 
@@ -10,7 +11,6 @@ namespace SoulRunProject.InGame
     /// </summary>
     public class SoulSkillManager : MonoBehaviour
     {
-        [SerializeField] SoulSkillBase _soulSkill;
         [SerializeField] private FloatReactiveProperty _currentSoul = new FloatReactiveProperty(0);
         SoulSkillBase _currentSoulSkill;
         public float RequiredSoul;
@@ -18,7 +18,11 @@ namespace SoulRunProject.InGame
 
         private void Start()
         {
-            _currentSoulSkill = Instantiate(_soulSkill);
+            //TODO デバック用　ソウルフレイム設定。
+            if (MyRepository.Instance.TryGetDataList<SoulSkillBase>(out var dataList))
+            {
+                _currentSoulSkill = dataList[0];
+            }
         }
         public void SetSoulSkill(SoulSkillBase soulSkill)
         {
