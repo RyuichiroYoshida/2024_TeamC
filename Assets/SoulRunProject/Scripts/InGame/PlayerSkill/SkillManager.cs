@@ -11,12 +11,10 @@ namespace SoulRunProject.InGame
 {
     public class SkillManager : MonoBehaviour, IPlayerPausable
     {
-        [SerializeField , Header("スキルデータセット")] private SkillData _skillData;
         [SerializeField, HideInInspector] private Image[] _skillIconImage = new Image[5];
-        private List<SkillBase> _skillDataCopy;
         private readonly List<SkillBase> _currentSkills = new(5);
-
-        public SkillData SkillData => _skillData;
+        private List<SkillBase> _skillData;
+        public List<SkillBase> SkillData => _skillData;
         public List<SkillBase> CurrentSkill => _currentSkills;
         /// <summary>
         /// 現在所持しているスキル名リスト
@@ -26,12 +24,10 @@ namespace SoulRunProject.InGame
         private bool _isPause;
         public void Start()
         {
-            //Instantiateしないと、ScriptableObject内のクラスが生成されない。
             if (MyRepository.Instance.TryGetDataList<SkillBase>(out var dataSet))
             {
-                _skillDataCopy = dataSet ;
+                _skillData = dataSet ;
             }
-             
             AddSkill(PlayerSkill.SoulBullet);
         }
         
@@ -52,7 +48,7 @@ namespace SoulRunProject.InGame
         /// <param name="skillType">スキル名</param>
         public void AddSkill(PlayerSkill skillType)
         {
-            var skill = _skillDataCopy.FirstOrDefault(x => x.SkillType == skillType);
+            var skill = _skillData.FirstOrDefault(x => x.SkillType == skillType);
             if (skill != null)
             {
                 _currentSkills.Add(skill);
