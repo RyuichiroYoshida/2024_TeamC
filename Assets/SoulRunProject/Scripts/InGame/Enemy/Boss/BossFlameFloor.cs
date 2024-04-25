@@ -12,12 +12,12 @@ namespace SoulRunProject.InGame
         [SerializeField, CustomLabel("火炎弾プレハブ")] private BossFlameBallController _flameBallPrefab;
         [Header("性能")]
         [SerializeField, CustomLabel("行動時間 ∞字一周の時間")] private float _actionTime;
-
         [SerializeField, CustomLabel("火炎弾スピード")] private float _flameBallSpeed;
         [SerializeField, CustomLabel("一回の行動の火炎弾の数")] private float _flameBallNum;
         [SerializeField, CustomLabel("延焼ダメージ(秒)")] private float _flameDamage;
         [SerializeField, CustomLabel("着弾地点のプレイヤーとの距離"), Tooltip("ブレス発射時のプレイヤーの位置からの着弾地点の距離")]
         private float _deviationDistance;
+        [SerializeField, CustomLabel("着弾地点の最大のずれ幅")] private float _flameBallAccuracy;
 
         // 移動
         private float _actionTimer;
@@ -47,9 +47,15 @@ namespace SoulRunProject.InGame
             if (_flameBallTimer >= _actionTime / _flameBallNum)
             {
                 _flameBallTimer = 0;
+                
+                // flame ball 生成と向きの調整
                 BossFlameBallController flameBall =
                     GameObject.Instantiate(_flameBallPrefab, _firingPosition.position, Quaternion.identity);
-                flameBall.transform.LookAt(_playerTransform.position + Vector3.forward * _deviationDistance);
+                Vector3 impactPos = _playerTransform.position;
+                impactPos.x += Random.Range(-_flameBallAccuracy, _flameBallAccuracy);
+                impactPos.y = 0; // fieldの高さ
+                impactPos.z += _deviationDistance;
+                flameBall.transform.LookAt(impactPos);
                 flameBall.Initialize(_flameBallSpeed, _flameDamage);
             }
             

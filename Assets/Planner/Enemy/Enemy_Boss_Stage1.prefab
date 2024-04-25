@@ -168,6 +168,7 @@ MonoBehaviour:
         _flameBallNum: 10
         _flameDamage: 1
         _deviationDistance: 30
+        _flameBallAccuracy: 0
 --- !u!1 &8952397705782560484
 GameObject:
   m_ObjectHideFlags: 0
