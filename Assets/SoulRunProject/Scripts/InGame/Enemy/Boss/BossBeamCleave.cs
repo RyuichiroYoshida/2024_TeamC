@@ -1,10 +1,10 @@
-using System;
 using SoulRunProject.Common;
 using UnityEngine;
 
 namespace SoulRunProject.InGame
 {
-    public class BossBeamCleave : IBossBehavior
+    [Name("ビーム薙ぎ払い")]
+    public class BossBeamCleave : BossBehaviorBase
     {
         [SerializeField, CustomLabel("エフェクトプレハブ")] private GameObject _razer;
         [SerializeField, CustomLabel("ビーム原点")] private GameObject _beamOrigin;
@@ -21,28 +21,26 @@ namespace SoulRunProject.InGame
         private float _timer;
         private int _hitCounter;
 
-        /// <summary> Action終了時に呼ばれる </summary>
-        public Action OnFinishAction;
-
-        public void Initialize()
+        public override void Initialize(BossController bossController)
         {
+            // エフェクトインスタンスの初期化
             _laserInstance = GameObject.Instantiate(_razer, _beamOrigin.transform);
             _laserInstance.SetActive(false);
+            
+            // 角度の初期化
             _startVector = _startImpactPosition - _beamOrigin.transform.position;
             _finishVector = (_finishImpactPosition - _beamOrigin.transform.position);
-            
-            Debug.Log(_beamOrigin.transform.position);
         }
         
-        public void BeginAction()
+        public override void BeginAction()
         {
-            _laserInstance.SetActive(true);
             _timer = 0;
             _hitCounter = 0;
+            _laserInstance.SetActive(true);
             _beamOrigin.transform.rotation = Quaternion.LookRotation(_startVector);
         }
 
-        public void UpdateAction(float deltaTime)
+        public override void UpdateAction(float deltaTime)
         {
             // 角度とタイマーの計算
             _timer += deltaTime;
@@ -54,7 +52,8 @@ namespace SoulRunProject.InGame
             }
             else
             {
-                // todo : finish action
+                // 終了処理
+                _laserInstance.SetActive(false);
                 OnFinishAction?.Invoke();
             }
             
@@ -70,6 +69,11 @@ namespace SoulRunProject.InGame
                     }
                 }
             }
+        }
+
+        public override void PowerUpBehavior()
+        {
+            _beamTime /= 2;
         }
     }
 }

@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4673776740619115298}
   - component: {fileID: 4473716244615621129}
+  - component: {fileID: 4060490222514243321}
+  - component: {fileID: 4175144361476707941}
   - component: {fileID: 493474759675345639}
   m_Layer: 0
   m_Name: Enemy_Boss_Stage1
@@ -86,6 +88,40 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4060490222514243321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4540017066615722400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ef424d786b4ebd4ea7ddc1567786d35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hp: 30
+  _collisionDamage: 0
+  _direction: {x: 1, y: 1, z: 1}
+  _takeKnockBack:
+    _resistanceValue: 100
+    _knockBackTime: 0.5
+  _lootTable: {fileID: 0}
+  _hitDamageEffectManager: {fileID: 4175144361476707941}
+--- !u!114 &4175144361476707941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4540017066615722400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e91850b292134f24a8ef6e7ce567f766, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _duration: 0.1
+  _loopCount: 1
 --- !u!114 &493474759675345639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,14 +138,16 @@ MonoBehaviour:
   _status: {fileID: 11400000, guid: 4e0565d40e571a84fb4c39df7a954013, type: 2}
   _lootTable: {fileID: 0}
   _bossBehaviors:
-  - rid: 7007908318245552131
+  - rid: 7007908318245552134
+  - rid: 7007908318245552135
+  _behaviorIntervalTime: 2
   references:
     version: 2
     RefIds:
-    - rid: 7007908318245552131
+    - rid: 7007908318245552134
       type: {class: BossBeamCleave, ns: SoulRunProject.InGame, asm: Assembly-CSharp}
       data:
-        _razer: {fileID: 1418158253269514, guid: 280b8b1393d77f148a8cbcfc7f36e116,
+        _razer: {fileID: 1818483698145146, guid: 6028b5b4fbbf45e45a362de709aa2e18,
           type: 3}
         _beamOrigin: {fileID: 8952397705782560484}
         _startImpactPosition: {x: 12, y: 1.5, z: 0}
@@ -117,6 +155,19 @@ MonoBehaviour:
         _beamTime: 1
         _damage: 1
         _hitCount: 1
+    - rid: 7007908318245552135
+      type: {class: BossFlameFloor, ns: SoulRunProject.InGame, asm: Assembly-CSharp}
+      data:
+        _moveRangeX: 30
+        _moveRangeY: 10
+        _firingPosition: {fileID: 6504038626365006790}
+        _flameBallPrefab: {fileID: 80501970798971705, guid: 835d64a7aa14fd34b84e2987143f9f94,
+          type: 3}
+        _actionTime: 10
+        _flameBallSpeed: 10
+        _flameBallNum: 10
+        _flameDamage: 1
+        _deviationDistance: 30
 --- !u!1 &8952397705782560484
 GameObject:
   m_ObjectHideFlags: 0
