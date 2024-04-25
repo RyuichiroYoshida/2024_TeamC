@@ -13,7 +13,7 @@ namespace SoulRunProject.InGame
         [SerializeField] SoulSkillBase _soulSkill;
         [SerializeField] private FloatReactiveProperty _currentSoul = new FloatReactiveProperty(0);
         SoulSkillBase _currentSoulSkill;
-        public float RequiredSoul => _currentSoulSkill.RequiredSoul;
+        public float RequiredSoul;
         public IObservable<float> CurrentSoul => _currentSoul;
 
         private void Start()
@@ -23,6 +23,7 @@ namespace SoulRunProject.InGame
         public void SetSoulSkill(SoulSkillBase soulSkill)
         {
             _currentSoulSkill = soulSkill;
+            RequiredSoul = _currentSoulSkill.RequiredSoul;
         }
         
         public void AddSoul(float soul)
