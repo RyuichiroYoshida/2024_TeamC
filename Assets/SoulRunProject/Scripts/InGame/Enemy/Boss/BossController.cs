@@ -19,14 +19,15 @@ namespace SoulRunProject
         private int _score = 100;
         
         [SerializeField, Tooltip("敵のパラメータを設定する")]
-        protected Status _status;
+        protected BaseStatus _baseStatus;
         
         [SerializeField] LootTable _lootTable;
         [Header("ボスの行動"), SerializeReference, SubclassSelector] List<IBossBahavior> _bossBahaviors;
 
+        private Status _currentStatus;
         private void Start()
         {
-            _status = _status.Copy();
+            _currentStatus = new(_baseStatus.Status);
         }
         
         private void Update()
