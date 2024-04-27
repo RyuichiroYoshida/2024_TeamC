@@ -100,9 +100,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ef424d786b4ebd4ea7ddc1567786d35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 30
+  _maxHp: 30
   _collisionDamage: 0
-  _direction: {x: 1, y: 1, z: 1}
+  _direction: {x: 0, y: 1, z: 1}
   _takeKnockBack:
     _resistanceValue: 100
     _knockBackTime: 0.5
@@ -134,9 +134,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9e7d01dd527d9a46ae18327327c853a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _score: 100
-  _status: {fileID: 11400000, guid: 4e0565d40e571a84fb4c39df7a954013, type: 2}
-  _lootTable: {fileID: 0}
+  _powerUpThreshold:
+  - 50
+  - 30
   _bossBehaviors:
   - rid: 7007908318245552134
   - rid: 7007908318245552135
