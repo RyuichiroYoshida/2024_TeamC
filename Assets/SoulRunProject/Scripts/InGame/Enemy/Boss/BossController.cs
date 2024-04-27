@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using SoulRunProject.Common;
 using UniRx;
-using UniRx.Triggers;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -31,7 +30,6 @@ namespace SoulRunProject.InGame
         {
             DamageableEntity damageableEntity = GetComponent<DamageableEntity>();
             damageableEntity.CurrentHp
-                .TakeUntilDestroy(this)
                 .Where(_ => _powerUpThreshold.Length > _thresholdIndex)
                 .Subscribe(hp =>
                 {
@@ -44,10 +42,8 @@ namespace SoulRunProject.InGame
                             bossBehavior.PowerUpBehavior();
                         }
                     }
-                });
-            this.UpdateAsObservable().TakeUntilDestroy(this)
-                .Where(_ => Input.GetMouseButtonDown(1))
-                .Subscribe(_ => damageableEntity.Damage(damageableEntity.MaxHp));
+                })
+                .AddTo(this);
 
             foreach (var behavior in _bossBehaviors)
             {
@@ -64,24 +60,26 @@ namespace SoulRunProject.InGame
         
         private void Update()
         {
-            if (_currentState == BossState.Animation)
+            switch (_currentState)
             {
-            }
-            else if (_currentState == BossState.Standby)
-            {
-                _intervalTimer += Time.deltaTime;
+                case BossState.Animation:
+                    break;
                 
-                if (_intervalTimer >= _behaviorIntervalTime)
-                {
-                    _currentState = BossState.InAction;
-                    _inActionIndex = Random.Range(0, _bossBehaviors.Count);
-                    _bossBehaviors[_inActionIndex].BeginAction();
+                case BossState.Standby:
+                    _intervalTimer += Time.deltaTime;
+                
+                    if (_intervalTimer >= _behaviorIntervalTime)
+                    {
+                        _currentState = BossState.InAction;
+                        _inActionIndex = Random.Range(0, _bossBehaviors.Count);
+                        _bossBehaviors[_inActionIndex].BeginAction();
+                        _bossBehaviors[_inActionIndex].UpdateAction(Time.deltaTime);
+                    }
+                    break;
+                
+                case BossState.InAction:
                     _bossBehaviors[_inActionIndex].UpdateAction(Time.deltaTime);
-                }
-            }
-            else
-            {
-                _bossBehaviors[_inActionIndex].UpdateAction(Time.deltaTime);
+                    break;
             }
         }
 
