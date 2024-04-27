@@ -121,14 +121,6 @@ namespace SoulRunProject.Common
             //SwitchPause(true);
         }
 
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.gameObject.TryGetComponent(out DamageableEntity fieldEntityController))
-            {
-                Damage(fieldEntityController.CollisionDamage);
-            }
-        }
-
         #region SoulSkill関連
         /// <summary>
         /// SoulSkillを使用する

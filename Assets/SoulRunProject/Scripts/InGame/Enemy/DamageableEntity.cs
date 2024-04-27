@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using SoulRunProject.Common;
 using SoulRunProject.SoulMixScene;
+using UniRx;
 
 namespace SoulRunProject.InGame
 {
@@ -12,25 +13,34 @@ namespace SoulRunProject.InGame
     /// </summary>
     public class DamageableEntity : MonoBehaviour
     {
-        [SerializeField , Header("HP")] private float _hp = 30;
+        [SerializeField , Header("HP")] private float _maxHp = 30;
         [SerializeField, Header("衝突ダメージ")] private float _collisionDamage;
         [SerializeField, Header("ノックバック方向")] private Vector3 _direction = Vector3.one;
         [SerializeField ,Header("ノックバック処理")] TakeKnockBack _takeKnockBack;
         [SerializeField, Header("ドロップデータ")] LootTable _lootTable;
         [SerializeField, Header("ダメージエフェクト")] HitDamageEffectManager _hitDamageEffectManager;
 
+        public float MaxHp => _maxHp;
         public float CollisionDamage => _collisionDamage;
+        public FloatReactiveProperty CurrentHp => _currentHp;
 
+        private FloatReactiveProperty _currentHp = new();
         private float _knockBackResistance;
         public Action OnDead;
+
+        private void Awake()
+        {
+            _currentHp.Value = _maxHp;
+        }
+
         /// <summary>
         /// ダメージ処理 + ノックバック処理
         /// </summary>
         public void Damage(float damage , in GiveKnockBack knockBack = null)
         {
-            _hp -= damage;
+            _currentHp.Value -= damage;
             CriAudioManager.Instance.PlaySE(CriAudioManager.CueSheet.Se, "SE_Hit");
-            if (_hp <= 0)
+            if (_currentHp.Value <= 0)
             {
                 Death();
             }
@@ -53,6 +63,13 @@ namespace SoulRunProject.InGame
             OnDead?.Invoke();
             Destroy(gameObject);
         }
-        
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.TryGetComponent(out PlayerManager playerManager))
+            {
+                playerManager.Damage(_collisionDamage);
+            }
+        }
     }
 }
