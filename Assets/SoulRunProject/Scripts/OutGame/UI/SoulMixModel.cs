@@ -10,7 +10,7 @@ namespace SoulRunProject.SoulMixScene
     public class SoulMixModel : MonoBehaviour
     {
         [SerializeField] private SoulCombiner _soulCombiner;
-        public ReactiveCollection<SoulCardData> OwnedCards = new ReactiveCollection<SoulCardData>();
+        public ReactiveCollection<SoulCardMasterData> OwnedCards = new ReactiveCollection<SoulCardMasterData>();
         private SoulCardManager _soulCardManager;
 
         // ログメッセージを発行するためのReactiveProperty
@@ -23,16 +23,16 @@ namespace SoulRunProject.SoulMixScene
 
         public async UniTaskVoid SoulMixAsync()
         {
-            // 選択されたソウルカードのリストが2つ以上であるか確認
-            if (_soulCombiner.ownedSelectSouls.soulCardList.Count < 2)
-            {
-                LogMessage.Value = "ソウルカードを2つ以上選択してください。";
-                return;
-            }
-
-            // 選択された最初のソウルカードを取得
-            var selectedSoul1 = _soulCombiner.ownedSelectSouls.soulCardList[0];
-
+            // // 選択されたソウルカードのリストが2つ以上であるか確認
+            // if (_soulCombiner.SoulCardMasterDataList.Count < 2)
+            // {
+            //     LogMessage.Value = "ソウルカードを2つ以上選択してください。";
+            //     return;
+            // }
+            //
+            // // 選択された最初のソウルカードを取得
+            // var selectedSoul1 = _soulCombiner.SoulCardMasterDataList[0];
+            SoulCardMasterData selectedSoul1 = null;
             // 組み合わせ可能なソウルカードを探す
             var combinableSoul = _soulCombiner.SearchCombinableSoul(selectedSoul1);
 
