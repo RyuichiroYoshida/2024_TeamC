@@ -13,8 +13,26 @@ MonoBehaviour:
   m_Name: SoulCard 2
   m_EditorClassIdentifier: 
   _cardID: 1
-  _image: {fileID: 0}
+  _imageName: 
   _soulName: 
-  _soulSkill: {fileID: 11400000, guid: 95369f5c160473b4287d5a8e74d1fc47, type: 2}
-  _baseStatus: {fileID: 0}
   _soulMaxLevel: 0
+  _description: 
+  _soulSkillType: 0
+  _baseStatus:
+    _hp: 0
+    _attack: 0
+    _defence: 0
+    _coolTime: 0
+    _range: 0
+    _bulletSpeed: 0
+    _effectTime: 0
+    _bulletNum: 0
+    _penetration: 0
+    _moveSpeed: 0
+    _growthSpeed: 0
+    _luck: 0
+    _criticalRate: 0
+    _criticalDamageRate: 0
+    _soulAbsorption: 0
+    _soulAcquisition: 0
+  _defaultCharacteristicType: 1
