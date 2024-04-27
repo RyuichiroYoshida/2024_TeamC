@@ -17,21 +17,43 @@ HP	値	100
 ソウル獲得率	割合	1	敵のドロップ率と掛け合わせて100％を超えるとドロップ率が上昇
  */
 
+using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace SoulRunProject.SoulMixScene
 {
     [CreateAssetMenu(fileName = "Status", menuName = "SoulRunProject/Status")]
-    public class Status : ScriptableObject
+    public class BaseStatus : ScriptableObject
     {
+        [SerializeField] private Status _status;
+        public Status Status => _status;
+    }
+    [Serializable]
+    public class Status 
+    {
+        public Status(Status status)
+        {
+            _hp = status.Hp;
+            _attack = status.Attack;
+            _defence = status.Defence;
+            _coolTime = status.CoolTime;
+            _range = status.Range;
+            _bulletSpeed = status.BulletSpeed;
+            _effectTime = status.EffectTime;
+            _bulletNum = status.BulletNum;
+            _penetration = status.Penetration;
+            _moveSpeed = status.MoveSpeed;
+            _growthSpeed = status.GrowthSpeed;
+            _luck = status.Luck;
+            _criticalRate = status.CriticalRate;
+            _criticalDamageRate = status.CriticalDamageRate;
+            _soulAbsorption = status.SoulAbsorption;
+            _soulAcquisition = status.SoulAcquisition;
+        }
+
         // Hp
         [SerializeField] private float _hp;
-
-        public Status Copy()
-        {
-            return Instantiate(this);
-        }
 
         public float Hp
         {
@@ -168,6 +190,8 @@ namespace SoulRunProject.SoulMixScene
 
         // ソウル獲得率
         [SerializeField] private float _soulAcquisition;
+
+
 
         public float SoulAcquisition
         {
