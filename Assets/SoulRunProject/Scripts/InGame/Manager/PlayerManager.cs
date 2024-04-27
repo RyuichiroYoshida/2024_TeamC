@@ -27,7 +27,7 @@ namespace SoulRunProject.Common
         private PlayerResourceContainer _resourceContainer;
         public FloatReactiveProperty CurrentHp { get; private set; }
         public PlayerResourceContainer ResourceContainer => _resourceContainer;
-        public float MaxHp => _currentStatus.Hp;
+        public float MaxHp;
         public Status CurrentStatus => _currentStatus;
         /// <summary>ダメージを無効化出来るかどうかの条件を格納するリスト</summary>
         public List<Func<bool>> IgnoreDamagePredicates { get; } = new();
@@ -35,6 +35,7 @@ namespace SoulRunProject.Common
         private Status _currentStatus;
         private void Awake()
         {
+            MaxHp = _currentStatus.Hp;
             _currentStatus = new Status(_baseStatus.Status);
             CurrentHp = new FloatReactiveProperty(_currentStatus.Hp);
             _inGameTimes = GetComponents<IPlayerPausable>();
