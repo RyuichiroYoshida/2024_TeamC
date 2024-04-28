@@ -27,7 +27,7 @@ namespace SoulRunProject.Common
         private PlayerResourceContainer _resourceContainer;
         public FloatReactiveProperty CurrentHp { get; private set; }
         public PlayerResourceContainer ResourceContainer => _resourceContainer;
-        public float MaxHp => _currentStatus.Hp;
+        public float MaxHp;
         public Status CurrentStatus => _currentStatus;
         /// <summary>ダメージを無効化出来るかどうかの条件を格納するリスト</summary>
         public List<Func<bool>> IgnoreDamagePredicates { get; } = new();
@@ -44,6 +44,7 @@ namespace SoulRunProject.Common
             _playerMovement = GetComponent<PlayerMovement>();
             _hitDamageEffectManager = GetComponent<HitDamageEffectManager>();
             _resourceContainer = new();
+            MaxHp = _currentStatus.Hp;
             
             InitializeInput();
         }
