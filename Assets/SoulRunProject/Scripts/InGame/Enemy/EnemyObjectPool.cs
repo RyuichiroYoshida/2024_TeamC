@@ -15,8 +15,9 @@ namespace SoulRunProject.Common
 
         public GameObject GetPoolObject(GameObject bulletObj, Vector3 pos)
         {
-            var trans = transform.Find(bulletObj.name);
+            var trans = transform.Find(bulletObj.name + "(Clone)");
             if (transform.childCount <= 0 || trans == null) return CreatePoolObject(bulletObj, pos);
+            trans.parent = null;
             trans.position = pos;
             var obj = trans.gameObject;
             obj.SetActive(true);
@@ -30,8 +31,8 @@ namespace SoulRunProject.Common
                 Destroy(bulletObj);
                 return;
             }
-            
-            transform.parent = bulletObj.GetComponent<Transform>();
+
+            bulletObj.transform.parent = transform;
             bulletObj.SetActive(false);
         }
     }

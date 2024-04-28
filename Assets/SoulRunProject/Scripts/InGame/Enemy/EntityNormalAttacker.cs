@@ -10,8 +10,9 @@ namespace SoulRunProject.InGame
     [Serializable, Name("通常攻撃"), RequireComponent(typeof(EnemyBulletShot))]
     public class EntityNormalAttacker : EntityAttacker
     {
-        [SerializeField] float _speed;
-        [SerializeField] EnemyBulletShot _enemyBulletShot;
+        [SerializeField, CustomLabel("弾速")] float _speed;
+        [SerializeField, CustomLabel("弾の寿命")] float _lifeTime;
+        [SerializeField, CustomLabel("弾を生成するスクリプト")] EnemyBulletShot _enemyBulletShot;
         ProjectileSkillParameter _parameter;
         float _timer;
         bool _isPause;
@@ -19,6 +20,7 @@ namespace SoulRunProject.InGame
         public override void OnStart()
         {
             _parameter = new ProjectileSkillParameter();
+            _timer = _coolTime;
         }
 
         public override void OnUpdateAttack(Transform myTransform, Transform playerTransform)
@@ -33,7 +35,7 @@ namespace SoulRunProject.InGame
             param.CoolTime = _coolTime;
             param.Range = _range;
             param.Speed = _speed;
-            param.LifeTime = 1000;
+            param.LifeTime = _lifeTime;
             if (param.CoolTime > _timer)
             {
                 _timer += Time.deltaTime;
