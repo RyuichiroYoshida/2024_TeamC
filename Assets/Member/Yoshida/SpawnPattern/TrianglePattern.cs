@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SoulRunProject.Common
+namespace SoulRunProject.Common.Interface
 {
     /// <summary>列を指定し、二等辺三角形状で等間隔に生成位置を求めるクラス</summary>
     [Serializable, Name("三角形スポーン")]
