@@ -16,15 +16,15 @@ namespace SoulRunProject.InGame
 
         [SerializeReference, SubclassSelector, CustomLabel("生成条件")]
         ISpawnerEnableType _spawnerType;
+        
+        [SerializeReference, SubclassSelector, CustomLabel("敵生成パターン")]
+        ISpawnPattern _spawnPattern;
 
         [SerializeField, CustomLabel("生成インターバル (ミリ秒)"), Range(0, 1000)]
         float _spawnInterval;
 
         [SerializeField, CustomLabel("イラスト左右反転化")]
         bool _useRandomFlip;
-
-        [SerializeReference, SubclassSelector, CustomLabel("敵生成パターン")]
-        ISpawnPattern _spawnPattern;
 
         //現状はヒットしたplayerの参照をヒット時に格納する
         PlayerManager _playerManager;
@@ -70,10 +70,8 @@ namespace SoulRunProject.InGame
                 yield return new WaitForSeconds(_spawnInterval / 1000);
 
                 // TODO 複数種出す場合、それらを選択するロジックを考える
-                var entity = Instantiate(_fieldEntity[spawnIndex], transform);
-                var transform1 = entity.transform;
-                transform1.position = transform.position + pos.Item1;
-                transform1.eulerAngles = new Vector3(0, pos.Item2, 0);
+                var entity = Instantiate(_fieldEntity[spawnIndex], transform.position + pos.Item1,
+                    Quaternion.Euler(0, pos.Item2, 0));
                 //entity.SetPlayer(_playerManager);
                 spawnIndex++;
 
@@ -88,7 +86,9 @@ namespace SoulRunProject.InGame
 #if UNITY_EDITOR
         void OnDrawGizmos()
         {
-            _spawnerType?.DrawSpawnerArea(transform.position);
+            var position = transform.position;
+            _spawnerType?.DrawSpawnerArea(position);
+            _spawnPattern?.DrawGizmos(position);
 
             // TODO シーン上で生成パターンを見れるようにしたいね
             // _spawnFlag = false;
