@@ -20,8 +20,13 @@ namespace SoulRunProject.Common
             if (other.gameObject.TryGetComponent(out PlayerManager player))
             {
                 OnHit(other);
-                player.Damage(_attackDamage);
+                //player.Damage(_attackDamage);
             }
+        }
+        
+        protected override void TouchCall(GameObject detachedPrefab)
+        {
+            EnemyObjectPool.Instance.ReleasePoolObject(gameObject);
         }
     }
 }
