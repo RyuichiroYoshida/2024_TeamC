@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using SoulRunProject.Common;
 using UniRx;
 using UnityEngine;
@@ -24,7 +25,8 @@ namespace SoulRunProject.InGame
         private BossState _currentState = BossState.Animation;
         private int _thresholdIndex;
         private float _intervalTimer;
-        private int _inActionIndex;
+        /// <summary> 動いている行動 </summary>
+        private IBossBehavior _inActionBehavior;
 
         private void Start()
         {
@@ -71,14 +73,14 @@ namespace SoulRunProject.InGame
                     if (_intervalTimer >= _behaviorIntervalTime)
                     {
                         _currentState = BossState.InAction;
-                        _inActionIndex = Random.Range(0, _bossBehaviors.Count);
-                        _bossBehaviors[_inActionIndex].BeginAction();
-                        _bossBehaviors[_inActionIndex].UpdateAction(Time.deltaTime);
+                        _inActionBehavior = _bossBehaviors.Where(x => x != _inActionBehavior).ToList()[0];
+                        _inActionBehavior.BeginAction();
+                        _inActionBehavior.UpdateAction(Time.deltaTime);
                     }
                     break;
                 
                 case BossState.InAction:
-                    _bossBehaviors[_inActionIndex].UpdateAction(Time.deltaTime);
+                    _inActionBehavior.UpdateAction(Time.deltaTime);
                     break;
             }
         }
