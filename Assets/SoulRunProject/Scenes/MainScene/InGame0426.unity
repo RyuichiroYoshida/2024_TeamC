@@ -6951,35 +6951,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _patterns:
-  - _isInfinity: 1
-    _seconds: 60
+  - _isInfinity: 0
+    _seconds: 3
     _isRandom: 0
     _fieldSegments:
-    - {fileID: 2752528944075337817, guid: 54942ca6699e8764a8b2eb58690cf15d, type: 3}
-    - {fileID: -1237910820451014031, guid: d1904c00fa7c5af4d868fc3945204e44, type: 3}
-    - {fileID: 2752528944075337817, guid: 411ea04717ae8de48876e7e0ac1554c8, type: 3}
-    - {fileID: 2428599316293845585, guid: a9a1194410f56c9439e2123b1a496349, type: 3}
-    - {fileID: 2752528944075337817, guid: d4d586d8a90d010429a203f71592a72b, type: 3}
-    - {fileID: 4714940432086655038, guid: 948be5b01315e6345a97df6ceb3432d0, type: 3}
-  - _isInfinity: 1
-    _seconds: 60
-    _isRandom: 0
-    _fieldSegments:
-    - {fileID: -1237910820451014031, guid: d1904c00fa7c5af4d868fc3945204e44, type: 3}
-    - {fileID: 2428599316293845585, guid: a9a1194410f56c9439e2123b1a496349, type: 3}
-    - {fileID: 3513544928683378069, guid: 937629548c19b1c4aaa149d2946f59bc, type: 3}
-    - {fileID: 2428599316293845585, guid: a9a1194410f56c9439e2123b1a496349, type: 3}
-    - {fileID: 4714940432086655038, guid: 948be5b01315e6345a97df6ceb3432d0, type: 3}
-  - _isInfinity: 1
-    _seconds: 60
-    _isRandom: 0
-    _fieldSegments:
-    - {fileID: 2752528944075337817, guid: 54942ca6699e8764a8b2eb58690cf15d, type: 3}
-    - {fileID: -1237910820451014031, guid: d1904c00fa7c5af4d868fc3945204e44, type: 3}
-    - {fileID: 2752528944075337817, guid: 411ea04717ae8de48876e7e0ac1554c8, type: 3}
-    - {fileID: 2428599316293845585, guid: a9a1194410f56c9439e2123b1a496349, type: 3}
-    - {fileID: 2752528944075337817, guid: d4d586d8a90d010429a203f71592a72b, type: 3}
-    - {fileID: 4714940432086655038, guid: 948be5b01315e6345a97df6ceb3432d0, type: 3}
+    - {fileID: 2752528944075337817, guid: 72160fdd4e91fc94e8d50beef2073970, type: 3}
   - _isInfinity: 1
     _seconds: 60
     _isRandom: 0
