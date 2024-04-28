@@ -35,7 +35,6 @@ namespace SoulRunProject.Common
         private Status _currentStatus;
         private void Awake()
         {
-            MaxHp = _currentStatus.Hp;
             _currentStatus = new Status(_baseStatus.Status);
             CurrentHp = new FloatReactiveProperty(_currentStatus.Hp);
             _inGameTimes = GetComponents<IPlayerPausable>();
@@ -45,6 +44,7 @@ namespace SoulRunProject.Common
             _playerMovement = GetComponent<PlayerMovement>();
             _hitDamageEffectManager = GetComponent<HitDamageEffectManager>();
             _resourceContainer = new();
+            MaxHp = _currentStatus.Hp;
             
             InitializeInput();
         }

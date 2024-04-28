@@ -3509,7 +3509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c787228e05b4c64b87894f5be52870b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startPos: {x: 0, y: 0, z: -40}
+  _startPos: {x: -7.107221, y: 0, z: -40}
   _endPos: {x: 0, y: 0, z: 40}
 --- !u!1 &2819453220253650416
 GameObject:
@@ -10173,6 +10173,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree3_125
       objectReference: {fileID: 0}
+    - target: {fileID: 871129033906405150, guid: 13e35f3c03bc45a40bab0890f943a980,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5012339785866729575, guid: 13e35f3c03bc45a40bab0890f943a980,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -10821,6 +10826,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree3_120
       objectReference: {fileID: 0}
+    - target: {fileID: 871129033906405150, guid: 13e35f3c03bc45a40bab0890f943a980,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5012339785866729575, guid: 13e35f3c03bc45a40bab0890f943a980,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -11147,6 +11157,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tree2_50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2896465790406250595, guid: 3a22f40f39b42ca49855f7b419f1aaeb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8886523578831790948, guid: 3a22f40f39b42ca49855f7b419f1aaeb,
         type: 3}
@@ -11632,6 +11647,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree3_116
       objectReference: {fileID: 0}
+    - target: {fileID: 871129033906405150, guid: 13e35f3c03bc45a40bab0890f943a980,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5012339785866729575, guid: 13e35f3c03bc45a40bab0890f943a980,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -11715,6 +11735,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tree1_71
+      objectReference: {fileID: 0}
+    - target: {fileID: 1224281310321379123, guid: 8d613e1c99a2f5e42b796cf8ef39300a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4411371263152241223, guid: 8d613e1c99a2f5e42b796cf8ef39300a,
         type: 3}
@@ -13828,6 +13853,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree3_88
       objectReference: {fileID: 0}
+    - target: {fileID: 871129033906405150, guid: 13e35f3c03bc45a40bab0890f943a980,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5012339785866729575, guid: 13e35f3c03bc45a40bab0890f943a980,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -14006,6 +14036,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree3_132
       objectReference: {fileID: 0}
+    - target: {fileID: 871129033906405150, guid: 13e35f3c03bc45a40bab0890f943a980,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5012339785866729575, guid: 13e35f3c03bc45a40bab0890f943a980,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -14150,6 +14185,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree2_54
       objectReference: {fileID: 0}
+    - target: {fileID: 2896465790406250595, guid: 3a22f40f39b42ca49855f7b419f1aaeb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8886523578831790948, guid: 3a22f40f39b42ca49855f7b419f1aaeb,
         type: 3}
       propertyPath: _takeKnockBack._resistanceValue
@@ -14278,6 +14318,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree3_84
       objectReference: {fileID: 0}
+    - target: {fileID: 871129033906405150, guid: 13e35f3c03bc45a40bab0890f943a980,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5012339785866729575, guid: 13e35f3c03bc45a40bab0890f943a980,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -14366,6 +14411,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tree3_115
+      objectReference: {fileID: 0}
+    - target: {fileID: 871129033906405150, guid: 13e35f3c03bc45a40bab0890f943a980,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5012339785866729575, guid: 13e35f3c03bc45a40bab0890f943a980,
         type: 3}
@@ -14510,6 +14560,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tree2_52
+      objectReference: {fileID: 0}
+    - target: {fileID: 2896465790406250595, guid: 3a22f40f39b42ca49855f7b419f1aaeb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8886523578831790948, guid: 3a22f40f39b42ca49855f7b419f1aaeb,
         type: 3}
@@ -15094,6 +15149,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree1_44
       objectReference: {fileID: 0}
+    - target: {fileID: 1224281310321379123, guid: 8d613e1c99a2f5e42b796cf8ef39300a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4411371263152241223, guid: 8d613e1c99a2f5e42b796cf8ef39300a,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -15430,6 +15490,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tree2_51
+      objectReference: {fileID: 0}
+    - target: {fileID: 2896465790406250595, guid: 3a22f40f39b42ca49855f7b419f1aaeb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8886523578831790948, guid: 3a22f40f39b42ca49855f7b419f1aaeb,
         type: 3}
@@ -15830,6 +15895,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tree1_45
+      objectReference: {fileID: 0}
+    - target: {fileID: 1224281310321379123, guid: 8d613e1c99a2f5e42b796cf8ef39300a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4411371263152241223, guid: 8d613e1c99a2f5e42b796cf8ef39300a,
         type: 3}
@@ -16374,6 +16444,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tree1_79
+      objectReference: {fileID: 0}
+    - target: {fileID: 1224281310321379123, guid: 8d613e1c99a2f5e42b796cf8ef39300a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4411371263152241223, guid: 8d613e1c99a2f5e42b796cf8ef39300a,
         type: 3}
@@ -17022,6 +17097,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tree3_83
+      objectReference: {fileID: 0}
+    - target: {fileID: 871129033906405150, guid: 13e35f3c03bc45a40bab0890f943a980,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5012339785866729575, guid: 13e35f3c03bc45a40bab0890f943a980,
         type: 3}
@@ -17800,6 +17880,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree2_55
       objectReference: {fileID: 0}
+    - target: {fileID: 2896465790406250595, guid: 3a22f40f39b42ca49855f7b419f1aaeb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8886523578831790948, guid: 3a22f40f39b42ca49855f7b419f1aaeb,
         type: 3}
       propertyPath: _takeKnockBack._resistanceValue
@@ -18260,6 +18345,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree2_58
       objectReference: {fileID: 0}
+    - target: {fileID: 2896465790406250595, guid: 3a22f40f39b42ca49855f7b419f1aaeb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8886523578831790948, guid: 3a22f40f39b42ca49855f7b419f1aaeb,
         type: 3}
       propertyPath: _takeKnockBack._resistanceValue
@@ -18482,6 +18572,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree3_114
       objectReference: {fileID: 0}
+    - target: {fileID: 871129033906405150, guid: 13e35f3c03bc45a40bab0890f943a980,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5012339785866729575, guid: 13e35f3c03bc45a40bab0890f943a980,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -18626,6 +18721,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree2_33
       objectReference: {fileID: 0}
+    - target: {fileID: 2896465790406250595, guid: 3a22f40f39b42ca49855f7b419f1aaeb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8886523578831790948, guid: 3a22f40f39b42ca49855f7b419f1aaeb,
         type: 3}
       propertyPath: _takeKnockBack._resistanceValue
@@ -18659,6 +18759,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tree3_123
+      objectReference: {fileID: 0}
+    - target: {fileID: 871129033906405150, guid: 13e35f3c03bc45a40bab0890f943a980,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5012339785866729575, guid: 13e35f3c03bc45a40bab0890f943a980,
         type: 3}
@@ -18832,6 +18937,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tree1_42
+      objectReference: {fileID: 0}
+    - target: {fileID: 1224281310321379123, guid: 8d613e1c99a2f5e42b796cf8ef39300a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4411371263152241223, guid: 8d613e1c99a2f5e42b796cf8ef39300a,
         type: 3}
@@ -19110,6 +19220,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree1_76
       objectReference: {fileID: 0}
+    - target: {fileID: 1224281310321379123, guid: 8d613e1c99a2f5e42b796cf8ef39300a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4411371263152241223, guid: 8d613e1c99a2f5e42b796cf8ef39300a,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -19198,6 +19313,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tree1_43
+      objectReference: {fileID: 0}
+    - target: {fileID: 1224281310321379123, guid: 8d613e1c99a2f5e42b796cf8ef39300a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4411371263152241223, guid: 8d613e1c99a2f5e42b796cf8ef39300a,
         type: 3}
@@ -19292,6 +19412,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tree3_111
+      objectReference: {fileID: 0}
+    - target: {fileID: 871129033906405150, guid: 13e35f3c03bc45a40bab0890f943a980,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5012339785866729575, guid: 13e35f3c03bc45a40bab0890f943a980,
         type: 3}
@@ -19476,6 +19601,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree3_127
       objectReference: {fileID: 0}
+    - target: {fileID: 871129033906405150, guid: 13e35f3c03bc45a40bab0890f943a980,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5012339785866729575, guid: 13e35f3c03bc45a40bab0890f943a980,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -19564,6 +19694,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tree3_134
+      objectReference: {fileID: 0}
+    - target: {fileID: 871129033906405150, guid: 13e35f3c03bc45a40bab0890f943a980,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5012339785866729575, guid: 13e35f3c03bc45a40bab0890f943a980,
         type: 3}
@@ -19925,6 +20060,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tree1_73
+      objectReference: {fileID: 0}
+    - target: {fileID: 1224281310321379123, guid: 8d613e1c99a2f5e42b796cf8ef39300a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4411371263152241223, guid: 8d613e1c99a2f5e42b796cf8ef39300a,
         type: 3}
@@ -20657,6 +20797,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tree3_126
+      objectReference: {fileID: 0}
+    - target: {fileID: 871129033906405150, guid: 13e35f3c03bc45a40bab0890f943a980,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5012339785866729575, guid: 13e35f3c03bc45a40bab0890f943a980,
         type: 3}
@@ -21529,6 +21674,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree2_57
       objectReference: {fileID: 0}
+    - target: {fileID: 2896465790406250595, guid: 3a22f40f39b42ca49855f7b419f1aaeb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8886523578831790948, guid: 3a22f40f39b42ca49855f7b419f1aaeb,
         type: 3}
       propertyPath: _takeKnockBack._resistanceValue
@@ -21617,6 +21767,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tree2_49
+      objectReference: {fileID: 0}
+    - target: {fileID: 2896465790406250595, guid: 3a22f40f39b42ca49855f7b419f1aaeb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8886523578831790948, guid: 3a22f40f39b42ca49855f7b419f1aaeb,
         type: 3}
@@ -22127,6 +22282,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree1_65
       objectReference: {fileID: 0}
+    - target: {fileID: 1224281310321379123, guid: 8d613e1c99a2f5e42b796cf8ef39300a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4411371263152241223, guid: 8d613e1c99a2f5e42b796cf8ef39300a,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -22220,6 +22380,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tree3_85
+      objectReference: {fileID: 0}
+    - target: {fileID: 871129033906405150, guid: 13e35f3c03bc45a40bab0890f943a980,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5012339785866729575, guid: 13e35f3c03bc45a40bab0890f943a980,
         type: 3}
@@ -22365,6 +22530,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree2_60
       objectReference: {fileID: 0}
+    - target: {fileID: 2896465790406250595, guid: 3a22f40f39b42ca49855f7b419f1aaeb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8886523578831790948, guid: 3a22f40f39b42ca49855f7b419f1aaeb,
         type: 3}
       propertyPath: _takeKnockBack._resistanceValue
@@ -22454,6 +22624,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree2_34
       objectReference: {fileID: 0}
+    - target: {fileID: 2896465790406250595, guid: 3a22f40f39b42ca49855f7b419f1aaeb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8886523578831790948, guid: 3a22f40f39b42ca49855f7b419f1aaeb,
         type: 3}
       propertyPath: _takeKnockBack._resistanceValue
@@ -22487,6 +22662,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tree3_124
+      objectReference: {fileID: 0}
+    - target: {fileID: 871129033906405150, guid: 13e35f3c03bc45a40bab0890f943a980,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5012339785866729575, guid: 13e35f3c03bc45a40bab0890f943a980,
         type: 3}
