@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SoulRunProject.Common
+namespace SoulRunProject.Common.Interface
 {
     /// <summary>
     /// 生成パターンのインターフェース

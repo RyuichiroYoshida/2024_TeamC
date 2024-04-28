@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
-using SoulRunProject.InGame;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace SoulRunProject.Common
+namespace SoulRunProject.Common.Interface
 {
     /// <summary>円形範囲でランダムに生成位置を求めるクラス</summary>
     [Serializable, Name("円形ランダムスポーン")]
@@ -38,6 +37,11 @@ namespace SoulRunProject.Common
             return _spawnPositions;
         }
 
+        public void DrawGizmos(Vector3 pos)
+        {
+            GizmoDrawWireDisk.DrawWireDisk(pos, _spawnRadiusRange, Color.red);
+        }
+
         /// <summary>
         /// 円形範囲内のランダムな地点の座標を求めるメソッド
         /// </summary>
@@ -49,11 +53,10 @@ namespace SoulRunProject.Common
             return randomRange * Mathf.Cos(randomTheta);
         }
 
-
-        public void DrawGizmos(Vector3 pos)
-        {
-            // TODO 仮で相互参照　今度直す
-            EntitySpawnController.DrawWireDisk(pos, _spawnRadiusRange, Color.red);
-        }
+        // public void DrawGizmos(Vector3 pos)
+        // {
+        //     // TODO 仮で相互参照　今度直す
+        //     EntitySpawnerController.DrawWireDisk(pos, _spawnRadiusRange, Color.red);
+        // }
     }
 }
