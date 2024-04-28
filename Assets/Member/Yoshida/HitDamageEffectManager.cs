@@ -9,19 +9,19 @@ namespace SoulRunProject.InGame
     /// </summary>
     public class HitDamageEffectManager : MonoBehaviour
     {
-        // シェーダーのカラープロパティ取得
-        private int PramID = Shader.PropertyToID("_DamageColor");
-
         // 良い感じの白色
         static readonly Color WhiteColor = new(0.85f, 0.85f, 0.85f, 0.6f);
-        [SerializeField, Tooltip("点滅時間")] float _duration;
-        [SerializeField, Tooltip("点滅回数")] int _loopCount;
+        [SerializeField, CustomLabel("点滅間隔"), Range(0, 0.1f)] float _duration;
+        [SerializeField, CustomLabel("点滅回数")] int _loopCount;
+        
         Renderer _renderer;
         Material _copyMaterial;
         Sequence _sequence;
         Color _defaultColor;
         bool _hitFadeBlinking;
-
+        // シェーダーのカラープロパティ取得
+        int _pramID = Shader.PropertyToID("_DamageColor");
+        
         public Material CopyMaterial => _copyMaterial;
 
         /// <summary>
@@ -38,12 +38,12 @@ namespace SoulRunProject.InGame
             var material = new Material(_renderer.material);
             _copyMaterial = material;
 
-            if (!material.HasColor(PramID)) // パラメータ名が存在しているか
+            if (!material.HasColor(_pramID)) // パラメータ名が存在しているか
             {
-                PramID = Shader.PropertyToID("_Color");
+                _pramID = Shader.PropertyToID("_Color");
             }
             
-            _defaultColor = material.GetColor(PramID);
+            _defaultColor = material.GetColor(_pramID);
             _renderer.material = _copyMaterial;
 
             if (_copyMaterial == null)
@@ -69,8 +69,8 @@ namespace SoulRunProject.InGame
             _copyMaterial.SetBool("_Boolean", true);
             _sequence?.Kill();
             _sequence = DOTween.Sequence();
-            _sequence.Append(DOTween.To(() => _defaultColor, c => _copyMaterial.SetColor(PramID, c), color, _duration));
-            _sequence.Append(DOTween.To(() => color, c => _copyMaterial.SetColor(PramID, c), _defaultColor, _duration));
+            _sequence.Append(DOTween.To(() => _defaultColor, c => _copyMaterial.SetColor(_pramID, c), color, _duration));
+            _sequence.Append(DOTween.To(() => color, c => _copyMaterial.SetColor(_pramID, c), _defaultColor, _duration));
             _sequence.AppendCallback(() => _copyMaterial.SetBool("_Boolean", false));
             _sequence.SetLoops(_loopCount, LoopType.Restart);
             _sequence.SetLink(gameObject);
