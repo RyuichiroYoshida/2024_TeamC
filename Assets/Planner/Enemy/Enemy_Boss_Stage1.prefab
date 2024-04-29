@@ -135,6 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9e7d01dd527d9a46ae18327327c853a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _initialPosition: {x: 0, y: 2, z: 13}
   _powerUpThreshold:
   - 50
   - 30

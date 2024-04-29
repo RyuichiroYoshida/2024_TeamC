@@ -16,11 +16,10 @@ namespace SoulRunProject.InGame
     /// </summary>
     public class BossController : MonoBehaviour
     {
+        [SerializeField, CustomLabel("初期ワールド座標")] private Vector3 _initialPosition;
         [SerializeField, Tooltip("パワーアップする閾値(%)")] private float[] _powerUpThreshold; 
         [Header("ボスの行動"), CustomLabel("行動の種類"), SerializeReference, SubclassSelector] List<IBossBehavior> _bossBehaviors;
-
-        [SerializeField, CustomLabel("行動待機時間")]
-        private float _behaviorIntervalTime;
+        [SerializeField, CustomLabel("行動待機時間")] private float _behaviorIntervalTime;
 
         private BossState _currentState = BossState.Animation;
         private int _thresholdIndex;
@@ -30,18 +29,26 @@ namespace SoulRunProject.InGame
 
         private void Start()
         {
-            DamageableEntity damageableEntity = GetComponent<DamageableEntity>();
-            damageableEntity.CurrentHp
+            transform.position = _initialPosition;
+            DamageableEntity bossDamageable = GetComponent<DamageableEntity>();
+            bossDamageable.CurrentHp
                 .Where(_ => _powerUpThreshold.Length > _thresholdIndex)
                 .Subscribe(hp =>
                 {
-                    while (damageableEntity.MaxHp * _powerUpThreshold[_thresholdIndex] / 100 >= hp)
+                    while (_powerUpThreshold.Length > _thresholdIndex)
                     {
-                        _thresholdIndex++;
-
-                        foreach (var bossBehavior in _bossBehaviors)
+                        if (bossDamageable.MaxHp * _powerUpThreshold[_thresholdIndex] / 100 >= hp)
                         {
-                            bossBehavior.PowerUpBehavior();
+                            _thresholdIndex++;
+
+                            foreach (var bossBehavior in _bossBehaviors)
+                            {
+                                bossBehavior.PowerUpBehavior();
+                            }
+                        }
+                        else
+                        {
+                            break;
                         }
                     }
                 })
@@ -57,7 +64,7 @@ namespace SoulRunProject.InGame
                 };
             }
 
-            _currentState = BossState.Standby; // とりあえず
+            _currentState = BossState.Standby; // todo 入場アニメーション
         }
         
         private void Update()
@@ -73,7 +80,8 @@ namespace SoulRunProject.InGame
                     if (_intervalTimer >= _behaviorIntervalTime)
                     {
                         _currentState = BossState.InAction;
-                        _inActionBehavior = _bossBehaviors.Where(x => x != _inActionBehavior).ToList()[0];
+                        _inActionBehavior = _bossBehaviors.Where(x => x != _inActionBehavior)
+                            .ToList()[Random.Range(0, _bossBehaviors.Count - 1)]; // 直前をのぞいた一つをランダムに選択
                         _inActionBehavior.BeginAction();
                         _inActionBehavior.UpdateAction(Time.deltaTime);
                     }
