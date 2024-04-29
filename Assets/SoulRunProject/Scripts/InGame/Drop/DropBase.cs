@@ -16,6 +16,7 @@ namespace SoulRunProject.InGame
         [SerializeField, CustomLabel("跳ねるアニメーションの乗数(増やすとより大きく跳ねる)")] float _multiplier = 1f;
         [SerializeField, CustomLabel("跳ねるアニメーションの時間")] float _projectileMotionTime = 0.5f;
         [SerializeField, CustomLabel("1回転する時間")] float _rotateTime = 0.5f;
+        [SerializeField, CustomLabel("出現する時の高さ。ワールド座標。")] float _dropHeight = 0.7f;
         Sequence _projectileMotionSequence;
         Tween _rotateTween;
         protected readonly Subject<Unit> FinishedSubject = new();
@@ -31,6 +32,11 @@ namespace SoulRunProject.InGame
         {
             // 現在の斜方投射が終わるまで次の投射を行わない
             if (_projectileMotionSequence != null)　return;
+            //  最終的に同じ高さで止まるので空中に出現しても地面から始めるようにする
+            Vector3 newPosition = transform.position;
+            newPosition.y = _dropHeight;
+            transform.position = newPosition;
+            
             Vector3 randomDir = new Vector3(Random.Range(-1f, 1f), Random.Range(0.5f, 1f), Random.Range(-1f, 1f));
             randomDir *= _multiplier;
             _projectileMotionSequence = DOTween.Sequence();
