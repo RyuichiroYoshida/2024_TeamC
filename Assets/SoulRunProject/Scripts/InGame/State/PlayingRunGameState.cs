@@ -9,22 +9,21 @@ namespace SoulRunProject.InGame
     /// </summary>
     public class PlayingRunGameState : State
     {
+        private StageManager _stageManager;
         private PlayerManager _playerManager;
         private PlayerInput _playerInput;
         private PlayerLevelManager _playerLevelManager;
         private FieldMover _fieldMover;
         private CompositeDisposable _compositeDisposable = new CompositeDisposable();
         
-        //TODO：ボスステージ開始前のプレイヤーの位置を設定する場所を検討
-        private float _enterBossStagePosition = 111440;
         public bool ArrivedBossStagePosition { get; private set; }
         public bool SwitchToPauseState { get; private set; }
         public bool IsPlayerDead { get; private set; }
         public bool SwitchToLevelUpState { get; private set; }
-        
-        public PlayingRunGameState(PlayerManager playerManager, PlayerInput playerInput, 
-            PlayerLevelManager playerLevelManager, FieldMover fieldMover)
+        public PlayingRunGameState(StageManager stageManager, PlayerManager playerManager, 
+            PlayerInput playerInput, PlayerLevelManager playerLevelManager)
         {
+            _stageManager = stageManager;
             _playerManager = playerManager;
             _playerInput = playerInput;
             _playerLevelManager = playerLevelManager;
@@ -36,6 +35,7 @@ namespace SoulRunProject.InGame
             DebugClass.Instance.ShowLog("プレイ中ステート開始");
             PauseManager.Pause(false);
             SwitchToLevelUpState = false;
+            ArrivedBossStagePosition = false;
             
             // PlayerInputへの購読
             _playerInput.PauseInput
@@ -47,6 +47,7 @@ namespace SoulRunProject.InGame
                 })
                 .AddTo(_compositeDisposable);
             
+            // レベルアップの購読
             _playerLevelManager.OnLevelUp
                 .SkipLatestValueOnSubscribe()
                 .Subscribe(_ =>
@@ -55,7 +56,7 @@ namespace SoulRunProject.InGame
                     StateChange();
                 })
                 .AddTo(_compositeDisposable);
-            _fieldMover.StartBossStage += StartBossStage;
+            //_fieldMover.StartBossStage += StartBossStage;
         }
         
         protected override void OnUpdate()
@@ -65,6 +66,23 @@ namespace SoulRunProject.InGame
                 IsPlayerDead = true;
                 StateChange();
             }
+            // プレイヤーのHPの監視
+            _playerManager.CurrentHp
+                .Where(hp => hp <= 0)
+                .Subscribe(hp =>
+                {
+                    IsPlayerDead = true;
+                    StateChange();
+                })
+                .AddTo(_compositeDisposable);
+            
+            // ボスステージへの遷移への購読
+            _stageManager.ToBossStage += () =>
+            {
+                ArrivedBossStagePosition = true;
+                StateChange();
+            };
+            _stageManager.PlayingRunGameUpdate();
         }
 
         protected override void OnExit(State nextState)
