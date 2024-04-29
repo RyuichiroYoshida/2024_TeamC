@@ -1,3 +1,4 @@
+using System;
 using SoulRunProject.Common;
 using UnityEngine;
 
@@ -30,6 +31,9 @@ namespace SoulRunProject.InGame
             // 角度の初期化
             _startVector = _startImpactPosition - _beamOrigin.transform.position;
             _finishVector = (_finishImpactPosition - _beamOrigin.transform.position);
+            
+            // 行動パワーアップの代入
+            PowerUpBejaviors = new Action<BossController>[] { SpeedPowerUp };
         }
         
         public override void BeginAction()
@@ -71,7 +75,7 @@ namespace SoulRunProject.InGame
             }
         }
 
-        public override void PowerUpBehavior()
+        private void SpeedPowerUp(BossController bossController)
         {
             _beamTime /= 2;
         }
