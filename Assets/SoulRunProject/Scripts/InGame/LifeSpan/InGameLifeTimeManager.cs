@@ -22,6 +22,7 @@ namespace SoulRunProject.Common
         [SerializeField] private CommonView _commonView;
         [SerializeField] private StageNameView _stageNameView;
         [SerializeField] private LevelUpView _levelUpView;
+        [SerializeField] private FieldMover _fieldMover;
         protected override void Configure(IContainerBuilder builder)
         {
             //ドメイン層
@@ -31,6 +32,7 @@ namespace SoulRunProject.Common
             builder.RegisterInstance(_playerInput);
             builder.RegisterInstance(gameObject);
             builder.RegisterInstance(_stageNameView);
+            builder.RegisterInstance(_fieldMover);
             
             //アプリケーション層
             builder.Register<EnterInGameState>(Lifetime.Singleton);
