@@ -173,7 +173,7 @@ namespace SoulRunProject.InGame
             _finishedSubject.Dispose();
         }
 
-        protected void TouchCall(GameObject detachedPrefab) //  弾が当たった時に一定時間待ってObjectPoolに入った自身のtransformに戻す
+        protected virtual void TouchCall(GameObject detachedPrefab) //  弾が当たった時に一定時間待ってObjectPoolに入った自身のtransformに戻す
         {
             detachedPrefab.transform.SetParent(transform);
             detachedPrefab.transform.position = transform.position;
