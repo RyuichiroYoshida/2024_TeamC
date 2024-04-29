@@ -28,7 +28,7 @@ namespace SoulRunProject.InGame
         /// <summary>
         /// ランダムな方向に斜方投射するメソッド
         /// </summary>
-        public async void RandomProjectileMotion()
+        public void RandomProjectileMotion()
         {
             // 現在の斜方投射が終わるまで次の投射を行わない
             if (_projectileMotionSequence != null)　return;
@@ -43,9 +43,7 @@ namespace SoulRunProject.InGame
             _projectileMotionSequence.Append(transform.DOBlendableMoveBy(new Vector3(randomDir.x, 0f ,randomDir.z), _projectileMotionTime));
             _projectileMotionSequence.Insert(0f , transform.DOBlendableMoveBy(new Vector3(0f , randomDir.y ,0f), _projectileMotionTime / 2));
             _projectileMotionSequence.Insert(_projectileMotionTime / 2 , transform.DOBlendableMoveBy(new Vector3(0f , - randomDir.y ,0f), _projectileMotionTime / 2));
-            _projectileMotionSequence.SetLink(gameObject);
-            await _projectileMotionSequence;
-            _projectileMotionSequence = null;
+            _projectileMotionSequence.SetLink(gameObject).OnComplete(()=>_projectileMotionSequence = null);
         }
 
         void OnEnable()
@@ -58,6 +56,8 @@ namespace SoulRunProject.InGame
         {
             _rotateTween?.Kill();
             _rotateTween = null;
+            _projectileMotionSequence?.Kill();
+            _projectileMotionSequence = null;
         }
 
         public void ForceFinish()

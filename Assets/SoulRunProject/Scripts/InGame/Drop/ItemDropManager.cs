@@ -3,6 +3,7 @@ using SoulRunProject.Common;
 using SoulRunProject.SoulMixScene;
 using UniRx;
 using UniRx.Triggers;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace SoulRunProject.InGame
@@ -15,7 +16,7 @@ namespace SoulRunProject.InGame
         [SerializeField] int _preloadCount = 5;
         [SerializeField] int _threshold = 5;
         readonly Dictionary<DropBase, DropPool> _dropPoolDictionary = new();
-        public void Drop(LootTable lootTable, Vector3 pos, MyConstraint constraint = null , Status playerStatus = null)
+        public void Drop(LootTable lootTable, Vector3 pos, Transform parent = null, Status playerStatus = null)
         {
             foreach (var dropData in lootTable.Choose(playerStatus))
             {
@@ -30,8 +31,13 @@ namespace SoulRunProject.InGame
                             pool.Return(drop);
                         });
                     drop.RandomProjectileMotion();  //  演出
-                    if (constraint != null) 
-                    {   
+                    if (parent) 
+                    {
+                        //  親オブジェクトにMyConstraintが付いてなければ新しく追加する
+                        if (!parent.TryGetComponent(out MyConstraint constraint))
+                        {
+                            constraint = parent.AddComponent<MyConstraint>();
+                        }
                         //  疑似的にフィールドの子オブジェクトにする(フィールドが破棄されても残る。座標は連動して動く。)
                         constraint.Targets.Add(drop.transform);
                         //  親オブジェクトが破棄されたら、ドロップアイテムをプールに戻す
