@@ -26,6 +26,9 @@ namespace SoulRunProject.InGame
         [SerializeField, CustomLabel("イラスト左右反転化")]
         bool _useRandomFlip;
 
+        [SerializeField, CustomLabel("スポナーが使用可能か")] bool _isSpawnerAvailable = true;
+
+        
         //現状はヒットしたplayerの参照をヒット時に格納する
         PlayerManager _playerManager;
         bool _spawnFlag;
@@ -34,11 +37,16 @@ namespace SoulRunProject.InGame
         void Start()
         {
             GameObject.FindWithTag("Player").TryGetComponent(out _playerManager);
+            if (_spawnerType == null)
+            {
+                Debug.LogWarning($"{gameObject.name} の生成条件がnullです。生成処理をロックします。");
+                _isSpawnerAvailable = false;
+            }
         }
 
         void Update()
         {
-            if (_spawnFlag) return;
+            if (_spawnFlag　|| !_isSpawnerAvailable) return;
             if (_spawnerType.IsEnable(_playerManager.transform.position, transform.position))
             {
                 StartCoroutine(SpawnEntity());
