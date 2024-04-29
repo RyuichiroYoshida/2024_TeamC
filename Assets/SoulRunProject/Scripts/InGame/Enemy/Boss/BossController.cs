@@ -39,12 +39,12 @@ namespace SoulRunProject.InGame
                     {
                         if (bossDamageable.MaxHp * _powerUpThreshold[_thresholdIndex] / 100 >= hp)
                         {
-                            _thresholdIndex++;
-
                             foreach (var bossBehavior in _bossBehaviors)
                             {
-                                bossBehavior.PowerUpBehavior();
+                                ((BossBehaviorBase)bossBehavior).PowerUpBejaviors[_thresholdIndex]?.Invoke(this);
                             }
+                            
+                            _thresholdIndex++;
                         }
                         else
                         {
@@ -112,8 +112,6 @@ namespace SoulRunProject.InGame
         public void BeginAction();
         /// <summary> Action中Update </summary>
         public void UpdateAction(float deltaTime);
-        /// <summary> Action強化 </summary> ActionなのかBehaviorなのか
-        public void PowerUpBehavior();
     }
 
     /// <summary>
@@ -125,10 +123,10 @@ namespace SoulRunProject.InGame
     {
         /// <summary> Action終了時に呼ばれる </summary>
         public Action OnFinishAction;
+        public Action<BossController>[] PowerUpBejaviors; 
 
         public abstract void Initialize(BossController bossController);
         public abstract void BeginAction();
         public abstract void UpdateAction(float deltaTime);
-        public abstract void PowerUpBehavior();
     }
 }

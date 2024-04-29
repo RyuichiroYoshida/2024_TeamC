@@ -1,5 +1,6 @@
 using SoulRunProject.Common;
 using UnityEngine;
+using System;
 
 namespace SoulRunProject.InGame
 {
@@ -32,6 +33,9 @@ namespace SoulRunProject.InGame
             _bossTransform = bossController.transform;
             _defaultBossPos = _bossTransform.position;
             _playerTransform = GameObject.FindObjectOfType<PlayerManager>().transform;
+            
+            // 行動パワーアップの代入
+            PowerUpBejaviors = new Action<BossController>[] { SpeedPowerUp };
         }
 
         public override void BeginAction()
@@ -52,7 +56,7 @@ namespace SoulRunProject.InGame
                 BossFlameBallController flameBall =
                     GameObject.Instantiate(_flameBallPrefab, _firingPosition.position, Quaternion.identity);
                 Vector3 impactPos = _playerTransform.position;
-                impactPos.x += Random.Range(-_flameBallAccuracy, _flameBallAccuracy);
+                impactPos.x += UnityEngine.Random.Range(-_flameBallAccuracy, _flameBallAccuracy);
                 impactPos.y = 0; // fieldの高さ
                 impactPos.z += _deviationDistance;
                 flameBall.transform.LookAt(impactPos);
@@ -77,9 +81,10 @@ namespace SoulRunProject.InGame
             }
         }
 
-        public override void PowerUpBehavior()
+        private void SpeedPowerUp(BossController bossController)
         {
-            
+            _actionTime /= 2; // 移動スピード
+            _flameBallSpeed *= 2; // 炎の弾のスピード
         }
     }
 }
