@@ -10,6 +10,10 @@ namespace SoulRunProject.InGame
     {
         [SerializeField, CustomLabel("経由地点")] GameObject _middlePosMarker;
         [SerializeField, CustomLabel("終了地点")] GameObject _endPosMarker;
+        [SerializeField, CustomLabel("終了地点と始点を繋げる")] bool _isPosLoop;
+        [SerializeField, CustomLabel("Loop回数指定"), Tooltip("-1で無限ループ")] int _loopCount;
+        [SerializeField, CustomLabel("LoopType設定")] LoopType _type;
+
         Tweener _tweener;
         bool _onceFlag;
         Vector3 _middlePos;
@@ -42,7 +46,11 @@ namespace SoulRunProject.InGame
                 (
                     closePath: false,
                     lockRotation: AxisConstraint.X
-                );
+                )
+                .SetOptions(_isPosLoop)
+                .SetLoops(_loopCount, _type)
+                .SetEase(Ease.Linear)
+                .SetLink(myTransform.gameObject);
             _onceFlag = true;
         }
 
