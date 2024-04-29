@@ -12,6 +12,7 @@ namespace SoulRunProject.InGame
         private PlayerManager _playerManager;
         private PlayerInput _playerInput;
         private PlayerLevelManager _playerLevelManager;
+        private FieldMover _fieldMover;
         private CompositeDisposable _compositeDisposable = new CompositeDisposable();
         
         //TODO：ボスステージ開始前のプレイヤーの位置を設定する場所を検討
@@ -21,11 +22,13 @@ namespace SoulRunProject.InGame
         public bool IsPlayerDead { get; private set; }
         public bool SwitchToLevelUpState { get; private set; }
         
-        public PlayingRunGameState(PlayerManager playerManager, PlayerInput playerInput, PlayerLevelManager playerLevelManager)
+        public PlayingRunGameState(PlayerManager playerManager, PlayerInput playerInput, 
+            PlayerLevelManager playerLevelManager, FieldMover fieldMover)
         {
             _playerManager = playerManager;
             _playerInput = playerInput;
             _playerLevelManager = playerLevelManager;
+            _fieldMover = fieldMover;
         }
         
         protected override void OnEnter(State currentState)
@@ -52,17 +55,12 @@ namespace SoulRunProject.InGame
                     StateChange();
                 })
                 .AddTo(_compositeDisposable);
+            _fieldMover.StartBossStage += StartBossStage;
         }
         
         protected override void OnUpdate()
-        {
-            if (_playerManager.transform.position.z > _enterBossStagePosition)
-            {   //プレイヤーがボスステージ開始前の位置に到達したら前進を止めて遷移
-                PauseManager.Pause(false);
-                ArrivedBossStagePosition = true;
-                StateChange();
-            }
-            else if (_playerManager.CurrentHp.Value <= 0)
+        { 
+            if (_playerManager.CurrentHp.Value <= 0)
             {   //プレイヤーのHPが0になったら遷移
                 IsPlayerDead = true;
                 StateChange();
@@ -72,6 +70,18 @@ namespace SoulRunProject.InGame
         protected override void OnExit(State nextState)
         {
             _compositeDisposable.Clear();
+            _fieldMover.StartBossStage -= StartBossStage;
+            ArrivedBossStagePosition = false;
+        }
+
+        /// <summary>
+        /// ボスステージ開始
+        /// </summary>
+        void StartBossStage()
+        {
+            PauseManager.Pause(false);
+            ArrivedBossStagePosition = true;
+            StateChange();
         }
     }
 }

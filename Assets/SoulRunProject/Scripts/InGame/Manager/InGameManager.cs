@@ -65,7 +65,7 @@ namespace SoulRunProject.Common
             playingBossStageState.OnStateExit += state =>
             {
                 if (playingBossStageState.IsBossDefeated) //ボスを倒した場合
-                    ChangeState(6);
+                    ChangeState(2); //  PlayingRunGameStateに戻る
                 else if (playingRunGameState.SwitchToPauseState) // PauseStateへの移行
                     ChangeState(7);
                 else if (playingRunGameState.SwitchToLevelUpState) // LevelUpStateへの移行
