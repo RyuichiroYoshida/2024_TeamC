@@ -42,7 +42,7 @@ namespace SoulRunProject.Common
             else
             {
                 _dataStorage.playerData = new PlayerData();
-                _dataStorage.playerData.CurrentSoulCardDataList = new List<SoulCardMasterData>();
+                _dataStorage.playerData.CurrentSoulCardDataList = new List<SoulCardMasterDataTable>();
                 // その他のプレイヤーデータを初期化
             }
         }
@@ -78,19 +78,19 @@ namespace SoulRunProject.Common
         /// <summary>
         /// プレイヤーデータにSoulCardDataを追加する
         /// </summary>
-        /// <param name="soulCardData"></param>
-        public void AddSoulCardToPlayerData(SoulCardMasterData soulCardData)
+        /// <param name="soulCardMasterDataData"></param>
+        public void AddSoulCardToPlayerData(SoulCardMasterDataTable soulCardMasterDataData)
         {
-            _dataStorage.playerData.CurrentSoulCardDataList.Add(soulCardData);
+            _dataStorage.playerData.CurrentSoulCardDataList.Add(soulCardMasterDataData);
         }
 
         /// <summary>
         /// プレイヤーデータからSoulCardDataを削除する
         /// </summary>
-        /// <param name="soulCardData"></param>
-        public void RemoveSoulCardFromPlayerData(SoulCardMasterData soulCardData)
+        /// <param name="soulCardMasterDataData"></param>
+        public void RemoveSoulCardFromPlayerData(SoulCardMasterDataTable soulCardMasterDataData)
         {
-            _dataStorage.playerData.CurrentSoulCardDataList.Remove(soulCardData);
+            _dataStorage.playerData.CurrentSoulCardDataList.Remove(soulCardMasterDataData);
         }
 
         // その他のプレイヤーデータの操作メソッドを追加
@@ -119,9 +119,9 @@ namespace SoulRunProject.Common
         [System.Serializable]
         public class MasterData
         {
-            public List<SoulCardMasterData> soulCardDataList; // ソウルカードのマスターデータ
+            public List<SoulCardMasterDataTable> soulCardDataList; // ソウルカードのマスターデータ
 
-            public List<SoulCardMasterData> soulCardDataCombinations; // ソウルカードの組み合わせのマスターデータ
+            public List<SoulCardMasterDataTable> soulCardDataCombinations; // ソウルカードの組み合わせのマスターデータ
             // エネミーのマスターデータ
             // アイテムのマスターデータ
         }
@@ -131,7 +131,7 @@ namespace SoulRunProject.Common
         {
             public int MaxScore; //最高スコア
             public int CurrentMoney; //所持金
-            public List<SoulCardMasterData> CurrentSoulCardDataList; //所持しているもの
+            public List<SoulCardMasterDataTable> CurrentSoulCardDataList; //所持しているもの
         }
     }
 }
