@@ -25,6 +25,8 @@ namespace SoulRunProject.InGame
         /// <summary>ボスステージが始まった時に呼ばれるデリゲート</summary>
         public Action StartBossStage { get; set; }
 
+        public List<FieldSegment> MoveSegments => _moveSegments;
+
         void Awake()
         {
             _ctOnDestroy = this.GetCancellationTokenOnDestroy();
