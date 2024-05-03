@@ -18,6 +18,7 @@ namespace SoulRunProject.InGame
 
         private void Update()
         {
+            if (_isPause) return;
             List<FieldSegment> list = new();
             //  フィールドタイル移動処理
             for (var i = 0; i < MoveSegments.Count; i++)
