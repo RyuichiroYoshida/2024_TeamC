@@ -27,7 +27,6 @@ namespace SoulRunProject.InGame
 
         private void Start()
         {
-            //CurrentFieldCreatePattern = _stageData[_stageDataIndex].FieldPatterns;
             _currentStageState = StageState.PlayingRunGame;
 
             ToNextStage += NextStage;
@@ -40,29 +39,90 @@ namespace SoulRunProject.InGame
             if (_currentStageState != StageState.PlayingRunGame) return;
             
             var pattern = _stageData[_stageDataIndex].FieldPatterns[_fieldPatternIndex];
-            for (int i = 0; i < _fieldMover.FreeMoveSegmentsCount; i++)
+            if (pattern.Mode == FieldMoverMode.Order)
             {
-                GenerateFieldToOrder(pattern, ref _fieldSegmentIndex);
-                GenerateFieldToRandom(pattern);
-            }
-
-            if (_fieldTimer >= pattern.Seconds && _fieldSegmentIndex == 0)
-            {
-                if (_stageData[_stageDataIndex].FieldPatterns.Count > _fieldPatternIndex + 1)
+                for (int i = 0; i < _fieldMover.FreeMoveSegmentsCount; i++)
                 {
-                    _fieldPatternIndex++;
+                    GenerateFieldToOrder(pattern, ref _fieldSegmentIndex);
+                }
+                //  生成パターンの時間を超えている && 現在生成されているタイルが生成パターンの順番の一番後ろかどうか
+                if (_fieldTimer >= pattern.Seconds && _fieldSegmentIndex == 0)
+                {
+                    NextPattern();
                 }
                 else
                 {
-                    ToBossStage?.Invoke();
+                    _fieldTimer += Time.deltaTime;
                 }
+            }
+            else if (pattern.Mode == FieldMoverMode.Random)
+            {
+                for (int i = 0; i < _fieldMover.FreeMoveSegmentsCount; i++)
+                {
+                    GenerateFieldToRandom(pattern);
+                }
+                //  生成パターンの制限時間を超えているかどうか
+                if (_fieldTimer >= pattern.Seconds)
+                {
+                    FieldSegment nextSegment = null;
+                    bool nextIsRandom = false;
+                
+                    if (_stageData[_stageDataIndex].FieldPatterns.Count > _fieldPatternIndex + 1)
+                    {
+                        var nextPattern = _stageData[_stageDataIndex].FieldPatterns[_fieldPatternIndex + 1];
+                        nextIsRandom = nextPattern.Mode == FieldMoverMode.Random;
+                        if (!nextIsRandom && nextPattern.FieldSegments.Count > 0)
+                        {
+                            nextSegment = nextPattern.FieldSegments[0];
+                        }
+                    }
+                    else
+                    {
+                        nextSegment = _stageData[_stageDataIndex].BossStageField;
+                    }
+                
+                    var processor = pattern.AdjacentGraph.Processor;
+                    var lastSegment = _fieldMover.MoveSegments[^1];
+                
+                    //  次に流れる予定のタイルがリストに登録されているかどうか
+                    bool registeredNextSegment = processor.FieldSegmentNodes.Any(node=>node.FieldSegment == nextSegment);
+                    //  最後のタイルが次のタイルに繋げられるかどうか
+                    bool canTheNextSegmentBeConnected = true;
+                    var lastSegmentNode = processor.FieldSegmentNodes.FirstOrDefault(node=>node.FieldSegment == lastSegment);
+                    if (lastSegmentNode != null)
+                    {
+                        canTheNextSegmentBeConnected = lastSegmentNode.OutSegments.Any(node=>node.FieldSegment == nextSegment);
+                    }
+                    
+                    //  次の生成パターンがランダムかどうか
+                    //  or 次に生成されるタイルが隣接リストに登録されていない
+                    //  or 現在生成されているタイルが次のタイルと繋がるかどうか
+                    if (nextIsRandom || !registeredNextSegment || canTheNextSegmentBeConnected)
+                    {
+                        NextPattern();
+                    }
+                }
+                else
+                {
+                    _fieldTimer += Time.deltaTime;
+                }
+            }
+        }
 
-                _fieldTimer = 0;
+        void NextPattern()
+        {
+            if (_stageData[_stageDataIndex].FieldPatterns.Count > _fieldPatternIndex + 1)
+            {
+                //  次の生成パターンへ移行
+                _fieldPatternIndex++;
             }
             else
             {
-                _fieldTimer += Time.deltaTime;
+                //  次の生成パターンが無いならボスステージへ移行する
+                ToBossStage?.Invoke();
             }
+
+            _fieldTimer = 0;
         }
 
         public void PlayingBossStageUpdate()
@@ -119,7 +179,7 @@ namespace SoulRunProject.InGame
             if (_fieldMover.MoveSegments.Count <= 0)
             {   //  生成したタイルが0個の時
                 //  FieldSegmentsに登録されているタイルの一番最初を選ぶ
-                originalSegment = pattern.List[segmentIndex];
+                originalSegment = pattern.FieldSegments[segmentIndex];
                 isFirstSegment = true;
             }
             else
@@ -129,13 +189,13 @@ namespace SoulRunProject.InGame
                 //  一番後ろのタイルのEndPosの座標を保存する
                 prevEndPos = prevSegment.transform.TransformPoint(prevSegment.EndPos);
                 //  FieldSegmentsに設定されている次のタイルを持ってくる
-                originalSegment = pattern.List[segmentIndex];
+                originalSegment = pattern.FieldSegments[segmentIndex];
             }
             
             var instantiatedSegment = InstantiateSegment(originalSegment, isFirstSegment, prevEndPos);
             _fieldMover.MoveSegments.Add(instantiatedSegment);
             segmentIndex++;
-            segmentIndex %= pattern.List.Count;
+            segmentIndex %= pattern.FieldSegments.Count;
         }
         /// <summary>
         /// ランダムにフィールド生成
@@ -147,12 +207,13 @@ namespace SoulRunProject.InGame
             FieldSegment originalSegment;
             Vector3 prevEndPos = Vector3.zero;
             bool isFirstSegment = false;
+            
             if (_fieldMover.MoveSegments.Count <= 0)
             {
                 //  AdjacentGraphの中のタイルからランダムで選ぶ
                 var processor = pattern.AdjacentGraph.Processor;
-                originalSegment = processor.FieldSegmentNodes
-                    [Random.Range(0, processor.FieldSegmentNodes.Count)].FieldSegment;
+                var allSegments = processor.FieldSegmentNodes.Where(node => !node.NotRandomInstantiate).ToList();
+                originalSegment = allSegments[Random.Range(0, allSegments.Count)].FieldSegment;
                 isFirstSegment = true;
             }
             else
@@ -170,14 +231,14 @@ namespace SoulRunProject.InGame
                 if (node != null)
                 {   //  AdjacentGraphに一番後ろのタイルが登録されていた場合
                     //  そのタイルの出口と隣接しているタイルからランダムにタイルを選ぶ
-                    var outSegments = node.OutSegments.ToList();
-                    originalSegment = outSegments[Random.Range(0, outSegments.Count)];
+                    var outSegments = node.OutSegments.Where(node=>!node.NotRandomInstantiate).ToList();
+                    originalSegment = outSegments[Random.Range(0, outSegments.Count)].FieldSegment;
                 }
                 else
                 {   //  登録されていなかった場合
                     //  AdjacentGraphに登録されているタイルからランダムに選ぶ
-                    originalSegment = processor.FieldSegmentNodes
-                        [Random.Range(0, processor.FieldSegmentNodes.Count)].FieldSegment;
+                    var allSegments = processor.FieldSegmentNodes.Where(node => !node.NotRandomInstantiate).ToList();
+                    originalSegment = allSegments[Random.Range(0, allSegments.Count)].FieldSegment;
                 }
             }
             var instantiatedSegment = InstantiateSegment(originalSegment, isFirstSegment, prevEndPos);
