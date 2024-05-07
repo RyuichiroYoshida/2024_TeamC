@@ -2892,7 +2892,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 1
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 0.465
@@ -6951,7 +6951,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _patterns:
-  - _isInfinity: 0
+  - _isInfinity: 1
     _seconds: 3
     _isRandom: 0
     _fieldSegments:
