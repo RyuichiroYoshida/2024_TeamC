@@ -9,26 +9,26 @@ namespace SoulRunProject.SoulMixScene
     public class AdjacencyList : MonoBehaviour
     {
         // 隣接リストを保持する辞書
-        private Dictionary<SoulCardMasterData, List<SoulCardMasterData>> _adjacencyList;
+        private Dictionary<SoulCardMasterDataTable, List<SoulCardMasterDataTable>> _adjacencyList;
 
         // 追加するためのSoulCardList
-        [SerializeField] private List<SoulCardMasterData> soulCardList;
+        [SerializeField] private List<SoulCardMasterDataTable> soulCardList;
         
         
         void Start()
         {
-            _adjacencyList = new Dictionary<SoulCardMasterData, List<SoulCardMasterData>>();
+            _adjacencyList = new Dictionary<SoulCardMasterDataTable, List<SoulCardMasterDataTable>>();
 
             // ここで隣接リストを初期化
             AddCombination(soulCardList[0], soulCardList[1]);
         }
 
         // 2つのSoulCard間の組み合わせを追加するメソッド
-        public void AddCombination(SoulCardMasterData card1, SoulCardMasterData card2)
+        public void AddCombination(SoulCardMasterDataTable card1, SoulCardMasterDataTable card2)
         {
             if (!_adjacencyList.ContainsKey(card1))// もし辞書にキーが存在しない場合は、新しいリストを作成
             {
-                _adjacencyList[card1] = new List<SoulCardMasterData>();
+                _adjacencyList[card1] = new List<SoulCardMasterDataTable>();
             }
 
             _adjacencyList[card1].Add(card2);
@@ -36,14 +36,14 @@ namespace SoulRunProject.SoulMixScene
             // もし無向グラフ（双方向の関係）の場合は、逆の組み合わせも追加
             if (!_adjacencyList.ContainsKey(card2))
             {
-                _adjacencyList[card2] = new List<SoulCardMasterData>();
+                _adjacencyList[card2] = new List<SoulCardMasterDataTable>();
             }
 
             _adjacencyList[card2].Add(card1);
         }
 
         // 2つのSoulCardが合成可能か判定するメソッド
-        public bool CanCombine(SoulCardMasterData card1, SoulCardMasterData card2)
+        public bool CanCombine(SoulCardMasterDataTable card1, SoulCardMasterDataTable card2)
         {
             if (!_adjacencyList.ContainsKey(card1))
             {

@@ -135,6 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9e7d01dd527d9a46ae18327327c853a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _initialPosition: {x: 0, y: 2, z: 13}
   _powerUpThreshold:
   - 50
   - 30
@@ -153,7 +154,7 @@ MonoBehaviour:
         _beamOrigin: {fileID: 8952397705782560484}
         _startImpactPosition: {x: 12, y: 1.5, z: 0}
         _finishImpactPosition: {x: -12, y: 1.5, z: 0}
-        _beamTime: 1
+        _beamTime: 2.5
         _damage: 1
         _hitCount: 1
     - rid: 7007908318245552135
@@ -164,7 +165,7 @@ MonoBehaviour:
         _firingPosition: {fileID: 6504038626365006790}
         _flameBallPrefab: {fileID: 80501970798971705, guid: 835d64a7aa14fd34b84e2987143f9f94,
           type: 3}
-        _actionTime: 10
+        _actionTime: 6
         _flameBallSpeed: 10
         _flameBallNum: 10
         _flameDamage: 1

@@ -14,24 +14,24 @@ namespace SoulRunProject.SoulMixScene
     [Serializable]
     public class SoulCombiner : MonoBehaviour
     {
-        private List<SoulCardMasterData> ownedSelectSouls;
+        private List<SoulCardMasterDataTable> ownedSelectSouls;
         public List<SoulCombination> combinations; // ソウルの組み合わせリスト
 
         private void Start()
         {
-            if (MyRepository.Instance.TryGetDataList<SoulCardMasterData>(out var dataList))
+            if (MyRepository.Instance.TryGetDataList<SoulCardMasterDataTable>(out var dataList))
             {
                 ownedSelectSouls = dataList;
             }
         }
 
         /// <summary> ソウルを選択する </summary>
-        public SoulCardMasterData SelectSoul()
+        public SoulCardMasterDataTable SelectSoul()
         {
             // クリックされたソウルを取得する
-            SoulCardMasterData selectSoul = null;
+            SoulCardMasterDataTable selectSoul = null;
             // クリックされたソウルを取得する
-            if (EventSystem.current.currentSelectedGameObject.TryGetComponent(out SoulCardMasterData soulCard))
+            if (EventSystem.current.currentSelectedGameObject.TryGetComponent(out SoulCardMasterDataTable soulCard))
             {
                 selectSoul = soulCard;
             }
@@ -39,20 +39,20 @@ namespace SoulRunProject.SoulMixScene
             return selectSoul;
         }
         /// <summary> 所持しているソウルカードの中から合成可能なソウルカードを探す </summary>
-        public SoulCardMasterData SearchCombinableSoul(SoulCardMasterData selectedSoul)
+        public SoulCardMasterDataTable SearchCombinableSoul(SoulCardMasterDataTable selectedSoul)
         {
             return ownedSelectSouls.FirstOrDefault(ownedSoul => 
                     ownedSoul != selectedSoul && IsValidCombination(selectedSoul, ownedSoul));
         }
         
         /// <summary> 2つのソウルカードの組み合わせが有効かどうかを判定する </summary>
-        private bool IsValidCombination(SoulCardMasterData soul1, SoulCardMasterData soul2)
+        private bool IsValidCombination(SoulCardMasterDataTable soul1, SoulCardMasterDataTable soul2)
         {
             return combinations.Any(c => c.IsValidCombination(soul1, soul2));
         }
         
         /// <summary> 特定のソウルカードと組み合わせ可能な組み合わせを探す共通処理 </summary>
-        private SoulCombination FindCompatibleCombination(SoulCardMasterData selectedSoul)
+        private SoulCombination FindCompatibleCombination(SoulCardMasterDataTable selectedSoul)
         {
             // 組み合わせリストから選択されたソウルカードと組み合わせ可能な組み合わせを検索する。
             // 選択されたソウルカードが組み合わせの一方の成分であり、もう一方の成分が選択されたソウルカードでないことを確認する。
@@ -64,20 +64,20 @@ namespace SoulRunProject.SoulMixScene
         }
 
         /// <summary>  選択されたソウルカードが組み合わせに使えるかどうかを判定する </summary>
-        public bool IsSelectedSoul(SoulCardMasterData selectSoul)
+        public bool IsSelectedSoul(SoulCardMasterDataTable selectSoul)
         {
             return FindCompatibleCombination(selectSoul) != null;
         }
 
         /// <summary> 特定のソウルカードと組み合わせ可能なソウルカードのResultを返す </summary>
-        public SoulCardMasterData SearchCombineSoul(SoulCardMasterData selectedSoul)
+        public SoulCardMasterDataTable SearchCombineSoul(SoulCardMasterDataTable selectedSoul)
         {
             var combination = FindCompatibleCombination(selectedSoul);
             return combination?.Result; // null許容型のアクセス演算子を使用
         }
 
         /// <summary> ソウルを合成する </summary>
-        public SoulCardMasterData Combine(SoulCardMasterData selectSoul1, SoulCardMasterData selectSoul2)
+        public SoulCardMasterDataTable Combine(SoulCardMasterDataTable selectSoul1, SoulCardMasterDataTable selectSoul2)
         {
             // 何を作るかを決定する
             SoulCombination combination = combinations.Find(c => 
@@ -88,7 +88,7 @@ namespace SoulRunProject.SoulMixScene
                 return null;
             }
 
-            SoulCardMasterData newSoul = ScriptableObject.CreateInstance<SoulCardMasterData>();
+            SoulCardMasterDataTable newSoul = ScriptableObject.CreateInstance<SoulCardMasterDataTable>();
             // 新しいソウルカードのデータを設定
             //SetData(newSoul, combination.Result);
 
