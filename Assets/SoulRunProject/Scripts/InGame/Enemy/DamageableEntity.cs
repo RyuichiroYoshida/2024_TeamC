@@ -8,7 +8,7 @@ namespace SoulRunProject.InGame
     /// <summary>
     /// 敵や障害物を管理するクラス
     /// </summary>
-    public class DamageableEntity : MonoBehaviour
+    public class DamageableEntity : PooledObject
     {
         [SerializeField, CustomLabel("HP")] float _maxHp = 30;
         [SerializeField, CustomLabel("衝突ダメージ")]
@@ -23,20 +23,17 @@ namespace SoulRunProject.InGame
         HitDamageEffectManager _hitDamageEffectManager;
         FloatReactiveProperty _currentHp = new();
         float _knockBackResistance;
-        readonly Subject<Unit> _finishedSubject = new();
-        public IObservable<Unit> OnFinishedAsync => _finishedSubject.Take(1);
         public Action OnDead;
         public float MaxHp => _maxHp;
         public float CollisionDamage => _collisionDamage;
         public FloatReactiveProperty CurrentHp => _currentHp;
-        public bool IsPooled { get; set; }
 
         void Start()
         {
             Initialize();
         }
 
-        public void Initialize()
+        public override void Initialize()
         {
             _currentHp.Value = _maxHp;
         }
@@ -66,24 +63,16 @@ namespace SoulRunProject.InGame
             }
         }
 
-        public void Finish()
+        public override void OnFinish()
         {
-            if (IsPooled)
-            {
-                OnDead = null;
-                _finishedSubject.OnNext(Unit.Default);
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
+            OnDead = null;
         }
 
         void Death()
         {
             if (_lootTable)
             {
-                ItemDropManager.Instance.Drop(_lootTable, transform.position);
+                ItemDropManager.Instance.RequestDrop(_lootTable, transform.position);
             }
 
             OnDead?.Invoke();
