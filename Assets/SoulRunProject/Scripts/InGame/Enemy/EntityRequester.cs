@@ -17,7 +17,7 @@ namespace SoulRunProject.InGame
         {
             if (_entity != null)
             {
-                EntityPoolManager.Instance.RequestInstance(_entity, transform.position, transform.rotation, transform.parent);
+                ObjectPoolManager.Instance.RequestInstance(_entity, transform.position, transform.rotation, transform.parent);
             }
             Destroy(gameObject);
         }
