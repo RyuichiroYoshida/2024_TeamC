@@ -9,7 +9,7 @@ namespace SoulRunProject.InGame
     /// <summary>
     /// Entityの生成管理クラス
     /// </summary>
-    public class EntitySpawnerController : MonoBehaviour
+    public class EntitySpawnerController : MonoBehaviour, IPausable
     {
         [SerializeField, CustomLabel("生成するEntity")]
         List<DamageableEntity> _fieldEntity;
@@ -32,6 +32,8 @@ namespace SoulRunProject.InGame
         //現状はヒットしたplayerの参照をヒット時に格納する
         PlayerManager _playerManager;
         bool _spawnFlag;
+        bool _pauseFlag;
+        Coroutine _coroutine;
         public ISpawnerEnableType SpawnerType => _spawnerType;
 
         void Start()
@@ -46,10 +48,10 @@ namespace SoulRunProject.InGame
 
         void Update()
         {
-            if (_spawnFlag　|| !_isSpawnerAvailable) return;
+            if (_spawnFlag　|| !_isSpawnerAvailable || _pauseFlag) return;
             if (_spawnerType.IsEnable(_playerManager.transform.position, transform.position))
             {
-                StartCoroutine(SpawnEntity());
+                _coroutine = StartCoroutine(SpawnEntity());
                 _spawnFlag = true;
             }
         }
@@ -88,6 +90,15 @@ namespace SoulRunProject.InGame
                     renderer.flipX = Random.Range(0, 2) == 0;
                 }
             }
+        }
+        public void Pause(bool isPause)
+        {
+            if (isPause)
+            {
+                StopCoroutine(_coroutine);
+            }
+
+            _pauseFlag = isPause;
         }
 
 #if UNITY_EDITOR
