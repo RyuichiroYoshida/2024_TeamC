@@ -13,6 +13,7 @@ namespace SoulRunProject.InGame
         [SerializeField] [CustomLabel("スクロール速度")] private float _scrollSpeed = 5f;
         private bool _isPause;
         public List<FieldSegment> MoveSegments { get; private set; } = new();
+        //public float ScrollSpeed => _scrollSpeed;
         /// <summary>現在空いているタイルの生成数</summary>
         public int FreeMoveSegmentsCount => Mathf.Clamp(_maxSegmentCount - MoveSegments.Count, 0, _maxSegmentCount);
 
