@@ -3509,8 +3509,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c787228e05b4c64b87894f5be52870b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startPos: {x: 0, y: 0, z: -40.152145}
-  _endPos: {x: -4.359659, y: 0, z: 40.36505}
+  _startPos: {x: 0, y: 0, z: 39.91885}
+  _endPos: {x: 0, y: 0, z: -41.898037}
 --- !u!1 &2819453220253650416
 GameObject:
   m_ObjectHideFlags: 0
