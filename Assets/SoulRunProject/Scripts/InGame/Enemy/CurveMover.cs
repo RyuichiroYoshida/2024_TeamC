@@ -30,9 +30,9 @@ namespace SoulRunProject.InGame
         {
             _onceFlag = false;
 
+            _posArr = _posMarkers.Select(target => target.transform.position).ToArray();
             foreach (var item in _posMarkers)
             {
-                _posArr = _posMarkers.Select(target => target.transform.position).ToArray();
                 item.SetActive(false);
             }
         }
