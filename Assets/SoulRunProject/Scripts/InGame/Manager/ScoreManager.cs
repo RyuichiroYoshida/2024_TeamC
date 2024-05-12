@@ -10,12 +10,12 @@ using System.Collections.Generic;
 
 namespace SoulRunProject
 {
-    public class PlayerScoreManager : AbstractSingletonMonoBehaviour<PlayerScoreManager>
+    public class ScoreManager : AbstractSingletonMonoBehaviour<ScoreManager>
     {
         protected override bool UseDontDestroyOnLoad { get; } = false;
         // Start is called before the first frame update
         
-        private IntReactiveProperty _score = new (0);
+        private readonly IntReactiveProperty _score = new (0);
         public IReadOnlyReactiveProperty<int> OnScoreChanged => _score;
 
         public void AddScore(int score)
