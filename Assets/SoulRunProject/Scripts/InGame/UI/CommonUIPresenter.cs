@@ -36,8 +36,8 @@ namespace SoulRunProject.InGame
             _soulSkillManager.CurrentSoul?.Subscribe(current => _view.SetSoulGauge(current, _soulSkillManager.RequiredSoul)).AddTo(_view);
             //TODO: スキル
             //playerManager.OnSkillIconChanged += (index, sprite) => _view.SetSkillIcon(index, sprite);
-            PlayerScoreManager.Instance.OnScoreChanged.Subscribe(score => _view.SetScoreText(score))
-                .AddTo(PlayerScoreManager.Instance);
+            ScoreManager.Instance.OnScoreChanged.Subscribe(score => _view.SetScoreText(score))
+                .AddTo(ScoreManager.Instance);
             Observable.EveryUpdate()
                 .Select(_ => _playerManager.ResourceContainer.Coin)
                 .Subscribe(coin =>
