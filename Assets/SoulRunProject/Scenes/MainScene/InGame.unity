@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.003204829, g: 0.0063439845, b: 0.014498586, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2796,7 +2796,7 @@ MonoBehaviour:
   _stageData:
   - _fieldPatterns:
     - _mode: 0
-      _seconds: 1
+      _seconds: 100
       _fieldSegments:
         List:
         - {fileID: 2752528944075337817, guid: 54942ca6699e8764a8b2eb58690cf15d, type: 3}
@@ -5400,8 +5400,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 20
   _jumpPower: 30
-  _grav: 80
-  _yAxisGroundLine: 1.49
+  _nomalGrav: 25
+  _jumpGrav: 80
+  _DistanceBetweenPivotAndGroundPoint: 1.5
   _xMoveRangeMin: -47
   _xMoveRangeMax: 47
   _canZAxisMovement: 0
