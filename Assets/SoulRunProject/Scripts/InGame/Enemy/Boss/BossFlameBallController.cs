@@ -7,12 +7,13 @@ using UnityEngine;
 
 namespace SoulRunProject.InGame
 {
-    public class BossFlameBallController : MonoBehaviour
+    public class BossFlameBallController : MonoBehaviour , IPausable
     {
         [SerializeField, CustomLabel("炎の床プレハブ")] private BossFlameFloorController _flameFloorPrefab;
         
         private float _flameFloorDamage;
         private Vector3 _lastPosition;
+        private bool _isPause;
         
         public void Initialize(float speed, float flameFloorDamage)
         {
@@ -24,6 +25,8 @@ namespace SoulRunProject.InGame
                 .TakeUntilDestroy(this)
                 .Subscribe(_ =>
                 {
+                    if (_isPause) return;
+                    
                     transform.position += transform.forward * speed * Time.fixedDeltaTime;
                     
                     // 当たり判定
@@ -59,6 +62,11 @@ namespace SoulRunProject.InGame
                 flameFloor.Initialize(_flameFloorDamage);
                 Destroy(gameObject);
             }
+        }
+
+        public void Pause(bool isPause)
+        {
+            _isPause = isPause;
         }
     }
 }
