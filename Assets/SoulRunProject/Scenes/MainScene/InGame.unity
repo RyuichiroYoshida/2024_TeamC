@@ -2800,6 +2800,9 @@ MonoBehaviour:
       _fieldSegments:
         List:
         - {fileID: 2752528944075337817, guid: 54942ca6699e8764a8b2eb58690cf15d, type: 3}
+        - {fileID: 1607657496594533194, guid: e0155a48b9a698543969ba48d5cc2648, type: 3}
+        - {fileID: 4565359466753811006, guid: f68f9faef7de264428c2fa60a75b6895, type: 3}
+        - {fileID: 5633894702588768396, guid: 45c01253160740348937b092aa04dddf, type: 3}
       _adjacentGraph: {fileID: 0}
     _bossStageField: {fileID: 3829013865918829885, guid: 9ebc2cb807cc7794d8b095da4e18832a,
       type: 3}
