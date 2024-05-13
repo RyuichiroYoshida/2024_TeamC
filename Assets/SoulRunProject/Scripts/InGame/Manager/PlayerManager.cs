@@ -24,12 +24,12 @@ namespace SoulRunProject.Common
         private SoulSkillManager _soulSkillManager;
         private PlayerMovement _playerMovement;
         private HitDamageEffectManager _hitDamageEffectManager;
-        private PlayerStatusManager _statusManager;
+        //private PlayerStatusManager _statusManager;
         private PlayerResourceContainer _resourceContainer;
-        public FloatReactiveProperty CurrentHp => _statusManager.CurrentHp;
+        public ReadOnlyReactiveProperty<float> CurrentHp => CurrentStatus.CurrentHpProperty;
         public PlayerResourceContainer ResourceContainer => _resourceContainer;
-        public PlayerStatusManager PlayerStatusManager => _statusManager;
-        public Status CurrentStatus => _statusManager.CurrentStatus;
+        //public PlayerStatusManager PlayerStatusManager => _statusManager;
+        public Status CurrentStatus { get; private set; }
         /// <summary>ダメージを無効化出来るかどうかの条件を格納するリスト</summary>
         public List<Func<bool>> IgnoreDamagePredicates { get; } = new();
 
@@ -42,7 +42,8 @@ namespace SoulRunProject.Common
             _playerMovement = GetComponent<PlayerMovement>();
             _hitDamageEffectManager = GetComponent<HitDamageEffectManager>();
             _resourceContainer = new();
-            _statusManager = new PlayerStatusManager(_baseStatus.Status);
+            //_statusManager = new PlayerStatusManager(_baseStatus.Status);
+            CurrentStatus = new Status(_baseStatus.Status);
             
             InitializeInput();
         }
@@ -90,11 +91,7 @@ namespace SoulRunProject.Common
             }
             
             _playerCamera.DamageCam();
-            
-            if (_statusManager.Damage(damage))
-            {
-                Death();
-            }
+            CurrentStatus.CurrentHp -= Calculator.CalcDamage(damage, CurrentStatus.Defence, 0, 1);
             
             // 白色点滅メソッド
             _hitDamageEffectManager.HitFadeBlinkWhite();
@@ -103,7 +100,7 @@ namespace SoulRunProject.Common
 
         public void Heal(float value)
         {
-            _statusManager.Heal(value);
+            CurrentStatus.CurrentHp += value;
         }
 
         /// <summary>
@@ -135,7 +132,7 @@ namespace SoulRunProject.Common
             _soulSkillManager.SetSoulSkill(soulSkillType);
         }
         
-        private void AddSoul(float soul)
+        public void AddSoul(float soul)
         {
             _soulSkillManager.AddSoul(soul);
         }
