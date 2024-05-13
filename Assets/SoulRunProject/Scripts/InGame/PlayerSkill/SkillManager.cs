@@ -87,6 +87,7 @@ namespace SoulRunProject.InGame
             }
         }
 
+        #if  UNITY_EDITOR
         [CustomEditor(typeof(SkillManager))]
         public class SkillManagerEditor : Editor
         {
@@ -121,5 +122,6 @@ namespace SoulRunProject.InGame
                 EditorGUILayout.EndFoldoutHeaderGroup();
             }
         }
+        #endif
     }
 }
