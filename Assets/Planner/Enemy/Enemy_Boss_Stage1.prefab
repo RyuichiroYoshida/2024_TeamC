@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ef424d786b4ebd4ea7ddc1567786d35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHp: 150
+  _maxHp: 800
   _collisionDamage: 0
   _direction: {x: 0, y: 1, z: 1}
   _takeKnockBack:
@@ -163,8 +163,8 @@ MonoBehaviour:
         _startImpactPosition: {x: 12, y: 1.5, z: 0}
         _finishImpactPosition: {x: -12, y: 1.5, z: 0}
         _beamTime: 2.5
-        _damage: 1
-        _hitCount: 1
+        _damage: 15
+        _hitCount: 2
         _powerUpBehaviors:
         - rid: 1007957575041548385
     - rid: 7007908318245552135
@@ -178,8 +178,8 @@ MonoBehaviour:
         _actionTime: 6
         _flameBallSpeed: 10
         _flameBallNum: 10
-        _flameDamage: 1
-        _deviationDistance: 30
+        _flameDamage: 5
+        _deviationDistance: 20
         _flameBallAccuracy: 0
         _powerUpBehaviors:
         - rid: 1007957575041548371

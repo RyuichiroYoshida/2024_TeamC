@@ -77,7 +77,7 @@ namespace SoulRunProject.InGame
         {
             if (_lootTable)
             {
-                ItemDropManager.Instance.RequestDrop(_lootTable, transform.position);
+                DropManager.Instance.RequestDrop(_lootTable, transform.position);
             }
 
             OnDead?.Invoke();
