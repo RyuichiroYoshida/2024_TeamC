@@ -10,7 +10,7 @@ namespace SoulRunProject.InGame
     [Serializable, Name("カーブ移動")]
     public class CurveMover : EntityMover
     {
-        [SerializeField,CustomLabel("移動時間")] float _moveSpeed;
+        //[SerializeField,CustomLabel("移動時間")] float _moveSpeed;
         [SerializeField, CustomLabel("経由地点")] List<GameObject> _posMarkers;
 
         [SerializeField, CustomLabel("終了地点と始点を繋げる")]
