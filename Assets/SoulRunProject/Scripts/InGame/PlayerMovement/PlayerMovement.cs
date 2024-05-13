@@ -37,6 +37,8 @@ namespace SoulRunProject.InGame
 
         public BoolReactiveProperty IsGround => _isGround;
         public event Action OnJumped;
+        /// <summary> プレイヤー地点の地面の高さ </summary>
+        public float GroundHeight => _yAxisGroundLine;
 
         private void Awake()
         {
