@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0019524717, g: 0.003835365, b: 0.008846895, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2348,7 +2348,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.504717, g: 0.6103775, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 2.32
   m_Range: 10
   m_SpotAngle: 30
@@ -2984,9 +2984,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 342fd8d87ed91b84f80c0ffc379a1d5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _preloadCount: 5
-  _threshold: 5
-  _useDontDestroyOnLoad: 0
 --- !u!114 &1174502022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2999,8 +2996,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fffaba4efc1d1b49b61acc970f88722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _preloadCount: 5
-  _threshold: 5
 --- !u!114 &1174502023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3704,7 +3699,6 @@ MonoBehaviour:
   _playerInput: {fileID: 1420106445}
   _baseStatus: {fileID: 11400000, guid: d50a16b38666d804883e3040b335a638, type: 2}
   _playerCamera: {fileID: 165873042}
-  MaxHp: 0
 --- !u!114 &1420106445
 MonoBehaviour:
   m_ObjectHideFlags: 0
