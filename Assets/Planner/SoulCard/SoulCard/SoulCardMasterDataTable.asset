@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SoulCardMasterDataTable
   m_EditorClassIdentifier: 
   DataTable:
-  - _cardID: 1
+  - _cardID: 0
     _imageName: wolf
     _soulName: Wol
     _description: "\u3042\u3042\u3042\u3042"
@@ -61,7 +61,7 @@ MonoBehaviour:
     _criticalDamageRate: 0.3333
     _soulAbsorption: 0.3333
     _soulAcquisition: 0.3333
-  - _cardID: 1
+  - _cardID: 2
     _imageName: wolf
     _soulName: Wol
     _description: "\u3042\u3042\u3042\u3042"

@@ -26,18 +26,18 @@ namespace SoulRunProject.InGame
 
         public void Start()
         {
-            _playerManager.PlayerStatusManager.CurrentHp.Subscribe(hp =>
+            _playerManager.CurrentHp.Subscribe(hp =>
             {
                 DebugClass.Instance.ShowLog(hp.ToString());
-                _view.SetHpGauge(hp, _playerManager.CurrentStatus.Hp);
+                _view.SetHpGauge(hp, _playerManager.CurrentStatus.MaxHp);
             }).AddTo(_view);
             _playerLevelManager.OnCurrentExpChanged.Subscribe(exp => _view.SetExpGauge(exp, _playerLevelManager.CurrentExpToNextLevel)).AddTo(_view);
             _playerLevelManager.OnLevelUp.Subscribe(level => _view.SetLevelText(level)).AddTo(_view);
             _soulSkillManager.CurrentSoul?.Subscribe(current => _view.SetSoulGauge(current, _soulSkillManager.RequiredSoul)).AddTo(_view);
             //TODO: スキル
             //playerManager.OnSkillIconChanged += (index, sprite) => _view.SetSkillIcon(index, sprite);
-            PlayerScoreManager.Instance.OnScoreChanged.Subscribe(score => _view.SetScoreText(score))
-                .AddTo(PlayerScoreManager.Instance);
+            ScoreManager.Instance.OnScoreChanged.Subscribe(score => _view.SetScoreText(score))
+                .AddTo(ScoreManager.Instance);
             Observable.EveryUpdate()
                 .Select(_ => _playerManager.ResourceContainer.Coin)
                 .Subscribe(coin =>

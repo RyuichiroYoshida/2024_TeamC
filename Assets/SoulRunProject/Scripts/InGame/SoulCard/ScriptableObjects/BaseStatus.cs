@@ -1,5 +1,6 @@
 ﻿using System;
 using SoulRunProject.Common;
+using UniRx;
 using UnityEngine;
 
 namespace SoulRunProject.SoulMixScene
@@ -31,9 +32,13 @@ namespace SoulRunProject.SoulMixScene
         [SerializeField, CustomLabel("ソウル吸収力")] private float _soulAbsorption;
         [SerializeField, CustomLabel("ソウル獲得率")] private float _soulAcquisition;
 
+        private FloatReactiveProperty _currentHp = new();
+        public ReadOnlyReactiveProperty<float> CurrentHpProperty => _currentHp.ToReadOnlyReactiveProperty();
+
         public Status(float hp, int attack, int defence, float coolTime, float skillSize, float bulletSpeed, float effectTime, int bulletNum, float penetration, float moveSpeed, float growthSpeed, float luck, float criticalRate, float criticalDamageRate, float soulAbsorption, float soulAcquisition)
         {
             _hp = hp;
+            _currentHp.Value = _hp;
             _attack = attack;
             _defence = defence;
             _coolTime = coolTime;
@@ -53,7 +58,8 @@ namespace SoulRunProject.SoulMixScene
 
         public Status(Status status)
         {
-            _hp = status.Hp;
+            _hp = status.MaxHp;
+            _currentHp.Value = _hp;
             _attack = status.Attack;
             _defence = status.Defence;
             _coolTime = status.CoolTime;
@@ -71,11 +77,31 @@ namespace SoulRunProject.SoulMixScene
             _soulAcquisition = status.SoulAcquisition;
         }
 
-        /// <summary> Hp </summary> 
-        public float Hp
+        /// <summary> 最大Hp </summary> 
+        public float MaxHp
         {
             get => _hp;
-            set => _hp = Mathf.Max(value, 0f); // HPは0未満にならないように制限
+            set
+            {
+                float diff = value - _hp;
+                _hp = Mathf.Max(value, 0f); // HPは0未満にならないように制限
+                
+                if (diff > 0) // 最大hpが増えた場合は現在hpも同じだけ増える
+                {
+                    CurrentHp += diff;
+                }
+                else
+                {
+                    CurrentHp = _currentHp.Value; // 減った場合は最大値を超えないように更新する
+                }
+            }
+        }
+
+        /// <summary> 現在HP </summary>
+        public float CurrentHp
+        {
+            get => _currentHp.Value;
+            set => _currentHp.Value = Mathf.Clamp(value, 0, _hp);
         }
 
         /// <summary> 攻撃力 </summary> 
