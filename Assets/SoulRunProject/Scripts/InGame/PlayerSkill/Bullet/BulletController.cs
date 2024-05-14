@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace SoulRunProject.InGame
 {
-    public class BulletController : MonoBehaviour
+    public class BulletController : PooledObject
     {
         [SerializeField] bool _useFirePointRotation;
         [SerializeField] bool _useFlash;
@@ -25,8 +25,7 @@ namespace SoulRunProject.InGame
         float _speed;
         int _penetration;
         int _hitCount;
-        readonly Subject<Unit> _finishedSubject = new();
-        public IObservable<Unit> OnFinishedAsync => _finishedSubject.Take(1);
+        private GiveKnockBack _giveKnockBack;
         public void Awake()
         {
             if (_light != null)
@@ -34,13 +33,18 @@ namespace SoulRunProject.InGame
             _collider.enabled = false;
             _particleSystem.Stop();
         }
-        public void Initialize(ProjectileSkillParameter param, float playerForwardMoveSpeed)
+
+        public void ApplyParameter(ProjectileSkillParameter param)
         {
             _lifeTime = param.LifeTime;
             _attackDamage = param.AttackDamage;
             _range = param.Range;
-            _speed = param.Speed + playerForwardMoveSpeed;
+            _speed = param.Speed;
             _penetration = param.Penetration;
+            _giveKnockBack = param.KnockBack;
+        }
+        public override void Initialize()
+        {
             _hitCount = 0;
             transform.localScale = new Vector3(_range, _range, _range);
             this.FixedUpdateAsObservable()
@@ -85,9 +89,9 @@ namespace SoulRunProject.InGame
 
         void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.TryGetComponent(out FieldEntityController entity))
+            if (other.gameObject.TryGetComponent(out DamageableEntity entity))
             {
-                entity.Damage((int)_attackDamage);
+                entity.Damage(_attackDamage , in _giveKnockBack);
                 _hitCount++;
                 if (_hitCount > _penetration)
                 {
@@ -96,7 +100,7 @@ namespace SoulRunProject.InGame
             }
         }
 
-        void OnHit(Collider other)
+        protected void OnHit(Collider other)
         {
             var closestPoint = other.ClosestPoint(transform.position);
             var normal = transform.position - closestPoint;
@@ -132,10 +136,11 @@ namespace SoulRunProject.InGame
                     Destroy(hitInstance, hitPsParts.main.duration);
                 }
             }
-            Finish();
+
+            StartFinish();
         }
 
-        void Finish()
+        void StartFinish()
         {
             _collider.enabled = false;
             if (_light != null)
@@ -157,21 +162,16 @@ namespace SoulRunProject.InGame
                         {
                             TouchCall(detachedPrefab);
                         }
-                        _finishedSubject.OnNext(Unit.Default);
+                        Finish();
                     });
             }
             else
             {
-                _finishedSubject.OnNext(Unit.Default);
+                Finish();
             }
         }
 
-        void OnDestroy()
-        {
-            _finishedSubject.Dispose();
-        }
-
-        void TouchCall(GameObject detachedPrefab) //  弾が当たった時に一定時間待ってObjectPoolに入った自身のtransformに戻す
+        protected virtual void TouchCall(GameObject detachedPrefab) //  弾が当たった時に一定時間待ってObjectPoolに入った自身のtransformに戻す
         {
             detachedPrefab.transform.SetParent(transform);
             detachedPrefab.transform.position = transform.position;

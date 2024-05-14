@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using SoulRunProject.Common;
 using UniRx;
 using UniRx.Triggers;
 using UnityEditor;
@@ -11,7 +12,7 @@ namespace SoulRunProject.InGame
     /// プレイヤー移動
     /// </summary>
     [RequireComponent(typeof(Rigidbody))]
-    public class PlayerMovement : MonoBehaviour, IInGameTime
+    public class PlayerMovement : MonoBehaviour, IPlayerPausable
     {
         [SerializeField] private float _moveSpeed;
         [SerializeField] private float _jumpPower;
@@ -28,6 +29,7 @@ namespace SoulRunProject.InGame
         private readonly BoolReactiveProperty _isGround = new BoolReactiveProperty(true);
         private Vector3 _playerVelocity;
         private bool _inPause;
+        private int _spinIndex;
 
         public BoolReactiveProperty IsGround => _isGround;
         public event Action OnJumped;
@@ -39,6 +41,8 @@ namespace SoulRunProject.InGame
 
             _isGround.AddTo(this);
             this.OnDestroyAsObservable().Subscribe(_ => OnJumped = null);
+            _spinIndex = CriAudioManager.Instance.PlaySE(CriAudioManager.CueSheet.Se, "SE_Spin");
+            CriAudioManager.Instance.PauseSE(_spinIndex);
         }
 
         private void Update()
@@ -78,6 +82,7 @@ namespace SoulRunProject.InGame
             if (_isGround.Value)
             {
                 _playerVelocity.y = _jumpPower;
+                CriAudioManager.Instance.PlaySE(CriAudioManager.CueSheet.Se, "SE_Jump");
                 OnJumped?.Invoke();
             }
         }
@@ -89,19 +94,31 @@ namespace SoulRunProject.InGame
                 Vector3 pos = transform.position;
                 pos.y = _yAxisGroundLine;
                 transform.position = pos;
+
+                if (!_isGround.Value)
+                {
+                    CriAudioManager.Instance.PlaySE(CriAudioManager.CueSheet.Se, "SE_Landing");
+                    CriAudioManager.Instance.PauseSE(_spinIndex);
+                }
+                
                 _isGround.Value = true;
             }
             else
             {
+                if (_isGround.Value)
+                {
+                    CriAudioManager.Instance.ResumeSE(_spinIndex);
+                }
+                
                 _isGround.Value = false;
             }
         }
 
-        public void SwitchPause(bool toPause)
+        public void Pause(bool isPause)
         {
-            _inPause = toPause;
+            _inPause = isPause;
             
-            if (toPause)
+            if (isPause)
             {
                 _rb.Sleep();
             }
@@ -174,6 +191,15 @@ namespace SoulRunProject.InGame
             // {
             //     transform.DORotate(new Vector3(transform.rotation.x, 0, transform.rotation.y), _rotateTime);
             // }
+        }
+
+        /// <summary>
+        /// プレイヤーの足音再生
+        /// AnimationEventから呼び出される
+        /// </summary>
+        public void PlayRumSound()
+        {
+            CriAudioManager.Instance.PlaySE(CriAudioManager.CueSheet.Se, "SE_Run");
         }
         
         #if UNITY_EDITOR

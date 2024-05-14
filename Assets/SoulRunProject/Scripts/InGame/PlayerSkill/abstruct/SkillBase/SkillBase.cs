@@ -22,15 +22,18 @@ namespace SoulRunProject.Common
     /// </summary>
     [Serializable]
     [Name("スキルの基底クラス")]
-    public abstract class SkillBase : ScriptableObject, IInGameTime
+    public abstract class SkillBase : ScriptableObject, IPausable
     {
-        [SerializeField] PlayerSkill _skillType;
-        [SerializeField] [Header("スキルの最大レベル")] public int MaxSkillLevel = 5;
+        [SerializeField, HideInInspector] PlayerSkill _skillType;
+        [SerializeField, HideInInspector] private string _skillName;
+        [SerializeField, HideInInspector] private string _explanatoryText;
+        [SerializeField, HideInInspector] private Sprite _skillIcon;
+        [SerializeField, HideInInspector] public int MaxSkillLevel = 5;
 
-        [SerializeField] [Header("レベルアップイベントデータ")]
+        [SerializeField, HideInInspector]
         protected SkillLevelUpEvent SkillLevelUpEvent;
 
-        [SerializeReference]
+        [SerializeReference, CustomLabel("スキルパラメーター")]
         protected ISkillParameter _skillParam;
 
         protected bool _isPause;
@@ -38,10 +41,30 @@ namespace SoulRunProject.Common
         int _currentLevel = 1;
 
         public PlayerSkill SkillType => _skillType;
-        
+        public string SkillName => _skillName;
+        public string ExplanatoryText => _explanatoryText;
+        public Sprite SkillIcon => _skillIcon;
+        public int CurrentLevel => _currentLevel;
+
+        private int _elementCount;
+        private void OnValidate()
+        {
+            int currentElementCount = SkillLevelUpEvent.LevelUpType.LevelUpEventListList.Count;
+            if (_elementCount != currentElementCount)
+            {
+                if (_elementCount < currentElementCount)
+                {
+                    Debug.Log("RefreshElement");
+                    SkillLevelUpEvent.LevelUpType.RefreshElement();
+                }
+                _elementCount = currentElementCount;
+            }
+        }
+
         void OnEnable()
         {
             SceneManager.sceneLoaded += OnSceneLoaded;
+            _elementCount = SkillLevelUpEvent.LevelUpType.LevelUpEventListList.Count;
         }
 
         void OnDisable()
@@ -98,13 +121,14 @@ namespace SoulRunProject.Common
             }
         }
 
-        public void SwitchPause(bool toPause)
+        public void Pause(bool isPause)
         {
-            _isPause = toPause;
-            OnSwitchPause(toPause);
+            _isPause = isPause;
+            OnSwitchPause(isPause);
         }
         protected virtual void OnSwitchPause(bool toPause){}
     }
+    #if UNITY_EDITOR
     /// <summary>
     /// エラーを出さないためのエディタ拡張クラス、SKillBaseクラスの派生クラスにも適応される
     /// https://forum.unity.com/threads/nullreferenceexception-serializedobject-of-serializedproperty-has-been-disposed.1431907/
@@ -112,10 +136,45 @@ namespace SoulRunProject.Common
     [CustomEditor(typeof(SkillBase), true)]
     public class SkillBaseEditor : Editor
     {
+        private SerializedProperty _skillTypeProperty;
+        private SerializedProperty _nameProperty;
+        private SerializedProperty _explanatoryProperty;
+        private SerializedProperty _iconProperty;
+        private SerializedProperty _levelUpEventListListProperty;
+
+        private int _levelUpListLastIndex;
+        private void OnEnable()
+        {
+            _skillTypeProperty = serializedObject.FindProperty("_skillType");
+            _nameProperty = serializedObject.FindProperty("_skillName");
+            _explanatoryProperty = serializedObject.FindProperty("_explanatoryText");
+            _iconProperty = serializedObject.FindProperty("_skillIcon");
+            _levelUpEventListListProperty =
+                serializedObject.FindProperty("SkillLevelUpEvent._levelUpType._levelUpEventListList");
+            _levelUpListLastIndex = _levelUpEventListListProperty.arraySize - 1;
+        }
+
         public override void OnInspectorGUI()
         {
-            serializedObject.ApplyModifiedProperties();
+            serializedObject.Update();
             base.OnInspectorGUI();
+            //enumの入力
+            _skillTypeProperty.enumValueIndex = 
+                (int)(PlayerSkill)EditorGUILayout.EnumPopup("スキルタイプ", (PlayerSkill)_skillTypeProperty.enumValueIndex);
+            EditorGUILayout.Space(10);
+            EditorGUILayout.LabelField("-----スキル情報-----");
+            EditorGUILayout.PropertyField(_nameProperty, new GUIContent("スキル名"), true);
+            EditorGUILayout.LabelField("スキル説明文");
+            _explanatoryProperty.stringValue =
+                EditorGUILayout.TextArea(_explanatoryProperty.stringValue);
+            EditorGUILayout.PropertyField(_iconProperty, new GUIContent("スキルアイコン"), true);
+            EditorGUILayout.Space(10);
+            EditorGUILayout.LabelField("-----スキル性能-----");
+            // ExampleCustomList list = new ExampleCustomList(_levelUpEventListListProperty);
+            // list.DoLayoutList();
+            EditorGUILayout.PropertyField(_levelUpEventListListProperty, new GUIContent("レベルアップデータ") , true);
+            serializedObject.ApplyModifiedProperties();
         }
     }
+    #endif
 }

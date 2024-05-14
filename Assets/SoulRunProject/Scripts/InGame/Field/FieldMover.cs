@@ -1,69 +1,58 @@
-using System;
 using System.Collections.Generic;
-using UniRx;
-using UniRx.Triggers;
+using SoulRunProject.Common;
 using UnityEngine;
 
-namespace SoulRunProject.InGame.Field
+namespace SoulRunProject.InGame
 {
     /// <summary>
-    /// フィールドを動かすクラス
+    ///     フィールドを動かすクラス
     /// </summary>
-    public class FieldMover : MonoBehaviour
+    public class FieldMover : MonoBehaviour, IPausable
     {
-        [SerializeField] [Tooltip("フィールドのデータ")] FieldData _fieldData;
-        [SerializeField] [Tooltip("スクロール速度")] float _scrollSpeed = 5f;
-        [SerializeField] [Tooltip("実行時にマップを生成するかどうか")]
-        bool _playOnAwake = true;
-        /// <summary>UpdateAsObservableをDisposeするためのリスト</summary>
-        readonly List<IDisposable> _subscriptions = new();
+        [SerializeField] [CustomLabel("最大タイル数")] private int _maxSegmentCount = 5;
+        [SerializeField] [CustomLabel("スクロール速度")] private float _scrollSpeed = 5f;
+        private bool _isPause;
+        public List<FieldSegment> MoveSegments { get; private set; } = new();
+        /// <summary>現在空いているタイルの生成数</summary>
+        public int FreeMoveSegmentsCount => Mathf.Clamp(_maxSegmentCount - MoveSegments.Count, 0, _maxSegmentCount);
 
-        /// <summary>マップのスクロールが止まるべき場所</summary>
-        Vector3 _endPosition;
-
-        /// <summary>スクロール速度</summary>
         public float ScrollSpeed
         {
             get => _scrollSpeed;
             set => _scrollSpeed = value;
         }
 
-        void Awake()
+        private void Update()
         {
-            if (_playOnAwake) CreateField();
-        }
-
-        /// <summary>
-        /// マップをスクロールさせるためのメソッド
-        /// </summary>
-        void UpdateMapPosition(Unit _)
-        {
-            var current = transform.position;
-            if (_endPosition.z > current.z)
+            if (_isPause) return;
+            List<FieldSegment> list = new();
+            //  フィールドタイル移動処理
+            for (var i = 0; i < MoveSegments.Count; i++)
             {
-                current.z += _scrollSpeed * Time.deltaTime;
-                transform.position = current;
-            }
-            else
-            {
-                _subscriptions.ForEach(s => s.Dispose());
-            }
-        }
-        /// <summary>
-        /// フィールドを生成する
-        /// </summary>
-        public void CreateField()
-        {
-            var prevPos = Vector3.zero;
-            foreach (var datum in _fieldData.FieldParts)
-            {
-                var parts = Instantiate(datum, transform);
-                parts.transform.position = prevPos;
-                prevPos = parts.EndAnchor.position;
+                MoveSegments[i].transform.position += Vector3.back * (_scrollSpeed * Time.deltaTime);
+                //  FieldMoverのz座標より後ろに行ったら消す
+                if (MoveSegments[i].transform.TransformPoint(MoveSegments[i].EndPos).z < transform.position.z)
+                {
+                    foreach (var entity in MoveSegments[i].transform.GetComponentsInChildren<DamageableEntity>())
+                    {
+                        entity.Finish();
+                    }
+                    //  破棄する。
+                    Destroy(MoveSegments[i].gameObject);
+                }
+                else
+                {
+                    list.Add(MoveSegments[i]);
+                }
             }
 
-            _endPosition = new Vector3(Math.Abs(prevPos.x), Math.Abs(prevPos.y), Math.Abs(prevPos.z));
-            //this.UpdateAsObservable().Subscribe(UpdateMapPosition).AddTo(_subscriptions);
+            //  Destroyした要素を取り除く
+            MoveSegments = list;
+        }
+
+        public void Pause(bool isPause)
+        {
+            _isPause = isPause;
         }
     }
 }

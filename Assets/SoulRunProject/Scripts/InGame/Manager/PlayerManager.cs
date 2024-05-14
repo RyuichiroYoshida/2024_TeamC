@@ -12,37 +12,37 @@ namespace SoulRunProject.Common
     /// プレイヤーを管理するクラス
     /// </summary>
     [RequireComponent(typeof(HitDamageEffectManager))]
-    public class PlayerManager : MonoBehaviour
+    public class PlayerManager : MonoBehaviour , IPausable
     {
         [SerializeField] private PlayerInput _playerInput;
-        [SerializeField] private Status _status;
+        [SerializeField] private BaseStatus _baseStatus;
         [SerializeField] private PlayerCamera _playerCamera;
         
-        private IInGameTime[] _inGameTimes;
+        private IPlayerPausable[] _inGameTimes;
         private PlayerLevelManager _pLevelManager;
         private SkillManager _skillManager;
         private SoulSkillManager _soulSkillManager;
         private PlayerMovement _playerMovement;
         private HitDamageEffectManager _hitDamageEffectManager;
+        private PlayerStatusManager _statusManager;
         private PlayerResourceContainer _resourceContainer;
-        public FloatReactiveProperty CurrentHp { get; private set; }
+        public FloatReactiveProperty CurrentHp => _statusManager.CurrentHp;
         public PlayerResourceContainer ResourceContainer => _resourceContainer;
-        public float MaxHp => _status.Hp;
-        public Status CurrentStatus => _status;
+        public PlayerStatusManager PlayerStatusManager => _statusManager;
+        public Status CurrentStatus => _statusManager.CurrentStatus;
         /// <summary>ダメージを無効化出来るかどうかの条件を格納するリスト</summary>
         public List<Func<bool>> IgnoreDamagePredicates { get; } = new();
 
         private void Awake()
         {
-            _status = _status.Copy();
-            CurrentHp = new FloatReactiveProperty(_status.Hp);
-            _inGameTimes = GetComponents<IInGameTime>();
+            _inGameTimes = GetComponents<IPlayerPausable>();
             _pLevelManager = GetComponent<PlayerLevelManager>();
             _skillManager = GetComponent<SkillManager>();
             _soulSkillManager = GetComponent<SoulSkillManager>();
             _playerMovement = GetComponent<PlayerMovement>();
             _hitDamageEffectManager = GetComponent<HitDamageEffectManager>();
             _resourceContainer = new();
+            _statusManager = new PlayerStatusManager(_baseStatus.Status);
             
             InitializeInput();
         }
@@ -62,11 +62,11 @@ namespace SoulRunProject.Common
         /// Pauseの切替
         /// </summary>
         /// <param name="toPause"></param>
-        public void SwitchPause(bool toPause)
+        public void Pause(bool toPause)
         {
             foreach (var inGameTime in _inGameTimes)
             {
-                inGameTime.SwitchPause(toPause);
+                inGameTime.Pause(toPause);
             }
         }
 
@@ -79,7 +79,7 @@ namespace SoulRunProject.Common
             _pLevelManager.AddExp(exp);
         }
         
-        public void Damage(int damage)
+        public void Damage(float damage)
         {
             foreach (var predicate in IgnoreDamagePredicates.Where(cond=> cond != null))
             {
@@ -88,14 +88,22 @@ namespace SoulRunProject.Common
                     return;
                 }
             }
-            CurrentHp.Value -= damage;
+            
             _playerCamera.DamageCam();
-            if (CurrentHp.Value <= 0)
+            
+            if (_statusManager.Damage(damage))
             {
                 Death();
             }
+            
             // 白色点滅メソッド
             _hitDamageEffectManager.HitFadeBlinkWhite();
+            CriAudioManager.Instance.PlaySE(CriAudioManager.CueSheet.Se, "SE_Damage");
+        }
+
+        public void Heal(float value)
+        {
+            _statusManager.Heal(value);
         }
 
         /// <summary>
@@ -113,14 +121,6 @@ namespace SoulRunProject.Common
             //SwitchPause(true);
         }
 
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.gameObject.TryGetComponent(out FieldEntityController fieldEntityController))
-            {
-                Damage(fieldEntityController.Status.Attack);
-            }
-        }
-
         #region SoulSkill関連
         /// <summary>
         /// SoulSkillを使用する
@@ -130,9 +130,9 @@ namespace SoulRunProject.Common
             _soulSkillManager.UseSoulSkill();
         }
         
-        public void SetSoul(SoulSkillBase soul)
+        public void SetSoulSkill(SoulSkillType soulSkillType)
         {
-            _soulSkillManager.SetSoulSkill(soul);
+            _soulSkillManager.SetSoulSkill(soulSkillType);
         }
         
         private void AddSoul(float soul)
@@ -141,5 +141,6 @@ namespace SoulRunProject.Common
         }
 
         #endregion
+        
     }
 }
