@@ -74,6 +74,7 @@ namespace SoulRunProject.Common
 
         void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
         {
+            Register();
             InitializeParamOnSceneLoaded();
         }
 
@@ -119,6 +120,16 @@ namespace SoulRunProject.Common
             {
                 Debug.LogError("レベル上限を超えています。");
             }
+        }
+
+        public void Register()
+        {
+            PauseManager.Instance.RegisterPausableObject(this);
+        }
+
+        public void UnRegister()
+        {
+            PauseManager.Instance.UnRegisterPausableObject(this);
         }
 
         public void Pause(bool isPause)

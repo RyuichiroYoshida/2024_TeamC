@@ -26,7 +26,7 @@ namespace SoulRunProject
         {
             DebugClass.Instance.ShowLog("ポーズステート開始");
             //停止させる仕組み自体は共通だが、こちらのステートに移行する際にはポーズUIを表示する。
-            PauseManager.Pause(true);
+            PauseManager.Instance.Pause(true);
             _lastState = currentState;
             _cts = new CancellationTokenSource();
             
