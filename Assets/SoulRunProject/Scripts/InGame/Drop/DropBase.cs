@@ -19,7 +19,7 @@ namespace SoulRunProject.InGame
         private bool _isPause;
         private PlayerManager _player;
         private FieldMover _fieldMover;
-
+        
         /// <summary>プレイヤーがドロップ品を拾った時に呼ぶ処理</summary>
         protected abstract void PickUp(PlayerManager playerManager);
 

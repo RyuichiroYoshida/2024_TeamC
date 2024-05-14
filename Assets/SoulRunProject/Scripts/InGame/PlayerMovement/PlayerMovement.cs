@@ -1,5 +1,4 @@
 using System;
-using DG.Tweening;
 using SoulRunProject.Common;
 using UniRx;
 using UniRx.Triggers;
@@ -16,8 +15,9 @@ namespace SoulRunProject.InGame
     {
         [SerializeField] private float _moveSpeed;
         [SerializeField] private float _jumpPower;
-        [SerializeField] private float _grav;
-        [SerializeField] private float _yAxisGroundLine = 0;
+        [SerializeField] private float _nomalGrav;
+        [SerializeField] private float _jumpGrav;
+        [SerializeField, CustomLabel("Pivotと接地点との距離")] private float _DistanceBetweenPivotAndGroundPoint;
         [SerializeField, HideInInspector] private float _xMoveRangeMin;
         [SerializeField, HideInInspector] private float _xMoveRangeMax;
         [SerializeField, HideInInspector] private bool _canZAxisMovement;
@@ -27,7 +27,11 @@ namespace SoulRunProject.InGame
 
         private Rigidbody _rb;
         private readonly BoolReactiveProperty _isGround = new BoolReactiveProperty(true);
+        private bool _useJumpGrav;
+        private float Grav => _useJumpGrav? _jumpGrav : _nomalGrav;
         private Vector3 _playerVelocity;
+        private float _onFieldVelocityY; // フィールドに沿った場合のｙ速度
+        private float _yAxisGroundLine;
         private bool _inPause;
         private int _spinIndex;
 
@@ -59,11 +63,11 @@ namespace SoulRunProject.InGame
             
             if (_isGround.Value && _playerVelocity.y <= 0)
             {
-                _playerVelocity.y = 0;
+                _playerVelocity.y = _onFieldVelocityY - Grav;
             }
             else
             {
-                _playerVelocity.y -= _grav * Time.fixedDeltaTime;
+                _playerVelocity.y -= Grav * Time.fixedDeltaTime;
             }
         }
 
@@ -82,34 +86,47 @@ namespace SoulRunProject.InGame
             if (_isGround.Value)
             {
                 _playerVelocity.y = _jumpPower;
+                _useJumpGrav = true;
                 CriAudioManager.Instance.PlaySE(CriAudioManager.CueSheet.Se, "SE_Jump");
                 OnJumped?.Invoke();
             }
         }
 
+        /// <summary>
+        /// 地面を検出してpositionと音を調整する
+        /// </summary>
         private void GroundCheck()
         {
-            if (transform.position.y <= _yAxisGroundLine)
+            // 地面の検出
+            RaycastHit[] hits = Physics.RaycastAll(transform.position + Vector3.up * 10, Vector3.down);
+
+            foreach (var hit in hits)
+            {
+                if (hit.transform.TryGetComponent(out FieldSegment field))
+                {
+                    _yAxisGroundLine = hit.point.y;
+                    _onFieldVelocityY = Vector3.ProjectOnPlane(Vector3.forward * 100, hit.normal).y; // todo プレイヤーのスピードを参照する
+                    break;
+                }
+            }
+            
+            if (transform.position.y <= _yAxisGroundLine + _DistanceBetweenPivotAndGroundPoint)
             {
                 Vector3 pos = transform.position;
-                pos.y = _yAxisGroundLine;
+                pos.y = _yAxisGroundLine + _DistanceBetweenPivotAndGroundPoint;
                 transform.position = pos;
 
                 if (!_isGround.Value)
                 {
                     CriAudioManager.Instance.PlaySE(CriAudioManager.CueSheet.Se, "SE_Landing");
                     CriAudioManager.Instance.PauseSE(_spinIndex);
+                    _isGround.Value = true;
+                    _useJumpGrav = false;
                 }
-                
-                _isGround.Value = true;
             }
-            else
+            else if (_isGround.Value)
             {
-                if (_isGround.Value)
-                {
-                    CriAudioManager.Instance.ResumeSE(_spinIndex);
-                }
-                
+                CriAudioManager.Instance.ResumeSE(_spinIndex);
                 _isGround.Value = false;
             }
         }

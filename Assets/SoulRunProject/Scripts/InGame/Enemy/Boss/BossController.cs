@@ -14,13 +14,14 @@ namespace SoulRunProject.InGame
     /// 最初に入場ムーブ
     /// 一行動を起こすたびに次の行動からランダムで実行する、
     /// </summary>
-    public class BossController : MonoBehaviour
+    public class BossController : MonoBehaviour , IPausable
     {
         [SerializeField, CustomLabel("初期ワールド座標")] private Vector3 _initialPosition;
         [SerializeField, Tooltip("パワーアップする閾値(%)")] private float[] _powerUpThreshold; 
         [Header("ボスの行動"), CustomLabel("行動の種類"), SerializeReference, SubclassSelector] List<IBossBehavior> _bossBehaviors;
         [SerializeField, CustomLabel("行動待機時間")] private float _behaviorIntervalTime;
 
+        private bool _isPause;
         private BossState _currentState = BossState.Animation;
         private int _thresholdIndex;
         private float _intervalTimer;
@@ -71,6 +72,8 @@ namespace SoulRunProject.InGame
         
         private void Update()
         {
+            if (_isPause) return;
+            
             switch (_currentState)
             {
                 case BossState.Animation:
@@ -93,6 +96,11 @@ namespace SoulRunProject.InGame
                     _inActionBehavior.UpdateAction(Time.deltaTime);
                     break;
             }
+        }
+
+        public void Pause(bool isPause)
+        {
+            _isPause = isPause;
         }
 
         private enum BossState

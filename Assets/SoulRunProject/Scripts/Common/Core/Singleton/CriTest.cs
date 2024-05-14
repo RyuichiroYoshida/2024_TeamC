@@ -13,6 +13,7 @@ namespace SoulRunProject
         void Start()
         {
             CriAudioManager.Instance.PlaySE(cueSheet, cueName);
+            CriAudioManager.Instance.MasterVolume = 0.5f;
         }
     }
 }

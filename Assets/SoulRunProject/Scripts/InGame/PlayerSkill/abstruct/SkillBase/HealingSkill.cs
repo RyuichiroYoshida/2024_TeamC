@@ -40,7 +40,7 @@ namespace SoulRunProject.Skill
             {
                 _coolTimer -= deltaTime;
             }
-            else if (_playerManager.PlayerStatusManager.CanHeal) // HPがMaxだと発動しない
+            else if (_playerManager.CurrentStatus.CurrentHp < _playerManager.CurrentStatus.MaxHp) // HPがMaxだと発動しない
             {
                 ActivateSkill();
             }

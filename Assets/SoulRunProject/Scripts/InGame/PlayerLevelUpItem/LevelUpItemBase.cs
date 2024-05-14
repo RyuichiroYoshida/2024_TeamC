@@ -81,7 +81,7 @@ namespace SoulRunProject.InGame
                 switch (_statusToUp)
                 {
                     case StatusType.Hp:
-                        playerManager.CurrentStatus.Hp += (int)_upValue;
+                        playerManager.CurrentStatus.MaxHp += (int)_upValue;
                         return;
                     case StatusType.Attack:
                         playerManager.CurrentStatus.Attack += (int)_upValue;
