@@ -36,7 +36,7 @@ namespace SoulRunProject.InGame
                 Destroy(gameObject);
             }
         }
-        void OnDestroy()
+        protected void OnDestroy()
         {
             _finishedSubject.Dispose();
         }
