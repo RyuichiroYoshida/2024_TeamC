@@ -124,6 +124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHp: 30
   _collisionDamage: 0
+  _canKnockback: 1
   _direction: {x: 1, y: 1, z: 1}
   _takeKnockBack:
     _resistanceValue: 0
@@ -192,9 +193,10 @@ MonoBehaviour:
         _range: 1
         _speed: 20
         _lifeTime: 10
-        _enemyBullet: {fileID: 0}
+        _enemyBullet: {fileID: 7854687109193279523, guid: caf0a23a1824b59448852c93b13230cf,
+          type: 3}
     - rid: 2917291596395053083
       type: {class: EntityNormalMover, ns: SoulRunProject.InGame, asm: Assembly-CSharp}
       data:
         _moveSpeed: 20
-        _moveSpeed: 20
+        _direction: 0

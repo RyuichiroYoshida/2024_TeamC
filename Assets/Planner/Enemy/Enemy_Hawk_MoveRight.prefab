@@ -253,7 +253,6 @@ MonoBehaviour:
       type: {class: CurveMover, ns: SoulRunProject.InGame, asm: Assembly-CSharp}
       data:
         _moveSpeed: 5
-        _moveSpeed: 5
         _posMarkers:
         - {fileID: 6179397458505883886}
         - {fileID: 455813844553014372}
@@ -268,5 +267,5 @@ MonoBehaviour:
         _range: 1.5
         _speed: 10
         _lifeTime: 30
-        _enemyBullet: {fileID: 5795336509465682056, guid: 1f37bb37cb75a7e4fbf8caf523ede8a5,
+        _enemyBullet: {fileID: 7854687109193279523, guid: caf0a23a1824b59448852c93b13230cf,
           type: 3}

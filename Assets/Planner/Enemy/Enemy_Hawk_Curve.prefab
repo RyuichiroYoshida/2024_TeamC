@@ -125,6 +125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHp: 30
   _collisionDamage: 10
+  _canKnockback: 1
   _direction: {x: 1, y: 1, z: 1}
   _takeKnockBack:
     _resistanceValue: 0
@@ -172,13 +173,13 @@ MonoBehaviour:
         _range: 3
         _speed: 30
         _lifeTime: 2
-        _enemyBullet: {fileID: 0}
+        _enemyBullet: {fileID: 7854687109193279523, guid: caf0a23a1824b59448852c93b13230cf,
+          type: 3}
     - rid: 290008905040265216
       type: {class: CurveMover, ns: SoulRunProject.InGame, asm: Assembly-CSharp}
       data:
         _moveSpeed: 50
-        _middlePosMarker: {fileID: 5796385776811678369}
-        _endPosMarker: {fileID: 5210671031124851512}
+        _posMarkers: []
         _isPosLoop: 1
         _loopCount: 10
         _type: 0
