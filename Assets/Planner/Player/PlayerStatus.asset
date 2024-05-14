@@ -27,5 +27,5 @@ MonoBehaviour:
     _luck: 0
     _criticalRate: 0
     _criticalDamageRate: 0
-    _soulAbsorption: 10
+    _soulAbsorption: 20
     _soulAcquisition: 0
