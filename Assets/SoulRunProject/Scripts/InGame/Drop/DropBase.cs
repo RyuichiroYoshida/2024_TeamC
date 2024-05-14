@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using SoulRunProject.Common;
 using UnityEngine;
