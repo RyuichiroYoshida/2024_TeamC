@@ -18,14 +18,14 @@ namespace SoulRunProject.EditorExtension
             if(prop == null)
             {
                 Debug.LogError($"Not found '{attr.BoolVariableName}' property");
-                if(property.hasVisibleChildren) property.NextVisible(true);
+                //if(property.hasVisibleChildren) property.NextVisible(true);
                 EditorGUI.PropertyField(position, property, label, true);
             }
             if(IsDisable(attr, prop))
             {
                 return;
             }
-            if(property.hasVisibleChildren) property.NextVisible(true);
+            //if(property.hasVisibleChildren) property.NextVisible(true);
             EditorGUI.PropertyField(position, property, label, true);
         }
 
@@ -40,7 +40,7 @@ namespace SoulRunProject.EditorExtension
             {
                 return -EditorGUIUtility.standardVerticalSpacing;
             }
-            if(property.hasVisibleChildren) property.NextVisible(true);
+            //if(property.hasVisibleChildren) property.NextVisible(true);
             return EditorGUI.GetPropertyHeight(property, true);
         }
 
