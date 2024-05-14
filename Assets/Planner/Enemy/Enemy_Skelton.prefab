@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8160015286760555117}
   - component: {fileID: 4104162914166171959}
   - component: {fileID: 8329125932870208999}
+  - component: {fileID: 1321131542843227285}
   m_Layer: 0
   m_Name: Enemy_Skelton
   m_TagString: Untagged
@@ -164,3 +165,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _duration: 0.1
   _loopCount: 1
+--- !u!114 &1321131542843227285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7073754473475370446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a52d006fdda4ecf991a184f16ff75a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attacker:
+    rid: -2
+  _mover:
+    rid: 8478225587102023693
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 8478225587102023693
+      type: {class: EntityNormalMover, ns: SoulRunProject.InGame, asm: Assembly-CSharp}
+      data:
+        _moveSpeed: 5
+        _direction: 3
