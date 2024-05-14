@@ -11,11 +11,10 @@ namespace SoulRunProject.InGame
     /// インゲーム中のステートの管理
     /// ステージデータの所持
     /// </summary>
-    public class StageManager : MonoBehaviour, IPausable
+    public class StageManager : MonoBehaviour
     {
         [SerializeField, EnumDrawer(typeof(StageName))] private StageDatum[] _stageData;
         [SerializeField] private FieldMover _fieldMover;
-        private bool _isPause;
         private int _stageDataIndex;
         private int _fieldPatternIndex;
         private int _fieldSegmentIndex;
@@ -269,8 +268,6 @@ namespace SoulRunProject.InGame
 
             return instantiatedSegment;
         }
-
-        public void Pause(bool isPause) => _isPause = isPause;
 
         enum StageState
         {
