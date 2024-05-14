@@ -3009,8 +3009,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1174502017}
   - component: {fileID: 1174502019}
-  - component: {fileID: 1174502020}
-  - component: {fileID: 1174502021}
   - component: {fileID: 1174502022}
   - component: {fileID: 1174502023}
   - component: {fileID: 1174502024}
@@ -3064,43 +3062,6 @@ MonoBehaviour:
   _commonView: {fileID: 183513117}
   _stageNameView: {fileID: 183513118}
   _levelUpView: {fileID: 183513119}
---- !u!114 &1174502020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1174502016}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cba4ab2e368bdd54ea5428b056fcef6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _fieldObjects:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  _playerManager: {fileID: 1420106444}
-  _activationDistance: 200
---- !u!114 &1174502021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1174502016}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 342fd8d87ed91b84f80c0ffc379a1d5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1174502022
 MonoBehaviour:
   m_ObjectHideFlags: 0
