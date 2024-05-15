@@ -13,10 +13,6 @@ namespace SoulRunProject.InGame
             _moveSpeed = playerStatus.MoveSpeedUpRate;
         }
 
-        public override void OnStart()
-        {
-        }
-
         public override void OnUpdateMove(Transform myTransform, Transform playerTransform)
         {
             myTransform.position += Vector3.back * (_moveSpeed * Time.deltaTime);

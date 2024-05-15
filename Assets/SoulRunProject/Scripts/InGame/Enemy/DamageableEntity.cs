@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using SoulRunProject.Common;
+using SoulRunProject.Runtime;
 using UniRx;
 
 namespace SoulRunProject.InGame
@@ -13,9 +14,11 @@ namespace SoulRunProject.InGame
         [SerializeField, CustomLabel("HP")] float _maxHp = 30;
         [SerializeField, CustomLabel("衝突ダメージ")]
         float _collisionDamage;
-        [SerializeField, CustomLabel("ノックバック方向")]
+        [SerializeField, CustomLabel("ノックバックするかどうか")]
+        private bool _canKnockback = true;
+        [SerializeField, CustomLabel("ノックバック方向"), ShowWhenBoolean(nameof(_canKnockback))]
         Vector3 _direction = Vector3.one;
-        [SerializeField, CustomLabel("ノックバック処理")]
+        [SerializeField, CustomLabel("ノックバック処理"), ShowWhenBoolean(nameof(_canKnockback))]
         TakeKnockBack _takeKnockBack;
         [SerializeField, CustomLabel("ドロップデータ")]
         LootTable _lootTable;
@@ -28,36 +31,40 @@ namespace SoulRunProject.InGame
         public float CollisionDamage => _collisionDamage;
         public FloatReactiveProperty CurrentHp => _currentHp;
         private PlayerManager _player;
+        private EnemyController _enemyController;
 
         void Start()
         {
-            Initialize();
             _player = FindObjectOfType<PlayerManager>();
+            _enemyController = GetComponent<EnemyController>();
+            Initialize();
         }
 
         public override void Initialize()
         {
             _currentHp.Value = _maxHp;
+            if(_enemyController) _enemyController.Initialize();
         }
 
         /// <summary>
         /// ダメージ処理 + ノックバック処理
         /// </summary>
-        public void Damage(float damage, in GiveKnockBack knockBack = null)
+        public void Damage(float damage, in GiveKnockBack knockBack = null, bool useSE = true)
         {
             if (!gameObject.activeSelf) return;
 
             float calcedDamage = Calculator.CalcDamage(damage,
                 0, _player.CurrentPlayerStatus.CriticalRate, _player.CurrentPlayerStatus.CriticalDamageRate);
             _currentHp.Value -= calcedDamage;
-            //CriAudioManager.Instance.PlaySE(CriAudioManager.CueSheet.Se, "SE_Hit");
+
+            if(useSE) CriAudioManager.Instance.PlaySE(CriAudioManager.CueSheet.Se, "SE_Hit");
             
             if (_currentHp.Value <= 0)
             {
                 Death();
             }
 
-            if (knockBack != null)
+            if (knockBack != null && _canKnockback)
             {
                 _takeKnockBack.KnockBack(transform, knockBack.Power, _direction);
             }
@@ -86,6 +93,7 @@ namespace SoulRunProject.InGame
 
         void OnTriggerEnter(Collider other)
         {
+            if (!gameObject.activeSelf) return;
             if (other.gameObject.TryGetComponent(out PlayerManager playerManager))
             {
                 playerManager.Damage(_collisionDamage);

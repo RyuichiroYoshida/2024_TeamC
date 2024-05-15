@@ -45,6 +45,8 @@ namespace SoulRunProject.Common.Core.ScriptableObject
             }
             return false;
         }
+
+#if UNITY_EDITOR
         
         private void OnValidate()
         {
@@ -59,6 +61,7 @@ namespace SoulRunProject.Common.Core.ScriptableObject
                 _dataList.Add(data);
             }
         }
+#endif
         
         [Serializable]
         public class ObjectList

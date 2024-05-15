@@ -12,7 +12,7 @@ namespace SoulRunProject.Common
     /// プレイヤーを管理するクラス
     /// </summary>
     [RequireComponent(typeof(HitDamageEffectManager))]
-    public class PlayerManager : MonoBehaviour , IPausable
+    public class PlayerManager : MonoBehaviour, IPausable
     {
         [SerializeField] private PlayerInput _playerInput;
         [SerializeField] private BaseStatus _baseStatus;
@@ -37,6 +37,7 @@ namespace SoulRunProject.Common
 
         private void Awake()
         {
+            Register();
             _inGameTimes = GetComponents<IPlayerPausable>();
             _pLevelManager = GetComponent<PlayerLevelManager>();
             _skillManager = GetComponent<SkillManager>();
@@ -49,7 +50,12 @@ namespace SoulRunProject.Common
             
             InitializeInput();
         }
-        
+
+        private void OnDestroy()
+        {
+            UnRegister();
+        }
+
         /// <summary>
         /// 入力を受け付けるクラスに対して入力と紐づける
         /// </summary>
@@ -59,6 +65,15 @@ namespace SoulRunProject.Common
             _playerInput.MoveInput.Subscribe(input => _playerMovement.RotatePlayer(input));
             _playerInput.JumpInput.Where(x => x).Subscribe(_ => _playerMovement.Jump()).AddTo(this);
             _playerInput.ShiftInput.Where(x => x).Subscribe(_ => UseSoulSkill()).AddTo(this);
+        }
+        public void Register()
+        {
+            PauseManager.Instance.RegisterPausableObject(this);
+        }
+
+        public void UnRegister()
+        {
+            PauseManager.Instance.UnRegisterPausableObject(this);
         }
 
         /// <summary>
@@ -132,6 +147,5 @@ namespace SoulRunProject.Common
         }
 
         #endregion
-        
     }
 }

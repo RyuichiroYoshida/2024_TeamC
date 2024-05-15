@@ -80,8 +80,13 @@ namespace SoulRunProject.Common
             OnSwitchPause(isPause);
         }
 
+        protected virtual void OnSwitchPause(bool isPause)
+        {
+            
+        }
         private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
         {
+            Register();
             InitializeParamOnSceneLoaded();
         }
 
@@ -139,10 +144,17 @@ namespace SoulRunProject.Common
                 Debug.LogError("レベル上限を超えています。");
             }
         }
-
-        protected virtual void OnSwitchPause(bool toPause)
+        
+        public void Register()
         {
+            PauseManager.Instance.RegisterPausableObject(this);
         }
+
+        public void UnRegister()
+        {
+            PauseManager.Instance.UnRegisterPausableObject(this);
+        }
+        
     }
 #if UNITY_EDITOR
     /// <summary>

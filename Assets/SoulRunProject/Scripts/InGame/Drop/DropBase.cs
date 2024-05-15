@@ -23,6 +23,16 @@ namespace SoulRunProject.InGame
         /// <summary>プレイヤーがドロップ品を拾った時に呼ぶ処理</summary>
         protected abstract void PickUp(PlayerManager playerManager);
 
+        protected new void OnDestroy()
+        {
+            base.OnDestroy();
+            UnRegister();
+        }
+        private void Awake()
+        {
+            PauseManager.Instance.RegisterPausableObject(this);
+        }
+
         public override void Initialize()
         {
             RandomProjectileMotion();
@@ -93,6 +103,16 @@ namespace SoulRunProject.InGame
             {
                 PickUp(playerManager);
             }
+        }
+
+        public void Register()
+        {
+            PauseManager.Instance.RegisterPausableObject(this);
+        }
+
+        public void UnRegister()
+        {
+            PauseManager.Instance.UnRegisterPausableObject(this);
         }
 
         public void Pause(bool isPause)

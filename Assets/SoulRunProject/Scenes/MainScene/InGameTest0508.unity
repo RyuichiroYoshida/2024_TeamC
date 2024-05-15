@@ -3072,8 +3072,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fffaba4efc1d1b49b61acc970f88722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _preloadCount: 5
-  _threshold: 5
+  _coinPrefab: {fileID: 0}
+  _expPrefab: {fileID: 0}
 --- !u!114 &1174502023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3506,7 +3506,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1341415491}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
   m_Name: 
@@ -3647,79 +3647,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1364571156}
   m_CullTransparentMesh: 1
---- !u!1001 &1398922487
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4531697623291092744, guid: 52c083962d6aec546879c4e978a207a6,
-        type: 3}
-      propertyPath: m_Name
-      value: WideMiddle Variant_2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4896557283387121739, guid: 52c083962d6aec546879c4e978a207a6,
-        type: 3}
-      propertyPath: m_Name
-      value: WideMiddle
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242119921249581809, guid: 52c083962d6aec546879c4e978a207a6,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242119921249581809, guid: 52c083962d6aec546879c4e978a207a6,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242119921249581809, guid: 52c083962d6aec546879c4e978a207a6,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 160
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242119921249581809, guid: 52c083962d6aec546879c4e978a207a6,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242119921249581809, guid: 52c083962d6aec546879c4e978a207a6,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242119921249581809, guid: 52c083962d6aec546879c4e978a207a6,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242119921249581809, guid: 52c083962d6aec546879c4e978a207a6,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242119921249581809, guid: 52c083962d6aec546879c4e978a207a6,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242119921249581809, guid: 52c083962d6aec546879c4e978a207a6,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242119921249581809, guid: 52c083962d6aec546879c4e978a207a6,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 52c083962d6aec546879c4e978a207a6, type: 3}
 --- !u!1 &1420106435
 GameObject:
   m_ObjectHideFlags: 0
@@ -3779,8 +3706,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 20
   _jumpPower: 30
-  _grav: 80
-  _yAxisGroundLine: 1.49
+  _nomalGrav: 0
+  _jumpGrav: 0
+  _DistanceBetweenPivotAndGroundPoint: 0
   _xMoveRangeMin: -47
   _xMoveRangeMax: 47
   _canZAxisMovement: 0
@@ -3850,7 +3778,6 @@ MonoBehaviour:
   _playerInput: {fileID: 1420106445}
   _baseStatus: {fileID: 11400000, guid: d50a16b38666d804883e3040b335a638, type: 2}
   _playerCamera: {fileID: 165873042}
-  MaxHp: 0
 --- !u!114 &1420106445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6920,4 +6847,3 @@ SceneRoots:
   - {fileID: 640931835}
   - {fileID: 1558038704}
   - {fileID: 2110468435}
-  - {fileID: 1398922487}

@@ -22,19 +22,15 @@ namespace SoulRunProject.InGame
             _moveSpeed = playerStatus.MoveSpeedUpRate;
         }
 
-        public void OnStart()
-        {
-        }
-
-        public void OnUpdateMove(Transform self, Transform target = default)
+        public override void OnUpdateMove(Transform myTransform , Transform playerTransform)
         {
             if (_isStopped) return;
-            Vector3 selfPos = self.position;
-            Vector3 targetPos = target.position;
+            Vector3 selfPos = myTransform.position;
+            Vector3 targetPos = playerTransform.position;
             if (!_canVerticalMove) targetPos.y = selfPos.y; //  ターゲットの座標の高さを敵の位置と合わせる(水平方向)
             //  自分とターゲットの座標を基準に移動
-            self.position = Vector3.MoveTowards(selfPos, targetPos, _moveSpeed * Time.deltaTime);
-            if (self.position.z < target.position.z) //  プレイヤーよりz座標が後ろに行ったら
+            myTransform.position = Vector3.MoveTowards(selfPos, targetPos, _moveSpeed * Time.deltaTime);
+            if (myTransform.position.z < playerTransform.position.z) //  プレイヤーよりz座標が後ろに行ったら
             {
                 Stop();
             }

@@ -20,9 +20,9 @@ namespace SoulRunProject.InGame
         [SerializeField] Vector3 _rotationOffset;
         [SerializeField] float _hitOffset;
         float _lifeTime;
-        float _attackDamage;
+        protected float _attackDamage;
         float _range;
-        float _speed;
+        protected float _speed;
         int _penetration;
         int _hitCount;
         private GiveKnockBack _giveKnockBack;

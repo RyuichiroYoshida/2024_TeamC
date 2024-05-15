@@ -10,7 +10,7 @@ namespace SoulRunProject.InGame
     [Serializable, Name("カーブ移動")]
     public class CurveMover : EntityMover
     {
-        [SerializeField,CustomLabel("移動時間")] float _moveSpeed;
+        //[SerializeField,CustomLabel("移動時間")] float _moveSpeed;
         [SerializeField, CustomLabel("経由地点")] List<GameObject> _posMarkers;
 
         [SerializeField, CustomLabel("終了地点と始点を繋げる")]
@@ -23,33 +23,21 @@ namespace SoulRunProject.InGame
         LoopType _type;
 
         Tweener _tweener;
-        bool _onceFlag;
         Vector3[] _posArr;
 
-        public override void OnStart()
+        public override void OnStart(Transform myTransform = null)
         {
-            _onceFlag = false;
-
+            if (myTransform == null) return;
             _posArr = _posMarkers.Select(target => target.transform.position).ToArray();
             foreach (var item in _posMarkers)
             {
                 item.SetActive(false);
             }
-        }
-
-        public override void OnUpdateMove(Transform myTransform, Transform playerTransform)
-        {
-            // Tweenは一度だけ動かしたい
-            if (_onceFlag)
-            {
-                return;
-            }
-
             _tweener = myTransform.DOLocalPath
                 (
-                path: _posArr,
-                duration: _moveSpeed,
-                PathType.CatmullRom
+                    path: _posArr,
+                    duration: _moveSpeed,
+                    PathType.CatmullRom
                 )
                 .SetOptions
                 (
@@ -59,8 +47,7 @@ namespace SoulRunProject.InGame
                 .SetOptions(_isPosLoop)
                 .SetLoops(_loopCount, _type)
                 .SetEase(Ease.Linear)
-                .SetLink(myTransform.gameObject);
-            _onceFlag = true;
+                .SetLink(myTransform.gameObject, LinkBehaviour.KillOnDisable);
         }
 
         public override void Pause()

@@ -55,7 +55,7 @@ namespace SoulRunProject.Skill
             }
         }
 
-        protected override void OnSwitchPause(bool toPause)
+        protected void OnSwitchPause(bool toPause)
         {
             if (toPause)
             {
