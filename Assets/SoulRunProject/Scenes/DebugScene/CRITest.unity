@@ -270,8 +270,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5540909ffa643d140876dbaeb0b5210f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cueSheet: 2
-  cueName: SE_BossDead
+  _seCueNames:
+  - SE_BossDead
+  - SE_Cancel
+  - SE_CoinGet
 --- !u!4 &1845749863
 Transform:
   m_ObjectHideFlags: 0
