@@ -1,5 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using SoulRunProject.Common;
 using SoulRunProject.Common.Interface;
 using UnityEngine;
@@ -9,7 +10,7 @@ namespace SoulRunProject.InGame
     /// <summary>
     /// Entityの生成管理クラス
     /// </summary>
-    public class EntitySpawnerController : MonoBehaviour, IPausable
+    public class EntitySpawnerController : MonoBehaviour
     {
         [SerializeField, CustomLabel("生成するEntity")]
         List<DamageableEntity> _fieldEntity;
@@ -20,7 +21,7 @@ namespace SoulRunProject.InGame
         [SerializeReference, SubclassSelector, CustomLabel("敵生成パターン")]
         ISpawnPattern _spawnPattern;
 
-        [SerializeField, CustomLabel("生成インターバル (ミリ秒)"), Range(0, 1000)]
+        [SerializeField, CustomLabel("生成インターバル (秒)"), Range(0, 60)]
         float _spawnInterval;
 
         [SerializeField, CustomLabel("イラスト左右反転化")]
@@ -33,7 +34,6 @@ namespace SoulRunProject.InGame
         PlayerManager _playerManager;
         bool _spawnFlag;
         bool _pauseFlag;
-        Coroutine _coroutine;
         public ISpawnerEnableType SpawnerType => _spawnerType;
 
         void Start()
@@ -51,22 +51,19 @@ namespace SoulRunProject.InGame
             if (_spawnFlag　|| !_isSpawnerAvailable || _pauseFlag) return;
             if (_spawnerType.IsEnable(_playerManager.transform.position, transform.position))
             {
-                _coroutine = StartCoroutine(SpawnEntity());
+                SpawnEntity().Forget();
                 _spawnFlag = true;
             }
         }
-
-        // TODO たぶんオブジェクトプールが必要になる気がする
-
         /// <summary>
         /// GetSpawnPositionsで渡された場所にEntityを召喚するメソッド
         /// </summary>
-        public IEnumerator SpawnEntity()
+        async UniTaskVoid SpawnEntity()
         {
             if (_spawnPattern == null)
             {
                 Debug.LogWarning($"{gameObject.name} の生成パターンが設定されていません");
-                yield break;
+                return;
             }
 
             var spawnIndex = 0;
@@ -77,7 +74,11 @@ namespace SoulRunProject.InGame
                     spawnIndex = 0;
                 }
 
-                yield return new WaitForSeconds(_spawnInterval / 1000);
+                var result = await PauseManager.Instance.TryWaitForSeconds(_spawnInterval);
+                if (!result)
+                {
+                    return;
+                }
 
                 var entity = ObjectPoolManager.Instance.RequestInstance(_fieldEntity[spawnIndex], transform.position + pos.Item1,
                     Quaternion.Euler(0, pos.Item2, 0));
@@ -93,11 +94,6 @@ namespace SoulRunProject.InGame
         }
         public void Pause(bool isPause)
         {
-            if (isPause)
-            {
-                StopCoroutine(_coroutine);
-            }
-
             _pauseFlag = isPause;
         }
 

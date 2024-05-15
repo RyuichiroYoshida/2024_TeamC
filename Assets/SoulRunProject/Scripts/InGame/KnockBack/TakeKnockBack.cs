@@ -1,6 +1,4 @@
 using System;
-using System.Threading;
-using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 
@@ -16,7 +14,7 @@ namespace SoulRunProject.Common
         /// <summary>
         /// ノックバック処理
         /// </summary>
-        public async void KnockBack(Transform myTransform , float power, Vector3 direction)
+        public void KnockBack(Transform myTransform , float power, Vector3 direction)
         {
             // ノックバックが終わるまで次のノックバックは行わない
             if (_isKnockBack)　return;
@@ -26,10 +24,13 @@ namespace SoulRunProject.Common
             _sequence.Append(myTransform.DOBlendableMoveBy(new Vector3(direction.x, 0f ,direction.z), _knockBackTime));
             _sequence.Insert(0f , myTransform.DOBlendableMoveBy(new Vector3(0f , direction.y ,0f), _knockBackTime / 2));
             _sequence.Insert(_knockBackTime / 2 , myTransform.DOBlendableMoveBy(new Vector3(0f , - direction.y ,0f), _knockBackTime / 2));
-            _sequence.SetLink(myTransform.gameObject);
-            await _sequence;
-            _sequence = null;
-            _isKnockBack = false;
+            _sequence.SetLink(myTransform.gameObject, LinkBehaviour.KillOnDisable);
+            _sequence.OnComplete(() =>
+            {
+                _sequence = null;
+                _isKnockBack = false;
+            });
+            _sequence.OnKill(()=>_isKnockBack = false);
         }
 
         public void Pause()

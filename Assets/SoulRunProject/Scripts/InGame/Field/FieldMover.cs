@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using SoulRunProject.Common;
 using UnityEngine;
@@ -21,6 +22,16 @@ namespace SoulRunProject.InGame
         {
             get => _scrollSpeed;
             set => _scrollSpeed = value;
+        }
+
+        private void Awake()
+        {
+            Register();
+        }
+
+        private void OnDestroy()
+        {
+            UnRegister();
         }
 
         private void Update()
@@ -49,6 +60,16 @@ namespace SoulRunProject.InGame
 
             //  Destroyした要素を取り除く
             MoveSegments = list;
+        }
+
+        public void Register()
+        {
+            PauseManager.Instance.RegisterPausableObject(this);
+        }
+
+        public void UnRegister()
+        {
+            PauseManager.Instance.UnRegisterPausableObject(this);
         }
 
         public void Pause(bool isPause)

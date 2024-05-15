@@ -1,5 +1,4 @@
 using SoulRunProject.Common;
-using UniRx;
 using UnityEngine;
 
 namespace SoulRunProject.InGame

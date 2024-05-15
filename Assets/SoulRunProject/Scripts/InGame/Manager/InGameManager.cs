@@ -55,17 +55,31 @@ namespace SoulRunProject.Common
             };
             pauseState.OnStateExit += _ =>
             {
-                if (pauseState.StateToReturn == playingRunGameState) ChangeState(2);
+                if (pauseState.StateToReturn == playingRunGameState)
+                {
+                    ChangeState(2);
+                }
+                else if (pauseState.StateToReturn == playingBossStageState)
+                {
+                    ChangeState(5);
+                }
             };
             levelUpState.OnStateExit += _ =>
             {
-                if (levelUpState.StateToReturn == playingRunGameState) ChangeState(2);
+                if (levelUpState.StateToReturn == playingRunGameState)
+                {
+                    ChangeState(2);
+                }
+                else if (levelUpState.StateToReturn == playingBossStageState)
+                {
+                    ChangeState(5);
+                }
             };
             enterBossStageState.OnStateExit += _ => ChangeState(5);
             playingBossStageState.OnStateExit += state =>
             {
                 if (playingBossStageState.IsBossDefeated) //ボスを倒した場合は通常のRunGameに戻る
-                    ChangeState(2);
+                    ChangeState(6);
                 else if (playingBossStageState.SwitchToPauseState) // PauseStateへの移行
                     ChangeState(7);
                 else if (playingBossStageState.SwitchToLevelUpState) // LevelUpStateへの移行
