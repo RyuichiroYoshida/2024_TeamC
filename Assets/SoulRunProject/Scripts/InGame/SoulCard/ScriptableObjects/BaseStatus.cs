@@ -122,7 +122,7 @@ namespace SoulRunProject.SoulMixScene
         public float CoolTimeReductionRate
         {
             get => _coolTimeReductionRate;
-            set => _coolTimeReductionRate = Mathf.Clamp(value, 0.00f, 1.00f); // 0.00から1.00までの範囲に制限
+            set => _coolTimeReductionRate = Mathf.Clamp(value, 0.00f, 5.00f); // 0.00から5.00までの範囲に制限
         }
         /// <summary> スキル範囲増加率 </summary> 
         public float SkillSizeUpRate
