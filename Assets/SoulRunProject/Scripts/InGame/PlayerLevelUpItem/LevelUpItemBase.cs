@@ -90,7 +90,7 @@ namespace SoulRunProject.InGame
                         playerManager.CurrentPlayerStatus.DefenceValue += (int)_upValue;
                         return;
                     case StatusType.CoolTime:
-                        playerManager.CurrentPlayerStatus.CoolTimeReductionRate += _upValue;
+                        playerManager.CurrentPlayerStatus.CoolTimeReductionRate -= _upValue;
                         return;
                     case StatusType.Range:
                         playerManager.CurrentPlayerStatus.SkillSizeUpRate += _upValue;
