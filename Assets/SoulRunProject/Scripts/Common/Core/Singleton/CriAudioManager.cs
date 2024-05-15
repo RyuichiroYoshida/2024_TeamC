@@ -323,8 +323,12 @@ namespace SoulRunProject.Common
                 Debug.LogWarning("CueSheetがNullです。");
                 return -1;
             }
-
-            var tempAcb = CriAtom.GetCueSheet(cueSheetName).acb;
+            var tempAcb = CriAtom.GetCueSheet(cueSheetName)?.acb;
+            if (tempAcb == null)
+            {
+                Debug.LogWarning("ACBがNullです。");
+                return -1;
+            }
             tempAcb.GetCueInfo(cueName, out cueInfo);
 
             newAtomPlayer.CueInfo = cueInfo;
