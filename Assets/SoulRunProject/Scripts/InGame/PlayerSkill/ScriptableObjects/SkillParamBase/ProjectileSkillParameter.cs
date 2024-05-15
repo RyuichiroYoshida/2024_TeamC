@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using SoulRunProject.SoulMixScene;
 using UnityEngine;
 
 namespace SoulRunProject.Common
@@ -11,62 +12,55 @@ namespace SoulRunProject.Common
     public class ProjectileSkillParameter : ISkillParameter
     {
         [SerializeField, CustomLabel("次にこのスキルを使えるまでの時間")] float _coolTime;
-        [SerializeField, CustomLabel("スキルの持続時間")] float _lifeTime;
         [SerializeField, CustomLabel("同時発射するオブジェクトの数")] int _amount;
         [SerializeField, CustomLabel("敵にヒットしたときに与えるダメージ")] float _attackDamage;
-        [SerializeField, CustomLabel("与ノックバック")]　GiveKnockBack _knockBack;
-        [SerializeField, CustomLabel("スキルのオブジェクトの大きさ")] float _range;
+        [SerializeField, CustomLabel("スキルのオブジェクトの大きさ")] float _size;
         [SerializeField, CustomLabel("スキルオブジェクトの移動速度")] float _speed;
         [SerializeField, CustomLabel("敵を何体まで貫通するか")] int _penetration;
-        // [SerializeReference, SubclassSelector, Header("独自パラメーター")] 
-        // List<IUniqueParameter> _uniqueParameters;
-
-        /// <summary>
-        /// ランタイム時に変更したいためこのような書き方をしている。
-        /// </summary>
-        [NonSerialized] public float CoolTime;
-        [NonSerialized] public float LifeTime;
-        [NonSerialized] public int Amount;
-        [NonSerialized] public float AttackDamage;
-        [NonSerialized] public GiveKnockBack KnockBack;
+        [SerializeField, CustomLabel("弾のライフタイム")] float _lifeTime;
+        [SerializeField, CustomLabel("与ノックバック")]　GiveKnockBack _knockBack;
         
-        [NonSerialized] public float Range;
-        [NonSerialized] public float Speed;
-        [NonSerialized] public int Penetration;
-        //[NonSerialized] public List<IUniqueParameter> UniqueParameters;
+        /// <summary>
+        /// ランタイム時に変更される基礎値
+        /// </summary>
+        [NonSerialized] public float BaseCoolTime;
+        [NonSerialized] public float BaseLifeTime;
+        [NonSerialized] public int BaseAmount;
+        [NonSerialized] public float BaseAttackDamage;
+        [NonSerialized] public GiveKnockBack BaseKnockBack;
+        [NonSerialized] public float BaseSize;
+        [NonSerialized] public float BaseSpeed;
+        [NonSerialized] public int BasePenetration;
+        
+        private PlayerStatus _status;
+        public void SetPlayerStatus(in PlayerStatus status)
+        {
+            _status = status;
+        }
 
+        public float AttackDamage => BaseAttackDamage + _status.AttackValue;
+        public float CoolTime => BaseCoolTime * _status.CoolTimeReductionRate;
+        public float Size => BaseSize * _status.SkillSizeUpRate;
+        public int Amount => BaseAmount + _status.BulletAmountExtension;
+        public float Speed => BaseSpeed * _status.BulletSpeedUpRate;
+        public int Penetration => BasePenetration + _status.PenetrateAmountExtension;
+        public float LifeTime => BaseLifeTime;
+        public GiveKnockBack KnockBack => BaseKnockBack;
+        
+
+        
         public void InitializeParamOnSceneLoaded()
         {
-            CoolTime = _coolTime;
-            LifeTime = _lifeTime;
-            Amount = _amount;
-            AttackDamage = _attackDamage;
-            KnockBack = _knockBack;
-            Range = _range;
-            Speed = _speed;
-            Penetration = _penetration;
-            //ディープコピー
-            //UniqueParameters = new(_uniqueParameters);
+            BaseCoolTime = _coolTime;
+            BaseLifeTime = _lifeTime;
+            BaseAmount = _amount;
+            BaseAttackDamage = _attackDamage;
+            BaseKnockBack = _knockBack;
+            BaseSize = _size;
+            BaseSpeed = _speed;
+            BasePenetration = _penetration;
         }
-
-        #region Debug用
-        /// <summary>
-        /// デバッグ用。各パラメーターの情報を文字列で返す。
-        /// </summary>
-        public override string ToString()
-        {
-            StringBuilder sb = new();
-            sb.Append(nameof(AttackDamage)).Append(": ").Append(AttackDamage).AppendLine();
-            sb.Append(nameof(CoolTime)).Append(": ").Append(CoolTime).AppendLine();
-            sb.Append(nameof(Range)).Append(": ").Append(Range).AppendLine();
-            sb.Append(nameof(Speed)).Append(": ").Append(Speed).AppendLine();
-            sb.Append(nameof(LifeTime)).Append(": ").Append(LifeTime).AppendLine();
-            sb.Append(nameof(Amount)).Append(": ").Append(Amount).AppendLine();
-            sb.Append(nameof(Penetration)).Append(": ").Append(Penetration).AppendLine();
-            return sb.ToString();
-        }
-
-        #endregion
+        
 
     }
 }

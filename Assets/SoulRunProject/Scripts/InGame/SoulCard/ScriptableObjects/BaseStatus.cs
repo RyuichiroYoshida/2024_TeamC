@@ -8,73 +8,73 @@ namespace SoulRunProject.SoulMixScene
     [CreateAssetMenu(fileName = "Status", menuName = "SoulRunProject/Status")]
     public class BaseStatus : ScriptableObject
     {
-        [SerializeField] private Status _status;
-        public Status Status => _status;
+        [SerializeField] private PlayerStatus _playerStatus;
+        public PlayerStatus PlayerStatus => _playerStatus;
     }
 
     [Serializable]
-    public class Status
+    public class PlayerStatus
     {
-        [SerializeField , CustomLabel("HP") ] private float _hp;
-        [SerializeField, CustomLabel("攻撃力")] private int _attack;
-        [SerializeField, CustomLabel("防御力")] private int _defence;
-        [SerializeField, CustomLabel("クールタイム減少率")] private float _coolTime;
-        [SerializeField, CustomLabel("スキル範囲増加率")] private float _skillSize;
-        [SerializeField, CustomLabel("弾速増加率")] private float _bulletSpeed;
-        [SerializeField, CustomLabel("効果時間(秒)")] private float _effectTime;
-        [SerializeField, CustomLabel("弾数")] private int _bulletNum;
-        [SerializeField, CustomLabel("貫通力")] private float _penetration;
-        [SerializeField, CustomLabel("移動スピード")] private float _moveSpeed;
-        [SerializeField, CustomLabel("成長速度")] private float _growthSpeed;
-        [SerializeField, CustomLabel("運")] private float _luck;
-        [SerializeField, CustomLabel("クリティカル率")] private float _criticalRate;
-        [SerializeField, CustomLabel("クリティカルダメージ倍率")] private float _criticalDamageRate;
-        [SerializeField, CustomLabel("ソウル吸収力")] private float _soulAbsorption;
-        [SerializeField, CustomLabel("ソウル獲得率")] private float _soulAcquisition;
+        [SerializeField , CustomLabel("HP") , Range( 0 , 1000)] private float _hp;
+        [SerializeField, CustomLabel("攻撃力"), Range( 0 , 10)] private int _attackValue;
+        [SerializeField, CustomLabel("防御力"), Range( 0 , 10)] private int _defenceValue;
+        [SerializeField, CustomLabel("クールタイム減少率"), Range( 0 , 5)] private float _coolTimeReductionRate;
+        [SerializeField, CustomLabel("スキル範囲増加率"), Range( 0 , 5)] private float _skillSizeUpRate;
+        [SerializeField, CustomLabel("弾速増加率"), Range( 0 , 5)] private float _bulletSpeedUpRate;
+        [SerializeField, CustomLabel("効果時間(秒)"), Range( 0 , 5)] private float _effectTimeExtension;
+        [SerializeField, CustomLabel("追加段数"), Range( 0 , 5)] private int _bulletAmountExtension;
+        [SerializeField, CustomLabel("追加貫通力"), Range( 0 , 5)] private int _penetrateAmountExtension;
+        [SerializeField, CustomLabel("移動スピード上昇率"), Range( 0 , 5)] private float _moveSpeedUpRate;
+        [SerializeField, CustomLabel("成長速度上昇率"), Range( 0 , 5)] private float _growthSpeedUpRate;
+        [SerializeField, CustomLabel("ゴールド獲得量増加"), Range( 0 , 5)] private float _goldLuckRate;
+        [SerializeField, CustomLabel("クリティカル率"), Range( 0 , 5)] private float _criticalRate;
+        [SerializeField, CustomLabel("クリティカルダメージ倍率"), Range( 0 , 5)] private float _criticalDamageRate;
+        [SerializeField, CustomLabel("アイテム吸収力範囲"), Range( 0 , 50)] private float _vacuumItemRangeRange;
+        [SerializeField, CustomLabel("ドロップ率増加"), Range( 0 , 5)] private float _dropIncreasedRate;
 
         private FloatReactiveProperty _currentHp = new();
         public ReadOnlyReactiveProperty<float> CurrentHpProperty => _currentHp.ToReadOnlyReactiveProperty();
 
-        public Status(float hp, int attack, int defence, float coolTime, float skillSize, float bulletSpeed, float effectTime, int bulletNum, float penetration, float moveSpeed, float growthSpeed, float luck, float criticalRate, float criticalDamageRate, float soulAbsorption, float soulAcquisition)
+        public PlayerStatus(float hp, int attackValue, int defenceValue, float coolTimeReductionRate, float skillSizeUpRate, float bulletSpeedUpRate, float effectTimeExtension, int bulletAmountExtension, int penetrateAmountExtension, float moveSpeedUpRate, float growthSpeedUpRate, float goldLuckRate, float criticalRate, float criticalDamageRate, float vacuumItemRangeRange, float dropIncreasedRate)
         {
             _hp = hp;
             _currentHp.Value = _hp;
-            _attack = attack;
-            _defence = defence;
-            _coolTime = coolTime;
-            _skillSize = skillSize;
-            _bulletSpeed = bulletSpeed;
-            _effectTime = effectTime;
-            _bulletNum = bulletNum;
-            _penetration = penetration;
-            _moveSpeed = moveSpeed;
-            _growthSpeed = growthSpeed;
-            _luck = luck;
+            _attackValue = attackValue;
+            _defenceValue = defenceValue;
+            _coolTimeReductionRate = coolTimeReductionRate;
+            _skillSizeUpRate = skillSizeUpRate;
+            _bulletSpeedUpRate = bulletSpeedUpRate;
+            _effectTimeExtension = effectTimeExtension;
+            _bulletAmountExtension = bulletAmountExtension;
+            _penetrateAmountExtension = penetrateAmountExtension;
+            _moveSpeedUpRate = moveSpeedUpRate;
+            _growthSpeedUpRate = growthSpeedUpRate;
+            _goldLuckRate = goldLuckRate;
             _criticalRate = criticalRate;
             _criticalDamageRate = criticalDamageRate;
-            _soulAbsorption = soulAbsorption;
-            _soulAcquisition = soulAcquisition;
+            _vacuumItemRangeRange = vacuumItemRangeRange;
+            _dropIncreasedRate = dropIncreasedRate;
         }
 
-        public Status(Status status)
+        public PlayerStatus(PlayerStatus playerStatus)
         {
-            _hp = status.MaxHp;
+            _hp = playerStatus.MaxHp;
             _currentHp.Value = _hp;
-            _attack = status.Attack;
-            _defence = status.Defence;
-            _coolTime = status.CoolTime;
-            _skillSize = status.SkillSize;
-            _bulletSpeed = status.BulletSpeed;
-            _effectTime = status.EffectTime;
-            _bulletNum = status.BulletNum;
-            _penetration = status.Penetration;
-            _moveSpeed = status.MoveSpeed;
-            _growthSpeed = status.GrowthSpeed;
-            _luck = status.Luck;
-            _criticalRate = status.CriticalRate;
-            _criticalDamageRate = status.CriticalDamageRate;
-            _soulAbsorption = status.SoulAbsorption;
-            _soulAcquisition = status.SoulAcquisition;
+            _attackValue = playerStatus.AttackValue;
+            _defenceValue = playerStatus.DefenceValue;
+            _coolTimeReductionRate = playerStatus.CoolTimeReductionRate;
+            _skillSizeUpRate = playerStatus.SkillSizeUpRate;
+            _bulletSpeedUpRate = playerStatus.BulletSpeedUpRate;
+            _effectTimeExtension = playerStatus.EffectTimeExtension;
+            _bulletAmountExtension = playerStatus.BulletAmountExtension;
+            _penetrateAmountExtension = playerStatus.PenetrateAmountExtension;
+            _moveSpeedUpRate = playerStatus.MoveSpeedUpRate;
+            _growthSpeedUpRate = playerStatus.GrowthSpeedUpRate;
+            _goldLuckRate = playerStatus.GoldLuckRate;
+            _criticalRate = playerStatus.CriticalRate;
+            _criticalDamageRate = playerStatus.CriticalDamageRate;
+            _vacuumItemRangeRange = playerStatus.VacuumItemRange;
+            _dropIncreasedRate = playerStatus.DropIncreasedRate;
         }
 
         /// <summary> 最大Hp </summary> 
@@ -105,72 +105,72 @@ namespace SoulRunProject.SoulMixScene
         }
 
         /// <summary> 攻撃力 </summary> 
-        public int Attack
+        public int AttackValue
         {
-            get => _attack;
-            set => _attack = value;
+            get => _attackValue;
+            set => _attackValue = value;
         }
 
         /// <summary> 防御力 </summary> 
-        public int Defence
+        public int DefenceValue
         {
-            get => _defence;
-            set => _defence = value;
+            get => _defenceValue;
+            set => _defenceValue = value;
         }
 
         /// <summary> クールタイム減少率 </summary> 
-        public float CoolTime
+        public float CoolTimeReductionRate
         {
-            get => _coolTime;
-            set => _coolTime = Mathf.Clamp(value, 0.00f, 1.00f); // 0.00から1.00までの範囲に制限
+            get => _coolTimeReductionRate;
+            set => _coolTimeReductionRate = Mathf.Clamp(value, 0.00f, 1.00f); // 0.00から1.00までの範囲に制限
         }
         /// <summary> スキル範囲増加率 </summary> 
-        public float SkillSize
+        public float SkillSizeUpRate
         {
-            get => _skillSize;
-            set => _skillSize = Mathf.Max(value, 0.00f); // 0.00未満にならないように制限
+            get => _skillSizeUpRate;
+            set => _skillSizeUpRate = Mathf.Max(value, 0.00f); // 0.00未満にならないように制限
         }
         /// <summary> 弾速増加率 </summary> 
-        public float BulletSpeed
+        public float BulletSpeedUpRate
         {
-            get => _bulletSpeed;
-            set => _bulletSpeed = Mathf.Max(value, 0.00f); // 0.00未満にならないように制限
+            get => _bulletSpeedUpRate;
+            set => _bulletSpeedUpRate = Mathf.Max(value, 0.00f); // 0.00未満にならないように制限
         }
         /// <summary> 効果時間(秒) </summary> 
-        public float EffectTime
+        public float EffectTimeExtension
         {
-            get => _effectTime;
-            set => _effectTime = Mathf.Max(value, 0.00f); // 0.00未満にならないように制限
+            get => _effectTimeExtension;
+            set => _effectTimeExtension = Mathf.Max(value, 0.00f); // 0.00未満にならないように制限
         }
         /// <summary> 弾数 </summary> 
-        public int BulletNum
+        public int BulletAmountExtension
         {
-            get => _bulletNum;
-            set => _bulletNum = Mathf.Max(value, 0); // 弾数は0未満にならないように制限
+            get => _bulletAmountExtension;
+            set => _bulletAmountExtension = Mathf.Max(value, 0); // 弾数は0未満にならないように制限
         }
         /// <summary> 貫通力 </summary> 
-        public float Penetration
+        public int PenetrateAmountExtension
         {
-            get => _penetration;
-            set => _penetration = Mathf.Max(value, 0.00f); // 貫通力は0未満にならないように制限
+            get => _penetrateAmountExtension;
+            set => _penetrateAmountExtension = Mathf.Max(value, 0); // 貫通力は0未満にならないように制限
         }
         /// <summary> 移動スピード </summary> 
-        public float MoveSpeed
+        public float MoveSpeedUpRate
         {
-            get => _moveSpeed;
-            set => _moveSpeed = Mathf.Max(value, 0.00f); // 0.00未満にならないように制限
+            get => _moveSpeedUpRate;
+            set => _moveSpeedUpRate = Mathf.Max(value, 0.00f); // 0.00未満にならないように制限
         }
         /// <summary> 成長速度 </summary> 
-        public float GrowthSpeed
+        public float GrowthSpeedUpRate
         {
-            get => _growthSpeed;
-            set => _growthSpeed = Mathf.Max(value, 0.00f); // 0.00未満にならないように制限
+            get => _growthSpeedUpRate;
+            set => _growthSpeedUpRate = Mathf.Max(value, 0.00f); // 0.00未満にならないように制限
         }
         /// <summary> 運 </summary> 
-        public float Luck
+        public float GoldLuckRate
         {
-            get => _luck;
-            set => _luck = Mathf.Max(value, 0.00f); // 0.00未満にならないように制限
+            get => _goldLuckRate;
+            set => _goldLuckRate = Mathf.Max(value, 0.00f); // 0.00未満にならないように制限
         }
         /// <summary> クリティカル率 </summary> 
         public float CriticalRate
@@ -185,17 +185,17 @@ namespace SoulRunProject.SoulMixScene
             set => _criticalDamageRate = Mathf.Max(value, 0.00f); // 0.00未満にならないように制限
         }
         /// <summary> ソウル吸収力 </summary> 
-        public float SoulAbsorption
+        public float VacuumItemRange
         {
-            get => _soulAbsorption;
-            set => _soulAbsorption = Mathf.Max(value, 0.00f); // 0.00未満にならないように制限
+            get => _vacuumItemRangeRange;
+            set => _vacuumItemRangeRange = Mathf.Max(value, 0.00f); // 0.00未満にならないように制限
         }
 
         /// <summary> ソウル獲得率 </summary> 
-        public float SoulAcquisition
+        public float DropIncreasedRate
         {
-            get => _soulAcquisition;
-            set => _soulAcquisition = Mathf.Max(value, 0.00f); // 0.00未満にならないように制限
+            get => _dropIncreasedRate;
+            set => _dropIncreasedRate = Mathf.Max(value, 0.00f); // 0.00未満にならないように制限
         }
     }
 }

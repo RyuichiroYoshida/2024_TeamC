@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SoulRunProject.InGame;
 using UnityEngine;
-
+using UniRx;
 namespace SoulRunProject.Common
 {
     /// <summary>
@@ -11,6 +11,7 @@ namespace SoulRunProject.Common
     public class AoEController : MonoBehaviour, IPausable
     {
         HashSet<DamageableEntity> _entities = new();
+        private AoESkillParameter _param;
         float _attackDamage;
         private bool _isPause;
 
@@ -24,10 +25,10 @@ namespace SoulRunProject.Common
             UnRegister();
         }
 
-        public void Initialize(float attackDamage, float range)
+        public void Initialize(in AoESkillParameter param)
         {
-            _attackDamage = attackDamage;
-            transform.localScale = new Vector3(range, range, range);
+            _param = param;
+            param.ObserveEveryValueChanged(x => x.Size).Subscribe(x => transform.localScale = Vector3.one * x).AddTo(this);
         }
 
         void FixedUpdate()

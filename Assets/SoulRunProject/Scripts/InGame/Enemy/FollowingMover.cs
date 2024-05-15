@@ -17,9 +17,9 @@ namespace SoulRunProject.InGame
         float _moveSpeed;
         bool _isStopped;
 
-        public void GetMoveStatus(Status status)
+        public void GetMoveStatus(PlayerStatus playerStatus)
         {
-            _moveSpeed = status.MoveSpeed;
+            _moveSpeed = playerStatus.MoveSpeedUpRate;
         }
 
         public override void OnUpdateMove(Transform myTransform , Transform playerTransform)

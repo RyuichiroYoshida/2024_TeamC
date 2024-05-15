@@ -1,3 +1,5 @@
+using SoulRunProject.SoulMixScene;
+
 namespace SoulRunProject.Common
 {
     /// <summary>
@@ -10,5 +12,8 @@ namespace SoulRunProject.Common
         /// シーンロード時にこのパラメータを初期化するように登録する。
         /// </summary>
         void InitializeParamOnSceneLoaded();
+
+        void SetPlayerStatus(in PlayerStatus status);
+
     }
 }

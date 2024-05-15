@@ -1,5 +1,6 @@
 using SoulRunProject.Common;
 using SoulRunProject.InGame;
+using SoulRunProject.SoulMixScene;
 using UniRx;
 using UnityEngine;
 
@@ -13,59 +14,69 @@ namespace SoulRunProject
     public class ProjectileSkill : SkillBase
     {
         static Transform _playerTransform;
-        static PlayerForwardMover _playerForwardMover;
         [SerializeField, Header("発射する弾のプレハブ")] BulletController _bullet;
+        [SerializeField, Header("複数弾を発射する際に与える回転基準")]　float _baseRotateY = 5f;
         [SerializeField] Vector3 _muzzleOffset;
         CommonObjectPool _bulletPool;
         ProjectileSkillParameter _projectileSkillParameter;
-        float _currentCoolTime;
+        float _timer;
 
         ProjectileSkill()
         {
-            _skillParam = new ProjectileSkillParameter();
+            SkillParam = new ProjectileSkillParameter();
             SkillLevelUpEvent = new SkillLevelUpEvent(new ProjectileSkillLevelUpEventListList());
         }
 
-        public BulletController Bullet => _bullet;
-
-        public override void InitializeParamOnSceneLoaded()
+        protected override void InitializeParamOnSceneLoaded()
         {
             base.InitializeParamOnSceneLoaded();
-            _currentCoolTime = 0f;
+            _timer = 0f;
         }
 
-        public override void StartSkill()
+        protected override void StartSkill()
         {
             _bulletPool = ObjectPoolManager.Instance.RequestPool(_bullet);
-            _playerTransform = FindObjectOfType<PlayerManager>().transform;
-            _playerForwardMover = FindObjectOfType<PlayerForwardMover>();
-            if (_skillParam is ProjectileSkillParameter param)
-                _projectileSkillParameter = param;
-            else
-                Debug.LogError($"パラメータが　{nameof(ProjectileSkillParameter)}　ではありません　");
+            _projectileSkillParameter = (ProjectileSkillParameter)SkillParam;
         }
 
         public override void UpdateSkill(float deltaTime)
         {
-            if (_currentCoolTime < _projectileSkillParameter.CoolTime)
+            float currentCoolTime = _projectileSkillParameter.CoolTime;
+            if (_timer < currentCoolTime)
             {
-                _currentCoolTime += deltaTime;
+                _timer += deltaTime;
             }
             else
             {
-                _currentCoolTime = 0;
+                _timer = 0;
                 if (_projectileSkillParameter != null)
                 {
-                    // 弾の生成
-                    var bullet = (BulletController)_bulletPool.Rent();
-                    bullet.transform.position = _playerTransform.position + _muzzleOffset;
-                    bullet.transform.forward = _playerTransform.forward;
-                    bullet.ApplyParameter(_projectileSkillParameter);
-                    bullet.Initialize();
-                    bullet.OnFinishedAsync.Take(1).Subscribe(_ => _bulletPool.Return(bullet));
+                    for (int i = 0; i < _projectileSkillParameter.Amount ; i++)
+                    {
+                        // 弾の生成
+                        float rotateY;
+                        if (_projectileSkillParameter.Amount % 2 == 0)
+                        {
+                            rotateY = (i - _projectileSkillParameter.Amount / 2) * _baseRotateY + _baseRotateY / 2;
+                        }
+                        else
+                        {
+                            rotateY = (i - _projectileSkillParameter.Amount / 2) * _baseRotateY;
+                        }
+                        
+                        
+                        var bullet = (BulletController)_bulletPool.Rent();
+                        bullet.transform.position = PlayerTransform.position + _muzzleOffset;
+                        bullet.transform.forward = PlayerTransform.forward;
+                        bullet.transform.rotation *= Quaternion.Euler(0f, rotateY ,0f);
+                        bullet.ApplyParameter(_projectileSkillParameter);
+                        bullet.Initialize();
+                        bullet.OnFinishedAsync.Take(1).Subscribe(_ => _bulletPool.Return(bullet));
+                    }
                     CriAudioManager.Instance.PlaySE(CriAudioManager.CueSheet.Se, "SE_Soulbullet");
                 }
             }
         }
+        
     }
 }

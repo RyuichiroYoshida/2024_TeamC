@@ -26,10 +26,12 @@ namespace SoulRunProject.Common
         private HitDamageEffectManager _hitDamageEffectManager;
         //private PlayerStatusManager _statusManager;
         private PlayerResourceContainer _resourceContainer;
-        public ReadOnlyReactiveProperty<float> CurrentHp => CurrentStatus.CurrentHpProperty;
+        public ReadOnlyReactiveProperty<float> CurrentHp => CurrentPlayerStatus.CurrentHpProperty;
         public PlayerResourceContainer ResourceContainer => _resourceContainer;
         //public PlayerStatusManager PlayerStatusManager => _statusManager;
-        public Status CurrentStatus { get; private set; }
+        
+        [CustomLabel("現在のプレイヤーのステータス")]　public PlayerStatus CurrentPlayerStatus;
+        
         /// <summary>ダメージを無効化出来るかどうかの条件を格納するリスト</summary>
         public List<Func<bool>> IgnoreDamagePredicates { get; } = new();
 
@@ -44,7 +46,7 @@ namespace SoulRunProject.Common
             _hitDamageEffectManager = GetComponent<HitDamageEffectManager>();
             _resourceContainer = new();
             //_statusManager = new PlayerStatusManager(_baseStatus.Status);
-            CurrentStatus = new Status(_baseStatus.Status);
+            CurrentPlayerStatus = new PlayerStatus(_baseStatus.PlayerStatus);
             
             InitializeInput();
         }
@@ -106,26 +108,18 @@ namespace SoulRunProject.Common
             }
             
             _playerCamera.DamageCam();
-            CurrentStatus.CurrentHp -= Calculator.CalcDamage(damage, CurrentStatus.Defence, 0, 1);
+            CurrentPlayerStatus.CurrentHp -= Calculator.CalcDamage(damage, CurrentPlayerStatus.DefenceValue, 0, 1);
             
             // 白色点滅メソッド
             _hitDamageEffectManager.HitFadeBlinkWhite();
-            CriAudioManager.Instance.PlaySE(CriAudioManager.CueSheet.Se, "SE_Damage");
+            //CriAudioManager.Instance.PlaySE(CriAudioManager.CueSheet.Se, "SE_Damage");
         }
 
         public void Heal(float value)
         {
-            CurrentStatus.CurrentHp += value;
+            CurrentPlayerStatus.CurrentHp += value;
         }
-
-        /// <summary>
-        /// Skillを追加する
-        /// </summary>
-        /// <param name="skillType"></param>
-        public void AddSkill(PlayerSkill skillType)
-        {
-            _skillManager.AddSkill(skillType);
-        }
+        
         
         private void Death()
         {

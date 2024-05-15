@@ -1,4 +1,5 @@
 using System;
+using SoulRunProject.SoulMixScene;
 using UnityEngine;
 
 namespace SoulRunProject.Common
@@ -16,5 +17,13 @@ namespace SoulRunProject.Common
             CoolTime = _coolTime;
             HealAmount = _healAmount;
         }
+        
+        private PlayerStatus _status;
+        public void SetPlayerStatus(in PlayerStatus status)
+        {
+            _status = status;
+        }
+
+
     }
 }
