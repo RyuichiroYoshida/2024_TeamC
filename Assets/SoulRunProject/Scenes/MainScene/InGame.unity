@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17053787, g: 0.16542515, b: 0.1600636, a: 1}
+  m_IndirectSpecularColor: {r: 0.17053778, g: 0.16542512, b: 0.16006339, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3010,7 +3010,6 @@ GameObject:
   - component: {fileID: 1174502017}
   - component: {fileID: 1174502019}
   - component: {fileID: 1174502022}
-  - component: {fileID: 1174502023}
   - component: {fileID: 1174502024}
   m_Layer: 0
   m_Name: Manager
@@ -3078,22 +3077,6 @@ MonoBehaviour:
     type: 3}
   _expPrefab: {fileID: 3413531040011444656, guid: 0dce8baa8685daf41b982149b3e0a88e,
     type: 3}
---- !u!114 &1174502023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1174502016}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e3723f97fa54d1aa78e67ec2ad6b2a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  streamingAssetsPathAcf: Glab2024-C
-  cueSheetBGM: BGM
-  cueSheetSe: SE
-  cueSheetVoice: Voice
 --- !u!114 &1174502024
 MonoBehaviour:
   m_ObjectHideFlags: 0
