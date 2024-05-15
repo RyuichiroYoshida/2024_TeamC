@@ -20,8 +20,8 @@ MonoBehaviour:
   SkillLevelUpEvent:
     _levelUpType:
       rid: 4051172700801204278
-  _skillParam:
-    rid: 4051172700801204279
+  SkillParam:
+    rid: 8824515701187543162
   _original: {fileID: 158674725360675817, guid: 75a84e6cba64bf448a7f1dd12ad33ca1,
     type: 3}
   _groundHeight: 0.05
@@ -42,11 +42,6 @@ MonoBehaviour:
           - rid: 4051172700801204280
           - rid: 4051172700801204281
         - _levelUpEventList: []
-    - rid: 4051172700801204279
-      type: {class: AoESkillParameter, ns: SoulRunProject.Common, asm: Assembly-CSharp}
-      data:
-        _attackDamage: 10
-        _range: 2
     - rid: 4051172700801204280
       type: {class: LevelUpEventAoERange, ns: SoulRunProject.Common, asm: Assembly-CSharp}
       data:
@@ -63,3 +58,8 @@ MonoBehaviour:
       type: {class: LevelUpEventAoEAttackDamage, ns: SoulRunProject.Common, asm: Assembly-CSharp}
       data:
         _increaseDamage: 5
+    - rid: 8824515701187543162
+      type: {class: AoESkillParameter, ns: SoulRunProject.Common, asm: Assembly-CSharp}
+      data:
+        _attackDamage: 10
+        _size: 1

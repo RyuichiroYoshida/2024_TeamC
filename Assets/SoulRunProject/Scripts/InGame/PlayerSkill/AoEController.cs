@@ -14,12 +14,12 @@ namespace SoulRunProject.Common
     public class AoEController : MonoBehaviour
     {
         HashSet<DamageableEntity> _entities = new();
-        float _attackDamage;
+        private AoESkillParameter _param;
 
-        public void Initialize(float attackDamage, float range)
+        public void Initialize(in AoESkillParameter param)
         {
-            _attackDamage = attackDamage;
-            transform.localScale = new Vector3(range, range, range);
+            _param = param;
+            param.ObserveEveryValueChanged(x => x.Size).Subscribe(x => transform.localScale = Vector3.one * x).AddTo(this);
         }
 
         void FixedUpdate()
@@ -28,7 +28,7 @@ namespace SoulRunProject.Common
             // Whereでnullチェックしてからダメージ処理
             foreach (var entity in _entities.Where(entity => entity))
             {
-                entity.Damage(_attackDamage * Time.fixedDeltaTime);
+                entity.Damage(_param.AttackDamage * Time.fixedDeltaTime);
             }
         }
 

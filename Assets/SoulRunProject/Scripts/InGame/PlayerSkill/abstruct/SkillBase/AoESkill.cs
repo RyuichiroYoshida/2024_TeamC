@@ -15,7 +15,7 @@ namespace SoulRunProject.Common
 
         AoESkill()
         {
-            _skillParam = new AoESkillParameter();
+            SkillParam = new AoESkillParameter();
             SkillLevelUpEvent = new SkillLevelUpEvent(new AoESkillLevelUpEventListList());
         }
         /// <summary>
@@ -23,18 +23,18 @@ namespace SoulRunProject.Common
         /// </summary>
         void ApplyParameter()
         {
-            if (_skillParam is AoESkillParameter param)
+            if (SkillParam is AoESkillParameter param)
             {
-                _aoeController.Initialize(param.AttackDamage, param.Range);
+                _aoeController.Initialize(param);
             }
             else
             {
                 Debug.LogError($"パラメータが{nameof(AoESkillParameter)}ではありません　");
             }
         }
-        public override void StartSkill()
+
+        protected override void StartSkill()
         {
-            _playerTransform = Object.FindObjectOfType<PlayerManager>().transform;
             _aoeController = Object.Instantiate(_original);
             ApplyParameter();
         }
@@ -42,7 +42,7 @@ namespace SoulRunProject.Common
         public override void UpdateSkill(float deltaTime)
         {
             //  AoEの座標更新
-            var playerPosition = _playerTransform.position;
+            var playerPosition = PlayerTransform.position;
             playerPosition.y = _groundHeight;
             _aoeController.transform.position = playerPosition;
         }

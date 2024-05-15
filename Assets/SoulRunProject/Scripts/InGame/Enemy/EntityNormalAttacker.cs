@@ -33,11 +33,11 @@ namespace SoulRunProject.InGame
                 return;
             }
 
-            _parameter.AttackDamage = _attack;
-            _parameter.CoolTime = _coolTime;
-            _parameter.Range = _range;
-            _parameter.Speed = _speed;
-            _parameter.LifeTime = _lifeTime;
+            // _parameter.AttackDamage = _attack;
+            // _parameter.CoolTime = _coolTime;
+            // _parameter.Size = _range;
+            // _parameter.Speed = _speed;
+            // _parameter.LifeTime = _lifeTime;
             if (_parameter.CoolTime > _timer)
             {
                 _timer += Time.deltaTime;

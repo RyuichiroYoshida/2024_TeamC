@@ -48,9 +48,9 @@ namespace SoulRunProject.InGame
             if (!gameObject.activeSelf) return;
 
             float calcedDamage = Calculator.CalcDamage(damage,
-                0, _player.CurrentStatus.CriticalRate, _player.CurrentStatus.CriticalDamageRate);
+                0, _player.CurrentPlayerStatus.CriticalRate, _player.CurrentPlayerStatus.CriticalDamageRate);
             _currentHp.Value -= calcedDamage;
-            CriAudioManager.Instance.PlaySE(CriAudioManager.CueSheet.Se, "SE_Hit");
+            //CriAudioManager.Instance.PlaySE(CriAudioManager.CueSheet.Se, "SE_Hit");
             
             if (_currentHp.Value <= 0)
             {

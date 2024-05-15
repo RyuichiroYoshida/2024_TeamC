@@ -19538,7 +19538,7 @@ PrefabInstance:
     - target: {fileID: 7157644484830043911, guid: e0816d3867536d04d95581ec710d4b44,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8875909938842997315, guid: e0816d3867536d04d95581ec710d4b44,
         type: 3}
@@ -19549,6 +19549,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _spawnPattern
       value: 1964425126697238535
+      objectReference: {fileID: 0}
+    - target: {fileID: 8875909938842997315, guid: e0816d3867536d04d95581ec710d4b44,
+        type: 3}
+      propertyPath: _spawnInterval
+      value: 108
       objectReference: {fileID: 0}
     - target: {fileID: 8875909938842997315, guid: e0816d3867536d04d95581ec710d4b44,
         type: 3}
@@ -19618,12 +19623,12 @@ PrefabInstance:
     - target: {fileID: 8875909938842997315, guid: e0816d3867536d04d95581ec710d4b44,
         type: 3}
       propertyPath: managedReferences[1964425126697238535]._spawnRadiusRange
-      value: 13.8
+      value: 10.1
       objectReference: {fileID: 0}
     - target: {fileID: 8875909938842997315, guid: e0816d3867536d04d95581ec710d4b44,
         type: 3}
       propertyPath: managedReferences[1964425126697238534]._spawnerEnableRange
-      value: 42.4
+      value: 79.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

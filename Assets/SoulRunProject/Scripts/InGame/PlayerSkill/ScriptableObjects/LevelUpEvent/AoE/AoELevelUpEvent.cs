@@ -27,7 +27,7 @@ namespace SoulRunProject.Common
 
         public override void LevelUpParam(in AoESkillParameter param)
         {
-            param.AttackDamage += _increaseDamage;
+            param.BaseAttackDamage += _increaseDamage;
         }
     }
     [Serializable, Name("AoE範囲上昇")]
@@ -37,7 +37,7 @@ namespace SoulRunProject.Common
 
         public override void LevelUpParam(in AoESkillParameter param)
         {
-            param.Range += _increaseRange;
+            param.BaseSize += _increaseRange;
         }
     }
 }

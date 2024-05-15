@@ -64,7 +64,7 @@ namespace SoulRunProject.InGame
             //  プレイヤーより後ろに行ったら吸引処理を行わない
             if (_player.transform.position.z > transform.position.z) return;
             
-            var absorptionPower = _player.CurrentStatus.SoulAbsorption;
+            var absorptionPower = _player.CurrentPlayerStatus.VacuumItemRange;
             var distance = _player.transform.position - transform.position;
             float moveSpeed = 10f + _fieldMover.ScrollSpeed;
             if (distance.sqrMagnitude < absorptionPower * absorptionPower)

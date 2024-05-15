@@ -22,7 +22,7 @@ namespace SoulRunProject.InGame
             _playerManager = FindObjectOfType<PlayerManager>();
         }
 
-        public void RequestDrop(LootTable lootTable, Vector3 position, Status playerStatus = null)
+        public void RequestDrop(LootTable lootTable, Vector3 position, PlayerStatus playerPlayerStatus = null)
         {
             ScoreManager.Instance.AddScore(lootTable.Score);
             MakeDropObjects(_coinPrefab , position , lootTable.Coin);

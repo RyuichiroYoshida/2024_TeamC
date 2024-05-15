@@ -1,5 +1,6 @@
 using System;
 using SoulRunProject.InGame;
+using SoulRunProject.SoulMixScene;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -24,32 +25,43 @@ namespace SoulRunProject.Common
     [Name("スキルの基底クラス")]
     public abstract class SkillBase : ScriptableObject, IPausable
     {
-        [SerializeField, HideInInspector] PlayerSkill _skillType;
-        [SerializeField, HideInInspector] private string _skillName;
-        [SerializeField, HideInInspector] private string _explanatoryText;
-        [SerializeField, HideInInspector] private Sprite _skillIcon;
-        [SerializeField, HideInInspector] public int MaxSkillLevel = 5;
+        [SerializeField] [HideInInspector] private PlayerSkill _skillType;
+        [SerializeField] [HideInInspector] private string _skillName;
+        [SerializeField] [HideInInspector] private string _explanatoryText;
+        [SerializeField] [HideInInspector] private Sprite _skillIcon;
+        [SerializeField] [HideInInspector] public int MaxSkillLevel = 5;
+        [SerializeField] [HideInInspector] protected SkillLevelUpEvent SkillLevelUpEvent;
 
-        [SerializeField, HideInInspector]
-        protected SkillLevelUpEvent SkillLevelUpEvent;
+        [SerializeReference] [CustomLabel("スキルパラメーター")] protected ISkillParameter SkillParam;
 
-        [SerializeReference, CustomLabel("スキルパラメーター")]
-        protected ISkillParameter _skillParam;
+        private int _elementCount;
 
         protected bool _isPause;
-
-        int _currentLevel = 1;
 
         public PlayerSkill SkillType => _skillType;
         public string SkillName => _skillName;
         public string ExplanatoryText => _explanatoryText;
         public Sprite SkillIcon => _skillIcon;
-        public int CurrentLevel => _currentLevel;
+        public int CurrentLevel { get; private set; } = 1;
 
-        private int _elementCount;
+
+        private void OnEnable()
+        {
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            _elementCount = SkillLevelUpEvent.LevelUpType.LevelUpEventListList.Count;
+        }
+
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
+
+        /// <summary>
+        ///     リストに要素を追加した際に、最後の要素がコピーされ同じ参照を保持するため、追加した要素を初期化している。
+        /// </summary>
         private void OnValidate()
         {
-            int currentElementCount = SkillLevelUpEvent.LevelUpType.LevelUpEventListList.Count;
+            var currentElementCount = SkillLevelUpEvent.LevelUpType.LevelUpEventListList.Count;
             if (_elementCount != currentElementCount)
             {
                 if (_elementCount < currentElementCount)
@@ -57,44 +69,51 @@ namespace SoulRunProject.Common
                     Debug.Log("RefreshElement");
                     SkillLevelUpEvent.LevelUpType.RefreshElement();
                 }
+
                 _elementCount = currentElementCount;
             }
         }
 
-        void OnEnable()
+        public void Pause(bool isPause)
         {
-            SceneManager.sceneLoaded += OnSceneLoaded;
-            _elementCount = SkillLevelUpEvent.LevelUpType.LevelUpEventListList.Count;
+            _isPause = isPause;
+            OnSwitchPause(isPause);
         }
 
-        void OnDisable()
-        {
-            SceneManager.sceneLoaded -= OnSceneLoaded;
-        }
-
-        void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+        private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
         {
             InitializeParamOnSceneLoaded();
         }
 
         /// <summary>
-        ///     シーンロード時にパラメータを初期化するように登録する。
+        /// シーンロード時にパラメータを初期化するように登録する。
         /// </summary>
-        public virtual void InitializeParamOnSceneLoaded()
+        protected virtual void InitializeParamOnSceneLoaded()
         {
-            _skillParam.InitializeParamOnSceneLoaded();
-            _currentLevel = 1;
+            SkillParam.InitializeParamOnSceneLoaded();
+            CurrentLevel = 1;
             _isPause = false;
         }
 
         /// <summary> スキルレベルアップ可能かどうか </summary>
         public bool CanLevelUp()
         {
-            return _currentLevel <= MaxSkillLevel;
+            return CurrentLevel <= MaxSkillLevel;
         }
 
-        public virtual void StartSkill()
+        protected PlayerManager PlayerManagerInstance;
+        protected Transform PlayerTransform;
+        public void InitialiseSkill(in PlayerManager playerManager , in Transform playerTransform)
         {
+            PlayerManagerInstance = playerManager;
+            PlayerTransform = playerTransform;
+            SkillParam.SetPlayerStatus(playerManager.CurrentPlayerStatus);
+            StartSkill();
+        }
+
+        protected virtual void StartSkill()
+        {
+            
         }
 
         public virtual void UpdateSkill(float deltaTime)
@@ -105,14 +124,14 @@ namespace SoulRunProject.Common
         public virtual void OnLevelUp()
         {
         }
-        
+
         /// <summary>スキル進化</summary>
         public void LevelUp()
         {
-            _currentLevel++;
+            CurrentLevel++;
             if (CanLevelUp())
             {
-                SkillLevelUpEvent.LevelUp(_currentLevel, _skillParam);
+                SkillLevelUpEvent.LevelUp(CurrentLevel, SkillParam);
                 OnLevelUp();
             }
             else
@@ -121,28 +140,26 @@ namespace SoulRunProject.Common
             }
         }
 
-        public void Pause(bool isPause)
+        protected virtual void OnSwitchPause(bool toPause)
         {
-            _isPause = isPause;
-            OnSwitchPause(isPause);
         }
-        protected virtual void OnSwitchPause(bool toPause){}
     }
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
     /// <summary>
-    /// エラーを出さないためのエディタ拡張クラス、SKillBaseクラスの派生クラスにも適応される
-    /// https://forum.unity.com/threads/nullreferenceexception-serializedobject-of-serializedproperty-has-been-disposed.1431907/
+    ///     エラーを出さないためのエディタ拡張クラス、SKillBaseクラスの派生クラスにも適応される
+    ///     https://forum.unity.com/threads/nullreferenceexception-serializedobject-of-serializedproperty-has-been-disposed.1431907/
     /// </summary>
     [CustomEditor(typeof(SkillBase), true)]
     public class SkillBaseEditor : Editor
     {
-        private SerializedProperty _skillTypeProperty;
-        private SerializedProperty _nameProperty;
         private SerializedProperty _explanatoryProperty;
         private SerializedProperty _iconProperty;
         private SerializedProperty _levelUpEventListListProperty;
 
         private int _levelUpListLastIndex;
+        private SerializedProperty _nameProperty;
+        private SerializedProperty _skillTypeProperty;
+
         private void OnEnable()
         {
             _skillTypeProperty = serializedObject.FindProperty("_skillType");
@@ -159,7 +176,7 @@ namespace SoulRunProject.Common
             serializedObject.Update();
             base.OnInspectorGUI();
             //enumの入力
-            _skillTypeProperty.enumValueIndex = 
+            _skillTypeProperty.enumValueIndex =
                 (int)(PlayerSkill)EditorGUILayout.EnumPopup("スキルタイプ", (PlayerSkill)_skillTypeProperty.enumValueIndex);
             EditorGUILayout.Space(10);
             EditorGUILayout.LabelField("-----スキル情報-----");
@@ -172,9 +189,9 @@ namespace SoulRunProject.Common
             EditorGUILayout.LabelField("-----スキル性能-----");
             // ExampleCustomList list = new ExampleCustomList(_levelUpEventListListProperty);
             // list.DoLayoutList();
-            EditorGUILayout.PropertyField(_levelUpEventListListProperty, new GUIContent("レベルアップデータ") , true);
+            EditorGUILayout.PropertyField(_levelUpEventListListProperty, new GUIContent("レベルアップデータ"), true);
             serializedObject.ApplyModifiedProperties();
         }
     }
-    #endif
+#endif
 }

@@ -38,7 +38,7 @@ namespace SoulRunProject.InGame
         {
             _lifeTime = param.LifeTime;
             _attackDamage = param.AttackDamage;
-            _range = param.Range;
+            _range = param.Size;
             _speed = param.Speed;
             _penetration = param.Penetration;
             _giveKnockBack = param.KnockBack;

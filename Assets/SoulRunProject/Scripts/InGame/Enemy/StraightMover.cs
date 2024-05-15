@@ -8,9 +8,9 @@ namespace SoulRunProject.InGame
     [Serializable, Name("直進移動")]
     public class StraightMover : EntityMover
     {
-        public void GetMoveStatus(Status status)
+        public void GetMoveStatus(PlayerStatus playerStatus)
         {
-            _moveSpeed = status.MoveSpeed;
+            _moveSpeed = playerStatus.MoveSpeedUpRate;
         }
 
         public override void OnStart()

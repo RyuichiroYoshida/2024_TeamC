@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.003204829, g: 0.0063439845, b: 0.014498586, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5472,6 +5472,23 @@ MonoBehaviour:
   _playerInput: {fileID: 1420106445}
   _baseStatus: {fileID: 11400000, guid: d50a16b38666d804883e3040b335a638, type: 2}
   _playerCamera: {fileID: 165873042}
+  CurrentPlayerStatus:
+    _hp: 0
+    _attackValue: 0
+    _defenceValue: 0
+    _coolTimeReductionRate: 0
+    _skillSizeUpRate: 0
+    _bulletSpeedUpRate: 0
+    _effectTimeExtension: 0
+    _bulletAmountExtension: 0
+    _penetrateAmountExtension: 0
+    _moveSpeedUpRate: 0
+    _growthSpeedUpRate: 0
+    _goldLuckRate: 0
+    _criticalRate: 0
+    _criticalDamageRate: 0
+    _soulAbsorptionRange: 0
+    _dropIncreasedRate: 0
 --- !u!114 &1420106445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5583,6 +5600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6075843f4893e842bfcc7a2cfcae3dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _defaultPlayerSkills: 0000000001000000
   _skillIconImage:
   - {fileID: 1698915878}
   - {fileID: 1639702815}
