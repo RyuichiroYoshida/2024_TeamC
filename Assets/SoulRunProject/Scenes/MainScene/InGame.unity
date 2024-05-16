@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.17053787, g: 0.16542515, b: 0.1600636, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1225,6 +1225,9 @@ MonoBehaviour:
         - {fileID: 2752528944075337817, guid: b4ec25b35ea14964bb47ed3d65d7f229, type: 3}
         - {fileID: 2752528944075337817, guid: 56dc9971f4273f94cbb70bb90e6ede0a, type: 3}
         - {fileID: 2752528944075337817, guid: 9fe28fa1c7a477e4299eab44ba2b96eb, type: 3}
+        - {fileID: 1607657496594533194, guid: e0155a48b9a698543969ba48d5cc2648, type: 3}
+        - {fileID: 4565359466753811006, guid: f68f9faef7de264428c2fa60a75b6895, type: 3}
+        - {fileID: 5633894702588768396, guid: 45c01253160740348937b092aa04dddf, type: 3}
       _adjacentGraph: {fileID: 0}
     _bossStageField: {fileID: 3829013865918829885, guid: 9ebc2cb807cc7794d8b095da4e18832a,
       type: 3}
