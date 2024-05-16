@@ -12,18 +12,25 @@ namespace SoulRunProject.InGame
     public class DamageableEntity : PooledObject
     {
         [SerializeField, CustomLabel("HP")] float _maxHp = 30;
+
         [SerializeField, CustomLabel("衝突ダメージ")]
         float _collisionDamage;
+
         [SerializeField, CustomLabel("ノックバックするかどうか")]
         private bool _canKnockback = true;
+
         [SerializeField, CustomLabel("ノックバック方向"), ShowWhenBoolean(nameof(_canKnockback))]
         Vector3 _direction = Vector3.one;
+
         [SerializeField, CustomLabel("ノックバック処理"), ShowWhenBoolean(nameof(_canKnockback))]
         TakeKnockBack _takeKnockBack;
+
         [SerializeField, CustomLabel("ドロップデータ")]
         LootTable _lootTable;
+
         [SerializeField, CustomLabel("ダメージエフェクト")]
         HitDamageEffectManager _hitDamageEffectManager;
+
         FloatReactiveProperty _currentHp = new();
         float _knockBackResistance;
         public Action OnDead;
@@ -43,7 +50,7 @@ namespace SoulRunProject.InGame
         public override void Initialize()
         {
             _currentHp.Value = _maxHp;
-            if(_enemyController) _enemyController.Initialize();
+            if (_enemyController) _enemyController.Initialize();
         }
 
         /// <summary>
@@ -57,8 +64,8 @@ namespace SoulRunProject.InGame
                 0, _player.CurrentPlayerStatus.CriticalRate, _player.CurrentPlayerStatus.CriticalDamageRate);
             _currentHp.Value -= calcedDamage;
 
-            if(useSE) CriAudioManager.Instance.PlaySE(CriAudioManager.CueSheet.Se, "SE_Hit");
-            
+            if (useSE) CriAudioManager.Instance.PlaySE("SE_Hit");
+
             if (_currentHp.Value <= 0)
             {
                 Death();

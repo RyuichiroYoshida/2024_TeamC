@@ -15,7 +15,10 @@ namespace SoulRunProject
     {
         static Transform _playerTransform;
         [SerializeField, Header("発射する弾のプレハブ")] BulletController _bullet;
-        [SerializeField, Header("複数弾を発射する際に与える回転基準")]　float _baseRotateY = 5f;
+
+        [SerializeField, Header("複数弾を発射する際に与える回転基準")]
+        float _baseRotateY = 5f;
+
         [SerializeField] Vector3 _muzzleOffset;
         CommonObjectPool _bulletPool;
         ProjectileSkillParameter _projectileSkillParameter;
@@ -51,7 +54,7 @@ namespace SoulRunProject
                 _timer = 0;
                 if (_projectileSkillParameter != null)
                 {
-                    for (int i = 0; i < _projectileSkillParameter.Amount ; i++)
+                    for (int i = 0; i < _projectileSkillParameter.Amount; i++)
                     {
                         // 弾の生成
                         float rotateY;
@@ -63,20 +66,20 @@ namespace SoulRunProject
                         {
                             rotateY = (i - _projectileSkillParameter.Amount / 2) * _baseRotateY;
                         }
-                        
-                        
+
+
                         var bullet = (BulletController)_bulletPool.Rent();
                         bullet.transform.position = PlayerTransform.position + _muzzleOffset;
                         bullet.transform.forward = PlayerTransform.forward;
-                        bullet.transform.rotation *= Quaternion.Euler(0f, rotateY ,0f);
+                        bullet.transform.rotation *= Quaternion.Euler(0f, rotateY, 0f);
                         bullet.ApplyParameter(_projectileSkillParameter);
                         bullet.Initialize();
                         bullet.OnFinishedAsync.Take(1).Subscribe(_ => _bulletPool.Return(bullet));
                     }
-                    CriAudioManager.Instance.PlaySE(CriAudioManager.CueSheet.Se, "SE_Soulbullet");
+
+                    CriAudioManager.Instance.PlaySE("SE_Soulbullet");
                 }
             }
         }
-        
     }
 }
