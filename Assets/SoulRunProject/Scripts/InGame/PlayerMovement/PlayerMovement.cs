@@ -195,19 +195,22 @@ namespace SoulRunProject.InGame
         
         public void RotatePlayer(Vector2 input)
         {
-            
-            // if (input.x > 0)
-            // {
-            //     transform.DORotate(new Vector3(0, -_rotateAngle, 0), _rotateTime);
-            // }
-            // else if ( input.x < 0)
-            // {
-            //     transform.DORotate(new Vector3(0, _rotateAngle, 0), _rotateTime);
-            // }
-            // else
-            // {
-            //     transform.DORotate(new Vector3(transform.rotation.x, 0, transform.rotation.y), _rotateTime);
-            // }
+            var animator = GetComponent<Animator>();
+            if (input.x > 0)
+            {
+                animator.SetBool("IsLeft", true);
+                animator.SetBool("IsRight", false);
+            }
+            else if ( input.x < 0)
+            {
+                animator.SetBool("IsRight", true);
+                animator.SetBool("IsLeft", false);
+            }
+            else
+            {
+                animator.SetBool("IsRight", false);
+                animator.SetBool("IsLeft", false);
+            }
         }
 
         /// <summary>
