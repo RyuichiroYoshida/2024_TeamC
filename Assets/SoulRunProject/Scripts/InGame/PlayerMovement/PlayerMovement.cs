@@ -37,6 +37,8 @@ namespace SoulRunProject.InGame
 
         public BoolReactiveProperty IsGround => _isGround;
         public event Action OnJumped;
+        /// <summary> プレイヤー地点の地面の高さ </summary>
+        public float GroundHeight => _yAxisGroundLine;
 
         private void Awake()
         {
@@ -63,7 +65,7 @@ namespace SoulRunProject.InGame
             
             if (_isGround.Value && _playerVelocity.y <= 0)
             {
-                _playerVelocity.y = _onFieldVelocityY - Grav;
+                _playerVelocity.y = _onFieldVelocityY;
             }
             else
             {
@@ -105,7 +107,8 @@ namespace SoulRunProject.InGame
                 if (hit.transform.TryGetComponent(out FieldSegment field))
                 {
                     _yAxisGroundLine = hit.point.y;
-                    _onFieldVelocityY = Vector3.ProjectOnPlane(Vector3.forward * 100, hit.normal).y; // todo プレイヤーのスピードを参照する
+                    Vector3 dir = Vector3.ProjectOnPlane(Vector3.forward, hit.normal);
+                    _onFieldVelocityY = (30 / dir.z * dir).y; // todo プレイヤーのスピードを参照する
                     break;
                 }
             }
