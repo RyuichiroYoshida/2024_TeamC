@@ -16,18 +16,21 @@ namespace SoulRunProject.Title
 
         private void Start()
         {
-            CriAudioManager.Instance.PlayBGM(CriAudioManager.CueSheet.Bgm, "BGM_title");
+            CriAudioManager.Instance.PlayBGM("BGM_title");
         }
+
         public async void StartGame()
         {
             DebugClass.Instance.ShowLog($"ゲーム開始:{_transitionTime}秒後にインゲーム画面に遷移します");
             //ここで実行
             SceneManager.LoadScene("InGame");
         }
+
         public void Option()
         {
             DebugClass.Instance.ShowLog("オプション画面表示");
         }
+
         public void Exit()
         {
             DebugClass.Instance.ShowLog("ゲーム終了");

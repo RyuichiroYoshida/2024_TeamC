@@ -25,7 +25,7 @@ namespace SoulRunProject
 
             // テストケースを実行
             //TestPlayBGM();
-            TestPlaySE();
+            _ = TestPlaySE();
             //TestPlayVoice();
             //TestVolumeChanges();
         }
@@ -33,7 +33,7 @@ namespace SoulRunProject
         async UniTaskVoid TestPlayBGM()
         {
             Debug.Log("Playing BGM...");
-            _audioManager.PlayBGM(CriAudioManager.CueSheet.Bgm, "bgm_cue_name");
+            _audioManager.PlayBGM("bgm_cue_name");
             // BGMの一時停止
             await UniTask.Delay(1000);
             _audioManager.PauseBGM();
@@ -52,7 +52,7 @@ namespace SoulRunProject
             Debug.Log("Playing SE...");
             foreach (var cueName in _seCueNames)
             {
-                int seIndex = _audioManager.PlaySE(CriAudioManager.CueSheet.Se, cueName, 0.8f);
+                int seIndex = _audioManager.PlaySE(cueName, 0.8f);
                 _seIndexes.Add(seIndex);
             }
 
@@ -85,7 +85,7 @@ namespace SoulRunProject
         async UniTaskVoid TestPlayVoice()
         {
             Debug.Log("Playing Voice...");
-            int voiceIndex = _audioManager.PlayVoice(CriAudioManager.CueSheet.Voice, "voice_cue_name", 0.9f);
+            int voiceIndex = _audioManager.PlayVoice("voice_cue_name", 0.9f);
             // Voiceの一時停止
             await UniTask.Delay(1000);
             _audioManager.PauseVoice(voiceIndex);
