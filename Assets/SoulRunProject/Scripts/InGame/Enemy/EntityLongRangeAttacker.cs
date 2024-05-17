@@ -6,14 +6,14 @@ using UnityEngine;
 namespace SoulRunProject.InGame
 {
     /// <summary>
-    /// Enemyの通常攻撃処理の実装クラス
+    /// Enemyの遠距離攻撃処理の実装クラス
     /// </summary>
-    [Serializable, Name("通常攻撃")]
-    public class EntityNormalAttacker : EntityAttacker
+    [Serializable, Name("遠距離攻撃")]
+    public class EntityLongRangeAttacker : EntityAttacker
     {
-        [SerializeField, CustomLabel("弾速")] float _speed;
-        [SerializeField, CustomLabel("弾の寿命")] float _lifeTime;
-        [SerializeField, CustomLabel("生成する弾丸")] private EnemyBulletController _enemyBullet;
+        [SerializeField, CustomLabel("弾の生成間隔")]
+        private float _interval = 3f;
+        [SerializeField, CustomLabel("生成する弾丸")] private EnemyBullet _enemyBullet;
         private CommonObjectPool _bulletPool;
         float _timer;
         bool _isPause;
@@ -21,7 +21,7 @@ namespace SoulRunProject.InGame
         public override void OnStart()
         {
             _bulletPool = ObjectPoolManager.Instance.RequestPool(_enemyBullet);
-            _timer = _coolTime;
+            _timer = _interval;
         }
 
         public override void OnUpdateAttack(Transform myTransform, Transform playerTransform)
@@ -30,22 +30,20 @@ namespace SoulRunProject.InGame
             {
                 return;
             }
-            if (_coolTime > _timer)
+            if (_interval > _timer)
             {
                 _timer += Time.deltaTime;
             }
             else
             {
                 _timer = 0;
-                // var bullet = (EnemyBulletController)_bulletPool.Rent();
-                // bullet.transform.position = myTransform.position + Vector3.back;
-                // bullet.ApplyParameter(_parameter);
-                // bullet.Initialize();
-                // bullet.OnFinishedAsync.Take(1).Subscribe(_ => _bulletPool.Return(bullet));
+                var bullet = (EnemyBullet)_bulletPool.Rent();
+                bullet.transform.position = myTransform.position + Vector3.back;
+                bullet.Initialize();
+                bullet.OnFinishedAsync.Take(1).Subscribe(_ => _bulletPool.Return(bullet));
             }
         }
 
-        // TODO ポーズ処理怪しい
         public override void Pause()
         {
             _isPause = true;
