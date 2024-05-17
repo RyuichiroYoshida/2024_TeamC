@@ -50,7 +50,7 @@ namespace SoulRunProject.InGame
             _isGround.AddTo(this);
             this.OnDestroyAsObservable().Subscribe(_ => OnJumped = null);
             //_spinIndex = CriAudioManager.Instance.PlaySE("SE_Spin");
-            CriAudioManager.Instance.PauseSE(_spinIndex);
+            //CriAudioManager.Instance.PauseSE(_spinIndex);
         }
 
         private void Update()
@@ -90,7 +90,7 @@ namespace SoulRunProject.InGame
             {
                 _playerVelocity.y = _jumpPower;
                 _jumping = true;
-                //CriAudioManager.Instance.PlaySE(CriAudioManager.CueSheet.Se, "SE_Jump");
+                //CriAudioManager.Instance.PlaySE("SE_Jump");
                 OnJumped?.Invoke();
             }
         }
@@ -123,14 +123,14 @@ namespace SoulRunProject.InGame
                 if (!_isGround.Value)
                 {
                     //CriAudioManager.Instance.PlaySE("SE_Landing");
-                    CriAudioManager.Instance.PauseSE(_spinIndex);
+                    //CriAudioManager.Instance.PauseSE(_spinIndex);
                     _isGround.Value = true;
                     _jumping = false;
                 }
             }
             else if (_isGround.Value)
             {
-                CriAudioManager.Instance.ResumeSE(_spinIndex);
+                //CriAudioManager.Instance.ResumeSE(_spinIndex);
                 _isGround.Value = false;
             }
         }
