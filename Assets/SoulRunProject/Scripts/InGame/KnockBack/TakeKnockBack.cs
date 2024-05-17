@@ -24,7 +24,7 @@ namespace SoulRunProject.Common
             _sequence.Append(myTransform.DOBlendableMoveBy(new Vector3(direction.x, 0f ,direction.z), _knockBackTime));
             _sequence.Insert(0f , myTransform.DOBlendableMoveBy(new Vector3(0f , direction.y ,0f), _knockBackTime / 2));
             _sequence.Insert(_knockBackTime / 2 , myTransform.DOBlendableMoveBy(new Vector3(0f , - direction.y ,0f), _knockBackTime / 2));
-            _sequence.SetLink(myTransform.gameObject, LinkBehaviour.KillOnDisable);
+            _sequence.SetLink(myTransform.gameObject, LinkBehaviour.KillOnDisable).SetLink(myTransform.gameObject);
             _sequence.OnComplete(() =>
             {
                 _sequence = null;

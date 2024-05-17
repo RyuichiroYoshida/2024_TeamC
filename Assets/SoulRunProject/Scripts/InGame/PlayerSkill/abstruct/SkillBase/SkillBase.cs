@@ -1,6 +1,5 @@
 using System;
 using SoulRunProject.InGame;
-using SoulRunProject.SoulMixScene;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -147,12 +146,12 @@ namespace SoulRunProject.Common
         
         public void Register()
         {
-            PauseManager.Instance.RegisterPausableObject(this);
+            PauseManager.RegisterPausableObject(this);
         }
 
         public void UnRegister()
         {
-            PauseManager.Instance.UnRegisterPausableObject(this);
+            PauseManager.UnRegisterPausableObject(this);
         }
         
     }

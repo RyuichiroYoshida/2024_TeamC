@@ -73,7 +73,7 @@ namespace SoulRunProject.InGame
             _sequence.Append(DOTween.To(() => color, c => _copyMaterial.SetColor(_pramID, c), _defaultColor, _duration));
             _sequence.AppendCallback(() => _copyMaterial.SetBool("_Boolean", false));
             _sequence.SetLoops(_loopCount, LoopType.Restart);
-            _sequence.SetLink(gameObject);
+            _sequence.SetLink(gameObject).SetLink(gameObject, LinkBehaviour.KillOnDisable);
             _sequence.Play();
             _hitFadeBlinking = true;
             _sequence.OnComplete(() => _hitFadeBlinking = false);

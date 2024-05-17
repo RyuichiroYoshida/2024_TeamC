@@ -30,7 +30,7 @@ namespace SoulRunProject.InGame
         }
         private void Awake()
         {
-            PauseManager.Instance.RegisterPausableObject(this);
+            PauseManager.RegisterPausableObject(this);
         }
 
         public override void Initialize()
@@ -65,7 +65,7 @@ namespace SoulRunProject.InGame
             _projectileMotionSequence.Append(transform.DOBlendableMoveBy(new Vector3(randomDir.x, 0f ,randomDir.z), _projectileMotionTime));
             _projectileMotionSequence.Insert(0f , transform.DOBlendableMoveBy(new Vector3(0f , randomDir.y ,0f), _projectileMotionTime / 2));
             _projectileMotionSequence.Insert(_projectileMotionTime / 2 , transform.DOBlendableMoveBy(new Vector3(0f , - randomDir.y ,0f), _projectileMotionTime / 2));
-            _projectileMotionSequence.SetLink(gameObject).OnComplete(()=>_projectileMotionSequence = null);
+            _projectileMotionSequence.SetLink(gameObject).SetLink(gameObject, LinkBehaviour.KillOnDisable).OnComplete(()=>_projectileMotionSequence = null);
         }
 
         private void Update()
@@ -86,7 +86,7 @@ namespace SoulRunProject.InGame
         void OnEnable()
         {
             _rotateTween = transform.DORotate(new Vector3(0,360,0),_rotateTime, RotateMode.WorldAxisAdd)
-                .SetEase(Ease.Linear).SetLoops(-1, LoopType.Restart).SetLink(gameObject);
+                .SetEase(Ease.Linear).SetLoops(-1, LoopType.Restart).SetLink(gameObject).SetLink(gameObject, LinkBehaviour.KillOnDisable);
         }
 
         void OnDisable()
@@ -107,12 +107,12 @@ namespace SoulRunProject.InGame
 
         public void Register()
         {
-            PauseManager.Instance.RegisterPausableObject(this);
+            PauseManager.RegisterPausableObject(this);
         }
 
         public void UnRegister()
         {
-            PauseManager.Instance.UnRegisterPausableObject(this);
+            PauseManager.UnRegisterPausableObject(this);
         }
 
         public void Pause(bool isPause)
