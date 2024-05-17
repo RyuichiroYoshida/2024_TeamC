@@ -15,9 +15,10 @@ namespace SoulRunProject.InGame
     {
         [SerializeField] private float _moveSpeed;
         [SerializeField] private float _jumpPower;
-        [SerializeField] private float _nomalGrav;
+        [SerializeField] private float _stickingPowerOnGround;
+        [SerializeField] private float _normalGrav;
         [SerializeField] private float _jumpGrav;
-        [SerializeField, CustomLabel("Pivotと接地点との距離")] private float _DistanceBetweenPivotAndGroundPoint;
+        [SerializeField, CustomLabel("Pivotと接地点との距離")] private float _distanceBetweenPivotAndGroundPoint;
         [SerializeField, HideInInspector] private float _xMoveRangeMin;
         [SerializeField, HideInInspector] private float _xMoveRangeMax;
         [SerializeField, HideInInspector] private bool _canZAxisMovement;
@@ -26,9 +27,9 @@ namespace SoulRunProject.InGame
         [SerializeField, HideInInspector] private float _zMoveRangeMax;
 
         private Rigidbody _rb;
-        private readonly BoolReactiveProperty _isGround = new BoolReactiveProperty(true);
-        private bool _useJumpGrav;
-        private float Grav => _useJumpGrav? _jumpGrav : _nomalGrav;
+        private readonly BoolReactiveProperty _isGround = new BoolReactiveProperty(false);
+        private bool _jumping;
+        private float Grav => _jumping? _jumpGrav : _normalGrav;
         private Vector3 _playerVelocity;
         private float _onFieldVelocityY; // フィールドに沿った場合のｙ速度
         private float _yAxisGroundLine;
@@ -37,6 +38,7 @@ namespace SoulRunProject.InGame
 
         public BoolReactiveProperty IsGround => _isGround;
         public event Action OnJumped;
+        public bool IsJumping => _jumping;
         /// <summary> プレイヤー地点の地面の高さ </summary>
         public float GroundHeight => _yAxisGroundLine;
 
@@ -63,9 +65,9 @@ namespace SoulRunProject.InGame
         {
             if (_inPause) return;
             
-            if (_isGround.Value && _playerVelocity.y <= 0)
+            if (_isGround.Value && !_jumping)
             {
-                _playerVelocity.y = _onFieldVelocityY;
+                _playerVelocity.y = _onFieldVelocityY - _stickingPowerOnGround;
             }
             else
             {
@@ -77,7 +79,6 @@ namespace SoulRunProject.InGame
         {
             if (_inPause) return;
             _playerVelocity.x = moveInput.x * _moveSpeed;
-            //_playerVelocity.z = moveInput.y * _moveSpeed;
             if (_canZAxisMovement) _playerVelocity.z = moveInput.y * _zAxisMoveSpeed;
         }
 
@@ -88,7 +89,7 @@ namespace SoulRunProject.InGame
             if (_isGround.Value)
             {
                 _playerVelocity.y = _jumpPower;
-                _useJumpGrav = true;
+                _jumping = true;
                 CriAudioManager.Instance.PlaySE(CriAudioManager.CueSheet.Se, "SE_Jump");
                 OnJumped?.Invoke();
             }
@@ -108,15 +109,15 @@ namespace SoulRunProject.InGame
                 {
                     _yAxisGroundLine = hit.point.y;
                     Vector3 dir = Vector3.ProjectOnPlane(Vector3.forward, hit.normal);
-                    _onFieldVelocityY = (30 / dir.z * dir).y; // todo プレイヤーのスピードを参照する
+                    _onFieldVelocityY = dir.y * 30 / dir.z; // todo 30 => プレイヤーのスピードを参照する
                     break;
                 }
             }
             
-            if (transform.position.y <= _yAxisGroundLine + _DistanceBetweenPivotAndGroundPoint)
+            if (transform.position.y <= _yAxisGroundLine + _distanceBetweenPivotAndGroundPoint)
             {
                 Vector3 pos = transform.position;
-                pos.y = _yAxisGroundLine + _DistanceBetweenPivotAndGroundPoint;
+                pos.y = _yAxisGroundLine + _distanceBetweenPivotAndGroundPoint;
                 transform.position = pos;
 
                 if (!_isGround.Value)
@@ -124,7 +125,7 @@ namespace SoulRunProject.InGame
                     CriAudioManager.Instance.PlaySE(CriAudioManager.CueSheet.Se, "SE_Landing");
                     CriAudioManager.Instance.PauseSE(_spinIndex);
                     _isGround.Value = true;
-                    _useJumpGrav = false;
+                    _jumping = false;
                 }
             }
             else if (_isGround.Value)
