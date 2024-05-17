@@ -1,9 +1,9 @@
-using SoulRunProject.Common;
-using SoulRunProject.InGame;
-using SoulRunProject.Framework;
 using System.Threading;
-using UniRx;
 using Cysharp.Threading.Tasks;
+using SoulRunProject.Common;
+using SoulRunProject.Framework;
+using SoulRunProject.InGame;
+using UniRx;
 
 namespace SoulRunProject
 {
@@ -26,7 +26,7 @@ namespace SoulRunProject
         {
             DebugClass.Instance.ShowLog("ポーズステート開始");
             //停止させる仕組み自体は共通だが、こちらのステートに移行する際にはポーズUIを表示する。
-            PauseManager.Instance.Pause(true);
+            PauseManager.Pause(true);
             _lastState = currentState;
             _cts = new CancellationTokenSource();
             

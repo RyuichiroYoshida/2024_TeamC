@@ -68,12 +68,12 @@ namespace SoulRunProject.Common
         }
         public void Register()
         {
-            PauseManager.Instance.RegisterPausableObject(this);
+            PauseManager.RegisterPausableObject(this);
         }
 
         public void UnRegister()
         {
-            PauseManager.Instance.UnRegisterPausableObject(this);
+            PauseManager.UnRegisterPausableObject(this);
         }
 
         /// <summary>

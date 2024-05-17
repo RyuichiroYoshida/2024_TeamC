@@ -1,6 +1,5 @@
 using SoulRunProject.Common;
 using SoulRunProject.InGame;
-using SoulRunProject.SoulMixScene;
 using UniRx;
 using UnityEngine;
 
@@ -14,7 +13,7 @@ namespace SoulRunProject
     public class ProjectileSkill : SkillBase
     {
         static Transform _playerTransform;
-        [SerializeField, Header("発射する弾のプレハブ")] BulletController _bullet;
+        [SerializeField, Header("発射する弾のプレハブ")] PlayerBullet _bullet;
 
         [SerializeField, Header("複数弾を発射する際に与える回転基準")]
         float _baseRotateY = 5f;
@@ -68,7 +67,7 @@ namespace SoulRunProject
                         }
 
 
-                        var bullet = (BulletController)_bulletPool.Rent();
+                        var bullet = (PlayerBullet)_bulletPool.Rent();
                         bullet.transform.position = PlayerTransform.position + _muzzleOffset;
                         bullet.transform.forward = PlayerTransform.forward;
                         bullet.transform.rotation *= Quaternion.Euler(0f, rotateY, 0f);

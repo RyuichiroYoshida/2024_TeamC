@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Threading;
 using Cysharp.Threading.Tasks;
 using SoulRunProject.Common;
 using SoulRunProject.Common.Interface;
@@ -74,7 +73,7 @@ namespace SoulRunProject.InGame
                     spawnIndex = 0;
                 }
 
-                var result = await PauseManager.Instance.TryWaitForSeconds(_spawnInterval);
+                var result = await PauseManager.TryWaitForSeconds(_spawnInterval, destroyCancellationToken);
                 if (!result)
                 {
                     return;

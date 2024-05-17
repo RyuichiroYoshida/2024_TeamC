@@ -3,8 +3,6 @@ using DG.Tweening;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 namespace SoulRun.InGame
 {
@@ -43,7 +41,7 @@ namespace SoulRun.InGame
         protected override void OnPointerDownEvent()
         {
             // DOTweenを使ってスケールを小さくするアニメーションを実行
-            transform.DOScale(_originalScale * 0.8f, 0.2f);
+            transform.DOScale(_originalScale * 0.8f, 0.2f).SetLink(gameObject);
             _button.alpha = 0.5f;
             // イベントの発火
             OnButtonDown?.Invoke();
@@ -52,7 +50,7 @@ namespace SoulRun.InGame
         protected override void OnPointerUpEvent()
         {
             // DOTweenを使ってスケールを元に戻すアニメーションを実行
-            transform.DOScale(_originalScale, 0.2f);
+            transform.DOScale(_originalScale, 0.2f).SetLink(gameObject);
             _button.alpha = 1f;
             // イベントの発火
             OnButtonUp?.Invoke();

@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using SoulRunProject.Common;
 using SoulRunProject.Framework;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace SoulRunProject.InGame
 {
@@ -19,7 +15,7 @@ namespace SoulRunProject.InGame
         protected override void OnEnter(State currentState)
         {
             DebugClass.Instance.ShowLog("ゲームオーバーステート開始");
-            PauseManager.Instance.Pause(true);
+            PauseManager.Pause(true);
         }
     }
 }
