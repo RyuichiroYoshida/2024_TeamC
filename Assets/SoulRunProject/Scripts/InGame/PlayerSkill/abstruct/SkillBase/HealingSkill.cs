@@ -14,22 +14,20 @@ namespace SoulRunProject.Skill
         [SerializeField, Tooltip("スキルエフェクト")] private ParticleSystem _healParticle;
 
         private HealingSkillParameter _healingSkillParam;
-        private PlayerManager _playerManager;
         private float _coolTimer;
         
         HealingSkill()
         {
-            _skillParam = new HealingSkillParameter();
+            SkillParam = new HealingSkillParameter();
             SkillLevelUpEvent = new SkillLevelUpEvent(new HealingSkillLevelUpEventListList());
         }
 
-        public override void StartSkill()
+        protected override void StartSkill()
         {
-            _playerManager = FindObjectOfType<PlayerManager>();
-            if (_skillParam is HealingSkillParameter param)
+            if (SkillParam is HealingSkillParameter param)
                 _healingSkillParam = param;
             ActivateSkill();
-            Instantiate(_healParticle, _playerManager.transform);
+            Instantiate(_healParticle, PlayerTransform);
         }
 
         public override void UpdateSkill(float deltaTime)
@@ -40,7 +38,7 @@ namespace SoulRunProject.Skill
             {
                 _coolTimer -= deltaTime;
             }
-            else if (_playerManager.CurrentStatus.CurrentHp < _playerManager.CurrentStatus.MaxHp) // HPがMaxだと発動しない
+            else if (PlayerManagerInstance.CurrentPlayerStatus.CurrentHp < PlayerManagerInstance.CurrentPlayerStatus.MaxHp) // HPがMaxだと発動しない
             {
                 ActivateSkill();
             }
@@ -50,7 +48,7 @@ namespace SoulRunProject.Skill
         void ActivateSkill()
         {
             _coolTimer = _healingSkillParam.CoolTime;
-            _playerManager.Heal(_healingSkillParam.HealAmount);
+            PlayerManagerInstance.Heal(_healingSkillParam.HealAmount);
             _healParticle.Play();
         }
         

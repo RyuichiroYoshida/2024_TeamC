@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using SoulRunProject.Common;
+using SoulRunProject.SoulMixScene;
 using SoulRunProject.SoulRunProject.Scripts.Common.Core.Singleton;
 using UnityEditor;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace SoulRunProject.InGame
 {
     public class SkillManager : MonoBehaviour, IPlayerPausable
     {
+        [SerializeField, Header("初期スキルリスト")] private List<PlayerSkill> _defaultPlayerSkills;
         [SerializeField, HideInInspector] private Image[] _skillIconImage = new Image[5];
         private readonly List<SkillBase> _currentSkills = new(5);
         private List<SkillBase> _skillData;
@@ -22,13 +24,22 @@ namespace SoulRunProject.InGame
         public List<PlayerSkill> CurrentSkillTypes => _currentSkills.Select(x => x.SkillType).ToList();
         
         private bool _isPause;
+        
+        private PlayerManager _playerManager;
+        
         public void Start()
         {
+            _playerManager = FindObjectOfType<PlayerManager>();
             if (MyRepository.Instance.TryGetDataList<SkillBase>(out var dataSet))
             {
                 _skillData = dataSet ;
             }
-            AddSkill(PlayerSkill.SoulBullet);
+
+            foreach (var skill in _defaultPlayerSkills)
+            {
+                AddSkill(skill);
+            }
+            
         }
         
         public void Update()
@@ -52,12 +63,12 @@ namespace SoulRunProject.InGame
             if (skill != null)
             {
                 _currentSkills.Add(skill);
-                skill.StartSkill();
+                skill.InitialiseSkill(_playerManager , transform);
                 _skillIconImage[_currentSkills.Count - 1].sprite = skill.SkillIcon; // スキルアイコンの表示
             }
             else
             {
-                Debug.LogError("スキルリストに入っていないスキルがレベルアップ選択されました。");
+                Debug.LogError("スキルリストに入っていないスキルが追加選択されました。");
             }
         }
 

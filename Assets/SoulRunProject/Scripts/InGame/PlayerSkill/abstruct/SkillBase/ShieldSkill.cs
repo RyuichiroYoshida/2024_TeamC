@@ -12,9 +12,7 @@ namespace SoulRunProject.Skill
     [CreateAssetMenu(menuName = "SoulRunProject/PlayerSkill/ShieldSkill")]
     public class ShieldSkill : SkillBase
     {
-        static Transform _playerTransform;
         [SerializeField, Tooltip("プレハブ")] GameObject _original;
-        PlayerManager _playerManager;
         Transform _instantiatedObject;
         CancellationTokenSource _linkedTokenSource;
         Tweener _tweener;
@@ -24,28 +22,26 @@ namespace SoulRunProject.Skill
 
         ShieldSkill()
         {
-            _skillParam = new ShieldSkillParameter();
+            SkillParam = new ShieldSkillParameter();
             SkillLevelUpEvent = new SkillLevelUpEvent(new ShieldSkillLevelUpEventListList());
         }
-        
-        public override void StartSkill()
+
+        protected override void StartSkill()
         {
-            _playerManager = FindObjectOfType<PlayerManager>();
-            _playerTransform = _playerManager.transform;
             _instantiatedObject = Instantiate(_original).transform;
             _instantiatedObject.localScale = Vector3.zero;
-            if (_skillParam is ShieldSkillParameter param)
+            if (SkillParam is ShieldSkillParameter param)
                 _shieldSkillParameter = param;
             else
                 Debug.LogError($"パラメータが　{nameof(ShieldSkillParameter)}　ではありません　");
-            _playerManager.IgnoreDamagePredicates.Add(IncreaseDamageCount);
+            PlayerManagerInstance.IgnoreDamagePredicates.Add(IncreaseDamageCount);
             ActiveSkill();
-            _instantiatedObject.position = _playerTransform.position;
+            _instantiatedObject.position = PlayerTransform.position;
         }
 
         public override void UpdateSkill(float deltaTime)
         {
-            _instantiatedObject.position = _playerTransform.position;
+            _instantiatedObject.position = PlayerTransform.position;
         }
 
         public override void OnLevelUp()
@@ -59,7 +55,7 @@ namespace SoulRunProject.Skill
             }
         }
 
-        protected override void OnSwitchPause(bool toPause)
+        protected void OnSwitchPause(bool toPause)
         {
             if (toPause)
             {

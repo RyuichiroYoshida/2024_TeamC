@@ -1,34 +1,44 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using SoulRunProject.InGame;
-using UniRx;
-using UniRx.Triggers;
 using UnityEngine;
-
+using UniRx;
 namespace SoulRunProject.Common
 {
     /// <summary>
     /// 範囲攻撃クラス
     /// </summary>
-    public class AoEController : MonoBehaviour
+    public class AoEController : MonoBehaviour, IPausable
     {
         HashSet<DamageableEntity> _entities = new();
+        private AoESkillParameter _param;
         float _attackDamage;
+        private bool _isPause;
 
-        public void Initialize(float attackDamage, float range)
+        private void Awake()
         {
-            _attackDamage = attackDamage;
-            transform.localScale = new Vector3(range, range, range);
+            Register();
+        }
+
+        private void OnDestroy()
+        {
+            UnRegister();
+        }
+
+        public void Initialize(in AoESkillParameter param)
+        {
+            _param = param;
+            param.ObserveEveryValueChanged(x => x.Size).Subscribe(x => transform.localScale = Vector3.one * x).AddTo(this);
         }
 
         void FixedUpdate()
         {
+            if (_isPause) return;
             // OnTriggerExitする前にDestroyすることがあるので、
             // Whereでnullチェックしてからダメージ処理
             foreach (var entity in _entities.Where(entity => entity))
             {
-                entity.Damage(_attackDamage * Time.fixedDeltaTime);
+                entity.Damage(_attackDamage * Time.fixedDeltaTime, useSE: false);
             }
         }
 
@@ -46,6 +56,21 @@ namespace SoulRunProject.Common
             {
                 _entities.Remove(entity);
             }
+        }
+
+        public void UnRegister()
+        {
+            PauseManager.Instance.UnRegisterPausableObject(this);
+        }
+
+        public void Pause(bool isPause)
+        {
+            _isPause = isPause;
+        }
+
+        public void Register()
+        {
+            PauseManager.Instance.RegisterPausableObject(this);
         }
     }
 }

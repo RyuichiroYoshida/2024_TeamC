@@ -15,14 +15,12 @@ namespace SoulRunProject.InGame
         [SerializeField, CustomLabel("弾の寿命")] float _lifeTime;
         [SerializeField, CustomLabel("生成する弾丸")] private EnemyBulletController _enemyBullet;
         private CommonObjectPool _bulletPool;
-        ProjectileSkillParameter _parameter;
         float _timer;
         bool _isPause;
 
         public override void OnStart()
         {
             _bulletPool = ObjectPoolManager.Instance.RequestPool(_enemyBullet);
-            _parameter = new ProjectileSkillParameter();
             _timer = _coolTime;
         }
 
@@ -32,24 +30,18 @@ namespace SoulRunProject.InGame
             {
                 return;
             }
-
-            _parameter.AttackDamage = _attack;
-            _parameter.CoolTime = _coolTime;
-            _parameter.Range = _range;
-            _parameter.Speed = _speed;
-            _parameter.LifeTime = _lifeTime;
-            if (_parameter.CoolTime > _timer)
+            if (_coolTime > _timer)
             {
                 _timer += Time.deltaTime;
             }
             else
             {
                 _timer = 0;
-                var bullet = (EnemyBulletController)_bulletPool.Rent();
-                bullet.transform.position = myTransform.position + Vector3.back;
-                bullet.ApplyParameter(_parameter);
-                bullet.Initialize();
-                bullet.OnFinishedAsync.Take(1).Subscribe(_ => _bulletPool.Return(bullet));
+                // var bullet = (EnemyBulletController)_bulletPool.Rent();
+                // bullet.transform.position = myTransform.position + Vector3.back;
+                // bullet.ApplyParameter(_parameter);
+                // bullet.Initialize();
+                // bullet.OnFinishedAsync.Take(1).Subscribe(_ => _bulletPool.Return(bullet));
             }
         }
 

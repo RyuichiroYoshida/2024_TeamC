@@ -1,8 +1,6 @@
 using SoulRunProject.Common;
 using UniRx;
 using UniRx.Triggers;
-using Unity.Mathematics;
-using UnityEditor;
 using UnityEngine;
 
 namespace SoulRunProject.InGame
@@ -14,7 +12,17 @@ namespace SoulRunProject.InGame
         private float _flameFloorDamage;
         private Vector3 _lastPosition;
         private bool _isPause;
-        
+
+        private void Awake()
+        {
+            Register();
+        }
+
+        private void OnDestroy()
+        {
+            UnRegister();
+        }
+
         public void Initialize(float speed, float flameFloorDamage)
         {
             _flameFloorDamage = flameFloorDamage;
@@ -62,6 +70,16 @@ namespace SoulRunProject.InGame
                 flameFloor.Initialize(_flameFloorDamage);
                 Destroy(gameObject);
             }
+        }
+
+        public void Register()
+        {
+            PauseManager.Instance.RegisterPausableObject(this);
+        }
+
+        public void UnRegister()
+        {
+            PauseManager.Instance.UnRegisterPausableObject(this);
         }
 
         public void Pause(bool isPause)

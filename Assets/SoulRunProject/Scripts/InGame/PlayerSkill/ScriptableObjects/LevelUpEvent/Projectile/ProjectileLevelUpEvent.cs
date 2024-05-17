@@ -26,8 +26,8 @@ namespace SoulRunProject.Common
 
         public override void LevelUpParam(in ProjectileSkillParameter param)
         {
-            param.CoolTime *= (100 - _reduceCoolTime) / 100;
-            Debug.Log($"レベルアップでクールタイムを {param.CoolTime}　にアップグレードしました");
+            param.BaseCoolTime *= (100 - _reduceCoolTime) / 100;
+            Debug.Log($"レベルアップでクールタイムを {param.BaseCoolTime}　にアップグレードしました");
         }
     }
     
@@ -37,8 +37,8 @@ namespace SoulRunProject.Common
         [SerializeField , Header(" 弾の発射数を増加 +同時発射数")] private int _addAmountCount;
         public override void LevelUpParam(in ProjectileSkillParameter param)
         {
-            param.Amount += _addAmountCount;
-            Debug.Log($"レベルアップで弾数を　{param.Amount}　にアップグレードしました");
+            param.BaseAmount += _addAmountCount;
+            Debug.Log($"レベルアップで弾数を　{param.BaseAmount}　にアップグレードしました");
         }
     }
     
@@ -48,8 +48,8 @@ namespace SoulRunProject.Common
         [SerializeField , Header("弾の速度を増加 +% (現在の速度から) ")] private float _multipleProjectionSpeed;
         public override void LevelUpParam(in ProjectileSkillParameter param)
         {
-            param.Speed *= 1 + _multipleProjectionSpeed / 100 ;
-            Debug.Log($"レベルアップで弾速度を {param.Speed}　にアップグレードしました");
+            param.BaseSpeed *= 1 + _multipleProjectionSpeed / 100 ;
+            Debug.Log($"レベルアップで弾速度を {param.BaseSpeed}　にアップグレードしました");
         }
     }
 }

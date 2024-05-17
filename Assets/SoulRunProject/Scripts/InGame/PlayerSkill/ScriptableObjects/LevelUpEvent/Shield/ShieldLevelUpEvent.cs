@@ -29,8 +29,8 @@ namespace SoulRunProject.Common
         [SerializeField, Header("シールドのクールタイムを減少 -% (現在のクールタイムから)")] private float _reduceCoolTime;
         public override void LevelUpParam(in ShieldSkillParameter param)
         {
-            param.CoolTime *= (100 - _reduceCoolTime) / 100;
-            Debug.Log($"レベルアップで{nameof(ShieldSkill)}のクールタイムを {param.CoolTime}　にアップグレードしました");
+            param.BaseCoolTime *= (100 - _reduceCoolTime) / 100;
+            Debug.Log($"レベルアップで{nameof(ShieldSkill)}のクールタイムを {param.BaseCoolTime}　にアップグレードしました");
         }
     }
     [Serializable, Name("無効化できる被ダメージ回数を増やす")]
@@ -39,8 +39,8 @@ namespace SoulRunProject.Common
         [SerializeField, Header("増加させるシールド数")] private int _increaseShieldCount;
         public override void LevelUpParam(in ShieldSkillParameter param)
         {
-            param.ShieldCount += _increaseShieldCount;
-            Debug.Log($"レベルアップで{nameof(ShieldSkill)}のダメージ無効化回数を {param.ShieldCount}　にアップグレードしました");
+            param.BaseShieldCount += _increaseShieldCount;
+            Debug.Log($"レベルアップで{nameof(ShieldSkill)}のダメージ無効化回数を {param.BaseShieldCount}　にアップグレードしました");
         }
     }
 }

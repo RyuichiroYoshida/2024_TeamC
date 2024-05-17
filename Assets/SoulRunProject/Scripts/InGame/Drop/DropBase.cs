@@ -23,6 +23,16 @@ namespace SoulRunProject.InGame
         /// <summary>プレイヤーがドロップ品を拾った時に呼ぶ処理</summary>
         protected abstract void PickUp(PlayerManager playerManager);
 
+        protected new void OnDestroy()
+        {
+            base.OnDestroy();
+            UnRegister();
+        }
+        private void Awake()
+        {
+            PauseManager.Instance.RegisterPausableObject(this);
+        }
+
         public override void Initialize()
         {
             RandomProjectileMotion();
@@ -64,7 +74,7 @@ namespace SoulRunProject.InGame
             //  プレイヤーより後ろに行ったら吸引処理を行わない
             if (_player.transform.position.z > transform.position.z) return;
             
-            var absorptionPower = _player.CurrentStatus.SoulAbsorption;
+            var absorptionPower = _player.CurrentPlayerStatus.VacuumItemRange;
             var distance = _player.transform.position - transform.position;
             float moveSpeed = 10f + _fieldMover.ScrollSpeed;
             if (distance.sqrMagnitude < absorptionPower * absorptionPower)
@@ -93,6 +103,16 @@ namespace SoulRunProject.InGame
             {
                 PickUp(playerManager);
             }
+        }
+
+        public void Register()
+        {
+            PauseManager.Instance.RegisterPausableObject(this);
+        }
+
+        public void UnRegister()
+        {
+            PauseManager.Instance.UnRegisterPausableObject(this);
         }
 
         public void Pause(bool isPause)
