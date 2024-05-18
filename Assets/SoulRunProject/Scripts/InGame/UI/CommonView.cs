@@ -15,6 +15,7 @@ namespace SoulRunProject.InGame
         [SerializeField] private Image _expGauge;
         [SerializeField] private Image _soulGauge;
         [SerializeField] private Text _levelText;
+        [SerializeField] private Text _levelStackText;
         [SerializeField] private List<Image> _skillIcons;
         [SerializeField] private Text _scoreText;
         [SerializeField] private Text _coinText;
@@ -37,6 +38,11 @@ namespace SoulRunProject.InGame
         public void SetLevelText(int level)
         {
             _levelText.text = $"{level}";
+        }
+
+        public void SetLevelStackText(int stack)
+        {
+            if (_levelStackText) _levelStackText.text = stack == 0 ? "" : $"{stack}"; // スタックが無ければ表示しない
         }
         
         public void SetSkillIcon(int index, Sprite sprite)

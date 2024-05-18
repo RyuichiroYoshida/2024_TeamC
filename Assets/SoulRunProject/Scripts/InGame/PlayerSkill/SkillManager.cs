@@ -4,6 +4,7 @@ using System.Linq;
 using SoulRunProject.Common;
 using SoulRunProject.SoulMixScene;
 using SoulRunProject.SoulRunProject.Scripts.Common.Core.Singleton;
+using UniRx;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +14,8 @@ namespace SoulRunProject.InGame
     public class SkillManager : MonoBehaviour, IPlayerPausable
     {
         [SerializeField, Header("初期スキルリスト")] private List<PlayerSkill> _defaultPlayerSkills;
+        [SerializeField, CustomLabel("初期のスキル保有可能数")] private int _initialNumberOfPossessions;
+        [SerializeField, Header("スキルの保有可能数が増えるレベル")] private int[] _increaseSkillLevels;
         [SerializeField, HideInInspector] private Image[] _skillIconImage = new Image[5];
         private readonly List<SkillBase> _currentSkills = new(5);
         private List<SkillBase> _skillData;
@@ -22,6 +25,8 @@ namespace SoulRunProject.InGame
         /// 現在所持しているスキル名リスト
         /// </summary>
         public List<PlayerSkill> CurrentSkillTypes => _currentSkills.Select(x => x.SkillType).ToList();
+        /// <summary> 現在のスキル保有可能数 </summary>
+        public int CurrentNumberOfPossessions { get; private set; }
         
         private bool _isPause;
         
@@ -39,7 +44,10 @@ namespace SoulRunProject.InGame
             {
                 AddSkill(skill);
             }
-            
+
+            CurrentNumberOfPossessions = _initialNumberOfPossessions;
+            GetComponent<PlayerLevelManager>().OnLevelUp.Where(level => _increaseSkillLevels.Contains(level))
+                .Subscribe(_ => CurrentNumberOfPossessions++).AddTo(this);
         }
         
         public void Update()
