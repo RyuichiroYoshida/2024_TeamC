@@ -29,7 +29,11 @@ namespace SoulRunProject.InGame
         /// </summary>
         void Start()
         {
-            _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+            var player = GameObject.FindGameObjectWithTag("Player");
+            if (player)
+            {
+                _playerTransform = player.transform;
+            }
             Initialize();
         }
 
@@ -46,12 +50,12 @@ namespace SoulRunProject.InGame
 
         public void Register()
         {
-            PauseManager.Instance.RegisterPausableObject(this);
+            PauseManager.RegisterPausableObject(this);
         }
 
         public void UnRegister()
         {
-            PauseManager.Instance.UnRegisterPausableObject(this);
+            PauseManager.UnRegisterPausableObject(this);
         }
 
         public void Pause(bool isPause)

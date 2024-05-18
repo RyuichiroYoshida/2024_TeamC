@@ -1,4 +1,3 @@
-using SoulRunProject.Common;
 using UnityEngine;
 
 namespace SoulRunProject.InGame
@@ -8,9 +7,6 @@ namespace SoulRunProject.InGame
     /// </summary>
     public abstract class EntityAttacker
     {
-        [SerializeField, CustomLabel("攻撃力")] protected int _attack;
-        [SerializeField, CustomLabel("クールタイム")] protected float _coolTime;
-        [SerializeField, CustomLabel("サイズ")] protected float _range;
         /// <summary>
         /// 起動時に一度のみ呼ばれる
         /// </summary>

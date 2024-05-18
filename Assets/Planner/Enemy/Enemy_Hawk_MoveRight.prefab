@@ -243,7 +243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attacker:
-    rid: 8478225610876387639
+    rid: 8478225676376211459
   _mover:
     rid: 8478225610876387393
   references:
@@ -259,13 +259,9 @@ MonoBehaviour:
         _isPosLoop: 0
         _loopCount: 0
         _type: 0
-    - rid: 8478225610876387639
-      type: {class: EntityNormalAttacker, ns: SoulRunProject.InGame, asm: Assembly-CSharp}
+    - rid: 8478225676376211459
+      type: {class: EntityLongRangeAttacker, ns: SoulRunProject.InGame, asm: Assembly-CSharp}
       data:
-        _attack: 5
-        _coolTime: 3
-        _range: 1.5
-        _speed: 10
-        _lifeTime: 30
-        _enemyBullet: {fileID: 7854687109193279523, guid: caf0a23a1824b59448852c93b13230cf,
+        _interval: 3
+        _enemyBullet: {fileID: 1312205383257055634, guid: caf0a23a1824b59448852c93b13230cf,
           type: 3}

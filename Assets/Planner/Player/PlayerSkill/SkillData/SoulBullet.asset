@@ -22,7 +22,7 @@ MonoBehaviour:
       rid: 4051172700801204271
   SkillParam:
     rid: 8824515701187543066
-  _bullet: {fileID: 7496366539032194065, guid: 93ebba11e021a9d4b92b90f0aeb5ef5b, type: 3}
+  _bullet: {fileID: 2092183155354231575, guid: 93ebba11e021a9d4b92b90f0aeb5ef5b, type: 3}
   _baseRotateY: 20
   _muzzleOffset: {x: 0, y: 0, z: 2}
   references:

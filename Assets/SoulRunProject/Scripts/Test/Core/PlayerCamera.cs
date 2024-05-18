@@ -1,14 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading;
-using Cinemachine;
 using Cysharp.Threading.Tasks;
-using SoulRunProject.InGame;
-using UniRx.Triggers;
-using UnityEngine;
-using UniRx;
 using DG.Tweening;
+using UnityEngine;
 
 namespace SoulRunProject
 {
@@ -62,7 +55,7 @@ namespace SoulRunProject
                 {
                     _shakeObj.position = new (_player.transform.position.x, transform.position.y, transform.position.z);
                     _shaking = false;
-                });
+                }).SetLink(gameObject);
         }
         
         public void StartFollowPlayer()

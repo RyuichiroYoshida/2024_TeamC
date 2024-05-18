@@ -3,11 +3,14 @@ using UnityEngine;
 
 namespace SoulRunProject.Common
 {
-    public class EnemyBulletController : BulletController
+    public class EnemyBullet : BulletBase
     {
+        [SerializeField, CustomLabel("弾速")] private float _speed = 5f;
+        [SerializeField, CustomLabel("攻撃力")] private float _attackDamage = 5f;
         public override void Move()
         {
-            transform.position += Vector3.back * (_speed * Time.fixedDeltaTime);
+            if (_isPause) return;
+            transform.position +=  Vector3.back * (_speed * Time.fixedDeltaTime);
         }
         void OnTriggerEnter(Collider other)
         {
@@ -17,5 +20,6 @@ namespace SoulRunProject.Common
                 OnHit(other);
             }
         }
+
     }
 }

@@ -47,7 +47,8 @@ namespace SoulRunProject.InGame
                 .SetOptions(_isPosLoop)
                 .SetLoops(_loopCount, _type)
                 .SetEase(Ease.Linear)
-                .SetLink(myTransform.gameObject, LinkBehaviour.KillOnDisable);
+                .SetLink(myTransform.gameObject, LinkBehaviour.KillOnDisable)
+                .SetLink(myTransform.gameObject);
         }
 
         public override void Pause()

@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using SoulRunProject.InGame;
-using UnityEngine;
 using UniRx;
+using UnityEngine;
+
 namespace SoulRunProject.Common
 {
     /// <summary>
@@ -60,7 +61,7 @@ namespace SoulRunProject.Common
 
         public void UnRegister()
         {
-            PauseManager.Instance.UnRegisterPausableObject(this);
+            PauseManager.UnRegisterPausableObject(this);
         }
 
         public void Pause(bool isPause)
@@ -70,7 +71,7 @@ namespace SoulRunProject.Common
 
         public void Register()
         {
-            PauseManager.Instance.RegisterPausableObject(this);
+            PauseManager.RegisterPausableObject(this);
         }
     }
 }

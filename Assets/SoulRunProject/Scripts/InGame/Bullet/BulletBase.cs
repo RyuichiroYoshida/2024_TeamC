@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace SoulRunProject.InGame
 {
-    public class BulletController : PooledObject
+    public abstract class BulletBase : PooledObject, IPausable
     {
         [SerializeField] bool _useFirePointRotation;
         [SerializeField] bool _useFlash;
@@ -16,37 +16,55 @@ namespace SoulRunProject.InGame
         [SerializeField] GameObject[] _detached;
         [SerializeField] Collider _collider;
         [SerializeField] Light _light;
-        [SerializeField] ParticleSystem _particleSystem;
+        [SerializeField] private ParticleSystem _ps;
         [SerializeField] Vector3 _rotationOffset;
         [SerializeField] float _hitOffset;
-        float _lifeTime;
-        protected float _attackDamage;
-        float _range;
-        protected float _speed;
-        int _penetration;
-        int _hitCount;
-        private GiveKnockBack _giveKnockBack;
-        public void Awake()
+        [SerializeField, CustomLabel("生存時間")] protected float _lifeTime = 15f;
+        protected bool _isPause;
+
+        void Awake()
         {
             if (_light != null)
                 _light.enabled = false;
             _collider.enabled = false;
-            _particleSystem.Stop();
+            _ps.Stop();
+            Register();
         }
 
-        public void ApplyParameter(ProjectileSkillParameter param)
+        new void OnDestroy()
         {
-            _lifeTime = param.LifeTime;
-            _attackDamage = param.AttackDamage;
-            _range = param.Size;
-            _speed = param.Speed;
-            _penetration = param.Penetration;
-            _giveKnockBack = param.KnockBack;
+            base.OnDestroy();
+            UnRegister();
         }
         public override void Initialize()
         {
-            _hitCount = 0;
-            transform.localScale = new Vector3(_range, _range, _range);
+            Fire();
+        }
+
+        public void Register()
+        {
+            PauseManager.RegisterPausableObject(this);
+        }
+
+        public void UnRegister()
+        {
+            PauseManager.UnRegisterPausableObject(this);
+        }
+
+        public void Pause(bool isPause)
+        {
+            _isPause = isPause;
+            if (isPause)
+            {
+                _ps.Pause();
+            }
+            else
+            {
+                _ps.Play();
+            }
+        }
+        void Fire()
+        {
             this.FixedUpdateAsObservable()
                 .TakeUntilDisable(this)
                 .TakeUntilDestroy(this)
@@ -59,7 +77,7 @@ namespace SoulRunProject.InGame
             if (_light != null)
                 _light.enabled = true;
             _collider.enabled = true;
-            _particleSystem.Play();
+            _ps.Play();
 
             //  撃った時に出現するパーティクル
             if (_flash != null && _useFlash)
@@ -82,24 +100,7 @@ namespace SoulRunProject.InGame
             }
         }
 
-        public virtual void Move()
-        {
-            transform.position += transform.forward * (_speed * Time.fixedDeltaTime);
-        }
-
-        void OnTriggerEnter(Collider other)
-        {
-            if (other.gameObject.TryGetComponent(out DamageableEntity entity))
-            {
-                entity.Damage(_attackDamage , in _giveKnockBack);
-                _hitCount++;
-                if (_hitCount > _penetration)
-                {
-                    OnHit(other);
-                }
-            }
-        }
-
+        public abstract void Move();
         protected void OnHit(Collider other)
         {
             var closestPoint = other.ClosestPoint(transform.position);
@@ -145,8 +146,8 @@ namespace SoulRunProject.InGame
             _collider.enabled = false;
             if (_light != null)
                 _light.enabled = false;
-            _particleSystem.Stop();
-            _particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            _ps.Stop();
+            _ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
             if (_detached.Length > 0)
             {
                 var detached = _detached.Where(prefab => prefab != null);
@@ -171,7 +172,7 @@ namespace SoulRunProject.InGame
             }
         }
 
-        protected virtual void TouchCall(GameObject detachedPrefab) //  弾が当たった時に一定時間待ってObjectPoolに入った自身のtransformに戻す
+        void TouchCall(GameObject detachedPrefab) //  弾が当たった時に一定時間待ってObjectPoolに入った自身のtransformに戻す
         {
             detachedPrefab.transform.SetParent(transform);
             detachedPrefab.transform.position = transform.position;

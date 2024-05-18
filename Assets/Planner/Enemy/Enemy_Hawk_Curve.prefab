@@ -159,22 +159,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attacker:
-    rid: 290008809808855056
+    rid: 8478225676376211457
   _mover:
     rid: 290008905040265216
   references:
     version: 2
     RefIds:
-    - rid: 290008809808855056
-      type: {class: EntityNormalAttacker, ns: SoulRunProject.InGame, asm: Assembly-CSharp}
-      data:
-        _attack: 1
-        _coolTime: 5
-        _range: 3
-        _speed: 30
-        _lifeTime: 2
-        _enemyBullet: {fileID: 7854687109193279523, guid: caf0a23a1824b59448852c93b13230cf,
-          type: 3}
     - rid: 290008905040265216
       type: {class: CurveMover, ns: SoulRunProject.InGame, asm: Assembly-CSharp}
       data:
@@ -183,6 +173,12 @@ MonoBehaviour:
         _isPosLoop: 1
         _loopCount: 10
         _type: 0
+    - rid: 8478225676376211457
+      type: {class: EntityLongRangeAttacker, ns: SoulRunProject.InGame, asm: Assembly-CSharp}
+      data:
+        _interval: 3
+        _enemyBullet: {fileID: 1312205383257055634, guid: caf0a23a1824b59448852c93b13230cf,
+          type: 3}
 --- !u!1 &5210671031124851512
 GameObject:
   m_ObjectHideFlags: 0
