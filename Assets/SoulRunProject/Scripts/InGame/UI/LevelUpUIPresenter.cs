@@ -9,22 +9,24 @@ namespace SoulRunProject.InGame
 {
     public class LevelUpUIPresenter : IInitializable
     {
-        private PlayerManager _playerManager;
+        private readonly PlayerManager _playerManager;
         private readonly LevelUpState _levelUpState;
         private readonly LevelUpItemData _levelUpItemData;
         private readonly LevelUpView _levelUpView;
-        private SkillManager _skillManager;
-        private CompositeDisposable _disposableOnUpdateUI = new();
+        private readonly SkillManager _skillManager;
+        private readonly PlayerLevelManager _levelManager;
+        private readonly CompositeDisposable _disposableOnUpdateUI = new();
         
         public LevelUpUIPresenter
             (PlayerManager playerManager, LevelUpState levelUpState, LevelUpItemData levelUpItemData,
-                LevelUpView levelUpView, SkillManager skillManager)
+                LevelUpView levelUpView, SkillManager skillManager, PlayerLevelManager levelManager)
         {
             _playerManager = playerManager;
             _levelUpState = levelUpState;
             _levelUpItemData = levelUpItemData;
             _levelUpView = levelUpView;
             _skillManager = skillManager;
+            _levelManager = levelManager;
         }
 
         public void Initialize()
@@ -41,10 +43,10 @@ namespace SoulRunProject.InGame
             };
             
             // upgradeされたら元のステートに戻る
-            foreach (var upgradeButton in _levelUpView.UpgradeButtons)
-            {
-                upgradeButton.InputUIButton.onClick.AsObservable().Subscribe(_ => _levelUpState.SelectedSkill()).AddTo(_levelUpView);
-            }
+            // foreach (var upgradeButton in _levelUpView.UpgradeButtons)
+            // {
+            //     upgradeButton.InputUIButton.onClick.AsObservable().Subscribe(_ => _levelUpState.EndSelectSkill()).AddTo(_levelUpView);
+            // }
 
             _disposableOnUpdateUI.AddTo(_levelUpView);
 
@@ -63,21 +65,34 @@ namespace SoulRunProject.InGame
             
             // ランダムにアイテムを選択し、ボタンに適用する
             // skill
-            SkillBase selectedSkill = _skillManager.SkillData[Random.Range(0, _skillManager.SkillData.Count)];
-            _levelUpView.UpgradeButtons[0].NameAndLevelText.text = selectedSkill.SkillName;
+            SkillBase selectedSkill;
 
-            if (_skillManager.CurrentSkillTypes.Contains(selectedSkill.SkillType)) // 取得済みスキルかによって分岐
+            if (_skillManager.CurrentNumberOfPossessions > _skillManager.CurrentSkill.Count) // 新しいスキル
             {
+                SkillBase[] newSkills = _skillManager.SkillData
+                    .Where(skillBase => !_skillManager.CurrentSkill.Contains(skillBase)).ToArray();
+                selectedSkill = newSkills[Random.Range(0, newSkills.Length)];
+                
                 _levelUpView.UpgradeButtons[0].InputUIButton.onClick.AsObservable()
-                    .Subscribe(_ => _skillManager.LevelUpSkill(selectedSkill.SkillType)).AddTo(_disposableOnUpdateUI);
-                _levelUpView.UpgradeButtons[0].NameAndLevelText.text += 
-                    $"\nLv {_skillManager.CurrentSkill.FirstOrDefault(skillBase => skillBase.SkillType == selectedSkill.SkillType).CurrentLevel + 1}";
+                    .Subscribe(_ =>
+                    {
+                        _skillManager.AddSkill(selectedSkill.SkillType);
+                        SelectedItem();
+                    }).AddTo(_disposableOnUpdateUI);
+                _levelUpView.UpgradeButtons[0].NameAndLevelText.text = $"{selectedSkill.SkillName}\nLv 1";
             }
-            else
+            else // 所持スキルのレベルアップ
             {
+                selectedSkill = _skillManager.CurrentSkill[Random.Range(0, _skillManager.CurrentSkill.Count)];
+                
                 _levelUpView.UpgradeButtons[0].InputUIButton.onClick.AsObservable()
-                    .Subscribe(_ => _skillManager.AddSkill(selectedSkill.SkillType)).AddTo(_disposableOnUpdateUI);
-                _levelUpView.UpgradeButtons[0].NameAndLevelText.text += "\nLv 1";
+                    .Subscribe(_ =>
+                    {
+                        _skillManager.LevelUpSkill(selectedSkill.SkillType);
+                        SelectedItem();
+                    }).AddTo(_disposableOnUpdateUI);
+                _levelUpView.UpgradeButtons[0].NameAndLevelText.text = 
+                    $"{selectedSkill.SkillName}\nLv {selectedSkill.CurrentLevel + 1}";
             }
 
             _levelUpView.UpgradeButtons[0].ExplanatoryText.text = selectedSkill.ExplanatoryText;
@@ -97,11 +112,35 @@ namespace SoulRunProject.InGame
                 indexList.RemoveAt(index);
             }
             _levelUpView.UpgradeButtons[1].InputUIButton.onClick.AsObservable()
-                .Subscribe(_ => selectedStatusUpItems[0].ItemEffect()).AddTo(_disposableOnUpdateUI);
+                .Subscribe(_ =>
+                {
+                    selectedStatusUpItems[0].ItemEffect();
+                    SelectedItem();
+                }).AddTo(_disposableOnUpdateUI);
             _levelUpView.UpgradeButtons[1].NameAndLevelText.text = selectedStatusUpItems[0].ItemName;
+            _levelUpView.UpgradeButtons[1].ButtonIconImage.sprite = selectedStatusUpItems[0].ItemIcon;
             _levelUpView.UpgradeButtons[2].InputUIButton.onClick.AsObservable()
-                .Subscribe(_ => selectedStatusUpItems[1].ItemEffect()).AddTo(_disposableOnUpdateUI);
+                .Subscribe(_ =>
+                {
+                    selectedStatusUpItems[1].ItemEffect();
+                    SelectedItem();
+                }).AddTo(_disposableOnUpdateUI);
             _levelUpView.UpgradeButtons[2].NameAndLevelText.text = selectedStatusUpItems[1].ItemName;
+            _levelUpView.UpgradeButtons[2].ButtonIconImage.sprite = selectedStatusUpItems[1].ItemIcon;
+        }
+
+        void SelectedItem()
+        {
+            _levelManager.UseLevelUpStack();
+
+            if (_levelManager.LevelUpStackCount.Value > 0)
+            {
+                UpdateUpgradeUI();
+            }
+            else
+            {
+                _levelUpState.EndSelectSkill();
+            }
         }
     }
 }

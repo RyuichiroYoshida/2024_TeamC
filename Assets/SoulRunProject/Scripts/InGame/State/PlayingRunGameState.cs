@@ -46,8 +46,7 @@ namespace SoulRunProject.InGame
                 .AddTo(_compositeDisposable);
             
             // レベルアップの購読
-            _playerLevelManager.OnLevelUp
-                .SkipLatestValueOnSubscribe()
+            _playerInput.LevelUpInput.Where(input => input && _playerLevelManager.LevelUpStackCount.Value > 0)
                 .Subscribe(_ =>
                 {
                     SwitchToLevelUpState = true;

@@ -20,7 +20,7 @@ namespace SoulRunProject.InGame
             PauseManager.Instance.Pause(true);
         }
 
-        public void SelectedSkill()
+        public void EndSelectSkill()
         {
             PauseManager.Instance.Pause(false);
             StateChange();

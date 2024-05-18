@@ -49,8 +49,8 @@ namespace SoulRunProject.InGame
 
             _isGround.AddTo(this);
             this.OnDestroyAsObservable().Subscribe(_ => OnJumped = null);
-            //_spinIndex = CriAudioManager.Instance.PlaySE("SE_Spin");
-            //CriAudioManager.Instance.PauseSE(_spinIndex);
+            _spinIndex = CriAudioManager.Instance.PlaySE("SE_Spin");
+            CriAudioManager.Instance.PauseSE(_spinIndex);
         }
 
         private void Update()
@@ -90,7 +90,7 @@ namespace SoulRunProject.InGame
             {
                 _playerVelocity.y = _jumpPower;
                 _jumping = true;
-                //CriAudioManager.Instance.PlaySE("SE_Jump");
+                CriAudioManager.Instance.PlaySE("SE_Jump");
                 OnJumped?.Invoke();
             }
         }
@@ -122,15 +122,15 @@ namespace SoulRunProject.InGame
 
                 if (!_isGround.Value)
                 {
-                    //CriAudioManager.Instance.PlaySE("SE_Landing");
-                    //CriAudioManager.Instance.PauseSE(_spinIndex);
+                    CriAudioManager.Instance.PlaySE("SE_Landing");
+                    CriAudioManager.Instance.PauseSE(_spinIndex);
                     _isGround.Value = true;
                     _jumping = false;
                 }
             }
             else if (_isGround.Value)
             {
-                //CriAudioManager.Instance.ResumeSE(_spinIndex);
+                CriAudioManager.Instance.ResumeSE(_spinIndex);
                 _isGround.Value = false;
             }
         }
@@ -223,7 +223,7 @@ namespace SoulRunProject.InGame
         /// </summary>
         public void PlayRumSound()
         {
-            //CriAudioManager.Instance.PlaySE("SE_Run");
+            CriAudioManager.Instance.PlaySE("SE_Run");
         }
 
 #if UNITY_EDITOR
