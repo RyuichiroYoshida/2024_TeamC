@@ -717,6 +717,7 @@ MonoBehaviour:
   _expGauge: {fileID: 2022202200}
   _soulGauge: {fileID: 545346072}
   _levelText: {fileID: 1499152568}
+  _levelStackText: {fileID: 0}
   _skillIcons:
   - {fileID: 1698915878}
   - {fileID: 0}
@@ -1222,14 +1223,9 @@ MonoBehaviour:
       _seconds: 30
       _fieldSegments:
         List:
-        - {fileID: 2752528944075337817, guid: b4ec25b35ea14964bb47ed3d65d7f229, type: 3}
-        - {fileID: 2752528944075337817, guid: 56dc9971f4273f94cbb70bb90e6ede0a, type: 3}
-        - {fileID: 2752528944075337817, guid: 9fe28fa1c7a477e4299eab44ba2b96eb, type: 3}
-        - {fileID: 1607657496594533194, guid: e0155a48b9a698543969ba48d5cc2648, type: 3}
-        - {fileID: 4565359466753811006, guid: f68f9faef7de264428c2fa60a75b6895, type: 3}
-        - {fileID: 5633894702588768396, guid: 45c01253160740348937b092aa04dddf, type: 3}
+        - {fileID: 2321524878127961784, guid: 03bca0da78a3a7c4cb908d93888a31e7, type: 3}
       _adjacentGraph: {fileID: 0}
-    _bossStageField: {fileID: 3829013865918829885, guid: 9ebc2cb807cc7794d8b095da4e18832a,
+    _bossStageField: {fileID: 2321524878127961784, guid: 03bca0da78a3a7c4cb908d93888a31e7,
       type: 3}
     _bossPrefab: {fileID: 493474759675345639, guid: c051b1a247ab52e448b0f10e61dce3bd,
       type: 3}
@@ -3537,7 +3533,7 @@ Transform:
   m_GameObject: {fileID: 1341415491}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.000000014901159, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0000001490116, y: 5, z: -5}
+  m_LocalPosition: {x: -0.0000001490116, y: 4.99, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3558,6 +3554,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ZPosition: -4.82
   m_YPosition: 5
+  _maxJumpedDistance: 0
 --- !u!1 &1364571156
 GameObject:
   m_ObjectHideFlags: 0
@@ -3695,9 +3692,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 20
   _jumpPower: 30
-  _nomalGrav: 25
+  _stickingPowerOnGround: 6
+  _normalGrav: 40
   _jumpGrav: 80
-  _DistanceBetweenPivotAndGroundPoint: 1.5
+  _distanceBetweenPivotAndGroundPoint: 1.5
   _xMoveRangeMin: -47
   _xMoveRangeMax: 47
   _canZAxisMovement: 0
@@ -3896,6 +3894,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _defaultPlayerSkills: 00000000
+  _initialNumberOfPossessions: 0
+  _increaseSkillLevels: 
   _skillIconImage:
   - {fileID: 1698915878}
   - {fileID: 1639702815}
@@ -4369,7 +4369,7 @@ Transform:
   m_GameObject: {fileID: 1484104522}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.000000014901159, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0000001490116, y: 5, z: -5}
+  m_LocalPosition: {x: -0.0000001490116, y: 4.99, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
