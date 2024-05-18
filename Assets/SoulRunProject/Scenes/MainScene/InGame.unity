@@ -1222,10 +1222,7 @@ MonoBehaviour:
     - _mode: 0
       _seconds: 30
       _fieldSegments:
-        List:
-        - {fileID: 2321524878127961784, guid: 03bca0da78a3a7c4cb908d93888a31e7, type: 3}
-        - {fileID: 4063893111327576276, guid: b6f0e207bd7eeca4d931833ecfbdf4ff, type: 3}
-        - {fileID: 356887298831892382, guid: d4e52efdb66138e4193bbef1ce92630e, type: 3}
+        List: []
       _adjacentGraph: {fileID: 0}
     _bossStageField: {fileID: 2321524878127961784, guid: 03bca0da78a3a7c4cb908d93888a31e7,
       type: 3}
