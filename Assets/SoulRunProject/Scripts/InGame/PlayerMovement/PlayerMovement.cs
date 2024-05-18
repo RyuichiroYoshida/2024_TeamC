@@ -223,7 +223,7 @@ namespace SoulRunProject.InGame
         /// </summary>
         public void PlayRumSound()
         {
-            //CriAudioManager.Instance.PlaySE("SE_Run");
+            CriAudioManager.Instance.PlaySE("SE_Run");
         }
 
 #if UNITY_EDITOR
