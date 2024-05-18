@@ -14,11 +14,11 @@ namespace SoulRunProject.InGame
     public abstract class LevelUpItemBase<T>
     {
         [SerializeField] protected string _itemName;
-        [SerializeField] protected Image _itemImage;
+        [SerializeField] protected Sprite _itemIcon;
         protected T _reference;
 
         public string ItemName => _itemName;
-        public Image ItemImage => _itemImage;
+        public Sprite ItemIcon => _itemIcon;
 
         /// <summary> プレイヤー強化処理で使用するScript参照を取得する </summary>
         /// <param name="reference"> プレイヤー強化処理で使用する参照 </param>

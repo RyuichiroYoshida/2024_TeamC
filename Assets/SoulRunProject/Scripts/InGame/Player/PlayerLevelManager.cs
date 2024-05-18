@@ -17,10 +17,12 @@ namespace SoulRunProject.InGame
 
         private readonly IntReactiveProperty _currentLevel = new IntReactiveProperty();
         private readonly IntReactiveProperty _currentExp = new IntReactiveProperty(0);
+        private readonly IntReactiveProperty _levelUpStackCount = new IntReactiveProperty();
 
         public IObservable<int> OnCurrentExpChanged => _currentExp;
         public IntReactiveProperty OnLevelUp => _currentLevel;
         public int CurrentExpToNextLevel => _expToNextLevel[_currentLevel.Value - 1];
+        public ReadOnlyReactiveProperty<int> LevelUpStackCount => _levelUpStackCount.ToReadOnlyReactiveProperty();
 
         private void Awake()
         {
@@ -61,7 +63,13 @@ namespace SoulRunProject.InGame
         void LevelUp()
         {
             _currentLevel.Value++;
+            _levelUpStackCount.Value++;
             CriAudioManager.Instance.PlaySE("SE_LevelUp");
+        }
+
+        public void UseLevelUpStack()
+        {
+            _levelUpStackCount.Value--;
         }
     }
 }
