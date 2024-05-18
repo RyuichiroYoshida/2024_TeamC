@@ -21,7 +21,7 @@ namespace SoulRunProject
             _audioManager.MasterVolumeChanged += volume => Debug.Log($"Master Volume Changed to: {volume}");
             _audioManager.BGMVolumeChanged += volume => Debug.Log($"BGM Volume Changed to: {volume}");
             _audioManager.SEVolumeChanged += volume => Debug.Log($"SE Volume Changed to: {volume}");
-            _audioManager.VoiceVolumeChanged += volume => Debug.Log($"Voice Volume Changed to: {volume}");
+            _audioManager.MEVolumeChanged += volume => Debug.Log($"ME Volume Changed to: {volume}");
 
             // テストケースを実行
             //TestPlayBGM();
@@ -82,19 +82,19 @@ namespace SoulRunProject
             }
         }
 
-        async UniTaskVoid TestPlayVoice()
+        async UniTaskVoid TestPlayME()
         {
             Debug.Log("Playing Voice...");
-            int voiceIndex = _audioManager.PlayVoice("voice_cue_name", 0.9f);
+            int voiceIndex = _audioManager.PlayME("voice_cue_name", 0.9f);
             // Voiceの一時停止
             await UniTask.Delay(1000);
-            _audioManager.PauseVoice(voiceIndex);
+            _audioManager.PauseME(voiceIndex);
             // Voiceの再開
             await UniTask.Delay(1000);
-            _audioManager.ResumeVoice(voiceIndex);
+            _audioManager.ResumeME(voiceIndex);
             await UniTask.Delay(1000);
             // Voiceの停止
-            _audioManager.StopVoice(voiceIndex);
+            _audioManager.StopME(voiceIndex);
         }
 
         async UniTaskVoid TestVolumeChanges()
@@ -111,7 +111,7 @@ namespace SoulRunProject
             _audioManager.SEVolume = 0.7f;
             // Voiceボリュームの変更
             await UniTask.Delay(1000);
-            _audioManager.VoiceVolume = 0.8f;
+            _audioManager.MEVolume = 0.8f;
         }
     }
 }

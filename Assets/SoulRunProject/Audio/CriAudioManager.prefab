@@ -45,6 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   streamingAssetsPathAcf: Glab2024-C
-  cueSheetBGM: BGM
+  cueSheetBGM: CueSheet_BGM
   cueSheetSe: CueSheet_SE
-  cueSheetVoice: Voice
+  cueSheetME: CueSheet_ME
