@@ -485,7 +485,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 165873039}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fc6a0ff9f4ca4c34bac1d94e85af1139, type: 3}
   m_Name: 
@@ -1222,7 +1222,17 @@ MonoBehaviour:
     - _mode: 0
       _seconds: 30
       _fieldSegments:
-        List: []
+        List:
+        - {fileID: 4191814948936305358, guid: b3d420eafd034874fadf9b2be2b542c9, type: 3}
+        - {fileID: 8571997593146528395, guid: d6207c91bfb158c40b319dea77734c38, type: 3}
+        - {fileID: 71984350006660550, guid: 1bca1e9d4c266eb428a3b583a80cf388, type: 3}
+        - {fileID: 5690076965110922155, guid: eda47cc38f750b84c9c4113d9455a67f, type: 3}
+        - {fileID: 789193190472825651, guid: 592a88ae6c6284043ac213df49e5f984, type: 3}
+        - {fileID: 4223504518893035637, guid: c76fdd6efee605a41a5d7f9b7f7ef532, type: 3}
+        - {fileID: 789193190472825651, guid: 592a88ae6c6284043ac213df49e5f984, type: 3}
+        - {fileID: 1607657496594533194, guid: e0155a48b9a698543969ba48d5cc2648, type: 3}
+        - {fileID: 5633894702588768396, guid: 45c01253160740348937b092aa04dddf, type: 3}
+        - {fileID: 2321524878127961784, guid: 03bca0da78a3a7c4cb908d93888a31e7, type: 3}
       _adjacentGraph: {fileID: 0}
     _bossStageField: {fileID: 2321524878127961784, guid: 03bca0da78a3a7c4cb908d93888a31e7,
       type: 3}
@@ -3689,14 +3699,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb1568618dddb9a4ebb38626a71534c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 20
+  _moveSpeed: 40
   _jumpPower: 30
   _stickingPowerOnGround: 6
   _normalGrav: 40
   _jumpGrav: 80
   _distanceBetweenPivotAndGroundPoint: 1.5
-  _xMoveRangeMin: -47
-  _xMoveRangeMax: 47
+  _xMoveRangeMin: -60
+  _xMoveRangeMax: 60
   _canZAxisMovement: 0
   _zAxisMoveSpeed: 0
   _zMoveRangeMin: 0
@@ -6160,7 +6170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxSegmentCount: 3
-  _scrollSpeed: 24
+  _scrollSpeed: 60
 --- !u!1001 &1989250201
 PrefabInstance:
   m_ObjectHideFlags: 0
