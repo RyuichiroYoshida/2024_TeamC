@@ -190,5 +190,5 @@ MonoBehaviour:
     - rid: 8478225587102023693
       type: {class: EntityNormalMover, ns: SoulRunProject.InGame, asm: Assembly-CSharp}
       data:
-        _moveSpeed: 5
+        _moveSpeed: 60
         _direction: 3

@@ -485,7 +485,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 165873039}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fc6a0ff9f4ca4c34bac1d94e85af1139, type: 3}
   m_Name: 
@@ -3699,7 +3699,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb1568618dddb9a4ebb38626a71534c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 40
+  _moveSpeed: 60
   _jumpPower: 30
   _stickingPowerOnGround: 6
   _normalGrav: 40
@@ -6170,75 +6170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxSegmentCount: 3
-  _scrollSpeed: 60
---- !u!1001 &1989250201
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 328080767618465389, guid: 2ce81513cfd7cf8439197b8d9951aa08,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 328080767618465389, guid: 2ce81513cfd7cf8439197b8d9951aa08,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 328080767618465389, guid: 2ce81513cfd7cf8439197b8d9951aa08,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 328080767618465389, guid: 2ce81513cfd7cf8439197b8d9951aa08,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 328080767618465389, guid: 2ce81513cfd7cf8439197b8d9951aa08,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 328080767618465389, guid: 2ce81513cfd7cf8439197b8d9951aa08,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 328080767618465389, guid: 2ce81513cfd7cf8439197b8d9951aa08,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 328080767618465389, guid: 2ce81513cfd7cf8439197b8d9951aa08,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 328080767618465389, guid: 2ce81513cfd7cf8439197b8d9951aa08,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 328080767618465389, guid: 2ce81513cfd7cf8439197b8d9951aa08,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6814538588581428667, guid: 2ce81513cfd7cf8439197b8d9951aa08,
-        type: 3}
-      propertyPath: m_Name
-      value: CriAudioManager
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2ce81513cfd7cf8439197b8d9951aa08, type: 3}
+  _scrollSpeed: 50
 --- !u!1 &1990613036
 GameObject:
   m_ObjectHideFlags: 0
@@ -6966,4 +6898,3 @@ SceneRoots:
   - {fileID: 348390302}
   - {fileID: 1767015243}
   - {fileID: 1086953229}
-  - {fileID: 1989250201}

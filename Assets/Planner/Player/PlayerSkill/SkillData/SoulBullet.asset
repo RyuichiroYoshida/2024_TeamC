@@ -85,7 +85,7 @@ MonoBehaviour:
         _amount: 1
         _attackDamage: 5
         _size: 5
-        _speed: 20
+        _speed: 60
         _penetration: 0
         _lifeTime: 3
         _knockBack:
