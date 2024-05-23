@@ -18,7 +18,7 @@ MonoBehaviour:
     _defenceValue: 1
     _coolTimeReductionRate: 1.06
     _skillSizeUpRate: 5
-    _bulletSpeedUpRate: 0.6
+    _bulletSpeedUpRate: 1
     _effectTimeExtension: 1
     _bulletAmountExtension: 0
     _penetrateAmountExtension: 1

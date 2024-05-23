@@ -48,6 +48,7 @@ namespace SoulRunProject
 
         public void DamageCam()
         {
+            return;
             if (_shaking) return;
             _shakeObj.transform.DOShakePosition(_shakeDur, _shakePower, _shakeVib, _shakeRand, _isSnap, _isFade)
                 .OnStart(() => _shaking = true)
