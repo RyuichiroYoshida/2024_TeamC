@@ -24,8 +24,8 @@ namespace SoulRunProject
             _audioManager.MEVolumeChanged += volume => Debug.Log($"ME Volume Changed to: {volume}");
 
             // テストケースを実行
-            //TestPlayBGM();
-            _ = TestPlaySE();
+            _ = TestPlayBGM();
+                //_ = TestPlaySE();
             //TestPlayVoice();
             //TestVolumeChanges();
         }
@@ -33,16 +33,16 @@ namespace SoulRunProject
         async UniTaskVoid TestPlayBGM()
         {
             Debug.Log("Playing BGM...");
-            _audioManager.PlayBGM("bgm_cue_name");
+            _audioManager.PlayBGM("BGM_Title");
             // BGMの一時停止
-            await UniTask.Delay(1000);
-            _audioManager.PauseBGM();
+            //await UniTask.Delay(1000);
+            //_audioManager.PauseBGM();
             // BGMの再開
-            await UniTask.Delay(1000);
-            _audioManager.ResumeBGM();
-            await UniTask.Delay(1000);
+            //await UniTask.Delay(1000);
+            //_audioManager.ResumeBGM();
+            //await UniTask.Delay(1000);
             // BGMの停止
-            _audioManager.StopBGM();
+            //_audioManager.StopBGM();
         }
 
         async UniTaskVoid TestPlaySE()
