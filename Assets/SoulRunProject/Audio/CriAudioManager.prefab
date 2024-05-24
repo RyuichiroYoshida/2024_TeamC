@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e3723f97fa54d1aa78e67ec2ad6b2a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  streamingAssetsPathAcf: Glab2024-C
-  cueSheetBGM: CueSheet_BGM
-  cueSheetSe: CueSheet_SE
-  cueSheetME: CueSheet_ME
+  _streamingAssetsPathAcf: Glab2024-C
+  _cueSheetBGM: CueSheet_BGM
+  _awbPathBGM: CueSheet_BGM
+  _cueSheetSe: CueSheet_SE
+  _cueSheetMe: CueSheet_ME

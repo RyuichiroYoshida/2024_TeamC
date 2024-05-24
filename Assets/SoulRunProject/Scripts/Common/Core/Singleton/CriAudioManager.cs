@@ -12,7 +12,7 @@ namespace SoulRunProject.Common
         [SerializeField] private string _streamingAssetsPathAcf = "SoulRun"; //.acf
 
         [SerializeField] private string _cueSheetBGM = "CueSheet_BGM"; //.acb
-
+        [SerializeField] private string _awbPathBGM = "CueSheet_BGM"; //.awb
         [SerializeField] private string _cueSheetSe = "CueSheet_SE"; //.acb
 
         [SerializeField] private string _cueSheetMe = "CueSheet_ME"; //.acb
@@ -136,7 +136,8 @@ namespace SoulRunProject.Common
             // CriAtom作成
             new GameObject().AddComponent<CriAtom>();
             // BGM acb追加
-            CriAtom.AddCueSheet(_cueSheetBGM, $"{_cueSheetBGM}.acb", null, null);
+            CriAtom.AddCueSheet(_cueSheetBGM, $"{_cueSheetBGM}.acb", _awbPathBGM != "" ? $"{_awbPathBGM}.awb" : null,
+                null);
             // SE acb追加
             CriAtom.AddCueSheet(_cueSheetSe, $"{_cueSheetSe}.acb", null, null);
             //Voice acb追加
@@ -220,7 +221,14 @@ namespace SoulRunProject.Common
         /// <param name="cueName">流したいキューの名前</param>
         public void PlayBGM(string cueName)
         {
-            var temp = CriAtom.GetCueSheet(_cueSheetBGM)?.acb;
+            var cueSheet = CriAtom.GetCueSheet(_cueSheetBGM);
+            if (cueSheet == null)
+            {
+                Debug.LogError($"Cue sheet {_cueSheetBGM} not found.");
+                return;
+            }
+
+            var temp = cueSheet.acb;
 
             if (_currentBGMAcb == temp && _currentBGMCueName == cueName &&
                 _bgmPlayer.GetStatus() == CriAtomExPlayer.Status.Playing)
@@ -229,6 +237,12 @@ namespace SoulRunProject.Common
             }
 
             StopBGM();
+
+            if (temp == null)
+            {
+                Debug.LogError("ACB is null. BGM cannot be played.");
+                return;
+            }
 
             _bgmPlayer.SetCue(temp, cueName);
             _bgmPlayback = _bgmPlayer.Start();
