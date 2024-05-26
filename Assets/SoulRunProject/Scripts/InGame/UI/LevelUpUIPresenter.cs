@@ -77,7 +77,7 @@ namespace SoulRunProject.InGame
                     .Subscribe(_ =>
                     {
                         _skillManager.AddSkill(selectedSkill.SkillType);
-                        SelectedItem();
+                        _levelUpState.EndSelectSkill();
                     }).AddTo(_disposableOnUpdateUI);
                 _levelUpView.UpgradeButtons[0].NameAndLevelText.text = $"{selectedSkill.SkillName}\nLv 1";
             }
@@ -89,7 +89,7 @@ namespace SoulRunProject.InGame
                     .Subscribe(_ =>
                     {
                         _skillManager.LevelUpSkill(selectedSkill.SkillType);
-                        SelectedItem();
+                        _levelUpState.EndSelectSkill();
                     }).AddTo(_disposableOnUpdateUI);
                 _levelUpView.UpgradeButtons[0].NameAndLevelText.text = 
                     $"{selectedSkill.SkillName}\nLv {selectedSkill.CurrentLevel + 1}";
@@ -115,7 +115,7 @@ namespace SoulRunProject.InGame
                 .Subscribe(_ =>
                 {
                     selectedStatusUpItems[0].ItemEffect();
-                    SelectedItem();
+                    _levelUpState.EndSelectSkill();
                 }).AddTo(_disposableOnUpdateUI);
             _levelUpView.UpgradeButtons[1].NameAndLevelText.text = selectedStatusUpItems[0].ItemName;
             _levelUpView.UpgradeButtons[1].ButtonIconImage.sprite = selectedStatusUpItems[0].ItemIcon;
@@ -123,24 +123,10 @@ namespace SoulRunProject.InGame
                 .Subscribe(_ =>
                 {
                     selectedStatusUpItems[1].ItemEffect();
-                    SelectedItem();
+                    _levelUpState.EndSelectSkill();
                 }).AddTo(_disposableOnUpdateUI);
             _levelUpView.UpgradeButtons[2].NameAndLevelText.text = selectedStatusUpItems[1].ItemName;
             _levelUpView.UpgradeButtons[2].ButtonIconImage.sprite = selectedStatusUpItems[1].ItemIcon;
-        }
-
-        void SelectedItem()
-        {
-            _levelManager.UseLevelUpStack();
-
-            if (_levelManager.LevelUpStackCount.Value > 0)
-            {
-                UpdateUpgradeUI();
-            }
-            else
-            {
-                _levelUpState.EndSelectSkill();
-            }
         }
     }
 }
