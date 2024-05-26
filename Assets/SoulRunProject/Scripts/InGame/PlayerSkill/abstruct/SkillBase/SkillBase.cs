@@ -35,7 +35,9 @@ namespace SoulRunProject.Common
 
         private int _elementCount;
 
-        protected bool _isPause;
+        protected bool IsPause;
+        protected PlayerManager PlayerManagerInstance;
+        protected Transform PlayerTransform;
 
         public PlayerSkill SkillType => _skillType;
         public string SkillName => _skillName;
@@ -75,7 +77,7 @@ namespace SoulRunProject.Common
 
         public void Pause(bool isPause)
         {
-            _isPause = isPause;
+            this.IsPause = isPause;
             OnSwitchPause(isPause);
         }
 
@@ -96,7 +98,7 @@ namespace SoulRunProject.Common
         {
             SkillParam.InitializeParamOnSceneLoaded();
             CurrentLevel = 1;
-            _isPause = false;
+            IsPause = false;
         }
 
         /// <summary> スキルレベルアップ可能かどうか </summary>
@@ -105,8 +107,7 @@ namespace SoulRunProject.Common
             return CurrentLevel <= MaxSkillLevel;
         }
 
-        protected PlayerManager PlayerManagerInstance;
-        protected Transform PlayerTransform;
+
         public void InitialiseSkill(in PlayerManager playerManager , in Transform playerTransform)
         {
             PlayerManagerInstance = playerManager;

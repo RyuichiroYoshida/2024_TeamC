@@ -109,7 +109,7 @@ namespace SoulRunProject.Skill
                 {
                     //  Pauseフラグがfalseなら1フレーム待つ(ちゃんと1フレーム待ってるか分からない)、
                     //  trueならfalseになるまで通さない
-                    await UniTask.WaitUntil(() => !_isPause, PlayerLoopTiming.Update, ct);
+                    await UniTask.WaitUntil(() => !IsPause, PlayerLoopTiming.Update, ct);
                     timer += Time.deltaTime;
                     if (timer >= _shieldSkillParameter.CoolTime)
                     {

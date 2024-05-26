@@ -14,10 +14,12 @@ namespace SoulRunProject.Common
     [RequireComponent(typeof(HitDamageEffectManager))]
     public class PlayerManager : MonoBehaviour, IPausable
     {
+        [SerializeField , CustomLabel("ダメージ時の速度減少量")] private float _downSpeedValue;
         [SerializeField] private PlayerInput _playerInput;
         [SerializeField] private BaseStatus _baseStatus;
         [SerializeField] private PlayerCamera _playerCamera;
-        
+
+        private FieldMover _fieldMover;
         private IPlayerPausable[] _inGameTimes;
         private PlayerLevelManager _pLevelManager;
         private SkillManager _skillManager;
@@ -47,7 +49,7 @@ namespace SoulRunProject.Common
             _resourceContainer = new();
             //_statusManager = new PlayerStatusManager(_baseStatus.Status);
             CurrentPlayerStatus = new PlayerStatus(_baseStatus.PlayerStatus);
-            
+            _fieldMover = FindObjectOfType<FieldMover>();
             InitializeInput();
         }
 
@@ -108,6 +110,7 @@ namespace SoulRunProject.Common
             }
             
             _playerCamera.DamageCam();
+            _fieldMover.DownSpeed(_downSpeedValue);
             CurrentPlayerStatus.CurrentHp -= Calculator.CalcDamage(damage, CurrentPlayerStatus.DefenceValue, 0, 1);
             
             // 白色点滅メソッド

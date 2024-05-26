@@ -32,7 +32,7 @@ namespace SoulRunProject.Skill
 
         public override void UpdateSkill(float deltaTime)
         {
-            if (_isPause) return;
+            if (IsPause) return;
             
             if (_coolTimer > 0)
             {

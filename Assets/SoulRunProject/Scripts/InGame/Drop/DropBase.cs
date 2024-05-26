@@ -76,7 +76,7 @@ namespace SoulRunProject.InGame
             
             var absorptionPower = _player.CurrentPlayerStatus.VacuumItemRange;
             var distance = _player.transform.position - transform.position;
-            float moveSpeed = 10f + _fieldMover.ScrollSpeed;
+            float moveSpeed = 10f + _fieldMover.MaxScrollSpeed;
             if (distance.sqrMagnitude < absorptionPower * absorptionPower)
             {
                 transform.position += distance.normalized * (moveSpeed * Time.deltaTime);

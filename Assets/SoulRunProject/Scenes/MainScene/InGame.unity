@@ -3862,7 +3862,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb1568618dddb9a4ebb38626a71534c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 60
+  _moveSpeed: 30
   _jumpPower: 30
   _stickingPowerOnGround: 6
   _normalGrav: 40
@@ -3934,6 +3934,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8f658ff644a4c5387a60090509359a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _downSpeedValue: 40
   _playerInput: {fileID: 1420106445}
   _baseStatus: {fileID: 11400000, guid: d50a16b38666d804883e3040b335a638, type: 2}
   _playerCamera: {fileID: 165873042}
@@ -6413,7 +6414,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxSegmentCount: 3
-  _scrollSpeed: 50
+  _maxScrollSpeed: 40
+  _lerpPower: 0.05
 --- !u!1 &1990613036
 GameObject:
   m_ObjectHideFlags: 0
