@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using SoulRunProject.Common;
 using UniRx;
 using UniRx.Triggers;
@@ -15,30 +16,21 @@ namespace SoulRunProject.InGame
     {
         [SerializeField] private float _moveSpeed;
         [SerializeField] private float _jumpPower;
-        [SerializeField] private float _stickingPowerOnGround;
-        [SerializeField] private float _normalGrav;
-        [SerializeField] private float _jumpGrav;
+        [SerializeField] private float _grav;
         [SerializeField, CustomLabel("Pivotと接地点との距離")] private float _distanceBetweenPivotAndGroundPoint;
         [SerializeField, HideInInspector] private float _xMoveRangeMin;
         [SerializeField, HideInInspector] private float _xMoveRangeMax;
-        [SerializeField, HideInInspector] private bool _canZAxisMovement;
-        [SerializeField, HideInInspector] private float _zAxisMoveSpeed;
-        [SerializeField, HideInInspector] private float _zMoveRangeMin;
-        [SerializeField, HideInInspector] private float _zMoveRangeMax;
 
         private Rigidbody _rb;
         private readonly BoolReactiveProperty _isGround = new BoolReactiveProperty(false);
-        private bool _jumping;
-        private float Grav => _jumping? _jumpGrav : _normalGrav;
         private Vector3 _playerVelocity;
-        private float _onFieldVelocityY; // フィールドに沿った場合のｙ速度
         private float _yAxisGroundLine;
         private bool _inPause;
         private int _spinIndex;
+        private CancellationTokenSource _cts;
 
         public BoolReactiveProperty IsGround => _isGround;
         public event Action OnJumped;
-        public bool IsJumping => _jumping;
         /// <summary> プレイヤー地点の地面の高さ </summary>
         public float GroundHeight => _yAxisGroundLine;
 
@@ -58,28 +50,26 @@ namespace SoulRunProject.InGame
             if (_inPause) return;
             LimitPosition();
             GroundCheck();
-            _rb.velocity = _playerVelocity;
         }
 
         private void FixedUpdate()
         {
-            if (_inPause) return;
-            
-            if (_isGround.Value && !_jumping)
+            if (_isGround.Value)
             {
-                _playerVelocity.y = _onFieldVelocityY - _stickingPowerOnGround;
+                _playerVelocity.y = 0;
             }
             else
             {
-                _playerVelocity.y -= Grav * Time.fixedDeltaTime;
+                _playerVelocity.y -= _grav * Time.fixedDeltaTime;
             }
+            
+            _rb.velocity = _playerVelocity;
         }
 
         public void InputMove(Vector2 moveInput)
         {
             if (_inPause) return;
             _playerVelocity.x = moveInput.x * _moveSpeed;
-            if (_canZAxisMovement) _playerVelocity.z = moveInput.y * _zAxisMoveSpeed;
         }
 
         public void Jump()
@@ -89,7 +79,7 @@ namespace SoulRunProject.InGame
             if (_isGround.Value)
             {
                 _playerVelocity.y = _jumpPower;
-                _jumping = true;
+                _isGround.Value = false;
                 CriAudioManager.Instance.PlaySE("SE_Jump");
                 OnJumped?.Invoke();
             }
@@ -108,8 +98,6 @@ namespace SoulRunProject.InGame
                 if (hit.transform.TryGetComponent(out FieldSegment field))
                 {
                     _yAxisGroundLine = hit.point.y;
-                    Vector3 dir = Vector3.ProjectOnPlane(Vector3.forward, hit.normal);
-                    _onFieldVelocityY = dir.y * 30 / dir.z; // todo 30 => プレイヤーのスピードを参照する
                     break;
                 }
             }
@@ -125,7 +113,6 @@ namespace SoulRunProject.InGame
                     CriAudioManager.Instance.PlaySE("SE_Landing");
                     CriAudioManager.Instance.PauseSE(_spinIndex);
                     _isGround.Value = true;
-                    _jumping = false;
                 }
             }
             else if (_isGround.Value)
@@ -173,28 +160,6 @@ namespace SoulRunProject.InGame
                 // Velocityの制限
                 _playerVelocity.x = Mathf.Clamp(_playerVelocity.x, -_moveSpeed, 0);
             }
-
-            if (!_canZAxisMovement) return;
-
-            // z座標軸の制限
-            if (transform.position.z <= _zMoveRangeMin) // z マイナス側の制限
-            {
-                // 位置の制限
-                Vector3 pos = transform.position;
-                pos.z = _zMoveRangeMin;
-                transform.position = pos;
-                // Velocityの制限
-                _playerVelocity.z = Mathf.Clamp(_playerVelocity.z, 0, _zAxisMoveSpeed);
-            }
-            else if (transform.position.z >= _zMoveRangeMax)
-            {
-                // 位置の制限
-                Vector3 pos = transform.position;
-                pos.z = _zMoveRangeMax;
-                transform.position = pos;
-                // Velocityの制限
-                _playerVelocity.z = Mathf.Clamp(_playerVelocity.z, -_zAxisMoveSpeed, 0);
-            }
         }
 
         public void RotatePlayer(Vector2 input)
@@ -240,14 +205,6 @@ namespace SoulRunProject.InGame
             Gizmos.DrawLine(leftPos, rightPos);
             Gizmos.DrawLine(leftPos + Vector3.up, leftPos - Vector3.up);
             Gizmos.DrawLine(rightPos + Vector3.up, rightPos - Vector3.up);
-
-            if (!_canZAxisMovement) return;
-
-            Vector3 backPos = Vector3.forward * _zMoveRangeMin;
-            Vector3 forwardPos = Vector3.forward * _zMoveRangeMax;
-            Gizmos.DrawLine(backPos, forwardPos);
-            Gizmos.DrawLine(backPos + Vector3.up, backPos - Vector3.up);
-            Gizmos.DrawLine(forwardPos + Vector3.up, forwardPos - Vector3.up);
         }
 
         /// <summary>
@@ -298,31 +255,6 @@ namespace SoulRunProject.InGame
                 if (_playerMovement._xMoveRangeMin > _playerMovement._xMoveRangeMax)
                 {
                     _playerMovement._xMoveRangeMin = _playerMovement._xMoveRangeMax;
-                }
-
-                EditorGUIUtility.labelWidth = width;
-                _playerMovement._canZAxisMovement =
-                    EditorGUILayout.Toggle("前後に移動可能か", _playerMovement._canZAxisMovement);
-
-                EditorGUI.BeginDisabledGroup(!_playerMovement._canZAxisMovement);
-                _playerMovement._zAxisMoveSpeed =
-                    EditorGUILayout.FloatField("前後移動速度", _playerMovement._zAxisMoveSpeed);
-                EditorGUIUtility.labelWidth = 32;
-                EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField("Z軸座標の移動範囲", fieldOptions);
-                GUILayout.FlexibleSpace();
-
-                _playerMovement._zMoveRangeMin =
-                    EditorGUILayout.FloatField("Min", _playerMovement._zMoveRangeMin, fieldOptions);
-                GUILayout.Space(EditorGUIUtility.currentViewWidth * 0.03f);
-                _playerMovement._zMoveRangeMax =
-                    EditorGUILayout.FloatField("Max", _playerMovement._zMoveRangeMax, fieldOptions);
-                EditorGUILayout.EndHorizontal();
-                EditorGUI.EndDisabledGroup();
-
-                if (_playerMovement._zMoveRangeMin > _playerMovement._zMoveRangeMax)
-                {
-                    _playerMovement._zMoveRangeMin = _playerMovement._zMoveRangeMax;
                 }
 
                 if (EditorGUI.EndChangeCheck())
