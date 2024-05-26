@@ -134,7 +134,7 @@ namespace SoulRunProject.Common
             string path = Application.streamingAssetsPath + $"/{_streamingAssetsPathAcf}.acf";
             CriAtomEx.RegisterAcf(null, path);
             // CriAtom作成
-            new GameObject().AddComponent<CriAtom>();
+            transform.gameObject.AddComponent<CriAtom>();
             // BGM acb追加
             CriAtom.AddCueSheet(_cueSheetBGM, $"{_cueSheetBGM}.acb", _awbPathBGM != "" ? $"{_awbPathBGM}.awb" : null,
                 null);
