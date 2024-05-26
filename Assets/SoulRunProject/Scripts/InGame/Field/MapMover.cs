@@ -1,4 +1,3 @@
-using System;
 using SoulRunProject.Common;
 using SoulRunProject.InGame;
 using UnityEngine;
@@ -28,12 +27,12 @@ namespace SoulRunProject
 
         public void Register()
         {
-            PauseManager.Instance.RegisterPausableObject(this);
+            PauseManager.RegisterPausableObject(this);
         }
 
         public void UnRegister()
         {
-            PauseManager.Instance.UnRegisterPausableObject(this);
+            PauseManager.UnRegisterPausableObject(this);
         }
 
         public void Pause(bool isPause)

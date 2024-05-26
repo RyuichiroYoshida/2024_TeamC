@@ -1,14 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading;
 using Cinemachine;
 using Cysharp.Threading.Tasks;
-using SoulRunProject.InGame;
-using UniRx.Triggers;
-using UnityEngine;
-using UniRx;
 using DG.Tweening;
+using UnityEngine;
 
 namespace SoulRunProject
 {
@@ -17,6 +11,7 @@ namespace SoulRunProject
     /// </summary>
     public class PlayerCamera : MonoBehaviour
     {
+        [SerializeField] private CinemachineImpulseSource _impulseSource;
         [SerializeField] private Transform _player;
         [SerializeField] private Vector3 _offset;
         [SerializeField] private Vector3 _firstPos;
@@ -55,14 +50,16 @@ namespace SoulRunProject
 
         public void DamageCam()
         {
-            if (_shaking) return;
-            _shakeObj.transform.DOShakePosition(_shakeDur, _shakePower, _shakeVib, _shakeRand, _isSnap, _isFade)
-                .OnStart(() => _shaking = true)
-                .OnComplete(() =>
-                {
-                    _shakeObj.position = new (_player.transform.position.x, transform.position.y, transform.position.z);
-                    _shaking = false;
-                });
+            _impulseSource.GenerateImpulse(Vector3.one);
+            // return;
+            // if (_shaking) return;
+            // _shakeObj.transform.DOShakePosition(_shakeDur, _shakePower, _shakeVib, _shakeRand, _isSnap, _isFade)
+            //     .OnStart(() => _shaking = true)
+            //     .OnComplete(() =>
+            //     {
+            //         _shakeObj.position = new (_player.transform.position.x, transform.position.y, transform.position.z);
+            //         _shaking = false;
+            //     }).SetLink(gameObject);
         }
         
         public void StartFollowPlayer()

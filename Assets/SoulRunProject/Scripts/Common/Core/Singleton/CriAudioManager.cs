@@ -1,26 +1,26 @@
-﻿// 日本語対応
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using CriWare;
 using UnityEngine.SceneManagement;
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace SoulRunProject.Common
 {
     public class CriAudioManager : AbstractSingletonMonoBehaviour<CriAudioManager>
     {
-        [SerializeField] string streamingAssetsPathAcf = "SoulRun";
-        [SerializeField] string cueSheetBGM = "CueSheet_BGM"; //.acb
-        [SerializeField] string cueSheetSe = "CueSheet_SE"; //.acb
-        [SerializeField] string cueSheetVoice = "CueSheet_Voice"; //.acb
+        [SerializeField] private string _streamingAssetsPathAcf = "SoulRun"; //.acf
 
-        protected override bool UseDontDestroyOnLoad => true;
+        [SerializeField] private string _cueSheetBGM = "CueSheet_BGM"; //.acb
+        [SerializeField] private string _awbPathBGM = "CueSheet_BGM"; //.awb
+        [SerializeField] private string _cueSheetSe = "CueSheet_SE"; //.acb
+
+        [SerializeField] private string _cueSheetMe = "CueSheet_ME"; //.acb
 
         private float _masterVolume = 1F;
         private float _bgmVolume = 1F;
         private float _seVolume = 1F;
-        private float _voiceVolume = 1F;
+        private float _meVolume = 1F;
         private const float Diff = 0.01F; //音量の変更があったかどうかの判定に使う
 
         /// <summary>マスターボリュームが変更された際に呼ばれるEvent</summary>
@@ -32,8 +32,8 @@ namespace SoulRunProject.Common
         /// <summary>SEボリュームが変更された際に呼ばれるEvent</summary>
         public Action<float> SEVolumeChanged;
 
-        /// <summary>Voiceボリュームが変更された際に呼ばれる処理</summary>
-        public Action<float> VoiceVolumeChanged;
+        /// <summary>MEボリュームが変更された際に呼ばれる処理</summary>
+        public Action<float> MEVolumeChanged;
 
         private CriAtomExPlayer _bgmPlayer;
         private CriAtomExPlayback _bgmPlayback;
@@ -42,11 +42,12 @@ namespace SoulRunProject.Common
         private CriAtomExPlayer _loopSEPlayer;
         private List<CriPlayerData> _seData;
 
-        private CriAtomExPlayer _voicePlayer;
-        private List<CriPlayerData> _voiceData;
+        private CriAtomExPlayer _mePlayer;
+        private List<CriPlayerData> _meData;
 
         private string _currentBGMCueName = "";
         private CriAtomExAcb _currentBGMAcb = null;
+
 
         /// <summary>マスターボリューム</summary>
         /// <value>変更したい値</value>
@@ -87,14 +88,14 @@ namespace SoulRunProject.Common
             }
         }
 
-        public float VoiceVolume
+        public float MEVolume
         {
-            get => _voiceVolume;
+            get => _meVolume;
             set
             {
-                if (!(_voiceVolume + Diff < value) && !(_voiceVolume - Diff > value)) return;
-                VoiceVolumeChanged.Invoke(value);
-                _voiceVolume = value;
+                if (!(_meVolume + Diff < value) && !(_meVolume - Diff > value)) return;
+                MEVolumeChanged.Invoke(value);
+                _meVolume = value;
             }
         }
 
@@ -124,28 +125,30 @@ namespace SoulRunProject.Common
         }
 
 
+        protected override bool UseDontDestroyOnLoad => true;
+
         /// <summary>CriAtom の追加。acb追加</summary>
-        public override void OnAwake()
+        private void Awake()
         {
             // acf設定
-            string path = Application.streamingAssetsPath + $"/{streamingAssetsPathAcf}.acf";
+            string path = Application.streamingAssetsPath + $"/{_streamingAssetsPathAcf}.acf";
             CriAtomEx.RegisterAcf(null, path);
             // CriAtom作成
             new GameObject().AddComponent<CriAtom>();
             // BGM acb追加
-            CriAtom.AddCueSheet(cueSheetBGM, $"{cueSheetBGM}.acb", null, null);
+            CriAtom.AddCueSheet(_cueSheetBGM, $"{_cueSheetBGM}.acb", _awbPathBGM != "" ? $"{_awbPathBGM}.awb" : null,
+                null);
             // SE acb追加
-            CriAtom.AddCueSheet(cueSheetSe, $"{cueSheetSe}.acb", null, null);
+            CriAtom.AddCueSheet(_cueSheetSe, $"{_cueSheetSe}.acb", null, null);
             //Voice acb追加
-            CriAtom.AddCueSheet(cueSheetVoice, $"{cueSheetVoice}.acb", null, null);
+            CriAtom.AddCueSheet(_cueSheetMe, $"{_cueSheetMe}.acb", null, null);
 
             _bgmPlayer = new CriAtomExPlayer();
             _sePlayer = new CriAtomExPlayer();
             _loopSEPlayer = new CriAtomExPlayer();
-            _voicePlayer = new CriAtomExPlayer();
-
+            _mePlayer = new CriAtomExPlayer();
             _seData = new List<CriPlayerData>();
-            _voiceData = new List<CriPlayerData>();
+            _meData = new List<CriPlayerData>();
 
             MasterVolumeChanged += volume =>
             {
@@ -166,11 +169,10 @@ namespace SoulRunProject.Common
                     }
                 }
 
-
-                foreach (var voice in _voiceData)
+                foreach (var voice in _meData)
                 {
-                    _voicePlayer.SetVolume(_masterVolume * volume);
-                    _voicePlayer.Update(voice.Playback);
+                    _mePlayer.SetVolume(_masterVolume * volume);
+                    _mePlayer.Update(voice.Playback);
                 }
             };
 
@@ -197,42 +199,54 @@ namespace SoulRunProject.Common
                 }
             };
 
-            VoiceVolumeChanged += volume =>
+            MEVolumeChanged += volume =>
             {
-                foreach (var voice in _voiceData)
+                foreach (var voice in _meData)
                 {
-                    _voicePlayer.SetVolume(_masterVolume * volume);
-                    _voicePlayer.Update(voice.Playback);
+                    _mePlayer.SetVolume(_masterVolume * volume);
+                    _mePlayer.Update(voice.Playback);
                 }
             };
+
             SceneManager.sceneUnloaded += Unload;
         }
 
-        public override void OnDestroyed()
+        private void OnDestroy()
         {
-            CriAtomPlugin.FinalizeLibrary();
+            SceneManager.sceneUnloaded -= Unload;
         }
+        // ここに音を鳴らす関数を書いてください
 
         /// <summary>BGMを開始する</summary>
         /// <param name="cueName">流したいキューの名前</param>
         public void PlayBGM(string cueName)
         {
-            var tempAcb = CriAtom.GetCueSheet(cueSheetBGM).acb;
-            if (!tempAcb.GetCueInfo(cueName, out var cueInfo))
+            var cueSheet = CriAtom.GetCueSheet(_cueSheetBGM);
+            if (cueSheet == null)
             {
-                Debug.LogError($"BGMキュー名 '{cueName}' がキューシート '{cueSheetBGM}' に存在しません。");
+                Debug.LogError($"Cue sheet {_cueSheetBGM} not found.");
                 return;
             }
 
-            if (_currentBGMCueName == cueName &&
+            var temp = cueSheet.acb;
+
+            if (_currentBGMAcb == temp && _currentBGMCueName == cueName &&
                 _bgmPlayer.GetStatus() == CriAtomExPlayer.Status.Playing)
             {
                 return;
             }
 
             StopBGM();
-            _bgmPlayer.SetCue(_currentBGMAcb, cueName);
+
+            if (temp == null)
+            {
+                Debug.LogError("ACB is null. BGM cannot be played.");
+                return;
+            }
+
+            _bgmPlayer.SetCue(temp, cueName);
             _bgmPlayback = _bgmPlayer.Start();
+            _currentBGMAcb = temp;
             _currentBGMCueName = cueName;
         }
 
@@ -268,12 +282,15 @@ namespace SoulRunProject.Common
         {
             CriPlayerData newAtomPlayer = new CriPlayerData();
 
-            var tempAcb = CriAtom.GetCueSheet(cueSheetSe).acb;
-            if (!tempAcb.GetCueInfo(cueName, out var cueInfo))
+
+            var tempAcb = CriAtom.GetCueSheet(_cueSheetSe).acb;
+            if (tempAcb == null)
             {
-                Debug.LogError($"SEキュー名 '{cueName}' がキューシート '{cueSheetSe}' に存在しません。");
+                Debug.LogWarning("ACBがNullです。");
                 return -1;
             }
+
+            tempAcb.GetCueInfo(cueName, out var cueInfo);
 
             newAtomPlayer.CueInfo = cueInfo;
 
@@ -327,50 +344,52 @@ namespace SoulRunProject.Common
             _loopSEPlayer.Stop();
         }
 
-        /// <summary>Voiceを流す関数</summary>
+        /// <summary>MEを流す関数</summary>
         /// <param name="cueName">流したいキューの名前</param>
         /// <returns>停止する際に必要なIndex</returns>
-        public int PlayVoice(string cueName, float volume = 1f)
+        public int PlayME(string cueName, float volume = 1f)
         {
+            CriAtomEx.CueInfo cueInfo;
             CriPlayerData newAtomPlayer = new CriPlayerData();
-            var tempAcb = CriAtom.GetCueSheet(cueSheetSe).acb;
-            tempAcb.GetCueInfo(cueName, out var cueInfo);
+
+            var tempAcb = CriAtom.GetCueSheet(_cueSheetMe).acb;
+            tempAcb.GetCueInfo(cueName, out cueInfo);
 
             newAtomPlayer.CueInfo = cueInfo;
 
-            _voicePlayer.SetCue(tempAcb, cueName);
-            _voicePlayer.SetVolume(volume * _masterVolume * _voiceVolume);
-            newAtomPlayer.Playback = _voicePlayer.Start();
+            _mePlayer.SetCue(tempAcb, cueName);
+            _mePlayer.SetVolume(volume * _masterVolume * _meVolume);
+            newAtomPlayer.Playback = _mePlayer.Start();
 
-            _voiceData.Add(newAtomPlayer);
-            return _voiceData.Count - 1;
+            _meData.Add(newAtomPlayer);
+            return _meData.Count - 1;
         }
 
-        /// <summary>VoiceをPauseさせる </summary>
+        /// <summary>MEをPauseさせる </summary>
         /// <param name="index">一時停止させたいPlayVoice()の戻り値 (-1以下を渡すと処理を行わない)</param>
-        public void PauseVoice(int index)
+        public void PauseME(int index)
         {
             if (index < 0) return;
 
-            _voiceData[index].Playback.Pause();
+            _meData[index].Playback.Pause();
         }
 
-        /// <summary>PauseさせたVoiceを再開させる</summary>
-        /// <param name="index">再開させたいPlayVoice()の戻り値 (-1以下を渡すと処理を行わない)</param>
-        public void ResumeVoice(int index)
+        /// <summary>PauseさせたMEを再開させる</summary>
+        /// <param name="index">再開させたいPlayME()の戻り値 (-1以下を渡すと処理を行わない)</param>
+        public void ResumeME(int index)
         {
             if (index < 0) return;
 
-            _voiceData[index].Playback.Resume(CriAtomEx.ResumeMode.AllPlayback);
+            _meData[index].Playback.Resume(CriAtomEx.ResumeMode.AllPlayback);
         }
 
-        /// <summary>Voiceを停止させる </summary>
-        /// <param name="index">止めたいPlayVoice()の戻り値 (-1以下を渡すと処理を行わない)</param>
-        public void StopVoice(int index)
+        /// <summary>MEを停止させる </summary>
+        /// <param name="index">止めたいPlayME()の戻り値 (-1以下を渡すと処理を行わない)</param>
+        public void StopME(int index)
         {
             if (index < 0) return;
 
-            _voiceData[index].Playback.Stop();
+            _meData[index].Playback.Stop();
         }
 
         private void Unload(Scene scene)

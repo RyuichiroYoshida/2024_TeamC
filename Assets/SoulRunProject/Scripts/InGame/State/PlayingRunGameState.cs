@@ -31,7 +31,7 @@ namespace SoulRunProject.InGame
         protected override void OnEnter(State currentState)
         {
             DebugClass.Instance.ShowLog("プレイ中ステート開始");
-            PauseManager.Instance.Pause(false);
+            PauseManager.Pause(false);
             SwitchToLevelUpState = false;
             ArrivedBossStagePosition = false;
             

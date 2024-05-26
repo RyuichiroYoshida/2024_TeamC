@@ -1,30 +1,39 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using SoulRunProject.InGame;
 using UnityEngine;
 
 namespace SoulRunProject.Common
 {
-    public class PauseManager : AbstractSingletonMonoBehaviour<PauseManager>
+    public static class PauseManager
     {
-        protected override bool UseDontDestroyOnLoad { get; } = true;
         private static List<IPausable> _pausables = new();
-        private bool _isPause;
+        private static bool _isPause;
 
-        public void RegisterPausableObject(IPausable pausable)
+        public static void RegisterPausableObject(IPausable pausable)
         {
             _pausables.Add(pausable);
         }
-        public void UnRegisterPausableObject(IPausable pausable)
+        public static void UnRegisterPausableObject(IPausable pausable)
         {
             _pausables.Remove(pausable);
         }
 
-        public void Pause(bool isPause)
+        public static void Pause(bool isPause)
         {
-            foreach (var pausable in _pausables)
+            // foreach (var pausable in _pausables)
+            // {
+            //     pausable.Pause(isPause);
+            // }
+
+            if (isPause)
             {
-                pausable.Pause(isPause);
+                Time.timeScale = 0;
+            }
+            else
+            {
+                Time.timeScale = 1;
             }
 
             _isPause = isPause;
@@ -33,7 +42,7 @@ namespace SoulRunProject.Common
         /// ポーズに対応した待機処理、キャンセルされるとfalseを返す
         /// </summary>
         /// <returns>キャンセルされるとfalse, 設定した時間を超えるとtrue</returns>
-        public async UniTask<bool> TryWaitForSeconds(float seconds)
+        public static async UniTask<bool> TryWaitForSeconds(float seconds, CancellationToken ct)
         {
             var timer = 0f;
             //  タイマーループ開始
@@ -42,7 +51,7 @@ namespace SoulRunProject.Common
                 {
                     //  Pauseフラグがfalseなら1フレーム待つ(ちゃんと1フレーム待ってるか分からない)、
                     //  trueならfalseになるまで通さない
-                    await UniTask.WaitUntil(() => !_isPause, PlayerLoopTiming.Update, destroyCancellationToken);
+                    await UniTask.WaitUntil(() => !_isPause, PlayerLoopTiming.Update, ct);
                     timer += Time.deltaTime;
                     if (timer >= seconds)
                     {
