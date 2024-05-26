@@ -1,4 +1,5 @@
 using System.Threading;
+using Cinemachine;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace SoulRunProject
     /// </summary>
     public class PlayerCamera : MonoBehaviour
     {
+        [SerializeField] private CinemachineImpulseSource _impulseSource;
         [SerializeField] private Transform _player;
         [SerializeField] private Vector3 _offset;
         [SerializeField] private Vector3 _firstPos;
@@ -48,15 +50,16 @@ namespace SoulRunProject
 
         public void DamageCam()
         {
-            return;
-            if (_shaking) return;
-            _shakeObj.transform.DOShakePosition(_shakeDur, _shakePower, _shakeVib, _shakeRand, _isSnap, _isFade)
-                .OnStart(() => _shaking = true)
-                .OnComplete(() =>
-                {
-                    _shakeObj.position = new (_player.transform.position.x, transform.position.y, transform.position.z);
-                    _shaking = false;
-                }).SetLink(gameObject);
+            _impulseSource.GenerateImpulse(Vector3.one);
+            // return;
+            // if (_shaking) return;
+            // _shakeObj.transform.DOShakePosition(_shakeDur, _shakePower, _shakeVib, _shakeRand, _isSnap, _isFade)
+            //     .OnStart(() => _shaking = true)
+            //     .OnComplete(() =>
+            //     {
+            //         _shakeObj.position = new (_player.transform.position.x, transform.position.y, transform.position.z);
+            //         _shaking = false;
+            //     }).SetLink(gameObject);
         }
         
         public void StartFollowPlayer()
