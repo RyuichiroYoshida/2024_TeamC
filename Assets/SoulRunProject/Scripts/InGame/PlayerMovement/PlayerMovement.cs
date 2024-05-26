@@ -54,7 +54,9 @@ namespace SoulRunProject.InGame
 
         private void FixedUpdate()
         {
-            if (_isGround.Value)
+            if (_inPause) return;
+            
+            if (_isGround.Value && _playerVelocity.y < 0)
             {
                 _playerVelocity.y = 0;
             }
@@ -68,7 +70,6 @@ namespace SoulRunProject.InGame
 
         public void InputMove(Vector2 moveInput)
         {
-            if (_inPause) return;
             _playerVelocity.x = moveInput.x * _moveSpeed;
         }
 
