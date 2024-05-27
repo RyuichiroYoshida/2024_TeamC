@@ -63,3 +63,4 @@ MonoBehaviour:
       data:
         _attackDamage: 10
         _size: 1
+        _getSoulPerSec: 1

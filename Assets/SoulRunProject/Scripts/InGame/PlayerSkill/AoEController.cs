@@ -13,7 +13,7 @@ namespace SoulRunProject.Common
     {
         HashSet<DamageableEntity> _entities = new();
         private AoESkillParameter _param;
-        float _attackDamage;
+        private PlayerManager _playerManager;
         private bool _isPause;
 
         private void Awake()
@@ -26,9 +26,10 @@ namespace SoulRunProject.Common
             UnRegister();
         }
 
-        public void Initialize(in AoESkillParameter param)
+        public void Initialize(in AoESkillParameter param, PlayerManager playerManager)
         {
             _param = param;
+            _playerManager = playerManager;
             param.ObserveEveryValueChanged(x => x.Size).Subscribe(x => transform.localScale = Vector3.one * x).AddTo(this);
         }
 
@@ -39,7 +40,12 @@ namespace SoulRunProject.Common
             // Whereでnullチェックしてからダメージ処理
             foreach (var entity in _entities.Where(entity => entity))
             {
-                entity.Damage(_attackDamage * Time.fixedDeltaTime, useSE: false);
+                entity.Damage(_param.BaseAttackDamage * Time.fixedDeltaTime, useSE: false);
+
+                if (entity.TryGetComponent(out EnemyController _)) // 敵に対するヒット数によってもらえるソウルが増える
+                {
+                    _playerManager.AddSoul(_param.GetSoulPerSec * Time.fixedDeltaTime);
+                }
             }
         }
 

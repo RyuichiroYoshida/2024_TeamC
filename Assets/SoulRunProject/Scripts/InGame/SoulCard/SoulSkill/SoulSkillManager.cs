@@ -43,7 +43,6 @@ namespace SoulRunProject.InGame
         private void FixedUpdate()
         {
             AddSoul(_regenerativePerSec * Time.fixedDeltaTime);
-            Debug.Log(_currentSoul.Value);
         }
 
         public void SetSoulSkill(SoulSkillType soulSkillType)
