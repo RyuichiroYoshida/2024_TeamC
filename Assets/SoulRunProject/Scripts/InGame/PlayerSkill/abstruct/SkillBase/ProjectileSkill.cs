@@ -73,6 +73,7 @@ namespace SoulRunProject
                         bullet.transform.rotation *= Quaternion.Euler(0f, rotateY, 0f);
                         bullet.ApplyParameter(_projectileSkillParameter);
                         bullet.Initialize();
+                        bullet.GetReference(PlayerManagerInstance);
                         bullet.OnFinishedAsync.Take(1).Subscribe(_ => _bulletPool.Return(bullet));
                     }
 

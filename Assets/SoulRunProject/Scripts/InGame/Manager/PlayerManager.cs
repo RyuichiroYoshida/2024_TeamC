@@ -35,6 +35,8 @@ namespace SoulRunProject.Common
         /// <summary>ダメージを無効化出来るかどうかの条件を格納するリスト</summary>
         public List<Func<bool>> IgnoreDamagePredicates { get; } = new();
 
+        public event Action OnDead;
+
         private void Awake()
         {
             Register();
@@ -49,6 +51,7 @@ namespace SoulRunProject.Common
             CurrentPlayerStatus = new PlayerStatus(_baseStatus.PlayerStatus);
             
             InitializeInput();
+            CurrentHp.Where(hp => hp == 0).Subscribe(_ => Death()).AddTo(this);
         }
 
         private void OnDestroy()
@@ -123,6 +126,7 @@ namespace SoulRunProject.Common
         
         private void Death()
         {
+            OnDead?.Invoke();
             Debug.Log("GameOver");
             //SwitchPause(true);
         }

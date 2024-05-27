@@ -1,3 +1,4 @@
+using SoulRunProject.Common;
 using UnityEngine;
 using UniRx;
 
@@ -12,6 +13,7 @@ namespace SoulRunProject.InGame
     {
         private void Awake()
         {
+            PlayerManager playerManager = GetComponent<PlayerManager>();
             PlayerMovement playerMovement = GetComponent<PlayerMovement>();
             Animator playerAnimator = GetComponent<Animator>();
 
@@ -21,6 +23,7 @@ namespace SoulRunProject.InGame
                 })
                 .AddTo(this);
             playerMovement.OnJumped += () => playerAnimator.SetTrigger("OnJump");
+            playerManager.OnDead += () => playerAnimator.SetTrigger("OnDead");
         }
     }
 }
