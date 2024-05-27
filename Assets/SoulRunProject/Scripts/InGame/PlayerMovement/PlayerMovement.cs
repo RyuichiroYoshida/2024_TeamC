@@ -27,7 +27,6 @@ namespace SoulRunProject.InGame
         private float _yAxisGroundLine;
         private bool _inPause;
         private int _spinIndex;
-        private CancellationTokenSource _cts;
 
         public BoolReactiveProperty IsGround => _isGround;
         public event Action OnJumped;

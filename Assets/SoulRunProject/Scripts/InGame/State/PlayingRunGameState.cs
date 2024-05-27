@@ -54,15 +54,12 @@ namespace SoulRunProject.InGame
                     StateChange();
                 })
                 .AddTo(_compositeDisposable);
-            // プレイヤーのHPの監視
-            _playerManager.CurrentHp
-                .Where(hp => hp <= 0)
-                .Subscribe(hp =>
-                {
-                    IsPlayerDead = true;
-                    StateChange();
-                })
-                .AddTo(_compositeDisposable);
+            //プレイヤーのHPの監視
+             _playerManager.OnDead += () =>
+             {
+                 IsPlayerDead = true;
+                 StateChange();
+             };
             
             // ボスステージへの遷移への購読
             _stageManager.ToBossStage += ToBossStage;
