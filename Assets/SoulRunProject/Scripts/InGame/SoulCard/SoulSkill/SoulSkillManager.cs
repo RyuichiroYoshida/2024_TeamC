@@ -14,14 +14,20 @@ namespace SoulRunProject.InGame
     /// </summary>
     public class SoulSkillManager : MonoBehaviour
     {
-        [SerializeField] private FloatReactiveProperty _currentSoul = new FloatReactiveProperty(0);
+        [SerializeField] private float _initialSoul;
+        [SerializeField] private float _regenerativePerSec;
+        
+        private FloatReactiveProperty _currentSoul = new FloatReactiveProperty(0);
         private readonly Dictionary<SoulSkillType , SoulSkillBase> _soulSkillReference = new();
         SoulSkillBase _currentSoulSkill;
-        public float RequiredSoul;
+        public float RequiredSoul { get; private set; }
         public IObservable<float> CurrentSoul => _currentSoul;
 
         private void Start()
         {
+            _currentSoul.AddTo(this);
+            _currentSoul.Value = _initialSoul;
+            
             //TODO デバック用　ソウルフレイム設定。
             if (MyRepository.Instance.TryGetDataList<SoulSkillBase>(out var dataList))
             {
@@ -29,11 +35,17 @@ namespace SoulRunProject.InGame
                 {
                     _soulSkillReference.Add(soulSkill.SkillType , soulSkill);
                 }
-                
             }
 
             SetSoulSkill(SoulSkillType.SoulFrame);
         }
+
+        private void FixedUpdate()
+        {
+            AddSoul(_regenerativePerSec * Time.fixedDeltaTime);
+            Debug.Log(_currentSoul.Value);
+        }
+
         public void SetSoulSkill(SoulSkillType soulSkillType)
         {
             _currentSoulSkill = _soulSkillReference[soulSkillType];
@@ -43,9 +55,9 @@ namespace SoulRunProject.InGame
         public void AddSoul(float soul)
         {
             _currentSoul.Value += soul;
-            if (_currentSoul.Value >= _currentSoulSkill.RequiredSoul)
+            if (_currentSoul.Value >= RequiredSoul)
             {
-                _currentSoul.Value = _currentSoulSkill.RequiredSoul;
+                _currentSoul.Value = RequiredSoul;
             }
         }
         
