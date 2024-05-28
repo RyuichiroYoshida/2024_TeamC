@@ -37,14 +37,15 @@ namespace SoulRunProject
         private static readonly int MaskTex = Shader.PropertyToID("_MaskTex");
         private static readonly int Range1 = Shader.PropertyToID("_Range");
 
-        private void OnValidate()
+#if UNITY_EDITOR
+        protected void OnValidate()
         {
-            // エディタ上での変更を即時反映
-            if (_fadeMaterial != null)
-            {
-                _fadeMaterial.SetFloat(Range1, 1 - _cutoutRange);
-            }
+            if (_fadeMaterial == null) return;
+            _fadeMaterial.SetFloat(Range1, 1 - _cutoutRange);
+            Debug.Log($"{Range1}");
         }
+#endif
+
 
         private void Start()
         {
