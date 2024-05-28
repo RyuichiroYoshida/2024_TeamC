@@ -19,6 +19,7 @@ namespace SoulRunProject.Common
         [SerializeField, CustomLabel("敵を何体まで貫通するか")] int _penetration;
         [SerializeField, CustomLabel("弾のライフタイム")] float _lifeTime;
         [SerializeField, CustomLabel("与ノックバック")]　GiveKnockBack _knockBack;
+        [SerializeField, CustomLabel("ヒット時のソウル増加量")] private float _getSoulValueOnHit;
         
         /// <summary>
         /// ランタイム時に変更される基礎値
@@ -31,6 +32,7 @@ namespace SoulRunProject.Common
         [NonSerialized] public float BaseSize;
         [NonSerialized] public float BaseSpeed;
         [NonSerialized] public int BasePenetration;
+        [NonSerialized] public float GetSoulValueOnHit;
         
         private PlayerStatus _status;
         public void SetPlayerStatus(in PlayerStatus status)
@@ -59,6 +61,7 @@ namespace SoulRunProject.Common
             BaseSize = _size;
             BaseSpeed = _speed;
             BasePenetration = _penetration;
+            GetSoulValueOnHit = _getSoulValueOnHit;
         }
         
 
