@@ -90,3 +90,4 @@ MonoBehaviour:
         _lifeTime: 3
         _knockBack:
           _power: 0
+        _getSoulValueOnHit: 1

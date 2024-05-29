@@ -11,6 +11,7 @@ namespace SoulRunProject.InGame
     public class PlayerAnimationController : MonoBehaviour
     {
         [SerializeField] private PlayerMovement _playerMovement;
+        [SerializeField] private PlayerManager _playerManager;
         private void Awake()
         {
             Animator playerAnimator = GetComponent<Animator>();
@@ -21,6 +22,7 @@ namespace SoulRunProject.InGame
                 })
                 .AddTo(this);
             _playerMovement.OnJumped += () => playerAnimator.SetTrigger("OnJump");
+            _playerManager.OnDead += () => playerAnimator.SetTrigger("OnDead");
         }
         /// <summary>
         /// プレイヤーの足音再生

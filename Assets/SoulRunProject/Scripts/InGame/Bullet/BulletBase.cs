@@ -21,6 +21,7 @@ namespace SoulRunProject.InGame
         [SerializeField] float _hitOffset;
         [SerializeField, CustomLabel("生存時間")] protected float _lifeTime = 15f;
         protected bool _isPause;
+        protected PlayerManager PlayerManagerInstance;
 
         void Awake()
         {
@@ -39,6 +40,11 @@ namespace SoulRunProject.InGame
         public override void Initialize()
         {
             Fire();
+        }
+
+        public void GetReference(PlayerManager playerManager)
+        {
+            PlayerManagerInstance = playerManager;
         }
 
         public void Register()

@@ -46,22 +46,20 @@ namespace SoulRunProject.InGame
                 .AddTo(_compositeDisposable);
             
             // レベルアップの購読
-            _playerInput.LevelUpInput.Where(input => input && _playerLevelManager.LevelUpStackCount.Value > 0)
+            _playerLevelManager.OnLevelUp
+                .SkipLatestValueOnSubscribe()
                 .Subscribe(_ =>
                 {
                     SwitchToLevelUpState = true;
                     StateChange();
                 })
                 .AddTo(_compositeDisposable);
-            // プレイヤーのHPの監視
-            _playerManager.CurrentHp
-                .Where(hp => hp <= 0)
-                .Subscribe(hp =>
-                {
-                    IsPlayerDead = true;
-                    StateChange();
-                })
-                .AddTo(_compositeDisposable);
+            //プレイヤーのHPの監視
+             _playerManager.OnDead += () =>
+             {
+                 IsPlayerDead = true;
+                 StateChange();
+             };
             
             // ボスステージへの遷移への購読
             _stageManager.ToBossStage += ToBossStage;

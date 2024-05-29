@@ -27,16 +27,7 @@ namespace SoulRunProject
             if (stage == CinemachineCore.Stage.Body)
             {
                 var pos = state.RawPosition;
-                //pos.y =  _playerMovement.GroundHeight + m_YPosition;
-
-                if (_playerMovement.IsJumping)
-                {
-                    pos.y = Mathf.Max(_playerMovement.GroundHeight + m_YPosition, _playerMovement.transform.position.y - _maxJumpedDistance);
-                }
-                else
-                {
-                    pos.y = _playerMovement.transform.position.y + m_YPosition - 1.5f; // 1.5 => player pivot distance
-                }
+                pos.y =  _playerMovement.GroundHeight + m_YPosition;
                 
                 state.RawPosition = pos;
             }
