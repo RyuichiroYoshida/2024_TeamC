@@ -3,21 +3,27 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using SoulRunProject.Common;
 using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 namespace SoulRunProject.InGame
 {
     public class TutorialManager : MonoBehaviour
     {
         [SerializeField] private PlayerInput _playerInput;
+        [SerializeField] private Image _fadePanel;
         [SerializeReference, SubclassSelector] private List<TutorialContentBase> _tutorialContents;
+        [SerializeField] private EndTutorial _endTutorial;
 
         private void Start()
         {
             foreach (var tutorialContent in _tutorialContents)
             {
-                tutorialContent.TutorialPanel.SetActive(false);
+                tutorialContent.TutorialUI.SetActive(false);
             }
 
+            _fadePanel.gameObject.SetActive(false);
             _ = TakeTutorial();
         }
 
@@ -33,10 +39,15 @@ namespace SoulRunProject.InGame
             foreach (var tutorialContent in _tutorialContents)
             {
                 await UniTask.Delay(TimeSpan.FromSeconds(tutorialContent.StandbyTime));
-                tutorialContent.TutorialPanel.SetActive(true);
+                _fadePanel.gameObject.SetActive(true);
+                tutorialContent.TutorialUI.SetActive(true);
                 await tutorialContent.WaitAction(_playerInput);
-                tutorialContent.TutorialPanel.SetActive(false);
+                _fadePanel.gameObject.SetActive(false);
+                tutorialContent.TutorialUI.SetActive(false);
             }
+            
+            _endTutorial.Initialize(_fadePanel);
+            await _endTutorial.WaitAction();
         }
     }
 
@@ -76,14 +87,40 @@ namespace SoulRunProject.InGame
         }
     }
 
+    [Serializable, Name("チュートリアル終了")]
+    public class EndTutorial
+    {
+        [SerializeField] private float _standbyTime;
+        [SerializeField] private float _fadeTime;
+        [SerializeField] private string _loadSceneName;
+        
+        private Image _fadePanel;
+        
+        public void Initialize(Image fadePanel)
+        {
+            _fadePanel = fadePanel;
+        }
+        
+        public async UniTask WaitAction()
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(_standbyTime));
+            _fadePanel.gameObject.SetActive(true);
+            Color color = _fadePanel.color;
+            color.a = 0;
+            _fadePanel.color = color;
+            await _fadePanel.DOFade(1, _fadeTime);
+            SceneManager.LoadScene(_loadSceneName);
+        }
+    }
+
     [Serializable, Name("基底クラス")]
     public class TutorialContentBase
     {
         [SerializeField] private float _standbyTime;
-        [SerializeField] private GameObject _tutorialPanel;
+        [SerializeField] private GameObject _tutorialUI;
 
         public float StandbyTime => _standbyTime;
-        public GameObject TutorialPanel => _tutorialPanel;
+        public GameObject TutorialUI => _tutorialUI;
 
         public virtual async UniTask WaitAction(PlayerInput input){}
     }
