@@ -1,3 +1,4 @@
+using SoulRunProject.Common;
 using UnityEngine;
 using UniRx;
 
@@ -7,20 +8,27 @@ namespace SoulRunProject.InGame
     /// PlayerのAnimationを制御する
     /// </summary>
     [RequireComponent(typeof(Animator))]
-    [RequireComponent(typeof(PlayerMovement))]
     public class PlayerAnimationController : MonoBehaviour
     {
+        [SerializeField] private PlayerMovement _playerMovement;
         private void Awake()
         {
-            PlayerMovement playerMovement = GetComponent<PlayerMovement>();
             Animator playerAnimator = GetComponent<Animator>();
 
-            playerMovement.IsGround.Subscribe(isGround =>
+            _playerMovement.IsGround.Subscribe(isGround =>
                 {
                     playerAnimator.SetBool("IsGround", isGround);
                 })
                 .AddTo(this);
-            playerMovement.OnJumped += () => playerAnimator.SetTrigger("OnJump");
+            _playerMovement.OnJumped += () => playerAnimator.SetTrigger("OnJump");
+        }
+        /// <summary>
+        /// プレイヤーの足音再生
+        /// AnimationEventから呼び出される
+        /// </summary>
+        public void PlayRunSound()
+        {
+            CriAudioManager.Instance.PlaySE("SE_Run");
         }
     }
 }
