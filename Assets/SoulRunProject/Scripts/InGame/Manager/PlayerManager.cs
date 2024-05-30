@@ -11,19 +11,18 @@ namespace SoulRunProject.Common
     /// <summary>
     /// プレイヤーを管理するクラス
     /// </summary>
-    [RequireComponent(typeof(HitDamageEffectManager))]
     public class PlayerManager : MonoBehaviour, IPausable
     {
         [SerializeField] private PlayerInput _playerInput;
         [SerializeField] private BaseStatus _baseStatus;
         [SerializeField] private PlayerCamera _playerCamera;
+        [SerializeField] private HitDamageEffectManager _hitDamageEffectManager;
         
         private IPlayerPausable[] _inGameTimes;
         private PlayerLevelManager _pLevelManager;
         private SkillManager _skillManager;
         private SoulSkillManager _soulSkillManager;
         private PlayerMovement _playerMovement;
-        private HitDamageEffectManager _hitDamageEffectManager;
         //private PlayerStatusManager _statusManager;
         private PlayerResourceContainer _resourceContainer;
         public ReadOnlyReactiveProperty<float> CurrentHp => CurrentPlayerStatus.CurrentHpProperty;
@@ -45,7 +44,6 @@ namespace SoulRunProject.Common
             _skillManager = GetComponent<SkillManager>();
             _soulSkillManager = GetComponent<SoulSkillManager>();
             _playerMovement = GetComponent<PlayerMovement>();
-            _hitDamageEffectManager = GetComponent<HitDamageEffectManager>();
             _resourceContainer = new();
             //_statusManager = new PlayerStatusManager(_baseStatus.Status);
             CurrentPlayerStatus = new PlayerStatus(_baseStatus.PlayerStatus);
