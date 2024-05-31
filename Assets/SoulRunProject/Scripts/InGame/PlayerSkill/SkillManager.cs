@@ -16,7 +16,7 @@ namespace SoulRunProject.InGame
         [SerializeField, Header("初期スキルリスト")] private List<PlayerSkill> _defaultPlayerSkills;
         [SerializeField, CustomLabel("初期のスキル保有可能数")] private int _initialNumberOfPossessions;
         [SerializeField, Header("スキルの保有可能数が増えるレベル")] private int[] _increaseSkillLevels;
-        [SerializeField, HideInInspector] private Image[] _skillIconImage = new Image[5];
+        [SerializeField] private Image[] _skillIconImage = new Image[5];
         private readonly List<SkillBase> _currentSkills = new(5);
         private List<SkillBase> _skillData;
         public List<SkillBase> SkillData => _skillData;
@@ -106,41 +106,41 @@ namespace SoulRunProject.InGame
             }
         }
 
-        #if  UNITY_EDITOR
-        [CustomEditor(typeof(SkillManager))]
-        public class SkillManagerEditor : Editor
-        {
-            private SkillManager _skillManager;
-            private bool _groupIsOpen;
-            
-            private void Awake()
-            {
-                _skillManager = target as SkillManager;
-            }
-
-            public override void OnInspectorGUI()
-            {
-                DrawDefaultInspector();
-
-                _groupIsOpen = EditorGUILayout.BeginFoldoutHeaderGroup(_groupIsOpen, "スキルアイコン");
-
-                if (_groupIsOpen)
-                {
-                    _skillManager._skillIconImage[0] = 
-                        EditorGUILayout.ObjectField(_skillManager._skillIconImage[0], typeof(Image), true) as Image;
-                    _skillManager._skillIconImage[1] = 
-                        EditorGUILayout.ObjectField(_skillManager._skillIconImage[1], typeof(Image), true) as Image;
-                    _skillManager._skillIconImage[2] = 
-                        EditorGUILayout.ObjectField(_skillManager._skillIconImage[2], typeof(Image), true) as Image;
-                    _skillManager._skillIconImage[3] = 
-                        EditorGUILayout.ObjectField(_skillManager._skillIconImage[3], typeof(Image), true) as Image;
-                    _skillManager._skillIconImage[4] = 
-                        EditorGUILayout.ObjectField(_skillManager._skillIconImage[4], typeof(Image), true) as Image;
-                }
-                
-                EditorGUILayout.EndFoldoutHeaderGroup();
-            }
-        }
-        #endif
+        // #if  UNITY_EDITOR
+        // [CustomEditor(typeof(SkillManager))]
+        // public class SkillManagerEditor : Editor
+        // {
+        //     private SkillManager _skillManager;
+        //     private bool _groupIsOpen;
+        //     
+        //     private void Awake()
+        //     {
+        //         _skillManager = target as SkillManager;
+        //     }
+        //
+        //     public override void OnInspectorGUI()
+        //     {
+        //         DrawDefaultInspector();
+        //
+        //         _groupIsOpen = EditorGUILayout.BeginFoldoutHeaderGroup(_groupIsOpen, "スキルアイコン");
+        //
+        //         if (_groupIsOpen)
+        //         {
+        //             _skillManager._skillIconImage[0] = 
+        //                 EditorGUILayout.ObjectField(_skillManager._skillIconImage[0], typeof(Image), true) as Image;
+        //             _skillManager._skillIconImage[1] = 
+        //                 EditorGUILayout.ObjectField(_skillManager._skillIconImage[1], typeof(Image), true) as Image;
+        //             _skillManager._skillIconImage[2] = 
+        //                 EditorGUILayout.ObjectField(_skillManager._skillIconImage[2], typeof(Image), true) as Image;
+        //             _skillManager._skillIconImage[3] = 
+        //                 EditorGUILayout.ObjectField(_skillManager._skillIconImage[3], typeof(Image), true) as Image;
+        //             _skillManager._skillIconImage[4] = 
+        //                 EditorGUILayout.ObjectField(_skillManager._skillIconImage[4], typeof(Image), true) as Image;
+        //         }
+        //         
+        //         EditorGUILayout.EndFoldoutHeaderGroup();
+        //     }
+        // }
+        // #endif
     }
 }
