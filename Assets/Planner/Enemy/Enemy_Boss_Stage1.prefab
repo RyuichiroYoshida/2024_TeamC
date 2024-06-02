@@ -347,6 +347,7 @@ GameObject:
   - component: {fileID: 4060490222514243321}
   - component: {fileID: 4175144361476707941}
   - component: {fileID: 493474759675345639}
+  - component: {fileID: -3820245366408176591}
   - component: {fileID: 2838193289605637035}
   - component: {fileID: 4926363286030084361}
   m_Layer: 0
@@ -522,6 +523,21 @@ MonoBehaviour:
         _flameBallAccuracy: 0
         _powerUpBehaviors:
         - rid: 1007958178315632817
+--- !u!114 &-3820245366408176591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4540017066615722400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5929496373a803b4fbfb5b45f78cd968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damageUIPrefab: {fileID: -8645444479275004511, guid: abba775fb86727447918faadc8d0e920,
+    type: 3}
+  _uiPosition: {x: 3.7542477, y: 4.7648954, z: 0}
 --- !u!65 &2838193289605637035
 BoxCollider:
   m_ObjectHideFlags: 0
