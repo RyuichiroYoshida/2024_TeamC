@@ -14,6 +14,9 @@ namespace SoulRunProject.InGame
         private readonly BoolReactiveProperty _shiftInput = new BoolReactiveProperty();
         private readonly BoolReactiveProperty _levelUpInput = new BoolReactiveProperty();
 
+        public bool MoveInputActive = true;
+        public bool JumpInputActive = true;
+        public bool ShiftInputActive = true;
         public ReactiveProperty<Vector2> MoveInput => _moveInput;
         public BoolReactiveProperty JumpInput => _jumpInput;
         public BoolReactiveProperty PauseInput => _pauseInput;
@@ -31,10 +34,10 @@ namespace SoulRunProject.InGame
 
         private void Update()
         {
-            _moveInput.Value = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-            _jumpInput.Value = Input.GetButtonDown("Jump");
+            if (MoveInputActive) _moveInput.Value = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            if (JumpInputActive) _jumpInput.Value = Input.GetButtonDown("Jump");
             _pauseInput.Value = Input.GetButtonDown("Cancel");
-            _shiftInput.Value = Input.GetButton("Fire3");
+            if (ShiftInputActive) _shiftInput.Value = Input.GetButton("Fire3");
             _levelUpInput.Value = Input.GetKeyDown(KeyCode.Q); // todo input manager
         }
     }
