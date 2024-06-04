@@ -117,7 +117,8 @@ namespace SoulRunProject.InGame
         {
             _currentState = BossState.Animation;
             _bossAnimator.SetTrigger("Entry");
-            await UniTask.WaitUntil(() => _bossAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
+            await UniTask.WaitUntil(() => _bossAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f, 
+                cancellationToken: this.GetCancellationTokenOnDestroy());
             _currentState = BossState.Standby;
         }
 

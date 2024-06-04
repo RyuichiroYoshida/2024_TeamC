@@ -14,9 +14,9 @@ namespace SoulRunProject.InGame
         private readonly BoolReactiveProperty _shiftInput = new BoolReactiveProperty();
         private readonly BoolReactiveProperty _levelUpInput = new BoolReactiveProperty();
 
-        public bool MoveInputActive = true;
-        public bool JumpInputActive = true;
-        public bool ShiftInputActive = true;
+        public bool MoveInputActive { get; set; } = true;
+        public bool JumpInputActive { get; set; } = true;
+        public bool ShiftInputActive { get; set; } = true;
         public ReactiveProperty<Vector2> MoveInput => _moveInput;
         public BoolReactiveProperty JumpInput => _jumpInput;
         public BoolReactiveProperty PauseInput => _pauseInput;
