@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: HikanyanLaboratory_DissolveShader
+  m_Name: HikanyanLaboratory_ConcentratedLine
   m_Shader: {fileID: 4800000, guid: 035122e133b666249b3906c7b8f7d902, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -33,7 +33,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _CutOff: 0.174
+    - _CutOff: 0.533
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 0.7921569, b: 1, a: 1}
   m_BuildTextureStacks: []
