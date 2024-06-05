@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/SoulRunProject/Scenes/MainScene/Title.unity
     guid: 3f2c004bed08b7148bb7ca198c66260b
   - enabled: 1
+    path: Assets/SoulRunProject/Scenes/MainScene/TutorialScene.unity
+    guid: dd85264634da13c47b0b5c993e292ffb
+  - enabled: 1
     path: Assets/SoulRunProject/Scenes/MainScene/InGame.unity
     guid: aafe37b1106181a4ab0e52c4413f8e54
   - enabled: 1
