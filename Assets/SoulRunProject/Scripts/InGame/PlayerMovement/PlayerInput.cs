@@ -34,6 +34,11 @@ namespace SoulRunProject.InGame
 
         private void Update()
         {
+            ReflectInput();
+        }
+
+        public void ReflectInput()
+        {
             if (MoveInputActive) _moveInput.Value = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             if (JumpInputActive) _jumpInput.Value = Input.GetButtonDown("Jump");
             _pauseInput.Value = Input.GetButtonDown("Cancel");
