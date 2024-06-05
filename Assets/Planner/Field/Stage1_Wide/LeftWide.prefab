@@ -20919,6 +20919,125 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &6016501119818441480
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5806464298133244867}
+    m_Modifications:
+    - target: {fileID: 5301361891405884771, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
+        type: 3}
+      propertyPath: _spawnerType
+      value: 2917291905484324872
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301361891405884771, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
+        type: 3}
+      propertyPath: _spawnPattern
+      value: 2917291905484324873
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301361891405884771, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
+        type: 3}
+      propertyPath: _spawnInterval
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301361891405884771, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
+        type: 3}
+      propertyPath: managedReferences[2917291905484324872]
+      value: Assembly-CSharp SoulRunProject.Common.SpawnerOnExit
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301361891405884771, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
+        type: 3}
+      propertyPath: managedReferences[2917291905484324873]
+      value: Assembly-CSharp SoulRunProject.Common.Interface.TrianglePattern
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301361891405884771, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
+        type: 3}
+      propertyPath: managedReferences[2917291905484324873]._spawnAngle
+      value: 22.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301361891405884771, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
+        type: 3}
+      propertyPath: managedReferences[2917291905484324873]._entitySpacing
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301361891405884771, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
+        type: 3}
+      propertyPath: managedReferences[2917291905484324873]._spawnRowCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301361891405884771, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
+        type: 3}
+      propertyPath: managedReferences[2917291905484324872]._spawnerEnableRange
+      value: 22.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5635675189360419162, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5635675189360419162, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 5635675189360419162, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -18.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5635675189360419162, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5635675189360419162, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5635675189360419162, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5635675189360419162, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5635675189360419162, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5635675189360419162, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5635675189360419162, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8450066731882398938, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemySpawner
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c1f99eb27d1bacc4aa327cdd5d52bb46, type: 3}
+--- !u!4 &2110806540814107218 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5635675189360419162, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
+    type: 3}
+  m_PrefabInstance: {fileID: 6016501119818441480}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6277470317816654888
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20980,7 +21099,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6a48245f58c199c46a4ef845591ba26f,
         type: 3}
       propertyPath: m_Name
-      value: LeftWide Variant
+      value: LeftWide
       objectReference: {fileID: 0}
     - target: {fileID: 4729559737328222139, guid: 6a48245f58c199c46a4ef845591ba26f,
         type: 3}
@@ -21634,6 +21753,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1464558279127213620}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6a48245f58c199c46a4ef845591ba26f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2110806540814107218}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6a48245f58c199c46a4ef845591ba26f,
         type: 3}
