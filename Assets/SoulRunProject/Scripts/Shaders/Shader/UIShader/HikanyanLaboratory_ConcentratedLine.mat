@@ -11,8 +11,7 @@ Material:
   m_Shader: {fileID: 4800000, guid: 035122e133b666249b3906c7b8f7d902, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - IS_GAMEING_COLOR
+  m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -30,15 +29,15 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Density: 5.7
-    - _InnerSpace: 0.073
-    - _IsGamingColor: 1
-    - _Offset: -1.04
-    - _OuterEdge: 0.701
-    - _RollSpeed: 6.17
-    - _Taper: 3.52
-    - _ThresholdH: 1.02
-    - _ThresholdL: -0.58
+    - _Density: 20
+    - _InnerSpace: 0.029
+    - _IsGamingColor: 0
+    - _Offset: 0.6
+    - _OuterEdge: 1
+    - _RollSpeed: 3.68
+    - _Taper: 0.07
+    - _ThresholdH: 0.13
+    - _ThresholdL: 0.04
     m_Colors:
     - _Color: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
