@@ -33,6 +33,7 @@ namespace SoulRunProject.InGame
 
         FloatReactiveProperty _currentHp = new();
         float _knockBackResistance;
+        public Action<float> OnDamaged;
         public Action OnDead;
         public float MaxHp => _maxHp;
         public float CollisionDamage => _collisionDamage;
@@ -60,9 +61,10 @@ namespace SoulRunProject.InGame
         {
             if (!gameObject.activeSelf) return;
 
-            float calcedDamage = Calculator.CalcDamage(damage,
+            float calculatedDamage = Calculator.CalcDamage(damage,
                 0, _player.CurrentPlayerStatus.CriticalRate, _player.CurrentPlayerStatus.CriticalDamageRate);
-            _currentHp.Value -= calcedDamage;
+            _currentHp.Value -= calculatedDamage;
+            OnDamaged?.Invoke(calculatedDamage);
 
             if (useSE) CriAudioManager.Instance.PlaySE("SE_Hit");
 
