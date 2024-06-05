@@ -11,6 +11,8 @@ namespace SoulRunProject.InGame
         int _penetration;
         int _hitCount;
         private GiveKnockBack _giveKnockBack;
+        private float _getSoulValueOnHit;
+        
         public void ApplyParameter(ProjectileSkillParameter param)
         {
             _lifeTime = param.LifeTime;
@@ -19,6 +21,7 @@ namespace SoulRunProject.InGame
             _speed = param.Speed;
             _penetration = param.Penetration;
             _giveKnockBack = param.KnockBack;
+            _getSoulValueOnHit = param.GetSoulValueOnHit;
         }
 
         public override void Initialize()
@@ -37,6 +40,7 @@ namespace SoulRunProject.InGame
             if (other.gameObject.TryGetComponent(out DamageableEntity entity))
             {
                 entity.Damage(_attackDamage , in _giveKnockBack);
+                if (other.gameObject.TryGetComponent(out EnemyController _)) PlayerManagerInstance.AddSoul(_getSoulValueOnHit);
                 _hitCount++;
                 if (_hitCount > _penetration)
                 {

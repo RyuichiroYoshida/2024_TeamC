@@ -14,14 +14,20 @@ namespace SoulRunProject.InGame
     /// </summary>
     public class SoulSkillManager : MonoBehaviour
     {
-        [SerializeField] private FloatReactiveProperty _currentSoul = new FloatReactiveProperty(0);
+        [SerializeField] private float _initialSoul;
+        [SerializeField] private float _regenerativePerSec;
+        
+        private FloatReactiveProperty _currentSoul = new FloatReactiveProperty(0);
         private readonly Dictionary<SoulSkillType , SoulSkillBase> _soulSkillReference = new();
         SoulSkillBase _currentSoulSkill;
-        public float RequiredSoul;
+        private float _usingSkillTimer;
+        public float RequiredSoul { get; private set; }
         public IObservable<float> CurrentSoul => _currentSoul;
 
         private void Start()
         {
+            _currentSoul.AddTo(this);
+            
             //TODO デバック用　ソウルフレイム設定。
             if (MyRepository.Instance.TryGetDataList<SoulSkillBase>(out var dataList))
             {
@@ -29,11 +35,23 @@ namespace SoulRunProject.InGame
                 {
                     _soulSkillReference.Add(soulSkill.SkillType , soulSkill);
                 }
-                
             }
 
             SetSoulSkill(SoulSkillType.SoulFrame);
+            AddSoul(_initialSoul);
         }
+
+        private void FixedUpdate()
+        {
+            if (_usingSkillTimer > 0)
+            {
+                _usingSkillTimer -= Time.fixedDeltaTime;
+                _currentSoul.Value -= RequiredSoul / _currentSoulSkill.Duration * Time.fixedDeltaTime;
+            }
+            
+            AddSoul(_regenerativePerSec * Time.fixedDeltaTime);
+        }
+
         public void SetSoulSkill(SoulSkillType soulSkillType)
         {
             _currentSoulSkill = _soulSkillReference[soulSkillType];
@@ -42,10 +60,12 @@ namespace SoulRunProject.InGame
         
         public void AddSoul(float soul)
         {
+            if (_usingSkillTimer > 0) return;
+            
             _currentSoul.Value += soul;
-            if (_currentSoul.Value >= _currentSoulSkill.RequiredSoul)
+            if (_currentSoul.Value >= RequiredSoul)
             {
-                _currentSoul.Value = _currentSoulSkill.RequiredSoul;
+                _currentSoul.Value = RequiredSoul;
             }
         }
         
@@ -53,13 +73,13 @@ namespace SoulRunProject.InGame
         { 
             DebugClass.Instance.ShowLog($"現在のソウル値：{_currentSoul.Value}/必要ソウル値：{RequiredSoul}");
             //TODO 処理の前後をずらしてテストように呼び出せるようにしている
-            if (_currentSoul.Value < RequiredSoul)
+            if (_currentSoul.Value < RequiredSoul && _usingSkillTimer <= 0)
             {
                 Debug.Log("ソウルが足りません。");
                 return;
             }
-            _currentSoul.Value -= RequiredSoul;
             _currentSoulSkill.StartSoulSkill();
+            _usingSkillTimer = _currentSoulSkill.Duration;
         }
     }
 }

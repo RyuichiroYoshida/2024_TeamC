@@ -25,7 +25,7 @@ namespace SoulRunProject.Common
         {
             if (SkillParam is AoESkillParameter param)
             {
-                _aoeController.Initialize(param);
+                _aoeController.Initialize(param, PlayerManagerInstance);
             }
             else
             {

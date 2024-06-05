@@ -67,7 +67,7 @@ namespace SoulRunProject.InGame
             // skill
             SkillBase selectedSkill;
 
-            if (_skillManager.CurrentNumberOfPossessions > _skillManager.CurrentSkill.Count) // 新しいスキル
+            if (_skillManager.CanGetNewSkill) // 新しいスキル
             {
                 SkillBase[] newSkills = _skillManager.SkillData
                     .Where(skillBase => !_skillManager.CurrentSkill.Contains(skillBase)).ToArray();

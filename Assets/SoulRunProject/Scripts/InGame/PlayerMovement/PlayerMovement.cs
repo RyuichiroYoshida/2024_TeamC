@@ -14,6 +14,7 @@ namespace SoulRunProject.InGame
     [RequireComponent(typeof(Rigidbody))]
     public class PlayerMovement : MonoBehaviour, IPlayerPausable
     {
+        [SerializeField] private Animator _playerAnimator;
         [SerializeField] private float _moveSpeed;
         [SerializeField] private float _jumpPower;
         [SerializeField] private float _grav;
@@ -27,7 +28,6 @@ namespace SoulRunProject.InGame
         private float _yAxisGroundLine;
         private bool _inPause;
         private int _spinIndex;
-        private CancellationTokenSource _cts;
 
         public BoolReactiveProperty IsGround => _isGround;
         public event Action OnJumped;
@@ -165,32 +165,24 @@ namespace SoulRunProject.InGame
 
         public void RotatePlayer(Vector2 input)
         {
-            var animator = GetComponent<Animator>();
             if (input.x > 0)
             {
-                animator.SetBool("IsLeft", true);
-                animator.SetBool("IsRight", false);
+                _playerAnimator.SetBool("IsLeft", true);
+                _playerAnimator.SetBool("IsRight", false);
             }
             else if (input.x < 0)
             {
-                animator.SetBool("IsRight", true);
-                animator.SetBool("IsLeft", false);
+                _playerAnimator.SetBool("IsRight", true);
+                _playerAnimator.SetBool("IsLeft", false);
             }
             else
             {
-                animator.SetBool("IsRight", false);
-                animator.SetBool("IsLeft", false);
+                _playerAnimator.SetBool("IsRight", false);
+                _playerAnimator.SetBool("IsLeft", false);
             }
         }
 
-        /// <summary>
-        /// プレイヤーの足音再生
-        /// AnimationEventから呼び出される
-        /// </summary>
-        public void PlayRumSound()
-        {
-            CriAudioManager.Instance.PlaySE("SE_Run");
-        }
+
 
 #if UNITY_EDITOR
         private void OnValidate()
