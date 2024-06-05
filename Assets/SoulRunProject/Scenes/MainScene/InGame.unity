@@ -241,6 +241,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &513949090 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6489243972660830253, guid: 5158a5381bdfb5444b1247f8ca126484,
+    type: 3}
+  m_PrefabInstance: {fileID: 2085064252}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4625c02a4140af845a79e80a17d36dfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &513949091 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8259380560567172652, guid: 5158a5381bdfb5444b1247f8ca126484,
+    type: 3}
+  m_PrefabInstance: {fileID: 2085064252}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53ed6dc731dc2fa49b7efc8e336039a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &513949092 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3502769304525116568, guid: 5158a5381bdfb5444b1247f8ca126484,
+    type: 3}
+  m_PrefabInstance: {fileID: 2085064252}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d876255950d8c6489c1021f2152b273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &513949093 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5462722955001265304, guid: 5158a5381bdfb5444b1247f8ca126484,
+    type: 3}
+  m_PrefabInstance: {fileID: 2085064252}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9672a377915a11e4b87544712ac0d44c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &822474404 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3724060668842937376, guid: 2a83745e1a1dd834cac2a42d4f9271f1,
@@ -706,10 +754,10 @@ MonoBehaviour:
   _skillManager: {fileID: 1149464544}
   _levelUpItemData: {fileID: 11400000, guid: 9aab34104a7b61a46934d17aa1312649, type: 2}
   _playerInput: {fileID: 1149464546}
-  _resultView: {fileID: 0}
-  _commonView: {fileID: 0}
-  _stageNameView: {fileID: 0}
-  _levelUpView: {fileID: 0}
+  _resultView: {fileID: 513949093}
+  _commonView: {fileID: 513949092}
+  _stageNameView: {fileID: 513949091}
+  _levelUpView: {fileID: 513949090}
 --- !u!114 &1174502022
 MonoBehaviour:
   m_ObjectHideFlags: 0
