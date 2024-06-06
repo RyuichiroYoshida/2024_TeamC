@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _statusUpItems:
   - _itemName: "\u53F8\u6559\u6756"
-    _itemIcon: {fileID: 0}
+    _itemIcon: {fileID: 21300000, guid: 4c81e2934a7af8344a987aa059b60d3d, type: 3}
     ItemEffects:
     - _statusToUp: 1
       _upValue: 2
@@ -27,7 +27,7 @@ MonoBehaviour:
     - _statusToUp: 1
       _upValue: 5
   - _itemName: "\u9B42\u306E\u5F3E\u4E38"
-    _itemIcon: {fileID: 0}
+    _itemIcon: {fileID: 21300000, guid: 26a2ad269f89c6f42a91e65dbc9170ba, type: 3}
     ItemEffects:
     - _statusToUp: 5
       _upValue: 0.2
@@ -40,7 +40,7 @@ MonoBehaviour:
     - _statusToUp: 7
       _upValue: 1
   - _itemName: "\u9B42\u306E\u30ED\u30B6\u30EA\u30AA"
-    _itemIcon: {fileID: 0}
+    _itemIcon: {fileID: 21300000, guid: 9ab94ae4e9270f640865c990529acc77, type: 3}
     ItemEffects:
     - _statusToUp: 3
       _upValue: 0.2
