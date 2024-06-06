@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using SoulRunProject.Common;
 using SoulRunProject.Framework;
 using SoulRunProject.SoulMixScene;
-using SoulRunProject.SoulRunProject.Scripts.Common.Core.Singleton;
 using UniRx;
 using UnityEngine;
 
