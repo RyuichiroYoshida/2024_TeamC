@@ -23,7 +23,8 @@ namespace SoulRunProject.Title
         {
             DebugClass.Instance.ShowLog($"ゲーム開始:{_transitionTime}秒後にインゲーム画面に遷移します");
             //ここで実行
-            SceneManager.LoadScene("InGame");
+            SceneManager.LoadScene("TutorialScene");
+            //LoadingScene.Instance.LoadNextScene("InGame").Forget();
         }
 
         public void Option()
