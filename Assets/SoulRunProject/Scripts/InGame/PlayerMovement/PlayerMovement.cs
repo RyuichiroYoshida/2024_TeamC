@@ -18,7 +18,6 @@ namespace SoulRunProject.InGame
         [SerializeField] private float _moveSpeed;
         [SerializeField] private float _jumpPower;
         [SerializeField] private float _grav;
-        [SerializeField, CustomLabel("地面の高さ")] private float _yAxisGroundLine;
         [SerializeField, CustomLabel("Pivotと接地点との距離")] private float _distanceBetweenPivotAndGroundPoint;
         [SerializeField, HideInInspector] private float _xMoveRangeMin;
         [SerializeField, HideInInspector] private float _xMoveRangeMax;
@@ -26,6 +25,7 @@ namespace SoulRunProject.InGame
         private Rigidbody _rb;
         private readonly BoolReactiveProperty _isGround = new BoolReactiveProperty(false);
         private Vector3 _playerVelocity;
+        private float _yAxisGroundLine;
         private bool _inPause;
         private int _spinIndex;
 
@@ -91,6 +91,18 @@ namespace SoulRunProject.InGame
         /// </summary>
         private void GroundCheck()
         {
+            // 地面の検出
+            RaycastHit[] hits = Physics.RaycastAll(transform.position + Vector3.up * 10, Vector3.down);
+
+            foreach (var hit in hits)
+            {
+                if (hit.transform.TryGetComponent(out FieldSegment field))
+                {
+                    _yAxisGroundLine = hit.point.y;
+                    break;
+                }
+            }
+            
             if (transform.position.y <= _yAxisGroundLine + _distanceBetweenPivotAndGroundPoint)
             {
                 Vector3 pos = transform.position;

@@ -160,7 +160,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 392928014464894764}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: 0.000000014901159, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -233,6 +233,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67af9876f0281cf40b526c49962e4dae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MoveInputActive: 1
+  JumpInputActive: 1
+  ShiftInputActive: 1
 --- !u!114 &3698741979491483856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,8 +263,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _defaultPlayerSkills: 00000000
-  _initialNumberOfPossessions: 1
-  _increaseSkillLevels: 0300000006000000090000000c000000
+  _initialNumberOfPossessions: 0
+  _increaseSkillLevels: 
+  _skillIconImage:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &2245462467506778556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,7 +284,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _initialSoul: 0
-  _regenerativePerSec: 0.1
+  _regenerativePerSec: 0
 --- !u!54 &6585847965433512431
 Rigidbody:
   m_ObjectHideFlags: 0

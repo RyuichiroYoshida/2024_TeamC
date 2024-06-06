@@ -6,7 +6,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
-using UniRx;
 
 namespace SoulRunProject.InGame
 {
@@ -59,8 +58,6 @@ namespace SoulRunProject.InGame
         {
             PauseManager.Pause(true);
             input.MoveInputActive = true;
-            input.ReflectInput();
-            await input.MoveInput;
             await UniTask.WaitUntil(() => input.MoveInput.Value != Vector2.zero);
             PauseManager.Pause(false);
         }
@@ -73,7 +70,6 @@ namespace SoulRunProject.InGame
         {
             PauseManager.Pause(true);
             input.JumpInputActive = true;
-            input.ReflectInput();
             await UniTask.WaitUntil(() => input.JumpInput.Value);
             PauseManager.Pause(false);
         }
@@ -86,8 +82,6 @@ namespace SoulRunProject.InGame
         {
             PauseManager.Pause(true);
             input.ShiftInputActive = true;
-            input.ReflectInput();
-            await input.ShiftInput;
             await UniTask.WaitUntil(() => input.ShiftInput.Value);
             PauseManager.Pause(false);
         }

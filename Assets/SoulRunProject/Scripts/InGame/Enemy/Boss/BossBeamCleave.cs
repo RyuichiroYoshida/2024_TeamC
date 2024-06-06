@@ -47,7 +47,7 @@ namespace SoulRunProject.InGame
             _timer = 0;
             _hitCounter = 0;
             _laserInstance.SetActive(true);
-            _beamOrigin.rotation = Quaternion.LookRotation(_startVector - _beamOrigin.position);
+            _beamOrigin.rotation = Quaternion.LookRotation(_startVector);
         }
 
         public override void UpdateAction(float deltaTime)
@@ -58,7 +58,7 @@ namespace SoulRunProject.InGame
             if (_timer < _beamTime)
             {
                 _beamOrigin.rotation = 
-                    Quaternion.LookRotation(Vector3.Slerp(_startVector - _beamOrigin.position, _finishVector - _beamOrigin.position, _timer / _beamTime));
+                    Quaternion.LookRotation(Vector3.Slerp(_startVector, _finishVector, _timer / _beamTime));
             }
             else
             {

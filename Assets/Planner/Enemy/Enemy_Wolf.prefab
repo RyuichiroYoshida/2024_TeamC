@@ -169,7 +169,7 @@ MonoBehaviour:
     - rid: 290008967495024640
       type: {class: StraightMover, ns: SoulRunProject.InGame, asm: Assembly-CSharp}
       data:
-        _moveSpeed: 60
+        _moveSpeed: 5
 --- !u!65 &4121832995990890696
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -7,7 +7,6 @@ namespace SoulRunProject.InGame
     [Name("炎の床生成")]
     public class BossFlameFloor : BossBehaviorBase
     {
-        [SerializeField] private Animator _animator;
         [SerializeField, CustomLabel("X軸移動範囲")] private float _moveRangeX;
         [SerializeField, CustomLabel("Y軸移動範囲")] private float _moveRangeY;
         [SerializeField, CustomLabel("発射位置")] private Transform _firingPosition;
@@ -48,8 +47,6 @@ namespace SoulRunProject.InGame
         public override void BeginAction()
         {
             _actionTimer = 0;
-            _animator.SetTrigger("FrameFloor");
-            _animator.SetFloat("Speed", 6 / _actionTime); // 6 => animationの長さ
         }
 
         public override void UpdateAction(float deltaTime)
@@ -75,9 +72,17 @@ namespace SoulRunProject.InGame
             // 時間と移動
             _actionTimer += deltaTime;
             
-            if (_actionTimer >= _actionTime)
+            if (_actionTimer < _actionTime)
+            {
+                Vector3 newPos = _defaultBossPos;
+                newPos.x = _defaultBossPos.x + _moveRangeX * Mathf.Sin(_actionTimer / _actionTime * Mathf.PI * 2) / 2;
+                newPos.y = _defaultBossPos.y + _moveRangeY * -Mathf.Sin(_actionTimer / _actionTime * Mathf.PI * 4) / 2;
+                _bossTransform.position = newPos;
+            }
+            else
             {
                 // 終了処理
+                _bossTransform.position = _defaultBossPos;
                 OnFinishAction?.Invoke();
             }
         }
