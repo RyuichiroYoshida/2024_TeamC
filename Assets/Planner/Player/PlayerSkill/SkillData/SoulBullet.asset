@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9970e7066e20c941bf4beed9b6721a7, type: 3}
   m_Name: SoulBullet
   m_EditorClassIdentifier: 
-  _skillType: 8388609
+  _skillType: 536870913
   _skillName: "\u30BD\u30A6\u30EB\u30D0\u30EC\u30C3\u30C8"
   _explanatoryText: "\u6700\u521D\u304B\u3089\u6301\u3063\u3066\u3044\u308B\u30B9\u30AD\u30EB\u3002\u30D7\u30EC\u30A4\u30E4\u30FC\u304B\u3089\u5E38\u6642\u653E\u305F\u308C\u308B\u3002"
   _skillIcon: {fileID: 21300000, guid: 9ced87deec738d147be4ef69b9d0d555, type: 3}
@@ -23,8 +23,39 @@ MonoBehaviour:
     List:
     - List:
       - _levelUpType: 0
-        _reduceCoolTime: 0
+        _reduceCoolTime: 25
         _addAmountCount: 0
+        _multipleProjectionSpeed: 0
+      - _levelUpType: 2
+        _reduceCoolTime: 25
+        _addAmountCount: 0
+        _multipleProjectionSpeed: 20
+    - List:
+      - _levelUpType: 0
+        _reduceCoolTime: 50
+        _addAmountCount: 0
+        _multipleProjectionSpeed: 0
+      - _levelUpType: 1
+        _reduceCoolTime: 50
+        _addAmountCount: 1
+        _multipleProjectionSpeed: 0
+    - List:
+      - _levelUpType: 0
+        _reduceCoolTime: 75
+        _addAmountCount: 0
+        _multipleProjectionSpeed: 0
+      - _levelUpType: 2
+        _reduceCoolTime: 75
+        _addAmountCount: 0
+        _multipleProjectionSpeed: 40
+    - List:
+      - _levelUpType: 0
+        _reduceCoolTime: 100
+        _addAmountCount: 0
+        _multipleProjectionSpeed: 0
+      - _levelUpType: 1
+        _reduceCoolTime: 100
+        _addAmountCount: 1
         _multipleProjectionSpeed: 0
   _bullet: {fileID: 2092183155354231575, guid: 93ebba11e021a9d4b92b90f0aeb5ef5b, type: 3}
   _baseRotateY: 20
@@ -35,13 +66,13 @@ MonoBehaviour:
     - rid: 3163472035625041929
       type: {class: ProjectileSkillParameter, ns: SoulRunProject.Common, asm: Assembly-CSharp}
       data:
-        _coolTime: 0
-        _amount: 0
-        _attackDamage: 0
-        _size: 0
-        _speed: 0
-        _penetration: 0
-        _lifeTime: 0
+        _coolTime: 1
+        _amount: 1
+        _attackDamage: 15
+        _size: 1
+        _speed: 60
+        _penetration: 1
+        _lifeTime: 3
         _knockBack:
           _power: 0
-        _getSoulValueOnHit: 0
+        _getSoulValueOnHit: 1

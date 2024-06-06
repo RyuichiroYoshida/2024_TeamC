@@ -9,27 +9,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a9742656f284cd7b88c94c69f88ac89, type: 3}
-  m_Name: SoulSword
+  m_Script: {fileID: 11500000, guid: b9970e7066e20c941bf4beed9b6721a7, type: 3}
+  m_Name: SoulBullet
   m_EditorClassIdentifier: 
-  _skillType: -2147483644
-  _skillName: "\u9B42\u5263"
-  _explanatoryText: "\u30D7\u30EC\u30A4\u30E4\u30FC\u5468\u308A\u306B\u9B54\u6CD5\u9663\u304C\u6D6E\u304B\u3073\u3001\u9B54\u6CD5\u9663\u304B\u3089\u30E9\u30F3\u30C0\u30E0\u306A\u5834\u6240\u306B\u5C04\u51FA\u3055\u308C\u308B\u3002"
+  _skillType: 536870913
+  _skillName: "\u30BD\u30A6\u30EB\u30D0\u30EC\u30C3\u30C8"
+  _explanatoryText: "\u6700\u521D\u304B\u3089\u6301\u3063\u3066\u3044\u308B\u30B9\u30AD\u30EB\u3002\u30D7\u30EC\u30A4\u30E4\u30FC\u304B\u3089\u5E38\u6642\u653E\u305F\u308C\u308B\u3002"
   _skillIcon: {fileID: 0}
   _maxSkillLevel: 5
   _skillParameter:
-    rid: 3163472118127263753
+    rid: 3163472118127263756
   _levelUpTable:
     List: []
-  _count: 0
-  _sword: {fileID: 0}
-  _magicCirclePrefab: {fileID: 0}
+  _bullet: {fileID: 0}
+  _baseRotateY: 5
   _muzzleOffset: {x: 0, y: 0, z: 0}
-  _swordShotDelay: 0
   references:
     version: 2
     RefIds:
-    - rid: 3163472118127263753
+    - rid: 3163472118127263756
       type: {class: ProjectileSkillParameter, ns: SoulRunProject.Common, asm: Assembly-CSharp}
       data:
         _coolTime: 0

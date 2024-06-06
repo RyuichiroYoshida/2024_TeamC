@@ -1,3 +1,4 @@
+using System.Text;
 using SoulRunProject.Common;
 using UniRx;
 using UnityEngine;

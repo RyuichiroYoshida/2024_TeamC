@@ -17,6 +17,7 @@ namespace SoulRunProject.InGame
             _playerManagerInstance = playerManager;
             _playerTransform = playerTransform;
             _runtimeParameter = skillData.Parameter.Clone();
+            _runtimeParameter.SetPlayerStatus(playerManager.CurrentPlayerStatus);
         }
         public int CurrentLevel { get; private set; } = 1;
         public bool CanLevelUp => CurrentLevel <= _skillData.MaxSkillLevel;
