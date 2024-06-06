@@ -473,6 +473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9e7d01dd527d9a46ae18327327c853a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _defaultPos: {x: 0, y: -8, z: 25}
   _hpImage: {fileID: 591339365316218285}
   _bossAnimator: {fileID: 4926363286030084361}
   _powerUpThreshold:
@@ -572,7 +573,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: d5c9458521c562f4ab9e7fbe943aab17, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 

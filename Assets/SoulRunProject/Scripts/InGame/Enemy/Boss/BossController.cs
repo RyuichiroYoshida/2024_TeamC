@@ -18,6 +18,7 @@ namespace SoulRunProject.InGame
     /// </summary>
     public class BossController : MonoBehaviour, IPausable
     {
+        [SerializeField, CustomLabel("デフォルト位置")] private Vector3 _defaultPos;
         [SerializeField] private Image _hpImage;
         [SerializeField] private Animator _bossAnimator;
         [SerializeField, Tooltip("パワーアップする閾値(%)")] private float[] _powerUpThreshold; 
@@ -39,6 +40,13 @@ namespace SoulRunProject.InGame
         private void OnDestroy()
         {
             UnRegister();
+        }
+
+        public void InitializePosition(float positionX)
+        {
+            Vector3 pos = new Vector3(positionX, _defaultPos.y, _defaultPos.z);
+            transform.position = pos;
+            Debug.Log(pos.x);
         }
 
         private void Start()
