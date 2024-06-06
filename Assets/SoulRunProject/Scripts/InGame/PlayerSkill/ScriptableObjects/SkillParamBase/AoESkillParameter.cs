@@ -9,9 +9,11 @@ namespace SoulRunProject.Common
     {
         [SerializeField, CustomLabel("敵にヒットしたときに与えるダメージ")] float _attackDamage;
         [SerializeField, CustomLabel("スキルのオブジェクトの大きさ")] float _size;
+        [SerializeField, CustomLabel("スキルを当てたときのソウルの増える量(秒)")] private float _getSoulPerSec;
         
         [NonSerialized] public float BaseAttackDamage;
         [NonSerialized] public float BaseSize;
+        public float GetSoulPerSec => _getSoulPerSec;
         
         public void InitializeParamOnSceneLoaded()
         {

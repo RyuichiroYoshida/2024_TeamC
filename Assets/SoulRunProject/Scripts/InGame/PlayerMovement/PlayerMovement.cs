@@ -14,9 +14,11 @@ namespace SoulRunProject.InGame
     [RequireComponent(typeof(Rigidbody))]
     public class PlayerMovement : MonoBehaviour, IPlayerPausable
     {
+        [SerializeField] private Animator _playerAnimator;
         [SerializeField] private float _moveSpeed;
         [SerializeField] private float _jumpPower;
         [SerializeField] private float _grav;
+        [SerializeField, CustomLabel("地面の高さ")] private float _yAxisGroundLine;
         [SerializeField, CustomLabel("Pivotと接地点との距離")] private float _distanceBetweenPivotAndGroundPoint;
         [SerializeField, HideInInspector] private float _xMoveRangeMin;
         [SerializeField, HideInInspector] private float _xMoveRangeMax;
@@ -24,10 +26,8 @@ namespace SoulRunProject.InGame
         private Rigidbody _rb;
         private readonly BoolReactiveProperty _isGround = new BoolReactiveProperty(false);
         private Vector3 _playerVelocity;
-        private float _yAxisGroundLine;
         private bool _inPause;
         private int _spinIndex;
-        private CancellationTokenSource _cts;
 
         public BoolReactiveProperty IsGround => _isGround;
         public event Action OnJumped;
@@ -91,18 +91,6 @@ namespace SoulRunProject.InGame
         /// </summary>
         private void GroundCheck()
         {
-            // 地面の検出
-            RaycastHit[] hits = Physics.RaycastAll(transform.position + Vector3.up * 10, Vector3.down);
-
-            foreach (var hit in hits)
-            {
-                if (hit.transform.TryGetComponent(out FieldSegment field))
-                {
-                    _yAxisGroundLine = hit.point.y;
-                    break;
-                }
-            }
-            
             if (transform.position.y <= _yAxisGroundLine + _distanceBetweenPivotAndGroundPoint)
             {
                 Vector3 pos = transform.position;
@@ -165,32 +153,24 @@ namespace SoulRunProject.InGame
 
         public void RotatePlayer(Vector2 input)
         {
-            var animator = GetComponent<Animator>();
             if (input.x > 0)
             {
-                animator.SetBool("IsLeft", true);
-                animator.SetBool("IsRight", false);
+                _playerAnimator.SetBool("IsLeft", true);
+                _playerAnimator.SetBool("IsRight", false);
             }
             else if (input.x < 0)
             {
-                animator.SetBool("IsRight", true);
-                animator.SetBool("IsLeft", false);
+                _playerAnimator.SetBool("IsRight", true);
+                _playerAnimator.SetBool("IsLeft", false);
             }
             else
             {
-                animator.SetBool("IsRight", false);
-                animator.SetBool("IsLeft", false);
+                _playerAnimator.SetBool("IsRight", false);
+                _playerAnimator.SetBool("IsLeft", false);
             }
         }
 
-        /// <summary>
-        /// プレイヤーの足音再生
-        /// AnimationEventから呼び出される
-        /// </summary>
-        public void PlayRumSound()
-        {
-            CriAudioManager.Instance.PlaySE("SE_Run");
-        }
+
 
 #if UNITY_EDITOR
         private void OnValidate()

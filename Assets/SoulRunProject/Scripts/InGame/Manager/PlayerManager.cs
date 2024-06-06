@@ -11,21 +11,18 @@ namespace SoulRunProject.Common
     /// <summary>
     /// プレイヤーを管理するクラス
     /// </summary>
-    [RequireComponent(typeof(HitDamageEffectManager))]
     public class PlayerManager : MonoBehaviour, IPausable
     {
-        [SerializeField , CustomLabel("ダメージ時の速度減少量")] private float _downSpeedValue;
         [SerializeField] private PlayerInput _playerInput;
         [SerializeField] private BaseStatus _baseStatus;
         [SerializeField] private PlayerCamera _playerCamera;
-
-        private FieldMover _fieldMover;
+        [SerializeField] private HitDamageEffectManager _hitDamageEffectManager;
+        
         private IPlayerPausable[] _inGameTimes;
         private PlayerLevelManager _pLevelManager;
         private SkillManager _skillManager;
         private SoulSkillManager _soulSkillManager;
         private PlayerMovement _playerMovement;
-        private HitDamageEffectManager _hitDamageEffectManager;
         //private PlayerStatusManager _statusManager;
         private PlayerResourceContainer _resourceContainer;
         public ReadOnlyReactiveProperty<float> CurrentHp => CurrentPlayerStatus.CurrentHpProperty;
@@ -37,6 +34,8 @@ namespace SoulRunProject.Common
         /// <summary>ダメージを無効化出来るかどうかの条件を格納するリスト</summary>
         public List<Func<bool>> IgnoreDamagePredicates { get; } = new();
 
+        public event Action OnDead;
+
         private void Awake()
         {
             Register();
@@ -45,12 +44,12 @@ namespace SoulRunProject.Common
             _skillManager = GetComponent<SkillManager>();
             _soulSkillManager = GetComponent<SoulSkillManager>();
             _playerMovement = GetComponent<PlayerMovement>();
-            _hitDamageEffectManager = GetComponent<HitDamageEffectManager>();
             _resourceContainer = new();
             //_statusManager = new PlayerStatusManager(_baseStatus.Status);
             CurrentPlayerStatus = new PlayerStatus(_baseStatus.PlayerStatus);
-            _fieldMover = FindObjectOfType<FieldMover>();
+            
             InitializeInput();
+            CurrentHp.Where(hp => hp == 0).Subscribe(_ => Death()).AddTo(this);
         }
 
         private void OnDestroy()
@@ -110,7 +109,6 @@ namespace SoulRunProject.Common
             }
             
             _playerCamera.DamageCam();
-            _fieldMover.DownSpeed(_downSpeedValue);
             CurrentPlayerStatus.CurrentHp -= Calculator.CalcDamage(damage, CurrentPlayerStatus.DefenceValue, 0, 1);
             
             // 白色点滅メソッド
@@ -126,6 +124,7 @@ namespace SoulRunProject.Common
         
         private void Death()
         {
+            OnDead?.Invoke();
             Debug.Log("GameOver");
             //SwitchPause(true);
         }

@@ -15,6 +15,7 @@ namespace SoulRunProject.InGame
 
         private void Awake()
         {
+            Destroy(gameObject, 10);
             Register();
         }
 
