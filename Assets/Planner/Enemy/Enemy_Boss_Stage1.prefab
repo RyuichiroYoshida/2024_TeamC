@@ -500,8 +500,8 @@ MonoBehaviour:
         _razer: {fileID: 1818483698145146, guid: 6028b5b4fbbf45e45a362de709aa2e18,
           type: 3}
         _beamOrigin: {fileID: 6504038626365006790}
-        _startImpactPosition: {x: 12, y: 1.5, z: -10}
-        _finishImpactPosition: {x: -12, y: 1.5, z: -10}
+        _startImpactPosition: {x: 12, y: -9, z: -25}
+        _finishImpactPosition: {x: -12, y: -9, z: -25}
         _beamTime: 1.5
         _damage: 15
         _hitCount: 2
