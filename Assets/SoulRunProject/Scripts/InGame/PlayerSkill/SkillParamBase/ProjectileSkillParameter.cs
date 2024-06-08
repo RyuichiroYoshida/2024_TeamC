@@ -8,7 +8,7 @@ namespace SoulRunProject.Common
     /// スキルのパラメーター
     /// </summary>
     [Serializable]
-    public class ProjectileSkillParameter : ISkillParameter, IUseBullet
+    public class ProjectileSkillParameter : ISkillParameter
     {
         [SerializeField, CustomLabel("次にこのスキルを使えるまでの時間")] float _coolTime;
         [SerializeField, CustomLabel("同時発射するオブジェクトの数")] int _amount;

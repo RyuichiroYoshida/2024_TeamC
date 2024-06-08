@@ -60,9 +60,8 @@ namespace SoulRunProject.InGame
         public void Damage(float damage, in GiveKnockBack knockBack = null, bool useSE = true)
         {
             if (!gameObject.activeSelf) return;
-
-            float calculatedDamage = Calculator.CalcDamage(damage,
-                0, _player.CurrentPlayerStatus.CriticalRate, _player.CurrentPlayerStatus.CriticalDamageRate);
+            if (!_player) return;
+            float calculatedDamage = Calculator.CalcDamage(damage, 0, _player.CurrentPlayerStatus.CriticalRate, _player.CurrentPlayerStatus.CriticalDamageRate);
             _currentHp.Value -= calculatedDamage;
             OnDamaged?.Invoke(calculatedDamage);
 
