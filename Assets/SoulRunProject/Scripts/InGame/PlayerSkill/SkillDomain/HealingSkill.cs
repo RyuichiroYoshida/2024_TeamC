@@ -40,6 +40,7 @@ namespace SoulRunProject.InGame
         /// <summary> スキル発動 </summary>
         private void ActivateSkill()
         {
+            CriAudioManager.Instance.PlaySE("SE_Heal");
             _coolTimer = RuntimeParameter.CoolTime;
             _playerManagerInstance.Heal(RuntimeParameter.HealAmount);
             _ps?.Play();
