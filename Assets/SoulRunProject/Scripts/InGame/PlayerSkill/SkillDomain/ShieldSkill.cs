@@ -51,6 +51,7 @@ namespace SoulRunProject.InGame
         /// <summary>シールド展開</summary>
         private void ActiveSkill()
         {
+            CriAudioManager.Instance.PlaySE("SE_Soulshell");
             _damageCount = 0;
             _tweener?.Kill();
             _tweener = _instantiatedObject.DOScale(Vector3.one, 0.25f).SetLink(_instantiatedObject.gameObject);
@@ -70,6 +71,7 @@ namespace SoulRunProject.InGame
             //  再度チェックしてシールド枚数以上ならクールダウンを開始してreturn true
             if (_damageCount >= RuntimeParameter.ShieldCount)
             {
+                CriAudioManager.Instance.PlaySE("SE_DiableSoulShell");
                 _linkedTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
                     _instantiatedObject.GetCancellationTokenOnDestroy());
                 CoolDown(_linkedTokenSource.Token).Forget();
@@ -80,29 +82,19 @@ namespace SoulRunProject.InGame
 
         private async UniTaskVoid CoolDown(CancellationToken ct)
         {
-            var timer = 0f;
-            //  演出
-            _tweener?.Kill();
-            _tweener = _instantiatedObject.DOScale(Vector3.zero, 0.25f).SetLink(_instantiatedObject.gameObject);
-            //  タイマーループ開始
-            while (true)
-                try
-                {
-                    //  Pauseフラグがfalseなら1フレーム待つ(ちゃんと1フレーム待ってるか分からない)、
-                    //  trueならfalseになるまで通さない
-                    //await UniTask.WaitUntil(() => !_isPause, PlayerLoopTiming.Update, ct);
-                    timer += Time.deltaTime;
-                    if (timer >= RuntimeParameter.CoolTime)
-                    {
-                        ActiveSkill();
-                        break;
-                    }
-                }
-                catch
-                {
-                    Debug.Log("キャンセルされた");
-                    break;
-                }
+            try
+            {
+                var timer = 0f;
+                //  演出
+                _tweener?.Kill();
+                _tweener = _instantiatedObject.DOScale(Vector3.zero, 0.25f).SetLink(_instantiatedObject.gameObject);
+                await UniTask.WaitForSeconds(RuntimeParameter.CoolTime, cancellationToken: ct);
+                ActiveSkill();
+            }
+            catch
+            {
+                Debug.Log("キャンセルされた");
+            }
         }
     }
 }

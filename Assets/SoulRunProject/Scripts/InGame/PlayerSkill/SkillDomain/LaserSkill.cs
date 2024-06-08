@@ -12,7 +12,7 @@ namespace SoulRunProject.InGame
         private UniTask.Awaiter _coolDownAwaiter;
         private LaserSkillData SkillData => (LaserSkillData)_skillData;
         private LaserSkillParameter RuntimeParameter => (LaserSkillParameter)_runtimeParameter;
-        
+        private int _seIndex = -1;
         public LaserSkill(AbstractSkillData skillData, in PlayerManager playerManager, in Transform playerTransform) : base(skillData, in playerManager, in playerTransform)
         {
         }
@@ -77,6 +77,7 @@ namespace SoulRunProject.InGame
             {
                 if (_coolDownAwaiter.IsCompleted && endCount >= _laserList.Count)
                 {
+                    CriAudioManager.Instance.StopSE(_seIndex);
                     _coolDownAwaiter = CoolDown().GetAwaiter();
                 }
             }
@@ -128,6 +129,7 @@ namespace SoulRunProject.InGame
                 _laserList[i].TurnSide = false;
                 _laserList[i].gameObject.SetActive(true);
             }
+            _seIndex = CriAudioManager.Instance.PlaySE("SE_Laser");
         }
         LaserController AddLaser()
         {

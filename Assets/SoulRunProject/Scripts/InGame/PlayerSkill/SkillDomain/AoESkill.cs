@@ -6,7 +6,6 @@ namespace SoulRunProject.InGame
     public class AoESkill : AbstractSkill
     {
         private AoEController _aoeController;
-
         public AoESkill(AbstractSkillData skillData, in PlayerManager playerManager, in Transform playerTransform)
             : base(skillData, in playerManager, in playerTransform)
         {
@@ -19,6 +18,7 @@ namespace SoulRunProject.InGame
         {
             _aoeController = Object.Instantiate(SkillData.Original);
             _aoeController.ApplyParameter(RuntimeParameter, _playerManagerInstance);
+            CriAudioManager.Instance.PlaySE("SE_Holyfield");
         }
 
         public override void UpdateSkill(float deltaTime)
