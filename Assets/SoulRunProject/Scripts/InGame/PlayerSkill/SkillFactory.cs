@@ -16,6 +16,8 @@ namespace SoulRunProject.Common
                 return new ShieldSkill(skillData, pm, pm.transform);
             if(skillType.HasFlag(PlayerSkill.SummoningProjectile))
                 return new SummoningProjectileSkill(skillData, pm, pm.transform);
+            if (skillType.HasFlag(PlayerSkill.Laser))
+                return new LaserSkill(skillData, pm, pm.transform);
             
             return null;
         }

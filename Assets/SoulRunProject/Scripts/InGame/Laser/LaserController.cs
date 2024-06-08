@@ -1,163 +1,117 @@
-using Cysharp.Threading.Tasks;
-using SoulRunProject.Common;
-using UniRx;
 using UnityEngine;
 
 namespace SoulRunProject.InGame
 {
     public class LaserController : MonoBehaviour
     {
-        [SerializeField] private int _initialCount = 5;
-        [SerializeField] private float _offsetY = 10f;
-        [SerializeField] private float _radius = 5f;
-        [SerializeField, CustomLabel("生成するプレハブ")] private Hovl_Laser _original;
-        [SerializeField] private float _width = 10f;
-        [SerializeField] private float _height = 2f;
-        [SerializeField] private float _speed = 1f;
-        [SerializeField] private float _delay = 0.1f;
-        [SerializeField] private int _turnCount = 15;
-        [SerializeField] private float _coolTime = 3f;
-        private readonly ReactiveCollection<LaserData> _laserList = new();
-        private readonly BoolReactiveProperty _endFlag = new(false);
-        private float _timer;
-        private void Awake()
+        #region SoulRun
+        private int _turnCount = 2;
+        public Vector3 StartDirection { get; set; }
+        public Vector3 EndDirection { get; set; }
+        public float Timer { get; set; }
+        public bool TurnSide { get; set; }
+        #endregion
+        #region Hovl_Studio
+        [SerializeField] GameObject _hitEffect;
+        [SerializeField] float _hitOffset = 0;
+        [SerializeField] bool _useLaserRotation = false;
+
+        [SerializeField] float _maxLength;
+        private LineRenderer _laser;
+
+        [SerializeField] float _mainTextureLength = 1f;
+        [SerializeField] float _noiseTextureLength = 1f;
+        private Vector4 _length = new Vector4(1,1,1,1);
+        //private Vector4 LaserSpeed = new Vector4(0, 0, 0, 0); {DISABLED AFTER UPDATE}
+        //private Vector4 LaserStartSpeed; {DISABLED AFTER UPDATE}
+        //One activation per shoot
+        private bool _laserSaver = false;
+        private bool _updateSaver = false;
+
+        private ParticleSystem[] _effects;
+        private ParticleSystem[] _hit;
+        #endregion
+        public int TurnCount
         {
-            _laserList.ObserveCountChanged().Subscribe(Arrangement).AddTo(this);
-            for (int i = 0; i < _initialCount; i++)
-            {
-                _laserList.Add(new LaserData(Instantiate(_original, transform)));
-            }
-            Initialize();
-            _endFlag.Subscribe(flag =>
-            {
-                if (flag)
-                {
-                    CoolDown().Forget();
-                }
-            }).AddTo(this);
+            get => _turnCount;
+            set => _turnCount = value;
         }
 
-        async UniTaskVoid CoolDown()
+        private void Start()
         {
-            await UniTask.WaitForSeconds(_coolTime, cancellationToken: destroyCancellationToken);
-            Initialize();
-        }
-
-        private void Initialize()
-        {
-            for (int i = 0; i < _laserList.Count; i++)
-            {
-                var startPos = transform.position;
-                startPos.x -= _width / 2;
-                startPos.z += _height;
-                var targetPos = transform.position;
-                targetPos.x += _width / 2;
-                targetPos.z += _height * 2;
-                var laserPos = transform.position + _laserList[i].HovlLaser.transform.localPosition;
-                _laserList[i].StartDirection = startPos - laserPos;
-                _laserList[i].EndDirection = targetPos - laserPos;
-                _laserList[i].Timer = -_delay * i;
-                _laserList[i].TurnCount = 2;
-                _laserList[i].TurnSide = false;
-                _laserList[i].HovlLaser.gameObject.SetActive(true);
-            }
-
-            _endFlag.Value = false;
+            //Get LineRender and ParticleSystem components from current prefab;  
+            _laser = GetComponent<LineRenderer>();
+            _effects = GetComponentsInChildren<ParticleSystem>();
+            _hit = _hitEffect.GetComponentsInChildren<ParticleSystem>();
+            //if (Laser.material.HasProperty("_SpeedMainTexUVNoiseZW")) LaserStartSpeed = Laser.material.GetVector("_SpeedMainTexUVNoiseZW");
+            //Save [1] and [3] textures speed
+            //{ DISABLED AFTER UPDATE}
+            //LaserSpeed = LaserStartSpeed;
         }
 
         private void Update()
         {
-            int endCount = 0;
-            foreach (var laser in _laserList)
+              //if (Laser.material.HasProperty("_SpeedMainTexUVNoiseZW")) Laser.material.SetVector("_SpeedMainTexUVNoiseZW", LaserSpeed);
+        //SetVector("_TilingMainTexUVNoiseZW", Length); - old code, _TilingMainTexUVNoiseZW no more exist
+        _laser.material.SetTextureScale("_MainTex", new Vector2(_length[0], _length[1]));                    
+        _laser.material.SetTextureScale("_Noise", new Vector2(_length[2], _length[3]));
+        //To set LineRender position
+        if (_laser != null && _updateSaver == false)
+        {
+            _laser.SetPosition(0, transform.position);
+            RaycastHit hit; //DELETE THIS IF YOU WANT USE LASERS IN 2D
+            //ADD THIS IF YOU WANNT TO USE LASERS IN 2D: RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.forward, MaxLength);       
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, _maxLength))//CHANGE THIS IF YOU WANT TO USE LASERRS IN 2D: if (hit.collider != null)
             {
-                if (laser.Timer > 1 && _turnCount > laser.TurnCount)
+                //End laser position if collides with object
+                _laser.SetPosition(1, hit.point);
+
+                    _hitEffect.transform.position = hit.point + hit.normal * _hitOffset;
+                if (_useLaserRotation)
+                    _hitEffect.transform.rotation = transform.rotation;
+                else
+                    _hitEffect.transform.LookAt(hit.point + hit.normal);
+
+                foreach (var AllPs in _effects)
                 {
-                    laser.Timer = 0;
-                    laser.TurnCount++;
-                    laser.StartDirection = laser.EndDirection;
-                    Vector3 endPos = transform.position;
-                    if (laser.TurnSide)
-                    {
-                        endPos.x += _width / 2;
-                    }
-                    else
-                    {
-                        endPos.x -= _width / 2;
-                    }
-                    endPos.z += _height * laser.TurnCount;
-                    var laserPos = transform.position + laser.HovlLaser.transform.localPosition;
-                    laser.EndDirection = endPos - laserPos;
-                    laser.TurnSide = !laser.TurnSide;
+                    if (!AllPs.isPlaying) AllPs.Play();
                 }
-                else if (_turnCount <= laser.TurnCount)
+                //Texture tiling
+                _length[0] = _mainTextureLength * (Vector3.Distance(transform.position, hit.point));
+                _length[2] = _noiseTextureLength * (Vector3.Distance(transform.position, hit.point));
+                //Texture speed balancer {DISABLED AFTER UPDATE}
+                //LaserSpeed[0] = (LaserStartSpeed[0] * 4) / (Vector3.Distance(transform.position, hit.point));
+                //LaserSpeed[2] = (LaserStartSpeed[2] * 4) / (Vector3.Distance(transform.position, hit.point));
+                //Destroy(hit.transform.gameObject); // destroy the object hit
+                //hit.collider.SendMessage("SomeMethod"); // example
+                /*if (hit.collider.tag == "Enemy")
                 {
-                    laser.HovlLaser.gameObject.SetActive(false);
-                    endCount++;
-                    continue;
+                    hit.collider.GetComponent<HittedObject>().TakeDamage(damageOverTime * Time.deltaTime);
+                }*/
+            }
+            else
+            {
+                //End laser position if doesn't collide with object
+                var EndPos = transform.position + transform.forward * _maxLength;
+                _laser.SetPosition(1, EndPos);
+                _hitEffect.transform.position = EndPos;
+                foreach (var AllPs in _hit)
+                {
+                    if (AllPs.isPlaying) AllPs.Stop();
                 }
-
-                var matrix2 = Matrix4x4.TRS(Vector3.zero, transform.rotation, Vector3.one);
-                //  プレイヤーが途中で回転してもいいようにベクトルに回転行列を掛ける。
-                laser.HovlLaser.transform.rotation = 
-                    Quaternion.LookRotation(Vector3.Lerp(matrix2.MultiplyVector(laser.StartDirection), matrix2.MultiplyVector(laser.EndDirection), Mathf.Clamp01(laser.Timer)));
-                laser.Timer += Time.deltaTime * _speed;
-                
-                // if (Physics.Raycast(laser.HovlLaser.transform.position, laser.HovlLaser.transform.forward, out RaycastHit hit))
-                // {
-                //     if (hit.collider.TryGetComponent(out DamageableEntity entity))
-                //     {
-                //         entity.Damage(20 * Time.deltaTime);
-                //     }
-                // }
+                //Texture tiling
+                _length[0] = _mainTextureLength * (Vector3.Distance(transform.position, EndPos));
+                _length[2] = _noiseTextureLength * (Vector3.Distance(transform.position, EndPos));
+                //LaserSpeed[0] = (LaserStartSpeed[0] * 4) / (Vector3.Distance(transform.position, EndPos)); {DISABLED AFTER UPDATE}
+                //LaserSpeed[2] = (LaserStartSpeed[2] * 4) / (Vector3.Distance(transform.position, EndPos)); {DISABLED AFTER UPDATE}
             }
-
-            if (endCount >= _laserList.Count)
+            //Insurance against the appearance of a laser in the center of coordinates!
+            if (_laser.enabled == false && _laserSaver == false)
             {
-                _endFlag.Value = true;
+                _laserSaver = true;
+                _laser.enabled = true;
             }
-        }
-        [ContextMenu("Restart")]
-        void Restart()
-        {
-            Initialize();
-        }
-
-        [ContextMenu("AddLaser")]
-        void AddLaser()
-        {
-            var data = new LaserData(Instantiate(_original, transform));
-            var startPos = transform.position;
-            startPos.x -= _width / 2;
-            startPos.z += _height;
-            var targetPos = transform.position;
-            targetPos.x += _width / 2;
-            targetPos.z += _height * 2;
-            data.StartDirection = startPos - data.HovlLaser.transform.position;
-            data.EndDirection = targetPos - data.HovlLaser.transform.position;
-            _laserList.Add(data);
-        }
-        
-        void Arrangement(int count)
-        {
-            float angleDiff = 180f / count;
-            for (int i = 0; i < count; i++)
-            {
-                Vector3 pos = transform.position;
-                float angle = (180 + angleDiff * i) * Mathf.Deg2Rad;
-                pos.x += _radius * Mathf.Cos(angle);
-                pos.y = transform.position.y + _offsetY;
-                pos.z += _radius * Mathf.Sin(angle);
-                var matrix = Matrix4x4.TRS(Vector3.zero, transform.rotation, Vector3.one);
-                pos = matrix.MultiplyPoint3x4(pos);
-                //  整列前の座標を保存しておく
-                var prevPos = _laserList[i].HovlLaser.transform.position;
-                _laserList[i].HovlLaser.transform.position = pos;
-                //  整列前と後の差を出す
-                var moveDiff = prevPos - pos;
-                //  レーザーのベクトルに差を足す
-                _laserList[i].StartDirection += moveDiff;
-                _laserList[i].EndDirection += moveDiff;
-            }
+        }     
         }
     }
 }
