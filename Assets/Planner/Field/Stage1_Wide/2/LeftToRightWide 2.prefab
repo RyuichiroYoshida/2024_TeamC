@@ -4088,7 +4088,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startPos: {x: -45, y: 0, z: 142}
-  _endPos: {x: 45, y: 0, z: 267}
+  _endPos: {x: 45, y: 0, z: 265}
 --- !u!1001 &3426981539430722420
 PrefabInstance:
   m_ObjectHideFlags: 0

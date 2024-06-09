@@ -66,9 +66,9 @@ MonoBehaviour:
     - rid: 3163472035625041929
       type: {class: ProjectileSkillParameter, ns: SoulRunProject.Common, asm: Assembly-CSharp}
       data:
-        _coolTime: 1
+        _coolTime: 0.5
         _amount: 1
-        _attackDamage: 15
+        _attackDamage: 20
         _size: 1
         _speed: 60
         _penetration: 1
