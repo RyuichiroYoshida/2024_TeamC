@@ -351,6 +351,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DefaultWide_1
       objectReference: {fileID: 0}
+    - target: {fileID: 2555513726494549676, guid: b3d420eafd034874fadf9b2be2b542c9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2899423833295944726, guid: b3d420eafd034874fadf9b2be2b542c9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1314,7 +1319,7 @@ MonoBehaviour:
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
   m_Cameras: []
-  m_RendererIndex: -1
+  m_RendererIndex: 0
   m_VolumeLayerMask:
     serializedVersion: 2
     m_Bits: 1
@@ -1744,6 +1749,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646974274986136710, guid: 5158a5381bdfb5444b1247f8ca126484,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 180.74365
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646974274986136710, guid: 5158a5381bdfb5444b1247f8ca126484,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 27.38379
       objectReference: {fileID: 0}
     - target: {fileID: 3490469551287386231, guid: 5158a5381bdfb5444b1247f8ca126484,
         type: 3}
