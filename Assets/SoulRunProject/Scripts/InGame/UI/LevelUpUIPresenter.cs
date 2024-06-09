@@ -65,38 +65,39 @@ namespace SoulRunProject.InGame
             
             // ランダムにアイテムを選択し、ボタンに適用する
             // skill
-            SkillBase selectedSkill;
+            AbstractSkillData selectedSkillData;
 
             if (_skillManager.CanGetNewSkill) // 新しいスキル
             {
-                SkillBase[] newSkills = _skillManager.SkillData
-                    .Where(skillBase => !_skillManager.CurrentSkill.Contains(skillBase)).ToArray();
-                selectedSkill = newSkills[Random.Range(0, newSkills.Length)];
+                AbstractSkillData[] notCreatedSkills = _skillManager.SkillData
+                    .Where(skillBase => !_skillManager.CreatedSkillList.Select(skill=>skill.AbstractSkillData).Contains(skillBase)).ToArray();
+                selectedSkillData = notCreatedSkills[Random.Range(0, notCreatedSkills.Length)];
                 
                 _levelUpView.UpgradeButtons[0].InputUIButton.onClick.AsObservable()
                     .Subscribe(_ =>
                     {
-                        _skillManager.AddSkill(selectedSkill.SkillType);
+                        _skillManager.AddSkill(selectedSkillData.SkillType);
                         _levelUpState.EndSelectSkill();
                     }).AddTo(_disposableOnUpdateUI);
-                _levelUpView.UpgradeButtons[0].NameAndLevelText.text = $"{selectedSkill.SkillName}\nLv 1";
+                _levelUpView.UpgradeButtons[0].NameAndLevelText.text = $"{selectedSkillData.SkillName}\nLv 1";
             }
             else // 所持スキルのレベルアップ
             {
-                selectedSkill = _skillManager.CurrentSkill[Random.Range(0, _skillManager.CurrentSkill.Count)];
+                var createdSkill = _skillManager.CreatedSkillList[Random.Range(0, _skillManager.CreatedSkillList.Count)];
+                selectedSkillData = createdSkill.AbstractSkillData;
                 
                 _levelUpView.UpgradeButtons[0].InputUIButton.onClick.AsObservable()
                     .Subscribe(_ =>
                     {
-                        _skillManager.LevelUpSkill(selectedSkill.SkillType);
+                        _skillManager.LevelUpSkill(selectedSkillData.SkillType);
                         _levelUpState.EndSelectSkill();
                     }).AddTo(_disposableOnUpdateUI);
                 _levelUpView.UpgradeButtons[0].NameAndLevelText.text = 
-                    $"{selectedSkill.SkillName}\nLv {selectedSkill.CurrentLevel + 1}";
+                    $"{selectedSkillData.SkillName}\nLv {createdSkill.CurrentLevel + 1}";
             }
 
-            _levelUpView.UpgradeButtons[0].ExplanatoryText.text = selectedSkill.ExplanatoryText;
-            _levelUpView.UpgradeButtons[0].ButtonIconImage.sprite = selectedSkill.SkillIcon;
+            _levelUpView.UpgradeButtons[0].ExplanatoryText.text = selectedSkillData.ExplanatoryText;
+            _levelUpView.UpgradeButtons[0].ButtonIconImage.sprite = selectedSkillData.SkillIcon;
             
             // passive
             List<int> indexList = new();

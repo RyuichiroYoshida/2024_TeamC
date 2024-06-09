@@ -12,11 +12,13 @@ namespace SoulRunProject.InGame
         protected EntityMover _mover;
         protected Transform _playerTransform;
         private Animator _animator;
+        private DamageableEntity _damageableEntity;
 
         private void Awake()
         {
             Register();
             _animator = GetComponent<Animator>();
+            _damageableEntity = GetComponent<DamageableEntity>();
         }
 
         private void OnDestroy()
@@ -46,6 +48,11 @@ namespace SoulRunProject.InGame
         {
             _mover?.OnUpdateMove(transform, _playerTransform);
             _attacker?.OnUpdateAttack(transform, _playerTransform);
+
+            if (_playerTransform.position.z > gameObject.transform.position.z)
+            {
+                _damageableEntity.Death();
+            }
         }
 
         public void Register()

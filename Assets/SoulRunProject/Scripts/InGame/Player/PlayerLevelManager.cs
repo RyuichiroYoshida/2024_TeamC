@@ -12,7 +12,7 @@ namespace SoulRunProject.InGame
     {
         [SerializeField, Min(1)] private int _initialLevel = 1;
 
-        [SerializeField, EnumDrawer(typeof(SkillLevelLabel)), Min(1)]
+        [SerializeField, Min(1)]
         private int[] _expToNextLevel;
 
         private readonly IntReactiveProperty _currentLevel = new IntReactiveProperty();

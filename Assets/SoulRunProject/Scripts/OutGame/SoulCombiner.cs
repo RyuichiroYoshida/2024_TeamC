@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SoulRun.InGame;
-using SoulRunProject.SoulRunProject.Scripts.Common.Core.Singleton;
+using SoulRunProject.Common;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 
 namespace SoulRunProject.SoulMixScene
 {

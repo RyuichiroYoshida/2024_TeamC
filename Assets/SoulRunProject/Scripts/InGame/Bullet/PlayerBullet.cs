@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SoulRunProject.InGame
 {
-    public class PlayerBullet : BulletBase, IPausable
+    public class PlayerBullet : BulletBase
     {
         float _attackDamage;
         float _range;
@@ -12,7 +12,6 @@ namespace SoulRunProject.InGame
         int _hitCount;
         private GiveKnockBack _giveKnockBack;
         private float _getSoulValueOnHit;
-        
         public void ApplyParameter(ProjectileSkillParameter param)
         {
             _lifeTime = param.LifeTime;

@@ -1,11 +1,7 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using SoulRunProject.Common;
-using SoulRunProject.Common.Core.ScriptableObject;
 using SoulRunProject.SoulMixScene;
-using SoulRunProject.SoulRunProject.Scripts.Common.Core.Singleton;
 using UnityEngine;
 
 namespace SoulRunProject
