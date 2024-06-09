@@ -27,5 +27,5 @@ MonoBehaviour:
     _goldLuckRate: 1
     _criticalRate: 0
     _criticalDamageRate: 1
-    _vacuumItemRangeRange: 15
+    _vacuumItemRangeRange: 20.3
     _dropIncreasedRate: 5

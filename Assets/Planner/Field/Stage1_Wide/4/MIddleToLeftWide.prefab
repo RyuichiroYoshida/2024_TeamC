@@ -4778,8 +4778,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c787228e05b4c64b87894f5be52870b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startPos: {x: -45, y: 5.395622e-12, z: 142}
-  _endPos: {x: 0, y: 0, z: 40}
+  _startPos: {x: -45, y: -0.00016155838, z: 139}
+  _endPos: {x: 0, y: -0.000054627653, z: 47}
 --- !u!4 &1847376481501413091 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 37fa295d2bb9fcc47b9733e93d6485bd,

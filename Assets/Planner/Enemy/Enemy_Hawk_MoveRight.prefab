@@ -93,7 +93,7 @@ Transform:
   m_GameObject: {fileID: 7073754473475370446}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.3, y: 2.2, z: 50.9}
+  m_LocalPosition: {x: -3.3, y: 2.2, z: 39}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -252,12 +252,12 @@ MonoBehaviour:
     - rid: 8478225610876387393
       type: {class: CurveMover, ns: SoulRunProject.InGame, asm: Assembly-CSharp}
       data:
-        _moveSpeed: 5
+        _moveSpeed: 30
         _posMarkers:
         - {fileID: 6179397458505883886}
         - {fileID: 455813844553014372}
-        _isPosLoop: 0
-        _loopCount: 0
+        _isPosLoop: 1
+        _loopCount: 3
         _type: 0
     - rid: 8478225676376211459
       type: {class: EntityLongRangeAttacker, ns: SoulRunProject.InGame, asm: Assembly-CSharp}

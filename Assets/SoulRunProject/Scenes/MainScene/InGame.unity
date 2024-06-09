@@ -209,6 +209,7 @@ MonoBehaviour:
       _fieldSegments:
         List:
         - {fileID: 4191814948936305358, guid: b3d420eafd034874fadf9b2be2b542c9, type: 3}
+        - {fileID: 4191814948936305358, guid: b3d420eafd034874fadf9b2be2b542c9, type: 3}
         - {fileID: 8571997593146528395, guid: d6207c91bfb158c40b319dea77734c38, type: 3}
         - {fileID: 71984350006660550, guid: 1bca1e9d4c266eb428a3b583a80cf388, type: 3}
         - {fileID: 5690076965110922155, guid: eda47cc38f750b84c9c4113d9455a67f, type: 3}
@@ -592,6 +593,56 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3698741979491483856, guid: 2a83745e1a1dd834cac2a42d4f9271f1,
+        type: 3}
+      propertyPath: _expToNextLevel.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3698741979491483856, guid: 2a83745e1a1dd834cac2a42d4f9271f1,
+        type: 3}
+      propertyPath: _expToNextLevel.Array.data[0]
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3698741979491483856, guid: 2a83745e1a1dd834cac2a42d4f9271f1,
+        type: 3}
+      propertyPath: _expToNextLevel.Array.data[1]
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3698741979491483856, guid: 2a83745e1a1dd834cac2a42d4f9271f1,
+        type: 3}
+      propertyPath: _expToNextLevel.Array.data[2]
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3698741979491483856, guid: 2a83745e1a1dd834cac2a42d4f9271f1,
+        type: 3}
+      propertyPath: _expToNextLevel.Array.data[3]
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3698741979491483856, guid: 2a83745e1a1dd834cac2a42d4f9271f1,
+        type: 3}
+      propertyPath: _expToNextLevel.Array.data[4]
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 3698741979491483856, guid: 2a83745e1a1dd834cac2a42d4f9271f1,
+        type: 3}
+      propertyPath: _expToNextLevel.Array.data[5]
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3698741979491483856, guid: 2a83745e1a1dd834cac2a42d4f9271f1,
+        type: 3}
+      propertyPath: _expToNextLevel.Array.data[6]
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3698741979491483856, guid: 2a83745e1a1dd834cac2a42d4f9271f1,
+        type: 3}
+      propertyPath: _expToNextLevel.Array.data[7]
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 3698741979491483856, guid: 2a83745e1a1dd834cac2a42d4f9271f1,
+        type: 3}
+      propertyPath: _expToNextLevel.Array.data[8]
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 3932238436133655523, guid: 2a83745e1a1dd834cac2a42d4f9271f1,
         type: 3}
       propertyPath: _skillIconImage.Array.data[0]
@@ -616,6 +667,31 @@ PrefabInstance:
         type: 3}
       propertyPath: _skillIconImage.Array.data[4]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3932238436133655523, guid: 2a83745e1a1dd834cac2a42d4f9271f1,
+        type: 3}
+      propertyPath: _defaultPlayerSkills.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3932238436133655523, guid: 2a83745e1a1dd834cac2a42d4f9271f1,
+        type: 3}
+      propertyPath: _increaseSkillLevels.Array.data[0]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3932238436133655523, guid: 2a83745e1a1dd834cac2a42d4f9271f1,
+        type: 3}
+      propertyPath: _increaseSkillLevels.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3932238436133655523, guid: 2a83745e1a1dd834cac2a42d4f9271f1,
+        type: 3}
+      propertyPath: _increaseSkillLevels.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3932238436133655523, guid: 2a83745e1a1dd834cac2a42d4f9271f1,
+        type: 3}
+      propertyPath: _increaseSkillLevels.Array.data[3]
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6519210490737000228, guid: 2a83745e1a1dd834cac2a42d4f9271f1,
         type: 3}
@@ -1464,7 +1540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxSegmentCount: 3
-  _scrollSpeed: 60
+  _scrollSpeed: 40
 --- !u!1001 &2085064252
 PrefabInstance:
   m_ObjectHideFlags: 0

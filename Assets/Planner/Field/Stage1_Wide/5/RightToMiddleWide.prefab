@@ -5333,12 +5333,12 @@ PrefabInstance:
     - target: {fileID: 2976286264063094494, guid: bb9e0b7ed13b5d741ad32191db07c964,
         type: 3}
       propertyPath: managedReferences[4896308439518019604]._entitySpacing
-      value: 2.35
+      value: 4.3
       objectReference: {fileID: 0}
     - target: {fileID: 2976286264063094494, guid: bb9e0b7ed13b5d741ad32191db07c964,
         type: 3}
       propertyPath: managedReferences[4896308439518019604]._spawnRowCount
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2976286264063094494, guid: bb9e0b7ed13b5d741ad32191db07c964,
         type: 3}
