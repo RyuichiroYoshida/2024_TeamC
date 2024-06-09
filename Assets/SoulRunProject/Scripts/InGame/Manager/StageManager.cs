@@ -151,8 +151,17 @@ namespace SoulRunProject.InGame
         void BossStage()
         {
             _currentStageState = StageState.PlayingBossStage;
+            Invoke(nameof(SpawnBoss), _stageData[_stageDataIndex].DelayBossSpawn);
+        }
+
+        /// <summary> ボス生成 </summary>
+        void SpawnBoss()
+        {
             // ボスの生成と通知設定
-            Instantiate(_stageData[_stageDataIndex].BossPrefab).GetComponent<DamageableEntity>().OnDead += () => ToNextStage?.Invoke();
+            BossController boss = Instantiate(_stageData[_stageDataIndex].BossPrefab);
+            boss.InitializePosition(_fieldMover.MoveSegments[^1].transform.TransformPoint(_fieldMover.MoveSegments[^1].StartPos).x);
+            boss.GetComponent<DamageableEntity>().OnDead += () => ToNextStage?.Invoke();
+            CriAudioManager.Instance.PlayBGM("BGM_Boss"); // 同じタイミングでBGM始める
         }
         
         /// <summary> 次のステージに移行 </summary>
@@ -290,12 +299,14 @@ namespace SoulRunProject.InGame
     {
         [SerializeField, CustomLabel("フィールド情報")] private List<FieldCreatePattern> _fieldPatterns;
         [SerializeField, CustomLabel("ボスステージのタイル")] private FieldSegment _bossStageField;
+        [SerializeField, CustomLabel("ボス出現までのディレイ")] private float _delayBossSpawn;
         [SerializeField, CustomLabel("ボス")] private BossController _bossPrefab; // 仮
         
         /// <summary> 通常時(PlayingRunGame)のFieldPattern </summary>
         public List<FieldCreatePattern> FieldPatterns => _fieldPatterns;
         /// <summary> ボスステージのFieldPattern </summary>
         public FieldSegment BossStageField => _bossStageField;
+        public float DelayBossSpawn => _delayBossSpawn;
         public BossController BossPrefab => _bossPrefab;
     }
 }

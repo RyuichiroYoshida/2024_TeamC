@@ -18,6 +18,7 @@ namespace SoulRunProject.InGame
     /// </summary>
     public class BossController : MonoBehaviour, IPausable
     {
+        [SerializeField, CustomLabel("デフォルト位置")] private Vector3 _defaultPos;
         [SerializeField] private Image _hpImage;
         [SerializeField] private Animator _bossAnimator;
         [SerializeField, Tooltip("パワーアップする閾値(%)")] private float[] _powerUpThreshold; 
@@ -41,11 +42,19 @@ namespace SoulRunProject.InGame
             UnRegister();
         }
 
+        public void InitializePosition(float positionX)
+        {
+            Vector3 pos = new Vector3(positionX, _defaultPos.y, _defaultPos.z);
+            transform.position = pos;
+        }
+
         private void Start()
         {
+            Transform playerTf = FindObjectOfType<PlayerManager>().transform;
+            
             foreach (var behavior in _bossBehaviors)
             {
-                behavior.Initialize(this);
+                behavior.Initialize(this, playerTf);
                 ((BossBehaviorBase)behavior).OnFinishAction += () =>
                 {
                     _currentState = BossState.Standby;
@@ -151,7 +160,7 @@ namespace SoulRunProject.InGame
     public interface IBossBehavior
     {
         /// <summary> Script初期化処理 </summary>
-        public void Initialize(BossController bossController);
+        public void Initialize(BossController bossController, Transform playerTf);
         /// <summary> Action開始 </summary>
         public void BeginAction();
         /// <summary> Action中Update </summary>
@@ -169,7 +178,7 @@ namespace SoulRunProject.InGame
         public Action OnFinishAction;
         public List<Action<BossController>> PowerUpBejaviors = new ();
 
-        public abstract void Initialize(BossController bossController);
+        public abstract void Initialize(BossController bossController, Transform playerTf);
         public abstract void BeginAction();
         public abstract void UpdateAction(float deltaTime);
 

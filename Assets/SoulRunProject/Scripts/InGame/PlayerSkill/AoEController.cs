@@ -9,24 +9,13 @@ namespace SoulRunProject.Common
     /// <summary>
     /// 範囲攻撃クラス
     /// </summary>
-    public class AoEController : MonoBehaviour, IPausable
+    public class AoEController : MonoBehaviour
     {
         HashSet<DamageableEntity> _entities = new();
         private AoESkillParameter _param;
         private PlayerManager _playerManager;
-        private bool _isPause;
 
-        private void Awake()
-        {
-            Register();
-        }
-
-        private void OnDestroy()
-        {
-            UnRegister();
-        }
-
-        public void Initialize(in AoESkillParameter param, PlayerManager playerManager)
+        public void ApplyParameter(in AoESkillParameter param, PlayerManager playerManager)
         {
             _param = param;
             _playerManager = playerManager;
@@ -35,7 +24,6 @@ namespace SoulRunProject.Common
 
         void FixedUpdate()
         {
-            if (_isPause) return;
             // OnTriggerExitする前にDestroyすることがあるので、
             // Whereでnullチェックしてからダメージ処理
             foreach (var entity in _entities.Where(entity => entity))
@@ -63,21 +51,6 @@ namespace SoulRunProject.Common
             {
                 _entities.Remove(entity);
             }
-        }
-
-        public void UnRegister()
-        {
-            PauseManager.UnRegisterPausableObject(this);
-        }
-
-        public void Pause(bool isPause)
-        {
-            _isPause = isPause;
-        }
-
-        public void Register()
-        {
-            PauseManager.RegisterPausableObject(this);
         }
     }
 }

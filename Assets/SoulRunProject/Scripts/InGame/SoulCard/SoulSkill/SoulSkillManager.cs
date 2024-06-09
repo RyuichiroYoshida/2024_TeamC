@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using SoulRunProject.Common;
 using SoulRunProject.Framework;
 using SoulRunProject.SoulMixScene;
-using SoulRunProject.SoulRunProject.Scripts.Common.Core.Singleton;
 using UniRx;
 using UnityEngine;
 
@@ -62,10 +61,18 @@ namespace SoulRunProject.InGame
         {
             if (_usingSkillTimer > 0) return;
             
-            _currentSoul.Value += soul;
             if (_currentSoul.Value >= RequiredSoul)
             {
                 _currentSoul.Value = RequiredSoul;
+                return;
+            }
+            
+            _currentSoul.Value += soul;
+            
+            if (_currentSoul.Value >= RequiredSoul)
+            {
+                _currentSoul.Value = RequiredSoul;
+                CriAudioManager.Instance.PlaySE("SE_SoulSkillAvailable");
             }
         }
         

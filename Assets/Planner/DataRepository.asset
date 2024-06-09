@@ -17,32 +17,30 @@ MonoBehaviour:
   - Assets/Planner/SoulCard/SoulSkill
   - Assets/Planner/SoulCard/SoulCard
   _dataList:
-  - rid: 8824515672781095095
-  - rid: 8824515672781095096
-  - rid: 8824515672781095097
+  - rid: 3163472158622744662
+  - rid: 3163472158622744663
+  - rid: 3163472158622744664
   references:
     version: 2
     RefIds:
-    - rid: 8824515672781095095
-      type: {class: RepositoryData/ObjectList, ns: SoulRunProject.Common.Core.ScriptableObject,
-        asm: Assembly-CSharp}
+    - rid: 3163472158622744662
+      type: {class: RepositoryData/ObjectList, ns: SoulRunProject.Common, asm: Assembly-CSharp}
       data:
         Objects:
         - {fileID: 11400000, guid: 0d9ceba750591d8468b54d2d2ecc5dc8, type: 2}
         - {fileID: 11400000, guid: df95c91d87216e64b8646eb5593ed616, type: 2}
         - {fileID: 11400000, guid: c7e3a43ae5d1ebf4c895b4bec4de59c6, type: 2}
+        - {fileID: 11400000, guid: a5116b74e53cd0a40ba8aa8910564f14, type: 2}
         - {fileID: 11400000, guid: 380fc6e6c3756b547b68c3ed6f2d08fe, type: 2}
-    - rid: 8824515672781095096
-      type: {class: RepositoryData/ObjectList, ns: SoulRunProject.Common.Core.ScriptableObject,
-        asm: Assembly-CSharp}
+        - {fileID: 11400000, guid: 1014b41278f3fbc46ae575637488a40f, type: 2}
+    - rid: 3163472158622744663
+      type: {class: RepositoryData/ObjectList, ns: SoulRunProject.Common, asm: Assembly-CSharp}
       data:
         Objects:
         - {fileID: 11400000, guid: 95369f5c160473b4287d5a8e74d1fc47, type: 2}
-    - rid: 8824515672781095097
-      type: {class: RepositoryData/ObjectList, ns: SoulRunProject.Common.Core.ScriptableObject,
-        asm: Assembly-CSharp}
+    - rid: 3163472158622744664
+      type: {class: RepositoryData/ObjectList, ns: SoulRunProject.Common, asm: Assembly-CSharp}
       data:
         Objects:
         - {fileID: 11400000, guid: cc047e147ba033c4ba1f76b16089371e, type: 2}
         - {fileID: 102900000, guid: efbb9dee6ccbed5478c6017a23dad16f, type: 3}
-        - {fileID: 102900000, guid: 48bfd46e522ca354bb86c644ce3bb747, type: 3}
