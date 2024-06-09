@@ -5835,7 +5835,7 @@ PrefabInstance:
     - target: {fileID: 5301361891405884771, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
         type: 3}
       propertyPath: managedReferences[2917291905484324893]._spawnCount
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5301361891405884771, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
         type: 3}
@@ -5850,12 +5850,12 @@ PrefabInstance:
     - target: {fileID: 5301361891405884771, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
         type: 3}
       propertyPath: managedReferences[2917291905484324893]._spawnRadiusRange
-      value: 33.4
+      value: 21.7
       objectReference: {fileID: 0}
     - target: {fileID: 5301361891405884771, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
         type: 3}
       propertyPath: managedReferences[2917291905484324894]._spawnerEnableRange
-      value: 48.7
+      value: 84.5
       objectReference: {fileID: 0}
     - target: {fileID: 5635675189360419162, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
         type: 3}
@@ -5870,7 +5870,7 @@ PrefabInstance:
     - target: {fileID: 5635675189360419162, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.7
+      value: -26
       objectReference: {fileID: 0}
     - target: {fileID: 5635675189360419162, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
         type: 3}
@@ -6667,7 +6667,7 @@ PrefabInstance:
     - target: {fileID: 2186928187174572084, guid: 43def463d04457b4f980ad43e158441b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -54
+      value: 13.889877
       objectReference: {fileID: 0}
     - target: {fileID: 2186928187174572084, guid: 43def463d04457b4f980ad43e158441b,
         type: 3}
@@ -6730,6 +6730,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5301361891405884771, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
         type: 3}
+      propertyPath: _spawnerType
+      value: 4434895750398214246
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301361891405884771, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
+        type: 3}
       propertyPath: _spawnPattern
       value: 2917291905484324895
       objectReference: {fileID: 0}
@@ -6762,6 +6767,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5301361891405884771, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
         type: 3}
+      propertyPath: managedReferences[4434895750398214246]
+      value: Assembly-CSharp SoulRunProject.Common.SpawnerOnPassThroughLine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301361891405884771, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
+        type: 3}
       propertyPath: managedReferences[2917291905484324895]._spawnCount
       value: 10
       objectReference: {fileID: 0}
@@ -6772,8 +6782,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5301361891405884771, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
         type: 3}
-      propertyPath: managedReferences[2917291905484324895]._spawnRadiusRange
+      propertyPath: managedReferences[4434895750398214246]._throughLinePos
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301361891405884771, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
+        type: 3}
+      propertyPath: managedReferences[2917291905484324895]._spawnRadiusRange
+      value: 33.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301361891405884771, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
+        type: 3}
+      propertyPath: managedReferences[4434895750398214242]._spawnerEnableRange
+      value: 75.1
       objectReference: {fileID: 0}
     - target: {fileID: 5635675189360419162, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
         type: 3}
@@ -6788,7 +6808,7 @@ PrefabInstance:
     - target: {fileID: 5635675189360419162, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -101.7
+      value: -121
       objectReference: {fileID: 0}
     - target: {fileID: 5635675189360419162, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
         type: 3}

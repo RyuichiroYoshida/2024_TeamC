@@ -56,15 +56,15 @@ MonoBehaviour:
     _itemIcon: {fileID: 0}
     ItemEffects:
     - _statusToUp: 4
-      _upValue: 0.5
-    - _statusToUp: 7
+      _upValue: 0.3
+    - _statusToUp: 12
+      _upValue: 0.2
+    - _statusToUp: 6
+      _upValue: 0.2
+    - _statusToUp: 10
       _upValue: 1
-    - _statusToUp: 7
-      _upValue: 3
-    - _statusToUp: 7
-      _upValue: 3
-    - _statusToUp: 7
-      _upValue: 3
+    - _statusToUp: 4
+      _upValue: 0.5
   - _itemName: "\u9B42\u306E\u30D6\u30FC\u30C4"
     _itemIcon: {fileID: 0}
     ItemEffects:
@@ -73,9 +73,9 @@ MonoBehaviour:
     - _statusToUp: 9
       _upValue: 2
     - _statusToUp: 3
-      _upValue: 1
+      _upValue: 0.2
     - _statusToUp: 3
-      _upValue: 1
+      _upValue: 0.2
     - _statusToUp: 9
       _upValue: 2
   - _itemName: "\u30BD\u30A6\u30EB\u30B5\u30FC\u30AF\u30EC\u30C3\u30C8"

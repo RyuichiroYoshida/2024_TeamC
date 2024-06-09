@@ -2860,7 +2860,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6a48245f58c199c46a4ef845591ba26f,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1775194120683459590}
+      addedObject: {fileID: 2923527684699416649}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6a48245f58c199c46a4ef845591ba26f,
         type: 3}
@@ -2924,7 +2924,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 50, y: 0, z: 80}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1001 &6239509807120545116
+--- !u!1001 &7397026363435649299
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -2934,18 +2934,8 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5301361891405884771, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
         type: 3}
-      propertyPath: _spawnerType
-      value: 2917291905484324875
-      objectReference: {fileID: 0}
-    - target: {fileID: 5301361891405884771, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
-        type: 3}
       propertyPath: _spawnPattern
-      value: 2917291905484324876
-      objectReference: {fileID: 0}
-    - target: {fileID: 5301361891405884771, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
-        type: 3}
-      propertyPath: _spawnInterval
-      value: 0
+      value: 4434895750398214243
       objectReference: {fileID: 0}
     - target: {fileID: 5301361891405884771, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
         type: 3}
@@ -2960,38 +2950,28 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 5301361891405884771, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
         type: 3}
-      propertyPath: managedReferences[2917291905484324875]
-      value: Assembly-CSharp SoulRunProject.Common.SpawnerOnEnter
-      objectReference: {fileID: 0}
-    - target: {fileID: 5301361891405884771, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
-        type: 3}
-      propertyPath: managedReferences[2917291905484324876]
+      propertyPath: managedReferences[4434895750398214243]
       value: Assembly-CSharp SoulRunProject.Common.Interface.RandomPattern
       objectReference: {fileID: 0}
     - target: {fileID: 5301361891405884771, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
         type: 3}
-      propertyPath: managedReferences[2917291905484324876]._spawnCount
+      propertyPath: managedReferences[4434895750398214243]._spawnCount
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5301361891405884771, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
         type: 3}
-      propertyPath: managedReferences[290008742374408197]._throughLinePos
-      value: 2.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5301361891405884771, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
-        type: 3}
-      propertyPath: managedReferences[2917291905484324876]._useRandomAngle
+      propertyPath: managedReferences[4434895750398214243]._useRandomAngle
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5301361891405884771, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
         type: 3}
-      propertyPath: managedReferences[2917291905484324876]._spawnRadiusRange
-      value: 27.6
+      propertyPath: managedReferences[4434895750398214243]._spawnRadiusRange
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 5301361891405884771, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
         type: 3}
-      propertyPath: managedReferences[2917291905484324875]._spawnerEnableRange
-      value: 37.4
+      propertyPath: managedReferences[4434895750398214242]._spawnerEnableRange
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 5635675189360419162, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
         type: 3}
@@ -3053,9 +3033,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1f99eb27d1bacc4aa327cdd5d52bb46, type: 3}
---- !u!4 &1775194120683459590 stripped
+--- !u!4 &2923527684699416649 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5635675189360419162, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
     type: 3}
-  m_PrefabInstance: {fileID: 6239509807120545116}
+  m_PrefabInstance: {fileID: 7397026363435649299}
   m_PrefabAsset: {fileID: 0}

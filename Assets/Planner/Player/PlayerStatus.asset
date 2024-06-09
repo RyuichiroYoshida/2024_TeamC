@@ -16,7 +16,7 @@ MonoBehaviour:
     _hp: 530
     _attackValue: 10
     _defenceValue: 1
-    _coolTimeReductionRate: 1.06
+    _coolTimeReductionRate: 1
     _skillSizeUpRate: 5
     _bulletSpeedUpRate: 1
     _effectTimeExtension: 1
@@ -27,5 +27,5 @@ MonoBehaviour:
     _goldLuckRate: 1
     _criticalRate: 0
     _criticalDamageRate: 1
-    _vacuumItemRangeRange: 20.3
+    _vacuumItemRangeRange: 30
     _dropIncreasedRate: 5
