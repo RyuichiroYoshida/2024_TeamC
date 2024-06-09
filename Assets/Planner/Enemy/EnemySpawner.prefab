@@ -46,17 +46,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fieldEntity: []
   _spawnerType:
-    rid: 290008742374408197
+    rid: 4434895750398214242
   _spawnPattern:
     rid: -2
-  _spawnInterval: 32
+  _spawnInterval: 0
   _useRandomFlip: 1
+  _isSpawnerAvailable: 1
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 290008742374408197
-      type: {class: SpawnerOnPassThroughLine, ns: SoulRunProject.Common, asm: Assembly-CSharp}
+    - rid: 4434895750398214242
+      type: {class: SpawnerOnEnter, ns: SoulRunProject.Common, asm: Assembly-CSharp}
       data:
-        _throughLinePos: 0
+        _spawnerEnableRange: 0
