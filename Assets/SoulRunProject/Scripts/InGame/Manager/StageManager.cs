@@ -161,6 +161,7 @@ namespace SoulRunProject.InGame
             BossController boss = Instantiate(_stageData[_stageDataIndex].BossPrefab);
             boss.InitializePosition(_fieldMover.MoveSegments[^1].transform.TransformPoint(_fieldMover.MoveSegments[^1].StartPos).x);
             boss.GetComponent<DamageableEntity>().OnDead += () => ToNextStage?.Invoke();
+            CriAudioManager.Instance.PlayBGM("BGM_Boss"); // 同じタイミングでBGM始める
         }
         
         /// <summary> 次のステージに移行 </summary>
