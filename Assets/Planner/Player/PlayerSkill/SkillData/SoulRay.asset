@@ -23,31 +23,15 @@ MonoBehaviour:
     List:
     - List:
       - _levelUpType: 1
-        _reduceCoolTime: 0
-        _increaseLaserAmount: 1
-        _increaseDamageOverTime: 0
-      - _levelUpType: 0
-        _reduceCoolTime: 10
+        _reduceCoolTime: 30
         _increaseLaserAmount: 1
         _increaseDamageOverTime: 0
     - List:
-      - _levelUpType: 1
-        _reduceCoolTime: 0
-        _increaseLaserAmount: 1
-        _increaseDamageOverTime: 0
-      - _levelUpType: 0
-        _reduceCoolTime: 10
-        _increaseLaserAmount: 1
-        _increaseDamageOverTime: 0
       - _levelUpType: 2
-        _reduceCoolTime: 10
-        _increaseLaserAmount: 1
-        _increaseDamageOverTime: 10
-    - List:
-      - _levelUpType: 1
         _reduceCoolTime: 0
         _increaseLaserAmount: 1
-        _increaseDamageOverTime: 0
+        _increaseDamageOverTime: 5
+    - List:
       - _levelUpType: 0
         _reduceCoolTime: 10
         _increaseLaserAmount: 1
@@ -80,10 +64,10 @@ MonoBehaviour:
     - rid: 3163472158622744583
       type: {class: LaserSkillParameter, ns: SoulRunProject.Common, asm: Assembly-CSharp}
       data:
-        _damageOverTime: 30
+        _damageOverTime: 100
         _amount: 1
         _width: 70
         _height: 4
         _speed: 1.25
-        _turnCount: 20
-        _coolTime: 10
+        _turnCount: 12
+        _coolTime: 4

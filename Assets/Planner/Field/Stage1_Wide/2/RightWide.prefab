@@ -3360,6 +3360,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3097486664983685563}
+    - targetCorrespondingSourceObject: {fileID: -3639050173514039444, guid: 6a48245f58c199c46a4ef845591ba26f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8277143015400155011}
   m_SourcePrefab: {fileID: 100100000, guid: 6a48245f58c199c46a4ef845591ba26f, type: 3}
 --- !u!4 &3891275230984744165 stripped
 Transform:
@@ -3387,6 +3391,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startPos: {x: 0, y: 0, z: -40}
   _endPos: {x: 0, y: 0, z: 40}
+--- !u!1 &9004191455245071458 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -3639050173514039444, guid: 6a48245f58c199c46a4ef845591ba26f,
+    type: 3}
+  m_PrefabInstance: {fileID: 3569717648791063310}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &8277143015400155011
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9004191455245071458}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 50, y: 0, z: 80}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &6239509807120545116
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3434,7 +3465,7 @@ PrefabInstance:
     - target: {fileID: 5301361891405884771, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
         type: 3}
       propertyPath: managedReferences[2917291905484324876]._spawnCount
-      value: 10
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5301361891405884771, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
         type: 3}
@@ -3449,12 +3480,12 @@ PrefabInstance:
     - target: {fileID: 5301361891405884771, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
         type: 3}
       propertyPath: managedReferences[2917291905484324876]._spawnRadiusRange
-      value: 27.6
+      value: 25.6
       objectReference: {fileID: 0}
     - target: {fileID: 5301361891405884771, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
         type: 3}
       propertyPath: managedReferences[2917291905484324875]._spawnerEnableRange
-      value: 37.4
+      value: 47.2
       objectReference: {fileID: 0}
     - target: {fileID: 5635675189360419162, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
         type: 3}
@@ -3469,7 +3500,7 @@ PrefabInstance:
     - target: {fileID: 5635675189360419162, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.47
+      value: 1.2499981
       objectReference: {fileID: 0}
     - target: {fileID: 5635675189360419162, guid: c1f99eb27d1bacc4aa327cdd5d52bb46,
         type: 3}
