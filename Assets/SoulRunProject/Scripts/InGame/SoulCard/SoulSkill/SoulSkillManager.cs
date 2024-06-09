@@ -61,10 +61,18 @@ namespace SoulRunProject.InGame
         {
             if (_usingSkillTimer > 0) return;
             
-            _currentSoul.Value += soul;
             if (_currentSoul.Value >= RequiredSoul)
             {
                 _currentSoul.Value = RequiredSoul;
+                return;
+            }
+            
+            _currentSoul.Value += soul;
+            
+            if (_currentSoul.Value >= RequiredSoul)
+            {
+                _currentSoul.Value = RequiredSoul;
+                CriAudioManager.Instance.PlaySE("SE_SoulSkillAvailable");
             }
         }
         

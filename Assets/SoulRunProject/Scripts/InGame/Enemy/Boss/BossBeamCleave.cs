@@ -21,6 +21,7 @@ namespace SoulRunProject.InGame
 
         private GameObject _laserInstance;
         private int _hitCounter;
+        private int _beamSoundIndex;
 
         public override void Initialize(BossController bossController, Transform playerTf)
         {
@@ -34,6 +35,10 @@ namespace SoulRunProject.InGame
                 powerUpBehavior.Initialize(this);
                 PowerUpBejaviors.Add(powerUpBehavior.PowerUpBehavior);
             }
+            
+            // sound
+            _beamSoundIndex = CriAudioManager.Instance.PlaySE("SE_Laser");
+            CriAudioManager.Instance.PauseSE(_beamSoundIndex);
         }
         
         public override void BeginAction()
@@ -41,6 +46,7 @@ namespace SoulRunProject.InGame
             _hitCounter = 0;
             _laserInstance.SetActive(true);
             _beamOrigin.rotation = Quaternion.LookRotation(_startImpactPosition);
+            CriAudioManager.Instance.ResumeSE(_beamSoundIndex);
         }
 
         public override void UpdateAction(float deltaTime)
@@ -50,6 +56,7 @@ namespace SoulRunProject.InGame
                 {
                     // 終了処理
                     _laserInstance.SetActive(false);
+                    CriAudioManager.Instance.PauseSE(_beamSoundIndex);
                     OnFinishAction?.Invoke();
                 });
             
