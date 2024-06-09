@@ -70,6 +70,7 @@ namespace SoulRunProject.InGame
                 impactPos.z += _deviationDistance;
                 flameBall.transform.LookAt(impactPos);
                 flameBall.Initialize(_flameBallSpeed, _flameDamage);
+                CriAudioManager.Instance.PlaySE("SE_Fire_Shot");
             }
             
             // 時間と移動
