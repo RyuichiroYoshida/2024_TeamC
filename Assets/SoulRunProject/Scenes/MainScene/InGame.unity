@@ -771,6 +771,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9091037442287400240, guid: 2a83745e1a1dd834cac2a42d4f9271f1,
+        type: 3}
+      propertyPath: _decreaceSpeed
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 9091037442287400240, guid: 2a83745e1a1dd834cac2a42d4f9271f1,
+        type: 3}
+      propertyPath: _decreaseSpeed
+      value: 40
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -1569,7 +1579,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxSegmentCount: 3
   _maxScrollSpeed: 5
-  _lerpPower: 5
+  _lerpPower: 1
 --- !u!1001 &2085064252
 PrefabInstance:
   m_ObjectHideFlags: 0

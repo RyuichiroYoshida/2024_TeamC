@@ -13,7 +13,7 @@ namespace SoulRunProject.InGame
     {
         [SerializeField] [CustomLabel("最大タイル数")] private int _maxSegmentCount = 5;
         [SerializeField] [CustomLabel("スクロール速度")] private float _maxScrollSpeed = 5f;
-        [SerializeField] [CustomLabel("最大速度に戻る補完値")][Range(0 ,1f)] private float _lerpPower = 5f;
+        [SerializeField] [CustomLabel("最大速度に戻る補完値")][Range(0 ,10f)] private float _lerpPower = 5f;
         private bool _isPause;
         private float _currentSpeed;
         public List<FieldSegment> MoveSegments { get; private set; } = new();
@@ -80,7 +80,7 @@ namespace SoulRunProject.InGame
         {
             if (!Mathf.Approximately(MaxScrollSpeed , _currentSpeed))
             {
-                _currentSpeed = Mathf.Lerp(_currentSpeed, _maxScrollSpeed, _lerpPower + Time.fixedDeltaTime);
+                _currentSpeed = Mathf.Lerp(_currentSpeed, _maxScrollSpeed, _lerpPower * Time.fixedDeltaTime);
             }
         }
 
