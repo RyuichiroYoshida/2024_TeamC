@@ -44,31 +44,15 @@ namespace SoulRunProject
         public async UniTask DoStartIngameMove(CancellationToken cts)
         {
             return;
-            transform.position = _firstPos;
-            await this.transform.DOMove(_player.position + _offset, 2f).WithCancellation(cts);
         }
 
         public void DamageCam()
         {
             _impulseSource.GenerateImpulse(Vector3.one);
-            // return;
-            // if (_shaking) return;
-            // _shakeObj.transform.DOShakePosition(_shakeDur, _shakePower, _shakeVib, _shakeRand, _isSnap, _isFade)
-            //     .OnStart(() => _shaking = true)
-            //     .OnComplete(() =>
-            //     {
-            //         _shakeObj.position = new (_player.transform.position.x, transform.position.y, transform.position.z);
-            //         _shaking = false;
-            //     }).SetLink(gameObject);
         }
         
         public void StartFollowPlayer()
         {
-            // this.LateUpdateAsObservable().Subscribe(_ =>
-            // {
-            //     var pos = _player.position + _offset;
-            //     transform.position = new Vector3(pos.x, transform.position.y, pos.z);
-            // }).AddTo(_player.gameObject);
         }
     }
 }

@@ -153,21 +153,7 @@ namespace SoulRunProject.InGame
 
         public void RotatePlayer(Vector2 input)
         {
-            if (input.x > 0)
-            {
-                _playerAnimator.SetBool("IsLeft", true);
-                _playerAnimator.SetBool("IsRight", false);
-            }
-            else if (input.x < 0)
-            {
-                _playerAnimator.SetBool("IsRight", true);
-                _playerAnimator.SetBool("IsLeft", false);
-            }
-            else
-            {
-                _playerAnimator.SetBool("IsRight", false);
-                _playerAnimator.SetBool("IsLeft", false);
-            }
+            _playerAnimator.SetFloat("Direction" , input.x);
         }
 
 
