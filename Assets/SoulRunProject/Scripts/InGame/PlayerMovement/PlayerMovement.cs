@@ -34,6 +34,8 @@ namespace SoulRunProject.InGame
         /// <summary> プレイヤー地点の地面の高さ </summary>
         public float GroundHeight => _yAxisGroundLine;
 
+        public float DistanceBetweenPivotAndGroundPoint => _distanceBetweenPivotAndGroundPoint;
+
         private void Awake()
         {
             _rb = GetComponent<Rigidbody>();
@@ -91,10 +93,10 @@ namespace SoulRunProject.InGame
         /// </summary>
         private void GroundCheck()
         {
-            if (transform.position.y <= _yAxisGroundLine + _distanceBetweenPivotAndGroundPoint)
+            if (transform.position.y <= _yAxisGroundLine + DistanceBetweenPivotAndGroundPoint)
             {
                 Vector3 pos = transform.position;
-                pos.y = _yAxisGroundLine + _distanceBetweenPivotAndGroundPoint;
+                pos.y = _yAxisGroundLine + DistanceBetweenPivotAndGroundPoint;
                 transform.position = pos;
 
                 if (!_isGround.Value)
