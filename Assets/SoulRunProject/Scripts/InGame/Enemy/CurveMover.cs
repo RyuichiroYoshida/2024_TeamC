@@ -7,41 +7,39 @@ using UnityEngine;
 
 namespace SoulRunProject.InGame
 {
-    [Serializable, Name("カーブ移動")]
+    [Serializable]
+    [Name("カーブ移動")]
     public class CurveMover : EntityMover
     {
-        //[SerializeField,CustomLabel("移動時間")] float _moveSpeed;
-        [SerializeField, CustomLabel("経由地点")] List<GameObject> _posMarkers;
+        [SerializeField] [CustomLabel("経由地点")] private List<GameObject> _posMarkers;
 
-        [SerializeField, CustomLabel("終了地点と始点を繋げる")]
-        bool _isPosLoop;
+        [SerializeField] [CustomLabel("終了地点と始点を繋げる")]
+        private bool _isPosLoop;
 
-        [SerializeField, CustomLabel("Loop回数指定"), Tooltip("-1で無限ループ")]
-        int _loopCount;
+        [SerializeField] [CustomLabel("Loop回数指定")] [Tooltip("-1で無限ループ")]
+        private int _loopCount;
 
-        [SerializeField, CustomLabel("LoopType設定")]
-        LoopType _type;
+        [SerializeField] [CustomLabel("LoopType設定")]
+        private LoopType _type;
 
-        Tweener _tweener;
-        Vector3[] _posArr;
+        private Tweener _tweener;
+        private Vector3[] _posArr;
 
         public override void OnStart(Transform myTransform = null)
         {
             if (myTransform == null) return;
             _posArr = _posMarkers.Select(target => target.transform.position).ToArray();
-            foreach (var item in _posMarkers)
-            {
-                item.SetActive(false);
-            }
+            foreach (var item in _posMarkers) item.SetActive(false);
             _tweener = myTransform.DOLocalPath
                 (
-                    path: _posArr,
-                    duration: _moveSpeed,
-                    PathType.CatmullRom
+                    _posArr,
+                    _moveSpeed,
+                    PathType.CatmullRom,
+                    gizmoColor: Color.red
                 )
                 .SetOptions
                 (
-                    closePath: false,
+                    false,
                     lockRotation: AxisConstraint.X
                 )
                 .SetOptions(_isPosLoop)

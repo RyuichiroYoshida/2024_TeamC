@@ -84,37 +84,34 @@ Shader "HikanyanLaboratory/ConcentratedLine"
                 const float PI = 3.141592653589793;
 
                 // 画像の中心からの角度を求める
-                float a = atan((i.uv.x - 0.5) / (i.uv.y - 0.5));
+                float uvCenterOffset = atan((i.uv.x - 0.5) / (i.uv.y - 0.5));
 
                 // 波の計算
-                float h1 = cos(a * 4 * _Density + _Time.x * _RollSpeed * 7) * 0.8;
-                h1 += cos(a * 14 * _Density + _Time.x * _RollSpeed * 3) * 0.4;
-                h1 += cos(a * 38 * _Density + _Time.x * _RollSpeed * 1) * 0.2;
+                float wave1 = cos(uvCenterOffset * 4 * _Density + _Time.x * _RollSpeed * 7) * 0.8;
+                wave1 += cos(uvCenterOffset * 14 * _Density + _Time.x * _RollSpeed * 3) * 0.4;
+                wave1 += cos(uvCenterOffset * 38 * _Density + _Time.x * _RollSpeed * 1) * 0.2;
 
                 // 波の計算2
-                float h2 = cos(a * 6 * _Density - _Time.x * _RollSpeed * 9) * 0.8;
-                h1 += cos(a * 12 * _Density - _Time.x * _RollSpeed * 5) * 0.4;
-                h1 += cos(a * 40 * _Density - _Time.x * _RollSpeed * 3) * 0.2;
+                float wave2 = cos(uvCenterOffset * 6 * _Density - _Time.x * _RollSpeed * 9) * 0.8;
+                wave1 += cos(uvCenterOffset * 12 * _Density - _Time.x * _RollSpeed * 5) * 0.4;
+                wave1 += cos(uvCenterOffset * 40 * _Density - _Time.x * _RollSpeed * 3) * 0.2;
 
-                //float l = cos(a * 30 + _Time.x * _RollSpeed);
-
-                float spmod; // 線の濃さ
-                float alpmod; // アルファ
                 float r = sqrt(pow((i.uv.x - 0.5), 2) + pow((i.uv.y - 0.5), 2)); // 中心からの距離
+                // 線の濃さ
+                float spmod = (r < _InnerSpace) ? 0 : ((r - _InnerSpace) * _Taper); // 中心部の空白を確保し外に行くほど濃くする
 
-                spmod = (r < _InnerSpace) ? 0 : ((r - _InnerSpace) * _Taper); // 中心部の空白を確保し外に行くほど濃くする
-
-                alpmod = (r < _OuterEdge) ? 1 : ((0.5 - r) * (1 / (0.5 - _OuterEdge))); // 外側エッジを超えたら徐々にフェードアウトさせる
+                // アルファ値の調整
+                float alpmod = (r < _OuterEdge) ? 1 : ((0.5 - r) * (1 / (0.5 - _OuterEdge))); // 外側エッジを超えたら徐々にフェードアウトさせる
                 alpmod = clamp(alpmod, 0, 1);
 
-                float h0 = ((h1 + h2) + _Offset) * spmod;
+                float combinedWave = ((wave1 + wave2) + _Offset) * spmod;
 
                 // ThresholdHとLの処理
-                h0 = (h0 < _ThresholdL)
-                         ? 0
-                         : (h0 > _ThresholdH)
-                         ? 1
-                         : ((h0 - _ThresholdL) * (1 / (_ThresholdH - _ThresholdL)));
+                combinedWave = (combinedWave < _ThresholdL)
+                                   ? 0
+                                   : (combinedWave > _ThresholdH)
+                                   ? 1
+                                   : ((combinedWave - _ThresholdL) * (1 / (_ThresholdH - _ThresholdL)));
 
                 #ifdef IS_GAMEING_COLOR
                 // ゲーミング
@@ -135,8 +132,7 @@ Shader "HikanyanLaboratory/ConcentratedLine"
                 #endif
 
                 fixed4 col = tex2D(_MainTex, i.uv) * _Color;
-                col.a = col.a * h0 * alpmod;
-                //fixed4 col = fixed4(h0, h0, h0, h0);
+                col.a = col.a * combinedWave * alpmod;
 
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
