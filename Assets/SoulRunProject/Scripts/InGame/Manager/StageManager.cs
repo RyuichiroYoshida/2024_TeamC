@@ -297,7 +297,7 @@ namespace SoulRunProject.InGame
     [Serializable]
     public class StageDatum
     {
-        [SerializeField, CustomLabel("フィールド情報")] private List<FieldCreatePattern> _fieldPatterns;
+        [SerializeField, EnumDrawer(typeof(Count))] private List<FieldCreatePattern> _fieldPatterns;
         [SerializeField, CustomLabel("ボスステージのタイル")] private FieldSegment _bossStageField;
         [SerializeField, CustomLabel("ボス出現までのディレイ")] private float _delayBossSpawn;
         [SerializeField, CustomLabel("ボス")] private BossController _bossPrefab; // 仮
@@ -308,5 +308,28 @@ namespace SoulRunProject.InGame
         public FieldSegment BossStageField => _bossStageField;
         public float DelayBossSpawn => _delayBossSpawn;
         public BossController BossPrefab => _bossPrefab;
+    }
+
+    public enum Count
+    {
+        pattern1,
+        pattern2,
+        pattern3,
+        pattern4,
+        pattern5,
+        pattern6,
+        pattern7,
+        pattern8,
+        pattern9,
+        pattern10,
+        pattern11,
+        pattern12,
+        pattern13,
+        pattern14,
+        pattern15,
+        pattern16,
+        pattern17,
+        pattern18,
+        pattern19,
     }
 }

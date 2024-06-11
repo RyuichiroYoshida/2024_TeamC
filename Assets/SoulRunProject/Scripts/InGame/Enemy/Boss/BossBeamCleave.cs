@@ -52,6 +52,7 @@ namespace SoulRunProject.InGame
         public override void UpdateAction(float deltaTime)
         {
             _beamOrigin.DOLocalRotateQuaternion(Quaternion.LookRotation(_finishImpactPosition), _beamTime)
+                .SetEase(Ease.Linear)
                 .OnComplete(() =>
                 {
                     // 終了処理
