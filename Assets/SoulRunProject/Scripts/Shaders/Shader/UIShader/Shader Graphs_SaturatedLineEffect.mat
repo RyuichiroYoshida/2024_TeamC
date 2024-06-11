@@ -51,14 +51,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _CircleSize: 0.05
-    - _Edge1: 0.88
-    - _Edge2: 1.25
-    - _LineSize: 240
+    - _CircleSize: 8.24
+    - _Edge1: 3.48
+    - _Edge2: 3.77
+    - _LineSize: 59.9
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Strong: 9.3
-    - _TimeSpeed: 1
+    - _Strong: 92.9
+    - _TimeSpeed: 6.04
     m_Colors:
     - _Color: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
