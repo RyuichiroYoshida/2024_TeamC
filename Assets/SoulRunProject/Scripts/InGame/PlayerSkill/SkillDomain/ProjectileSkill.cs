@@ -44,9 +44,7 @@ namespace SoulRunProject.InGame
                                       SkillData.BaseRotateY +
                                       SkillData.BaseRotateY / 2;
                         else
-                            rotateY = (i - RuntimeParameter.Amount / 2f) *
-                                      SkillData.BaseRotateY;
-
+                            rotateY = RuntimeParameter.Amount / 2 * -SkillData.BaseRotateY + i * SkillData.BaseRotateY;
 
                         var bullet = (PlayerBullet)_bulletPool.Rent();
                         bullet.transform.position = _playerTransform.position + SkillData.MuzzleOffset;
