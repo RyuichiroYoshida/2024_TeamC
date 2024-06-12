@@ -12,9 +12,10 @@ namespace SoulRunProject.InGame
     {
         [SerializeField] private DamageDisplay _damageUIPrefab;
         [SerializeField] private Vector3 _uiPosition;
-        
+
         private CommonObjectPool _damageUIPool;
-        private DamageableEntity _damageable;
+        /// <summary> 最後に表示したインスタンス </summary>
+        private DamageDisplay _lastDisplayUI;
 
         private void Awake()
         {
@@ -22,8 +23,16 @@ namespace SoulRunProject.InGame
             
             GetComponent<DamageableEntity>().OnDamaged += damage =>
             {
-                var damageDisplay = (DamageDisplay)_damageUIPool.Rent();
-                damageDisplay.ResetDisplay(transform.position + _uiPosition, damage, Color.white);
+                // 前回のUIが存在かつダメージ待機中であれば、ダメージの追加表示をする
+                if (_lastDisplayUI && _lastDisplayUI.WaitingForNextDamage)
+                {
+                    _lastDisplayUI.AddDisplayDamage(damage);
+                    return;
+                }
+                
+                _lastDisplayUI = (DamageDisplay)_damageUIPool.Rent();
+                DamageDisplay damageDisplay = _lastDisplayUI;
+                damageDisplay.ResetDisplay(transform, _uiPosition, damage, Color.white);
                 damageDisplay.OnFinishedAsync.Take(1).Subscribe(_ => _damageUIPool.Return(damageDisplay));
             };
         }

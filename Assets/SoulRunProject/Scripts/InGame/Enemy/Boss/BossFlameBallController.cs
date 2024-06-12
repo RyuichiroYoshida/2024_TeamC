@@ -64,7 +64,7 @@ namespace SoulRunProject.InGame
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.TryGetComponent(out FieldSegment field))
+            if (other.gameObject.CompareTag("Field"))
             {
                 // 火の床生成
                 BossFlameFloorController flameFloor = Instantiate(_flameFloorPrefab, other.gameObject.transform);

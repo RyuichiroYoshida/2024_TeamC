@@ -16,14 +16,15 @@ namespace SoulRunProject.SoulMixScene
     public class PlayerStatus
     {
         [SerializeField , CustomLabel("HP") , Range( 0 , 1000)] private float _hp;
-        [SerializeField, CustomLabel("攻撃力"), Range( 0 , 10)] private int _attackValue;
-        [SerializeField, CustomLabel("防御力"), Range( 0 , 10)] private int _defenceValue;
+        [SerializeField, CustomLabel("攻撃力"), Range( 0 , 100)] private int _attackValue;
+        [SerializeField, CustomLabel("防御力"), Range( 0 , 100)] private int _defenceValue;
         [SerializeField, CustomLabel("クールタイム減少率"), Range( 0 , 5)] private float _coolTimeReductionRate;
         [SerializeField, CustomLabel("スキル範囲増加率"), Range( 0 , 5)] private float _skillSizeUpRate;
         [SerializeField, CustomLabel("弾速増加率"), Range( 0 , 5)] private float _bulletSpeedUpRate;
         [SerializeField, CustomLabel("効果時間(秒)"), Range( 0 , 5)] private float _effectTimeExtension;
         [SerializeField, CustomLabel("追加段数"), Range( 0 , 5)] private int _bulletAmountExtension;
         [SerializeField, CustomLabel("追加貫通力"), Range( 0 , 5)] private int _penetrateAmountExtension;
+        [SerializeField, CustomLabel("移動スピード"), Range(0, 100)] private float _moveSpeed;
         [SerializeField, CustomLabel("移動スピード上昇率"), Range( 0 , 5)] private float _moveSpeedUpRate;
         [SerializeField, CustomLabel("成長速度上昇率"), Range( 0 , 5)] private float _growthSpeedUpRate;
         [SerializeField, CustomLabel("ゴールド獲得量増加"), Range( 0 , 5)] private float _goldLuckRate;
@@ -35,7 +36,7 @@ namespace SoulRunProject.SoulMixScene
         private FloatReactiveProperty _currentHp = new();
         public ReadOnlyReactiveProperty<float> CurrentHpProperty => _currentHp.ToReadOnlyReactiveProperty();
 
-        public PlayerStatus(float hp, int attackValue, int defenceValue, float coolTimeReductionRate, float skillSizeUpRate, float bulletSpeedUpRate, float effectTimeExtension, int bulletAmountExtension, int penetrateAmountExtension, float moveSpeedUpRate, float growthSpeedUpRate, float goldLuckRate, float criticalRate, float criticalDamageRate, float vacuumItemRangeRange, float dropIncreasedRate)
+        public PlayerStatus(float hp, int attackValue, int defenceValue, float coolTimeReductionRate, float skillSizeUpRate, float bulletSpeedUpRate, float effectTimeExtension, int bulletAmountExtension, int penetrateAmountExtension, float moveSpeed, float moveSpeedUpRate, float growthSpeedUpRate, float goldLuckRate, float criticalRate, float criticalDamageRate, float vacuumItemRangeRange, float dropIncreasedRate)
         {
             _hp = hp;
             _currentHp.Value = _hp;
@@ -47,6 +48,7 @@ namespace SoulRunProject.SoulMixScene
             _effectTimeExtension = effectTimeExtension;
             _bulletAmountExtension = bulletAmountExtension;
             _penetrateAmountExtension = penetrateAmountExtension;
+            _moveSpeed = moveSpeed;
             _moveSpeedUpRate = moveSpeedUpRate;
             _growthSpeedUpRate = growthSpeedUpRate;
             _goldLuckRate = goldLuckRate;
@@ -68,6 +70,7 @@ namespace SoulRunProject.SoulMixScene
             _effectTimeExtension = playerStatus.EffectTimeExtension;
             _bulletAmountExtension = playerStatus.BulletAmountExtension;
             _penetrateAmountExtension = playerStatus.PenetrateAmountExtension;
+            _moveSpeed = playerStatus.MoveSpeed;
             _moveSpeedUpRate = playerStatus.MoveSpeedUpRate;
             _growthSpeedUpRate = playerStatus.GrowthSpeedUpRate;
             _goldLuckRate = playerStatus.GoldLuckRate;
@@ -154,7 +157,13 @@ namespace SoulRunProject.SoulMixScene
             get => _penetrateAmountExtension;
             set => _penetrateAmountExtension = Mathf.Max(value, 0); // 貫通力は0未満にならないように制限
         }
-        /// <summary> 移動スピード </summary> 
+        /// <summary> 移動スピード </summary>
+        public float MoveSpeed
+        {
+            get => _moveSpeed;
+            set => _moveSpeed = Mathf.Max(value, 0);
+        }
+        /// <summary> 移動スピード上昇率 </summary> 
         public float MoveSpeedUpRate
         {
             get => _moveSpeedUpRate;
