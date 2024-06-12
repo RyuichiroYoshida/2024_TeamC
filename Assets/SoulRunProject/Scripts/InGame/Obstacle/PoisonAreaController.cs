@@ -1,3 +1,4 @@
+using System;
 using SoulRunProject.Common;
 using UnityEngine;
 
@@ -11,27 +12,38 @@ namespace SoulRunProject
         private PlayerManager _player;
         private bool _triggerFlag;
         private float _timer;
-        
-        private void FixedUpdate()
+
+        private void Awake()
         {
-            _timer += Time.fixedDeltaTime;
+            _player = FindObjectOfType<PlayerManager>();
+        }
+
+        private void Update()
+        {
+            _timer += Time.deltaTime;
             if (!_triggerFlag) return;
 
             if (_damageInterval < _timer)
             {
                 _timer = 0;
-                _player?.Damage(_attackDamage);
+                _player.Damage(_attackDamage);
             }
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out _player)) _triggerFlag = true;
+            if (other.gameObject.CompareTag("Player"))
+            {
+                _triggerFlag = true;
+            }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.TryGetComponent(out _player)) _triggerFlag = false;
+            if (other.gameObject.CompareTag("Player"))
+            {
+                _triggerFlag = false;
+            }
         }
     }
 }
