@@ -15,7 +15,7 @@ namespace SoulRunProject.InGame
         private Animator _animator;
         private DamageableEntity _damageableEntity;
         private bool _spawnFlag;
-        private const float EnemyLifeTime = 5;
+        private const float EnemyLifeTime = 20;
         private float _timer;
         
 
