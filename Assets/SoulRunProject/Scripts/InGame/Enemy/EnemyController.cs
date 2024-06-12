@@ -1,4 +1,5 @@
-﻿using SoulRunProject.Common;
+﻿using System;
+using SoulRunProject.Common;
 using UnityEngine;
 
 namespace SoulRunProject.InGame
@@ -13,12 +14,27 @@ namespace SoulRunProject.InGame
         protected Transform _playerTransform;
         private Animator _animator;
         private DamageableEntity _damageableEntity;
+        private bool _spawnFlag;
+        private const float EnemyLifeTime = 5;
+        private float _timer;
+        
 
         private void Awake()
         {
             Register();
             _animator = GetComponent<Animator>();
             _damageableEntity = GetComponent<DamageableEntity>();
+        }
+
+        private void OnEnable()
+        {
+            _timer = 0;
+            _spawnFlag = true;
+        }
+        
+        private void OnDisable()
+        {
+            _spawnFlag = false;
         }
 
         private void OnDestroy()
@@ -46,9 +62,20 @@ namespace SoulRunProject.InGame
         }
         void Update()
         {
+            if (!_spawnFlag)
+            {
+                return;
+            }
+
+            _timer += Time.deltaTime;
             _mover?.OnUpdateMove(transform, _playerTransform);
             _attacker?.OnUpdateAttack(transform, _playerTransform);
 
+            if (EnemyLifeTime < _timer)
+            {
+                _damageableEntity.Death();
+            }
+            
             if (_playerTransform.position.z > gameObject.transform.position.z)
             {
                 _damageableEntity.Death();
