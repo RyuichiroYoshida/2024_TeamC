@@ -32,10 +32,11 @@ namespace SoulRunProject.InGame
         private PlayerManager _playerManager;
         private bool _spawnFlag;
 
-        [field: SerializeReference]
-        [field: SubclassSelector]
-        [field: CustomLabel("生成条件")]
-        public ISpawnerEnableType SpawnerType { get; }
+        [SerializeField] [SerializeReference] [SubclassSelector] [CustomLabel("生成条件")]
+        private ISpawnerEnableType _spawnerType;
+
+
+        public ISpawnerEnableType SpawnerType => _spawnerType;
 
         private void Start()
         {
