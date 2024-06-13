@@ -549,6 +549,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8113991146490619906, guid: 5158a5381bdfb5444b1247f8ca126484,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8682295581964002841, guid: 5158a5381bdfb5444b1247f8ca126484,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -613,6 +618,7 @@ MonoBehaviour:
       _adjacentGraph: {fileID: 0}
     _bossStageField: {fileID: 2321524878127961784, guid: 03bca0da78a3a7c4cb908d93888a31e7,
       type: 3}
+    _delayBossSpawn: 0
     _bossPrefab: {fileID: 493474759675345639, guid: c051b1a247ab52e448b0f10e61dce3bd,
       type: 3}
   _fieldMover: {fileID: 1962700606}
@@ -1513,7 +1519,7 @@ MonoBehaviour:
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
   m_Cameras: []
-  m_RendererIndex: -1
+  m_RendererIndex: 1
   m_VolumeLayerMask:
     serializedVersion: 2
     m_Bits: 1
@@ -1820,7 +1826,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxSegmentCount: 3
-  _scrollSpeed: 50
+  _maxScrollSpeed: 5
+  _lerpPower: 5
 --- !u!850595691 &2129626495
 LightingSettings:
   m_ObjectHideFlags: 0

@@ -13,19 +13,20 @@ MonoBehaviour:
   m_Name: PlayerStatus
   m_EditorClassIdentifier: 
   _playerStatus:
-    _hp: 530
+    _hp: 100
     _attackValue: 10
-    _defenceValue: 1
-    _coolTimeReductionRate: 1.06
-    _skillSizeUpRate: 5
+    _defenceValue: 10
+    _coolTimeReductionRate: 1
+    _skillSizeUpRate: 1
     _bulletSpeedUpRate: 1
     _effectTimeExtension: 1
     _bulletAmountExtension: 0
-    _penetrateAmountExtension: 1
-    _moveSpeedUpRate: 5
-    _growthSpeedUpRate: 0
+    _penetrateAmountExtension: 0
+    _initialMoveSpeed: 30
+    _speedUpAtLevelUp: 2
+    _growthSpeedUpRate: 1
     _goldLuckRate: 1
     _criticalRate: 0
     _criticalDamageRate: 1
-    _vacuumItemRangeRange: 15
+    _vacuumItemRangeRange: 30
     _dropIncreasedRate: 5

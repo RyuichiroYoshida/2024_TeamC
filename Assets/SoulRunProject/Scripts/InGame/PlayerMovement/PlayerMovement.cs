@@ -34,6 +34,8 @@ namespace SoulRunProject.InGame
         /// <summary> プレイヤー地点の地面の高さ </summary>
         public float GroundHeight => _yAxisGroundLine;
 
+        public float DistanceBetweenPivotAndGroundPoint => _distanceBetweenPivotAndGroundPoint;
+
         private void Awake()
         {
             _rb = GetComponent<Rigidbody>();
@@ -91,10 +93,22 @@ namespace SoulRunProject.InGame
         /// </summary>
         private void GroundCheck()
         {
-            if (transform.position.y <= _yAxisGroundLine + _distanceBetweenPivotAndGroundPoint)
+            // 地面の高さ判定
+            RaycastHit[] hits = Physics.RaycastAll(transform.position + Vector3.up * 10, Vector3.down, 20);
+
+            foreach (var hit in hits)
+            {
+                if (hit.collider.CompareTag("Field"))
+                {
+                    _yAxisGroundLine = hit.point.y;
+                    break;
+                }
+            }
+            
+            if (transform.position.y <= _yAxisGroundLine + DistanceBetweenPivotAndGroundPoint)
             {
                 Vector3 pos = transform.position;
-                pos.y = _yAxisGroundLine + _distanceBetweenPivotAndGroundPoint;
+                pos.y = _yAxisGroundLine + DistanceBetweenPivotAndGroundPoint;
                 transform.position = pos;
 
                 if (!_isGround.Value)
@@ -153,21 +167,7 @@ namespace SoulRunProject.InGame
 
         public void RotatePlayer(Vector2 input)
         {
-            if (input.x > 0)
-            {
-                _playerAnimator.SetBool("IsLeft", true);
-                _playerAnimator.SetBool("IsRight", false);
-            }
-            else if (input.x < 0)
-            {
-                _playerAnimator.SetBool("IsRight", true);
-                _playerAnimator.SetBool("IsLeft", false);
-            }
-            else
-            {
-                _playerAnimator.SetBool("IsRight", false);
-                _playerAnimator.SetBool("IsLeft", false);
-            }
+            _playerAnimator.SetFloat("Direction" , input.x);
         }
 
 

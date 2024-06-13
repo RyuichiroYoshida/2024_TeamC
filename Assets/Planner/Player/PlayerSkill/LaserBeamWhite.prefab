@@ -9762,8 +9762,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4091674351751200}
-  - component: {fileID: 114117845178483124}
   - component: {fileID: 120411782446683384}
+  - component: {fileID: 4155619141305576982}
   m_Layer: 0
   m_Name: LaserBeamWhite
   m_TagString: Untagged
@@ -9788,25 +9788,6 @@ Transform:
   - {fileID: 4237799285410548}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114117845178483124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1395565506770744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ea4308861e24ac4caa06d26e151d595, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageOverTime: 30
-  HitEffect: {fileID: 1348276961250486}
-  HitOffset: 0.01
-  useLaserRotation: 0
-  MaxLength: 120
-  MainTextureLength: 0.2
-  NoiseTextureLength: 0.2
 --- !u!120 &120411782446683384
 LineRenderer:
   serializedVersion: 2
@@ -9854,7 +9835,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.9
+    widthMultiplier: 0.4
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -9920,6 +9901,24 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 0
+--- !u!114 &4155619141305576982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1395565506770744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24847bf6a8c54af087b3697e10dcad66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hitEffect: {fileID: 1348276961250486}
+  _hitOffset: 0.01
+  _useLaserRotation: 0
+  _maxLength: 120
+  _mainTextureLength: 0.2
+  _noiseTextureLength: 0.2
 --- !u!1 &1436039344504592
 GameObject:
   m_ObjectHideFlags: 0

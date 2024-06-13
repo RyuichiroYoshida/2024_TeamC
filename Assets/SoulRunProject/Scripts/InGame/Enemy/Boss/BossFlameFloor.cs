@@ -31,11 +31,11 @@ namespace SoulRunProject.InGame
         // flame
         private float _flameBallTimer;
         
-        public override void Initialize(BossController bossController)
+        public override void Initialize(BossController bossController, Transform playerTf)
         {
             _bossTransform = bossController.transform;
             _defaultBossPos = _bossTransform.position;
-            _playerTransform = GameObject.FindObjectOfType<PlayerManager>().transform;
+            _playerTransform = playerTf;
             
             // 行動パワーアップの代入
             foreach (var powerUpBehavior in _powerUpBehaviors)
@@ -70,6 +70,7 @@ namespace SoulRunProject.InGame
                 impactPos.z += _deviationDistance;
                 flameBall.transform.LookAt(impactPos);
                 flameBall.Initialize(_flameBallSpeed, _flameDamage);
+                CriAudioManager.Instance.PlaySE("SE_Fire_Shot");
             }
             
             // 時間と移動

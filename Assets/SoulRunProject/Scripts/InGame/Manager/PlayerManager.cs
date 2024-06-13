@@ -17,7 +17,8 @@ namespace SoulRunProject.Common
         [SerializeField] private BaseStatus _baseStatus;
         [SerializeField] private PlayerCamera _playerCamera;
         [SerializeField] private HitDamageEffectManager _hitDamageEffectManager;
-        
+
+        [SerializeField, CustomLabel("ダメージを受けた時の速度減少量")] private float _decreaseSpeed;
         private IPlayerPausable[] _inGameTimes;
         private PlayerLevelManager _pLevelManager;
         private SkillManager _skillManager;
@@ -25,6 +26,7 @@ namespace SoulRunProject.Common
         private PlayerMovement _playerMovement;
         //private PlayerStatusManager _statusManager;
         private PlayerResourceContainer _resourceContainer;
+        private FieldMover _fieldMover;
         public ReadOnlyReactiveProperty<float> CurrentHp => CurrentPlayerStatus.CurrentHpProperty;
         public PlayerResourceContainer ResourceContainer => _resourceContainer;
         //public PlayerStatusManager PlayerStatusManager => _statusManager;
@@ -47,7 +49,7 @@ namespace SoulRunProject.Common
             _resourceContainer = new();
             //_statusManager = new PlayerStatusManager(_baseStatus.Status);
             CurrentPlayerStatus = new PlayerStatus(_baseStatus.PlayerStatus);
-            
+            _fieldMover = FindObjectOfType<FieldMover>();
             InitializeInput();
             CurrentHp.Where(hp => hp == 0).Subscribe(_ => Death()).AddTo(this);
         }
@@ -107,7 +109,7 @@ namespace SoulRunProject.Common
                     return;
                 }
             }
-            
+            _fieldMover.DownSpeed(_decreaseSpeed);
             _playerCamera.DamageCam();
             CurrentPlayerStatus.CurrentHp -= Calculator.CalcDamage(damage, CurrentPlayerStatus.DefenceValue, 0, 1);
             

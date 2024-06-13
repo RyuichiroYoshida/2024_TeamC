@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using SoulRunProject.Common;
 using UnityEngine;
 
@@ -9,8 +10,8 @@ namespace SoulRunProject.InGame
     {
         [SerializeField, CustomLabel("エフェクトプレハブ")] private GameObject _razer;
         [SerializeField, CustomLabel("ビーム原点")] private Transform _beamOrigin;
-        [SerializeField, CustomLabel("ビーム開始時着弾地点")] private Vector3 _startImpactPosition;
-        [SerializeField, CustomLabel("ビーム終了時着弾地点")] private Vector3 _finishImpactPosition;
+        [SerializeField, CustomLabel("ボス相対ビーム開始時着弾地点")] private Vector3 _startImpactPosition;
+        [SerializeField, CustomLabel("ボス相対ビーム終了時着弾地点")] private Vector3 _finishImpactPosition;
         [Header("性能")]
         [SerializeField, CustomLabel("薙ぎ払い時間")] private float _beamTime;
         [SerializeField, CustomLabel("ダメージ")] private float _damage;
@@ -19,20 +20,14 @@ namespace SoulRunProject.InGame
         PowerUpBehaviorBase[] _powerUpBehaviors;
 
         private GameObject _laserInstance;
-        private Vector3 _startVector;
-        private Vector3 _finishVector;
-        private float _timer;
         private int _hitCounter;
+        private int _beamSoundIndex;
 
-        public override void Initialize(BossController bossController)
+        public override void Initialize(BossController bossController, Transform playerTf)
         {
             // エフェクトインスタンスの初期化
             _laserInstance = GameObject.Instantiate(_razer, _beamOrigin);
             _laserInstance.SetActive(false);
-            
-            // 角度の初期化
-            _startVector = _startImpactPosition - _beamOrigin.position;
-            _finishVector = (_finishImpactPosition - _beamOrigin.position);
             
             // 行動パワーアップの代入
             foreach (var powerUpBehavior in _powerUpBehaviors)
@@ -40,32 +35,31 @@ namespace SoulRunProject.InGame
                 powerUpBehavior.Initialize(this);
                 PowerUpBejaviors.Add(powerUpBehavior.PowerUpBehavior);
             }
+            
+            // sound
+            _beamSoundIndex = CriAudioManager.Instance.PlaySE("SE_Laser");
+            CriAudioManager.Instance.PauseSE(_beamSoundIndex);
         }
         
         public override void BeginAction()
         {
-            _timer = 0;
             _hitCounter = 0;
             _laserInstance.SetActive(true);
-            _beamOrigin.rotation = Quaternion.LookRotation(_startVector - _beamOrigin.position);
+            _beamOrigin.rotation = Quaternion.LookRotation(_startImpactPosition);
+            CriAudioManager.Instance.ResumeSE(_beamSoundIndex);
         }
 
         public override void UpdateAction(float deltaTime)
         {
-            // 角度とタイマーの計算
-            _timer += deltaTime;
-
-            if (_timer < _beamTime)
-            {
-                _beamOrigin.rotation = 
-                    Quaternion.LookRotation(Vector3.Slerp(_startVector - _beamOrigin.position, _finishVector - _beamOrigin.position, _timer / _beamTime));
-            }
-            else
-            {
-                // 終了処理
-                _laserInstance.SetActive(false);
-                OnFinishAction?.Invoke();
-            }
+            _beamOrigin.DOLocalRotateQuaternion(Quaternion.LookRotation(_finishImpactPosition), _beamTime)
+                .SetEase(Ease.Linear)
+                .OnComplete(() =>
+                {
+                    // 終了処理
+                    _laserInstance.SetActive(false);
+                    CriAudioManager.Instance.PauseSE(_beamSoundIndex);
+                    OnFinishAction?.Invoke();
+                });
             
             // 当たり判定
             if (Physics.Raycast(_beamOrigin.position, _beamOrigin.forward, out RaycastHit hit))

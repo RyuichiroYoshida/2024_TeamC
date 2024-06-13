@@ -64,11 +64,13 @@ namespace SoulRunProject.InGame
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.TryGetComponent(out FieldSegment field))
+            if (other.gameObject.CompareTag("Field"))
             {
+                // 火の床生成
                 BossFlameFloorController flameFloor = Instantiate(_flameFloorPrefab, other.gameObject.transform);
-                flameFloor.transform.position = gameObject.transform.position; //
+                flameFloor.transform.position = gameObject.transform.position;
                 flameFloor.Initialize(_flameFloorDamage);
+                CriAudioManager.Instance.PlaySE("SE_Fire_Hit"); // sound
                 Destroy(gameObject);
             }
         }
