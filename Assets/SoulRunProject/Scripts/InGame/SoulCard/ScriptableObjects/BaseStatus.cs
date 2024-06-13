@@ -25,7 +25,8 @@ namespace SoulRunProject.SoulMixScene
         [SerializeField, CustomLabel("追加段数"), Range( 0 , 5)] private int _bulletAmountExtension;
         [SerializeField, CustomLabel("追加貫通力"), Range( 0 , 5)] private int _penetrateAmountExtension;
         [SerializeField, CustomLabel("初期移動スピード"), Range(0, 100)] private float _initialMoveSpeed;
-        [SerializeField, CustomLabel("レベルアップ時の上昇スピード"), Range( 0, 50)] private float _speedUpAtLevelUp;
+        [SerializeField, CustomLabel("レベルアップ時の上昇スピード"), Range(0, 50)] private float _speedUpAtLevelUp;
+        [SerializeField, CustomLabel("レベルアップ時の回復量"), Range(0, 100)] private float _healAtLevelUp;
         [SerializeField, CustomLabel("成長速度上昇率"), Range( 0 , 5)] private float _growthSpeedUpRate;
         [SerializeField, CustomLabel("ゴールド獲得量増加"), Range( 0 , 5)] private float _goldLuckRate;
         [SerializeField, CustomLabel("クリティカル率"), Range( 0 , 5)] private float _criticalRate;
@@ -36,7 +37,10 @@ namespace SoulRunProject.SoulMixScene
         private FloatReactiveProperty _currentHp = new();
         public ReadOnlyReactiveProperty<float> CurrentHpProperty => _currentHp.ToReadOnlyReactiveProperty();
 
-        public PlayerStatus(float hp, int attackValue, int defenceValue, float coolTimeReductionRate, float skillSizeUpRate, float bulletSpeedUpRate, float effectTimeExtension, int bulletAmountExtension, int penetrateAmountExtension, float initialMoveSpeed, float speedUpAtLevelUp, float growthSpeedUpRate, float goldLuckRate, float criticalRate, float criticalDamageRate, float vacuumItemRangeRange, float dropIncreasedRate)
+        public PlayerStatus(float hp, int attackValue, int defenceValue, float coolTimeReductionRate, float skillSizeUpRate,
+            float bulletSpeedUpRate, float effectTimeExtension, int bulletAmountExtension, int penetrateAmountExtension, 
+            float initialMoveSpeed, float speedUpAtLevelUp, float healAtLevelUp, float growthSpeedUpRate, float goldLuckRate,
+            float criticalRate, float criticalDamageRate, float vacuumItemRangeRange, float dropIncreasedRate)
         {
             _hp = hp;
             _currentHp.Value = _hp;
@@ -50,6 +54,7 @@ namespace SoulRunProject.SoulMixScene
             _penetrateAmountExtension = penetrateAmountExtension;
             _initialMoveSpeed = initialMoveSpeed;
             _speedUpAtLevelUp = speedUpAtLevelUp;
+            _healAtLevelUp = healAtLevelUp;
             _growthSpeedUpRate = growthSpeedUpRate;
             _goldLuckRate = goldLuckRate;
             _criticalRate = criticalRate;
@@ -71,7 +76,8 @@ namespace SoulRunProject.SoulMixScene
             _bulletAmountExtension = playerStatus.BulletAmountExtension;
             _penetrateAmountExtension = playerStatus.PenetrateAmountExtension;
             _initialMoveSpeed = playerStatus.MoveSpeed;
-            _speedUpAtLevelUp = playerStatus.MoveSpeedUpRate;
+            _speedUpAtLevelUp = playerStatus.SpeedUpAtLevelUp;
+            _healAtLevelUp = playerStatus.HealAtLevelUp;
             _growthSpeedUpRate = playerStatus.GrowthSpeedUpRate;
             _goldLuckRate = playerStatus.GoldLuckRate;
             _criticalRate = playerStatus.CriticalRate;
@@ -163,11 +169,17 @@ namespace SoulRunProject.SoulMixScene
             get => _initialMoveSpeed;
             set => _initialMoveSpeed = Mathf.Max(value, 0);
         }
-        /// <summary> 移動スピード上昇率 </summary> 
-        public float MoveSpeedUpRate
+        /// <summary> レベルアップ時の上昇スピード </summary> 
+        public float SpeedUpAtLevelUp
         {
             get => _speedUpAtLevelUp;
             set => _speedUpAtLevelUp = Mathf.Max(value, 0.00f); // 0.00未満にならないように制限
+        }
+        /// <summary> レベルアップ時の回復量 </summary>
+        public float HealAtLevelUp
+        {
+            get => _healAtLevelUp;
+            set => _healAtLevelUp = Mathf.Max(value, 0);
         }
         /// <summary> 成長速度 </summary> 
         public float GrowthSpeedUpRate
