@@ -65,8 +65,9 @@ namespace SoulRunProject.SoulMixScene
         [SerializeField, CustomLabel("効果時間(秒)")] private float _effectTime;
         [SerializeField, CustomLabel("弾数")] private int _bulletNum;
         [SerializeField, CustomLabel("貫通力")] private int _penetration;
-        [SerializeField, CustomLabel("移動スピード")] private float _moveSpeed;
-        [SerializeField, CustomLabel("移動スピード加速度")] private float _moveSpeedUpRate;
+        [SerializeField, CustomLabel("初期移動スピード")] private float _moveSpeed;
+        [SerializeField, CustomLabel("レベルアップ時の上昇スピード")] private float _moveSpeedUpRate;
+        [SerializeField, CustomLabel("レベルアップ時の回復量")] private float _healAtLevelUp;
         [SerializeField, CustomLabel("成長速度")] private float _growthSpeed;
         [SerializeField, CustomLabel("運")] private float _luck;
         [SerializeField, CustomLabel("クリティカル率")] private float _criticalRate;
@@ -85,7 +86,7 @@ namespace SoulRunProject.SoulMixScene
         public SoulCardStatusTableType StatusTableType => _statusTableType;
 
         public PlayerStatus BasePlayerStatus =>
-            new PlayerStatus(_hp, _attack, _defence, _coolTime, _skillSize, _bulletSpeed, _effectTime, _bulletNum, _penetration, _moveSpeed, _moveSpeedUpRate, _growthSpeed, _luck, _criticalRate, _criticalDamageRate, _soulAbsorption, _soulAcquisition);
+            new PlayerStatus(_hp, _attack, _defence, _coolTime, _skillSize, _bulletSpeed, _effectTime, _bulletNum, _penetration, _moveSpeed, _moveSpeedUpRate, _healAtLevelUp, _growthSpeed, _luck, _criticalRate, _criticalDamageRate, _soulAbsorption, _soulAcquisition);
 
         public CharacteristicType DefaultCharacteristicType => _defaultCharacteristicType;
     }
