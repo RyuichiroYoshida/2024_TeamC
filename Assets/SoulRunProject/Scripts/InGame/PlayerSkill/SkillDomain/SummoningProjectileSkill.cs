@@ -193,6 +193,7 @@ namespace SoulRunProject
             sword.transform.rotation = Quaternion.Euler(randomRotationX, -randomRotationY, 0);
             sword.ApplyParameter(RuntimeParameter);
             sword.Initialize();
+            sword.GetReference(_playerManagerInstance);
             sword.OnFinishedAsync.Take(1).Subscribe(_ => _swordPool.Return(sword));
         }
     }
