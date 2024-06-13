@@ -119,6 +119,7 @@ namespace SoulRunProject.InGame
                     _levelUpState.EndSelectSkill();
                 }).AddTo(_disposableOnUpdateUI);
             _levelUpView.UpgradeButtons[1].NameAndLevelText.text = selectedStatusUpItems[0].ItemName;
+            _levelUpView.UpgradeButtons[1].ExplanatoryText.text = selectedStatusUpItems[0].ExplanatoryText;
             _levelUpView.UpgradeButtons[1].ButtonIconImage.sprite = selectedStatusUpItems[0].ItemIcon;
             _levelUpView.UpgradeButtons[2].InputUIButton.onClick.AsObservable()
                 .Subscribe(_ =>
@@ -127,6 +128,7 @@ namespace SoulRunProject.InGame
                     _levelUpState.EndSelectSkill();
                 }).AddTo(_disposableOnUpdateUI);
             _levelUpView.UpgradeButtons[2].NameAndLevelText.text = selectedStatusUpItems[1].ItemName;
+            _levelUpView.UpgradeButtons[2].ExplanatoryText.text = selectedStatusUpItems[1].ExplanatoryText;
             _levelUpView.UpgradeButtons[2].ButtonIconImage.sprite = selectedStatusUpItems[1].ItemIcon;
         }
     }

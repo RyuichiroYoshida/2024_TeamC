@@ -50,5 +50,5 @@ MonoBehaviour:
       type: {class: AoESkillParameter, ns: SoulRunProject.Common, asm: Assembly-CSharp}
       data:
         _attackDamage: 10
-        _size: 1
+        _size: 3
         _getSoulPerSec: 1

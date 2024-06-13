@@ -93,6 +93,18 @@ namespace SoulRunProject.InGame
         /// </summary>
         private void GroundCheck()
         {
+            // 地面の高さ判定
+            RaycastHit[] hits = Physics.RaycastAll(transform.position + Vector3.up * 10, Vector3.down, 20);
+
+            foreach (var hit in hits)
+            {
+                if (hit.collider.CompareTag("Field"))
+                {
+                    _yAxisGroundLine = hit.point.y;
+                    break;
+                }
+            }
+            
             if (transform.position.y <= _yAxisGroundLine + DistanceBetweenPivotAndGroundPoint)
             {
                 Vector3 pos = transform.position;

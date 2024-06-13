@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1120929885485965393}
   - component: {fileID: 5490371727154280608}
   - component: {fileID: 4009990936954171281}
+  - component: {fileID: 3766654820064300477}
   - component: {fileID: 4121832995990890696}
   m_Layer: 0
   m_Name: Enemy_Wolf
@@ -122,8 +123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ef424d786b4ebd4ea7ddc1567786d35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHp: 30
-  _collisionDamage: 0
+  _maxHp: 45
+  _collisionDamage: 15
   _canKnockback: 1
   _direction: {x: 0, y: 0.5, z: 1}
   _takeKnockBack:
@@ -169,7 +170,22 @@ MonoBehaviour:
     - rid: 290008967495024640
       type: {class: StraightMover, ns: SoulRunProject.InGame, asm: Assembly-CSharp}
       data:
-        _moveSpeed: 35
+        _moveSpeed: 40
+--- !u!114 &3766654820064300477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9142368703458993471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5929496373a803b4fbfb5b45f78cd968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damageUIPrefab: {fileID: -8645444479275004511, guid: abba775fb86727447918faadc8d0e920,
+    type: 3}
+  _uiPosition: {x: 1.2551227, y: 1.6551802, z: 0}
 --- !u!65 &4121832995990890696
 BoxCollider:
   m_ObjectHideFlags: 0

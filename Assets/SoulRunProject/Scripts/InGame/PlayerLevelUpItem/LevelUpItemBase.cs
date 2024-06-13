@@ -13,8 +13,8 @@ namespace SoulRunProject.InGame
     /// プレイヤーの強化処理で欲しいScriptが違う
     public abstract class LevelUpItemBase<T>
     {
-        [SerializeField] protected string _itemName;
-        [SerializeField] protected Sprite _itemIcon;
+        [SerializeField, CustomLabel("アイテム名")] protected string _itemName;
+        [SerializeField, CustomLabel("アイコンSprite")] protected Sprite _itemIcon;
         protected T _reference;
 
         public string ItemName => _itemName;
@@ -58,7 +58,11 @@ namespace SoulRunProject.InGame
     [Serializable]
     public class StatusUpItem : LevelUpItemBase<PlayerManager>
     {
+        [SerializeField, CustomLabel("アイテム説明文")] private string _explanatoryText;
         [SerializeField] private StatusEffect[] ItemEffects;
+
+        /// <summary> アイテム説明文 </summary>
+        public string ExplanatoryText => _explanatoryText;
         
         public override void ItemEffect()
         {
