@@ -3,6 +3,7 @@ using DG.Tweening;
 using SoulRunProject.Common;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace SoulRunProject.InGame
 {
@@ -14,6 +15,7 @@ namespace SoulRunProject.InGame
         [SerializeField] private Text _damageText;
         [SerializeField] private float _fadeDuration;
         [SerializeField, CustomLabel("合計ダメージとして加算する待機時間")] private float _timeToWaitNextDamage;
+        [SerializeField, CustomLabel("UIのランダム位置範囲")] private Vector3 _randomPosRange;
 
         /// <summary> 表示するダメージ </summary>
         private float _displayTotalDamage;
@@ -26,7 +28,7 @@ namespace SoulRunProject.InGame
 
         private void FixedUpdate()
         {
-            if (WaitingForNextDamage)
+            if (WaitingForNextDamage && _parent)
             {
                 _damageText.rectTransform.position = Camera.main.WorldToScreenPoint(_parent.position + _position);
             }
@@ -39,7 +41,9 @@ namespace SoulRunProject.InGame
             _damageText.text = ((int)_displayTotalDamage).ToString();
             _damageText.color = color;
             _parent = tf;
-            _position = position;
+            _position = position + new Vector3(Random.Range(-_randomPosRange.x, _randomPosRange.x), 
+                Random.Range(-_randomPosRange.y, _randomPosRange.y), 0);
+            _damageText.rectTransform.position = Camera.main.WorldToScreenPoint(_parent.position + _position);
 
             // ダメージ待機
             WaitingForNextDamage = true;

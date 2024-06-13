@@ -57,5 +57,5 @@ MonoBehaviour:
     - rid: 3163472035625041926
       type: {class: HealingSkillParameter, ns: SoulRunProject.Common, asm: Assembly-CSharp}
       data:
-        _coolTime: 20
+        _coolTime: 10
         _healAmount: 10

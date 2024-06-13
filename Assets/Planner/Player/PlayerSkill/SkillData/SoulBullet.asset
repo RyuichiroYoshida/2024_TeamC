@@ -23,7 +23,7 @@ MonoBehaviour:
     List:
     - List:
       - _levelUpType: 0
-        _reduceCoolTime: 25
+        _reduceCoolTime: 20
         _addAmountCount: 0
         _multipleProjectionSpeed: 0
       - _levelUpType: 2
@@ -32,30 +32,26 @@ MonoBehaviour:
         _multipleProjectionSpeed: 20
     - List:
       - _levelUpType: 0
-        _reduceCoolTime: 50
-        _addAmountCount: 0
-        _multipleProjectionSpeed: 0
-      - _levelUpType: 1
-        _reduceCoolTime: 50
-        _addAmountCount: 1
-        _multipleProjectionSpeed: 0
-    - List:
-      - _levelUpType: 0
-        _reduceCoolTime: 75
+        _reduceCoolTime: 20
         _addAmountCount: 0
         _multipleProjectionSpeed: 0
       - _levelUpType: 2
-        _reduceCoolTime: 75
+        _reduceCoolTime: 20
         _addAmountCount: 0
-        _multipleProjectionSpeed: 40
+        _multipleProjectionSpeed: 20
     - List:
       - _levelUpType: 0
-        _reduceCoolTime: 100
+        _reduceCoolTime: 20
         _addAmountCount: 0
         _multipleProjectionSpeed: 0
       - _levelUpType: 1
-        _reduceCoolTime: 100
-        _addAmountCount: 1
+        _reduceCoolTime: 75
+        _addAmountCount: 3
+        _multipleProjectionSpeed: 40
+    - List:
+      - _levelUpType: 0
+        _reduceCoolTime: 20
+        _addAmountCount: 0
         _multipleProjectionSpeed: 0
   _bullet: {fileID: 2092183155354231575, guid: 93ebba11e021a9d4b92b90f0aeb5ef5b, type: 3}
   _baseRotateY: 20
@@ -68,8 +64,8 @@ MonoBehaviour:
       data:
         _coolTime: 0.5
         _amount: 1
-        _attackDamage: 20
-        _size: 1
+        _attackDamage: 15
+        _size: 5
         _speed: 60
         _penetration: 1
         _lifeTime: 3
