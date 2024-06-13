@@ -10,7 +10,7 @@ namespace SoulRunProject.InGame
     {
         public void GetMoveStatus(PlayerStatus playerStatus)
         {
-            _moveSpeed = playerStatus.MoveSpeedUpRate;
+            _moveSpeed = playerStatus.SpeedUpAtLevelUp;
         }
 
         public override void OnUpdateMove(Transform myTransform, Transform playerTransform)

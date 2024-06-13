@@ -112,7 +112,7 @@ namespace SoulRunProject.InGame
                         playerManager.CurrentPlayerStatus.PenetrateAmountExtension += (int)_upValue;
                         return;
                     case StatusType.MoveSpeed:
-                        playerManager.CurrentPlayerStatus.MoveSpeedUpRate += _upValue;
+                        playerManager.CurrentPlayerStatus.SpeedUpAtLevelUp += _upValue;
                         return;
                     case StatusType.GrowthSpeed:
                         playerManager.CurrentPlayerStatus.GrowthSpeedUpRate += _upValue;
