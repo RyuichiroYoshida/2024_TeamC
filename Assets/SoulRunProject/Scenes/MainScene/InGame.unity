@@ -1577,7 +1577,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxSegmentCount: 3
-  _maxScrollSpeed: 5
+  _maxScrollSpeed: 50
   _lerpPower: 1
 --- !u!1001 &2085064252
 PrefabInstance:
