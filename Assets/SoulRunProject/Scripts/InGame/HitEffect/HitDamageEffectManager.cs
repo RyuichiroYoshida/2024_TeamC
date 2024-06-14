@@ -53,6 +53,15 @@ namespace SoulRunProject.InGame
         }
 
         /// <summary>
+        /// 色リセットメソッド
+        /// </summary>
+        public void ResetColor()
+        {
+            if (!_copyMaterial) return;
+            _copyMaterial.SetColor(_pramID, _defaultColor);
+        }
+
+        /// <summary>
         /// 白色点滅メソッド
         /// </summary>
         public void HitFadeBlinkWhite()
@@ -77,6 +86,7 @@ namespace SoulRunProject.InGame
             _sequence.Play();
             _hitFadeBlinking = true;
             _sequence.OnComplete(() => _hitFadeBlinking = false);
+            _sequence.OnKill(ResetColor);
         }
     }
 }
