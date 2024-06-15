@@ -15,12 +15,21 @@ namespace SoulRunProject.Title
         public InputUIButton StartButton => _startButton;
         public InputUIButton OptionButton => _optionButton;
         public InputUIButton ExitButton => _exitSimButton;
-        public float minFalloffIntensity = 0.1f;
-        public float maxFalloffIntensity = 0.5f;
+        public float minFalloffIntensity = 0.5f;
+        public float maxFalloffIntensity = 1f;
         public float duration = 2.0f; 
 
         private void Start()
         {
+            var lights = FindObjectsOfType<Light2D>();
+            foreach (var light in lights)
+            {
+                if (light.gameObject.name == "SoulLight")
+                {
+                    _soulLight2D = light;
+                    break;
+                }
+            }
             StartCoroutine(AnimateLightFalloff());
         }
 
@@ -31,7 +40,7 @@ namespace SoulRunProject.Title
                 float time = 0;
                 while (time < duration)
                 {
-                    _soulLight2D.falloffIntensity = Mathf.Lerp(minFalloffIntensity, maxFalloffIntensity, time / duration);
+                    _soulLight2D.intensity = Mathf.Lerp(minFalloffIntensity, maxFalloffIntensity, time / duration);
                     time += Time.deltaTime;
                     yield return null;
                 }
@@ -39,7 +48,7 @@ namespace SoulRunProject.Title
                 time = 0;
                 while (time < duration)
                 {
-                    _soulLight2D.falloffIntensity = Mathf.Lerp(maxFalloffIntensity, minFalloffIntensity, time / duration);
+                    _soulLight2D.intensity = Mathf.Lerp(maxFalloffIntensity, minFalloffIntensity, time / duration);
                     time += Time.deltaTime;
                     yield return null;
                 }
