@@ -48,15 +48,5 @@ namespace SoulRunProject.InGame
                 .SetLink(myTransform.gameObject, LinkBehaviour.KillOnDisable)
                 .SetLink(myTransform.gameObject);
         }
-
-        public override void Pause()
-        {
-            _tweener.Pause();
-        }
-
-        public override void Resume()
-        {
-            _tweener.Play();
-        }
     }
 }
