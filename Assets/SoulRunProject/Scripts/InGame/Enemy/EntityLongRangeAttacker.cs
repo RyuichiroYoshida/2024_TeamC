@@ -6,17 +6,22 @@ using UnityEngine;
 namespace SoulRunProject.InGame
 {
     /// <summary>
-    /// Enemyの遠距離攻撃処理の実装クラス
+    ///     Enemyの遠距離攻撃処理の実装クラス
     /// </summary>
-    [Serializable, Name("遠距離攻撃")]
+    [Serializable]
+    [Name("遠距離攻撃")]
     public class EntityLongRangeAttacker : EntityAttacker
     {
         [SerializeField, CustomLabel("弾の生成間隔")]
         private float _interval = 3f;
-        [SerializeField, CustomLabel("生成する弾丸")] private EnemyBullet _enemyBullet;
+
+        [SerializeField, CustomLabel("生成する弾丸")]
+        private EnemyBullet _enemyBullet;
+
         private CommonObjectPool _bulletPool;
-        float _timer;
-        bool _isPause;
+        [SerializeField] private bool _isPlayerTarget;
+        private float _timer;
+        private bool _isPause;
 
         public override void OnStart()
         {
@@ -26,10 +31,8 @@ namespace SoulRunProject.InGame
 
         public override void OnUpdateAttack(Transform myTransform, Transform playerTransform)
         {
-            if (_isPause)
-            {
-                return;
-            }
+            if (_isPause) return;
+
             if (_interval > _timer)
             {
                 _timer += Time.deltaTime;
