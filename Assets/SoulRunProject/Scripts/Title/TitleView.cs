@@ -11,6 +11,7 @@ namespace SoulRunProject.Title
         [SerializeField] private InputUIButton _optionButton;
         [SerializeField] private InputUIButton _exitSimButton;
         [SerializeField] private Light2D _soulLight2D;
+        [SerializeField] private ParticleSystem _particleSystem;
 
         public InputUIButton StartButton => _startButton;
         public InputUIButton OptionButton => _optionButton;
@@ -21,7 +22,9 @@ namespace SoulRunProject.Title
 
         private void Start()
         {
+            Debug.Log("TitleView Start");
             var lights = FindObjectsOfType<Light2D>();
+            _particleSystem.Play();
             foreach (var light in lights)
             {
                 if (light.gameObject.name == "SoulLight")
