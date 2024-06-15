@@ -89,7 +89,7 @@ namespace SoulRunProject.InGame
         }
 
 #if UNITY_EDITOR
-        private void OnDrawGizmos()
+        private void OnDrawGizmosSelected()
         {
             var position = transform.position;
             SpawnerType?.DrawSpawnerArea(position);

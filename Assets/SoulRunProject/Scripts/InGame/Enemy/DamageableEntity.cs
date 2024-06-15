@@ -40,7 +40,6 @@ namespace SoulRunProject.InGame
         public FloatReactiveProperty CurrentHp => _currentHp;
         private PlayerManager _player;
         private EnemyController _enemyController;
-        private bool _isDead;
 
         void Start()
         {
@@ -70,7 +69,6 @@ namespace SoulRunProject.InGame
 
             if (_currentHp.Value <= 0)
             {
-                _isDead = true;
                 Death();
             }
 
@@ -87,18 +85,23 @@ namespace SoulRunProject.InGame
 
         public override void OnFinish()
         {
-            _isDead = false;
             OnDead = null;
         }
 
         public void Death()
         {
-            if (_lootTable && _isDead)
+            if (_lootTable)
             {
                 DropManager.Instance.RequestDrop(_lootTable, transform.position);
             }
 
             OnDead?.Invoke();
+            Finish();
+        }
+
+        public void Despawn()
+        {
+            Debug.Log($"{gameObject.name} Despawn!");
             Finish();
         }
 
