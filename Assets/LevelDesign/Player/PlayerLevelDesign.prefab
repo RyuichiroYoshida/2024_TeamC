@@ -279,7 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c77eda4c25f42df42900dfed143ab44a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _initialSoul: 100
+  _initialSoul: 0
   _regenerativePerSec: 0.2
 --- !u!54 &6585847965433512431
 Rigidbody:

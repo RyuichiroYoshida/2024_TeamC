@@ -18,7 +18,7 @@ MonoBehaviour:
     _explanatoryText: "\u653B\u6483\u529B\u3068\u30B9\u30AD\u30EB\u7BC4\u56F2\u304C\u5897\u52A0"
     ItemEffects:
     - _statusToUp: 1
-      _upValue: 2
+      _upValue: 7
     - _statusToUp: 4
       _upValue: 0.5
   - _itemName: "\u6804\u5149\u306E\u9280\u5F3E"
@@ -34,7 +34,7 @@ MonoBehaviour:
     _explanatoryText: "\u30B9\u30AD\u30EB\u306E\u6642\u9593\u6027\u80FD\u304C\u5411\u4E0A"
     ItemEffects:
     - _statusToUp: 3
-      _upValue: 0.5
+      _upValue: 0.2
     - _statusToUp: 6
       _upValue: 6
   - _itemName: "\u6DF1\u6DF5\u306E\u66F8"
@@ -58,7 +58,7 @@ MonoBehaviour:
     - _statusToUp: 9
       _upValue: 6
     - _statusToUp: 3
-      _upValue: 0.4
+      _upValue: 0.2
   - _itemName: "\u5973\u6559\u7687\u306E\u982D\u51A0"
     _itemIcon: {fileID: 0}
     _explanatoryText: "\u30B9\u30AD\u30EB\u306E\u52B9\u679C\u304C\u5EF6\u3073\u308B"

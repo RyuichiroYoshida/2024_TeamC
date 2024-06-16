@@ -27,8 +27,8 @@ MonoBehaviour:
         _increaseLaserAmount: 1
         _increaseDamageOverTime: 0
     - List:
-      - _levelUpType: 2
-        _reduceCoolTime: 0
+      - _levelUpType: 0
+        _reduceCoolTime: 20
         _increaseLaserAmount: 1
         _increaseDamageOverTime: 5
     - List:
