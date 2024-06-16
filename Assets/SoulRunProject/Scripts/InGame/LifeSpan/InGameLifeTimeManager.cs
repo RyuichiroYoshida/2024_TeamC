@@ -22,6 +22,7 @@ namespace SoulRunProject.Common
         [SerializeField] private CommonView _commonView;
         [SerializeField] private StageNameView _stageNameView;
         [SerializeField] private LevelUpView _levelUpView;
+        [SerializeField] private PauseView _pauseView;
         protected override void Configure(IContainerBuilder builder)
         {
             //ドメイン層
@@ -55,12 +56,15 @@ namespace SoulRunProject.Common
             builder.Register<StageEnterPresenter>(Lifetime.Singleton);
             builder.RegisterComponent(_levelUpView);
             builder.Register<LevelUpUIPresenter>(Lifetime.Singleton);
+            builder.RegisterComponent(_pauseView);
+            builder.Register<PauseUIPresenter>(Lifetime.Singleton);
             
             //開始処理
             builder.RegisterEntryPoint<ResultPresenter>();
             builder.RegisterEntryPoint<StageEnterPresenter>();
             builder.RegisterEntryPoint<CommonUIPresenter>();
             builder.RegisterEntryPoint<LevelUpUIPresenter>();
+            builder.RegisterEntryPoint<PauseUIPresenter>();
             builder.RegisterEntryPoint<InGameManager>();
         }
     }
