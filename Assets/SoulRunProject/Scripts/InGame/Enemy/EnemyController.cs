@@ -16,6 +16,7 @@ namespace SoulRunProject.InGame
         private float _enemyLifeTime = 10;
 
         protected Transform _playerTransform;
+        protected PlayerManager _playerManagerInstance;
         private Animator _animator;
         private DamageableEntity _damageableEntity;
         private bool _spawnFlag;
@@ -52,15 +53,15 @@ namespace SoulRunProject.InGame
         /// </summary>
         private void Start()
         {
-            var player = GameObject.FindGameObjectWithTag("Player");
-            if (player) _playerTransform = player.transform;
+            _playerManagerInstance = FindObjectOfType<PlayerManager>();
+            if (_playerManagerInstance) _playerTransform = _playerManagerInstance.transform;
             Initialize();
         }
 
         public void Initialize()
         {
             _attacker?.OnStart();
-            _mover?.OnStart(transform);
+            _mover?.OnStart(transform, _playerManagerInstance);
         }
 
         private void Update()
