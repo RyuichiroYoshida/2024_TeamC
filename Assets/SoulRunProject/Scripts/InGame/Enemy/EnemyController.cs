@@ -26,7 +26,7 @@ namespace SoulRunProject.InGame
             Register();
             _animator = GetComponent<Animator>();
             _damageableEntity = GetComponent<DamageableEntity>();
-
+            
             if (_mover is not null) _mover.Despawn += _damageableEntity.Despawn;
         }
 
@@ -43,7 +43,7 @@ namespace SoulRunProject.InGame
 
         private void OnDestroy()
         {
-            _mover.Despawn -= _damageableEntity.Despawn;
+            if (_mover is not null) _mover.Despawn -= _damageableEntity.Despawn;
             UnRegister();
         }
 
