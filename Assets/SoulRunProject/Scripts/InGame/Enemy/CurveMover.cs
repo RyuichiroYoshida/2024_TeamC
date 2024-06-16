@@ -25,6 +25,7 @@ namespace SoulRunProject.InGame
         private Tweener _tweener;
         private Vector3[] _posArr;
 
+        // TODO オブジェクトが非アクティブになっても動いてる
         public override void OnStart(Transform myTransform = null)
         {
             if (myTransform == null) return;
@@ -46,7 +47,8 @@ namespace SoulRunProject.InGame
                 .SetLoops(_loopCount, _type)
                 .SetEase(Ease.Linear)
                 .SetLink(myTransform.gameObject, LinkBehaviour.KillOnDisable)
-                .SetLink(myTransform.gameObject);
+                .SetLink(myTransform.gameObject)
+                .OnComplete(() => Despawn());
         }
     }
 }
