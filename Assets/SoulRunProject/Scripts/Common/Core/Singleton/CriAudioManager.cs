@@ -155,15 +155,15 @@ namespace SoulRunProject.Common
             _sePlayer.Set3dSource(nativeSource);
             _loopSEPlayer.Set3dSource(nativeSource);
             
-            var nativeListener = FindObjectOfType<CriAtomListener>().nativeListener;
-            if (nativeListener == null)
+            var listener = FindObjectOfType<CriAtomListener>();
+            if (listener == null)
             {
-                Debug.LogWarning($"{nameof(CriAtomListener)} が見つからないので3d設定されている音源が流れません。");
+                Debug.LogWarning($"{nameof(CriAtomListener)} が見つかりません。");
             }
             else
             {
-                _sePlayer.Set3dListener(nativeListener);
-                _loopSEPlayer.Set3dListener(nativeListener);
+                _sePlayer.Set3dListener(listener.nativeListener);
+                _loopSEPlayer.Set3dListener(listener.nativeListener);
             }
             
             MasterVolumeChanged += volume =>
