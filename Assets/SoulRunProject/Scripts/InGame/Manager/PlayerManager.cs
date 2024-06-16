@@ -52,6 +52,7 @@ namespace SoulRunProject.Common
             _fieldMover = FindObjectOfType<FieldMover>();
             InitializeInput();
             CurrentHp.Where(hp => hp == 0).Subscribe(_ => Death()).AddTo(this);
+            if(_pLevelManager) _pLevelManager.CurrentPlayerStatus = CurrentPlayerStatus;
         }
 
         private void OnDestroy()
