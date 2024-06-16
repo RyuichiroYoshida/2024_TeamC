@@ -1,3 +1,4 @@
+using System;
 using SoulRunProject.Common;
 using UnityEngine;
 
@@ -11,7 +12,6 @@ namespace SoulRunProject.InGame
         [SerializeField, CustomLabel("移動速度")] protected float _moveSpeed;
         public virtual void OnStart(Transform myTransform = null){}
         public virtual void OnUpdateMove(Transform myTransform , Transform playerTransform){}
-        public virtual void Pause(){}
-        public virtual void Resume(){}
+        public Action Despawn;
     }
 }
