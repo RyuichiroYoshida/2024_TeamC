@@ -13,6 +13,7 @@ namespace SoulRunProject.Common
     /// </summary>
     public class PlayerManager : MonoBehaviour, IPausable
     {
+        [SerializeField] private bool _useGodMode;
         [SerializeField] private PlayerInput _playerInput;
         [SerializeField] private BaseStatus _baseStatus;
         [SerializeField] private PlayerCamera _playerCamera;
@@ -102,6 +103,8 @@ namespace SoulRunProject.Common
         
         public void Damage(float damage)
         {
+            if (_useGodMode) return;
+            
             foreach (var predicate in IgnoreDamagePredicates.Where(cond=> cond != null))
             {
                 if (predicate())
