@@ -13,6 +13,7 @@ namespace SoulRunProject.Common
     /// </summary>
     public class PlayerManager : MonoBehaviour, IPausable
     {
+        [SerializeField] private bool _useGodMode;
         [SerializeField] private PlayerInput _playerInput;
         [SerializeField] private BaseStatus _baseStatus;
         [SerializeField] private PlayerCamera _playerCamera;
@@ -52,6 +53,8 @@ namespace SoulRunProject.Common
             _fieldMover = FindObjectOfType<FieldMover>();
             InitializeInput();
             CurrentHp.Where(hp => hp == 0).Subscribe(_ => Death()).AddTo(this);
+            if (_pLevelManager) _pLevelManager.CurrentPlayerStatus = CurrentPlayerStatus;
+            if (_fieldMover) _fieldMover.CurrentPlayerStatus = CurrentPlayerStatus;
         }
 
         private void OnDestroy()
@@ -102,6 +105,8 @@ namespace SoulRunProject.Common
         
         public void Damage(float damage)
         {
+            if (_useGodMode) return;
+            
             foreach (var predicate in IgnoreDamagePredicates.Where(cond=> cond != null))
             {
                 if (predicate())
