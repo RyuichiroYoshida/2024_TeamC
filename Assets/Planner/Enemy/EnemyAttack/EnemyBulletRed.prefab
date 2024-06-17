@@ -14596,7 +14596,7 @@ MonoBehaviour:
   _hitOffset: 0.1
   _lifeTime: 15
   _speed: 20
-  _attackDamage: 20
+  _attackDamage: 10
 --- !u!198 &1798320854629654623
 ParticleSystem:
   m_ObjectHideFlags: 0

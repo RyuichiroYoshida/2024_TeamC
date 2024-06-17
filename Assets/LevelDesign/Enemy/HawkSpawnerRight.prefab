@@ -65,4 +65,4 @@ MonoBehaviour:
     - rid: 5361252003259088930
       type: {class: SpawnerOnPassThroughLine, ns: SoulRunProject.Common, asm: Assembly-CSharp}
       data:
-        _throughLinePos: -5.6
+        _throughLinePos: -25

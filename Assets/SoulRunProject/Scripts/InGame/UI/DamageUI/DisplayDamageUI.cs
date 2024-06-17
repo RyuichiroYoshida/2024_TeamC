@@ -32,7 +32,7 @@ namespace SoulRunProject.InGame
                 
                 _lastDisplayUI = (DamageDisplay)_damageUIPool.Rent();
                 DamageDisplay damageDisplay = _lastDisplayUI;
-                damageDisplay.ResetDisplay(transform, _uiPosition, damage, Color.white);
+                damageDisplay.ResetDisplay(transform, _uiPosition, damage);
                 damageDisplay.OnFinishedAsync.Take(1).Subscribe(_ => _damageUIPool.Return(damageDisplay));
             };
         }

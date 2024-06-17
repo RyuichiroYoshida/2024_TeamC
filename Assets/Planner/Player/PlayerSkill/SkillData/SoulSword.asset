@@ -43,6 +43,11 @@ MonoBehaviour:
         _increaseSummonLineValue: 0
         _increasePenetrationPower: 1
         _reduceCoolTime: 0
+      - _levelUpType: 3
+        _increaseDamageValue: 0
+        _increaseSummonLineValue: 0
+        _increasePenetrationPower: 1
+        _reduceCoolTime: 20
     - List:
       - _levelUpType: 1
         _increaseDamageValue: 10
@@ -53,7 +58,7 @@ MonoBehaviour:
         _increaseDamageValue: 0
         _increaseSummonLineValue: 0
         _increasePenetrationPower: 1
-        _reduceCoolTime: 20
+        _reduceCoolTime: 30
     - List:
       - _levelUpType: 1
         _increaseDamageValue: 0
@@ -65,6 +70,11 @@ MonoBehaviour:
         _increaseSummonLineValue: 0
         _increasePenetrationPower: 1
         _reduceCoolTime: 0
+      - _levelUpType: 3
+        _increaseDamageValue: 0
+        _increaseSummonLineValue: 0
+        _increasePenetrationPower: 1
+        _reduceCoolTime: 30
   _count: 2
   _sword: {fileID: 230340649894754956, guid: 01cf13cfebb01c0499fcd59c97fffca9, type: 3}
   _magicCirclePrefab: {fileID: 4254510158241516511, guid: 9e6a82502d65aa247972ff84a8c3996e,

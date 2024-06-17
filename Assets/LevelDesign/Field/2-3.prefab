@@ -493,7 +493,7 @@ PrefabInstance:
     - target: {fileID: 2186928187174572084, guid: 43def463d04457b4f980ad43e158441b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -10.6
       objectReference: {fileID: 0}
     - target: {fileID: 2186928187174572084, guid: 43def463d04457b4f980ad43e158441b,
         type: 3}
@@ -503,7 +503,7 @@ PrefabInstance:
     - target: {fileID: 2186928187174572084, guid: 43def463d04457b4f980ad43e158441b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 31.8
+      value: 25.5
       objectReference: {fileID: 0}
     - target: {fileID: 2186928187174572084, guid: 43def463d04457b4f980ad43e158441b,
         type: 3}
@@ -549,6 +549,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PoisonArea
+      objectReference: {fileID: 0}
+    - target: {fileID: 8382591723504919969, guid: 43def463d04457b4f980ad43e158441b,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

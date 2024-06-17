@@ -32,7 +32,7 @@ MonoBehaviour:
         _multipleProjectionSpeed: 10
     - List:
       - _levelUpType: 0
-        _reduceCoolTime: 10
+        _reduceCoolTime: 15
         _addAmountCount: 0
         _multipleProjectionSpeed: 0
       - _levelUpType: 2
@@ -41,7 +41,7 @@ MonoBehaviour:
         _multipleProjectionSpeed: 10
     - List:
       - _levelUpType: 0
-        _reduceCoolTime: 10
+        _reduceCoolTime: 15
         _addAmountCount: 0
         _multipleProjectionSpeed: 0
       - _levelUpType: 1
@@ -50,7 +50,7 @@ MonoBehaviour:
         _multipleProjectionSpeed: 40
     - List:
       - _levelUpType: 0
-        _reduceCoolTime: 10
+        _reduceCoolTime: 20
         _addAmountCount: 0
         _multipleProjectionSpeed: 0
   _bullet: {fileID: 2092183155354231575, guid: 93ebba11e021a9d4b92b90f0aeb5ef5b, type: 3}

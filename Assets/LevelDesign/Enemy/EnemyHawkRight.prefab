@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 6942516581084546689}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -100, y: 2.2, z: 8.7}
+  m_LocalPosition: {x: -100, y: 2.2, z: 15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -155,14 +155,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ef424d786b4ebd4ea7ddc1567786d35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHp: 30
-  _collisionDamage: 0
+  _maxHp: 15
+  _collisionDamage: 10
   _canKnockback: 1
   _direction: {x: 1, y: 1, z: 1}
   _takeKnockBack:
     _resistanceValue: 0
     _knockBackTime: 0.5
-  _lootTable: {fileID: 11400000, guid: 336e4d9ca71d4f8498bc390b9e894732, type: 2}
+  _lootTable: {fileID: 11400000, guid: 186a7e95e1599754e837c3948f396204, type: 2}
   _hitDamageEffectManager: {fileID: 8329125932870208999}
 --- !u!65 &4104162914166171959
 BoxCollider:
@@ -215,6 +215,7 @@ MonoBehaviour:
     rid: 8478225676376211456
   _mover:
     rid: 5361252003259088908
+  _enemyLifeTime: 10
   references:
     version: 2
     RefIds:
@@ -231,10 +232,11 @@ MonoBehaviour:
     - rid: 8478225676376211456
       type: {class: EntityLongRangeAttacker, ns: SoulRunProject.InGame, asm: Assembly-CSharp}
       data:
-        _interval: 3
+        _interval: 5
         _enemyBullet: {fileID: 1312205383257055634, guid: caf0a23a1824b59448852c93b13230cf,
           type: 3}
-        _isPlayerTarget: 0
+        _isHoming: 1
+        _homingTime: 0.2
 --- !u!1 &7699666227352543159
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,7 +262,7 @@ Transform:
   m_GameObject: {fileID: 7699666227352543159}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 40, y: 2.2, z: 24.1}
+  m_LocalPosition: {x: 40, y: 2.2, z: 30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

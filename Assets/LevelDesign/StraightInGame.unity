@@ -313,6 +313,30 @@ MonoBehaviour:
         List:
         - {fileID: 4382749047587651699, guid: 65f7665402082ef4cbc0999118ed005c, type: 3}
       _adjacentGraph: {fileID: 0}
+    - _mode: 0
+      _seconds: 10
+      _fieldSegments:
+        List:
+        - {fileID: 4382749047587651699, guid: 4e9f6abc0e25bf9448125572d46d4c63, type: 3}
+      _adjacentGraph: {fileID: 0}
+    - _mode: 0
+      _seconds: 10
+      _fieldSegments:
+        List:
+        - {fileID: 4382749047587651699, guid: cd3b9aad5edebc84786f6dd0e1bca669, type: 3}
+      _adjacentGraph: {fileID: 0}
+    - _mode: 0
+      _seconds: 10
+      _fieldSegments:
+        List:
+        - {fileID: 4382749047587651699, guid: 5fd2b2fe7b0f5f94d947df605d3d9b08, type: 3}
+      _adjacentGraph: {fileID: 0}
+    - _mode: 0
+      _seconds: 10
+      _fieldSegments:
+        List:
+        - {fileID: 4382749047587651699, guid: 5a5cc85aed9b6d347aff1a1d7d004528, type: 3}
+      _adjacentGraph: {fileID: 0}
     _bossStageField: {fileID: 4382749047587651699, guid: 8e41c6cf49444ff4e8f064638217e023,
       type: 3}
     _delayBossSpawn: 12
@@ -1017,11 +1041,10 @@ MonoBehaviour:
   _stageData:
   - _fieldPatterns:
     - _mode: 0
-      _seconds: 0
+      _seconds: 120
       _fieldSegments:
         List:
-        - {fileID: 4382749047587651699, guid: 8e41c6cf49444ff4e8f064638217e023, type: 3}
-        - {fileID: 4382749047587651699, guid: 4435967f767e7d74d8d963fd1a13a8b9, type: 3}
+        - {fileID: 4382749047587651699, guid: 24cf2b6555ca60f4baa9ce7d8e92e9f6, type: 3}
       _adjacentGraph: {fileID: 0}
     _bossStageField: {fileID: 4382749047587651699, guid: 8e41c6cf49444ff4e8f064638217e023,
       type: 3}
@@ -1792,7 +1815,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxSegmentCount: 4
-  _maxScrollSpeed: 30
   _lerpPower: 5
 --- !u!850595691 &2129626495
 LightingSettings:
