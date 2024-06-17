@@ -14,12 +14,11 @@ namespace SoulRunProject.InGame
     public class PopupView : MonoBehaviour
     {
         [SerializeField] private Image _popupPanel;
-        [SerializeField] private Image _centerback;
         [SerializeField] private GameObject _popupContent;
-        [SerializeField] private float _fadeDuration = 0.5f;
+        [SerializeField] private float _fadeDuration = 0.1f;
         [SerializeField] private float _maxHeight = 2169;
         [SerializeField] private float _minHeight = 865;
-        [SerializeField] private float _sizeChangeDuration = 0.5f;
+        [SerializeField] private float _sizeChangeDuration = 0.2f;
         private float _centerbackMaxSizeY = 1;
         private float _centerbackMinSizeY = 0.1f;
 
