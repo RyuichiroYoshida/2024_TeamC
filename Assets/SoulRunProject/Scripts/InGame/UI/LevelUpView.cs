@@ -16,24 +16,22 @@ namespace SoulRunProject.InGame
 
         public ButtonAndView[] UpgradeButtons => _upgradeButtons;
 
-        private void Start()
-        {
-            OpenLevelUpPanel();
-        }
-
         /// <summary>
         /// LevelUpPanelの表示を切り替える
         /// </summary>
         /// <param name="isShow"></param>
         public void OpenLevelUpPanel()
         {
+            Debug.Log("OpenLevelUpPanel");
             _levelUpPanel.SetActive(true);
             _popupView.OpenPopup();
         }
         
         public async UniTask CloseLevelUpPanel()
         {
+            Debug.Log("CloseLevelUpPanel");
             await _popupView.ClosePopup();
+            _levelUpPanel.SetActive(false);
         }
 
         /// <summary>

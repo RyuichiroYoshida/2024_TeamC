@@ -40,7 +40,7 @@ namespace SoulRunProject.InGame
             };
             _levelUpState.OnStateExit += _ =>
             {
-                
+                _levelUpView.CloseLevelUpPanel().Forget();
             };
             
             // upgradeされたら元のステートに戻る
@@ -75,10 +75,9 @@ namespace SoulRunProject.InGame
                 selectedSkillData = notCreatedSkills[Random.Range(0, notCreatedSkills.Length)];
                 
                 _levelUpView.UpgradeButtons[0].InputUIButton.onClick.AsObservable()
-                    .Subscribe( async _ =>
+                    .Subscribe( _ =>
                     {
                         _skillManager.AddSkill(selectedSkillData.SkillType);
-                        await _levelUpView.CloseLevelUpPanel();
                         _levelUpState.EndSelectSkill();
                     }).AddTo(_disposableOnUpdateUI);
                 _levelUpView.UpgradeButtons[0].NameAndLevelText.text = $"{selectedSkillData.SkillName}\nLv 1";
