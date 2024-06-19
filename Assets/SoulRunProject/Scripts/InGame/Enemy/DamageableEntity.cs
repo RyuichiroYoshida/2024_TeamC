@@ -37,12 +37,14 @@ namespace SoulRunProject.InGame
         private float _knockBackResistance;
 
         private PlayerManager _player;
-
-        public Action<float> OnDamaged;
+        /// <typeparam name="ダメージ"></typeparam>
+        /// <typeparam name="クリティカルかどうか"></typeparam>
+        public Action<float, bool> OnDamaged;
         public Action OnDead;
         public float MaxHp => _maxHp;
         public float CollisionDamage => _collisionDamage;
         public FloatReactiveProperty CurrentHp => _currentHp;
+        public bool IsEnemy => _enemyController;
 
         private void Start()
         {
@@ -64,10 +66,11 @@ namespace SoulRunProject.InGame
         {
             if (!gameObject.activeSelf) return;
             if (!_player) return;
+            bool isCritical = false;
             var calculatedDamage = Calculator.CalcDamage(damage, 0, _player.CurrentPlayerStatus.CriticalRate,
-                _player.CurrentPlayerStatus.CriticalDamageRate);
+                _player.CurrentPlayerStatus.CriticalDamageRate, ref isCritical);
             CurrentHp.Value -= calculatedDamage;
-            OnDamaged?.Invoke(calculatedDamage);
+            OnDamaged?.Invoke(calculatedDamage, isCritical);
 
             if (useSE) CriAudioManager.Instance.PlaySE("SE_Hit");
 
@@ -95,7 +98,7 @@ namespace SoulRunProject.InGame
         {
             Finish();
         }
-
+        
         private void OnTriggerEnter(Collider other)
         {
             if (!gameObject.activeSelf) return;
