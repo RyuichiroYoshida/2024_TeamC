@@ -98,7 +98,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 9a6df0b19924b0a4c952ee36ea1dda6e,
+    type: 2}
   m_LightingSettings: {fileID: 2129626495}
 --- !u!196 &4
 NavMeshSettings:
@@ -1070,6 +1071,7 @@ MonoBehaviour:
   _commonView: {fileID: 1245848006}
   _stageNameView: {fileID: 1245848005}
   _levelUpView: {fileID: 1245848004}
+  _pauseView: {fileID: 0}
 --- !u!114 &1174502022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1826,7 +1828,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxSegmentCount: 3
-  _maxScrollSpeed: 5
   _lerpPower: 5
 --- !u!850595691 &2129626495
 LightingSettings:
