@@ -44,6 +44,10 @@ namespace SoulRunProject.Common
         private CriAtomExPlayer _mePlayer;
         private List<CriPlayerData> _meData;
 
+        private CriAtomExPlayer _3dSePlayer;
+        private CriAtomEx3dSource _3dSource;
+        private CriAtomListener _listener;
+
         private string _currentBGMCueName = "";
         private CriAtomExAcb _currentBGMAcb = null;
 
@@ -147,24 +151,26 @@ namespace SoulRunProject.Common
             _mePlayer = new CriAtomExPlayer();
             _seData = new List<CriPlayerData>();
             _meData = new List<CriPlayerData>();
-            
-            var nativeSource = new CriAtomEx3dSource();
-            nativeSource.SetPosition(0, 0, 0);  //  TODO 現状、音源が3dの設定になってはいるが適切な設定がされていないので適当な座標で流しても問題ない。
-            nativeSource.Update();
-            _sePlayer.Set3dSource(nativeSource);
-            _loopSEPlayer.Set3dSource(nativeSource);
-            
-            var listener = FindObjectOfType<CriAtomListener>();
-            if (listener == null)
+            _3dSePlayer = new CriAtomExPlayer();
+
+            // 3Dサウンド用のソースを初期化
+            _3dSource = new CriAtomEx3dSource();
+            _3dSource.SetPosition(0, 0, 0);
+            _3dSource.Update();
+            _3dSePlayer.Set3dSource(_3dSource);
+
+            _listener = FindObjectOfType<CriAtomListener>();
+            if (_listener == null)
             {
                 Debug.LogWarning($"{nameof(CriAtomListener)} が見つかりません。");
             }
             else
             {
-                _sePlayer.Set3dListener(listener.nativeListener);
-                _loopSEPlayer.Set3dListener(listener.nativeListener);
+                _sePlayer.Set3dListener(_listener.nativeListener);
+                _loopSEPlayer.Set3dListener(_listener.nativeListener);
+                _3dSePlayer.Set3dListener(_listener.nativeListener);
             }
-            
+
             MasterVolumeChanged += volume =>
             {
                 _bgmPlayer.SetVolume(volume * _bgmVolume);
@@ -328,8 +334,9 @@ namespace SoulRunProject.Common
         /// <summary>SEを流す関数</summary>
         /// <param name="cueName">流したいキューの名前</param>
         /// <param name="volume">音量</param>
+        /// <param name="is3d"></param>
         /// <returns>停止する際に必要なIndex</returns>
-        public int PlaySE(string cueName, float volume = 1f)
+        public int PlaySE(string cueName, float volume = 1f , bool is3d = false)
         {
             CriPlayerData newAtomPlayer = new CriPlayerData();
 
@@ -352,9 +359,10 @@ namespace SoulRunProject.Common
             }
             else
             {
-                _sePlayer.SetCue(tempAcb, cueName);
-                _sePlayer.SetVolume(volume * _seVolume * _masterVolume);
-                newAtomPlayer.Playback = _sePlayer.Start();
+                var player = is3d ? _3dSePlayer : _sePlayer;
+                player.SetCue(tempAcb, cueName);
+                player.SetVolume(volume * _seVolume * _masterVolume);
+                newAtomPlayer.Playback = player.Start();
             }
 
             _seData.Add(newAtomPlayer);
@@ -457,6 +465,21 @@ namespace SoulRunProject.Common
             foreach (var i in removeIndex)
             {
                 _seData.RemoveAt(i);
+            }
+            
+            if (_listener != null)
+            {
+                _sePlayer.Dispose();
+                _loopSEPlayer.Dispose();
+                _3dSePlayer.Dispose();
+            }
+
+            if (_3dSource != null)
+            {
+                _sePlayer.Dispose();
+                _loopSEPlayer.Dispose();
+                _3dSePlayer.Dispose();
+                _3dSource.Dispose();
             }
         }
     }

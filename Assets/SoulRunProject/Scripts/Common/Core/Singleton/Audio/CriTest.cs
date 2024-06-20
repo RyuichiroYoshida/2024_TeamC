@@ -25,7 +25,7 @@ namespace SoulRunProject
 
             // テストケースを実行
             _ = TestPlayBGM();
-                //_ = TestPlaySE();
+            _ = TestPlaySE();
             //TestPlayVoice();
             //TestVolumeChanges();
         }
@@ -56,30 +56,30 @@ namespace SoulRunProject
                 _seIndexes.Add(seIndex);
             }
 
-            // SEの一時停止
-            foreach (var index in _seIndexes)
-            {
-                _audioManager.PauseSE(index);
-                Debug.Log("Paused SE");
-            }
-
-            await UniTask.Delay(1000);
-
-            // SEの再開
-            foreach (var index in _seIndexes)
-            {
-                _audioManager.ResumeSE(index);
-                Debug.Log("Resumed SE");
-            }
-
-            await UniTask.Delay(1000);
-
-            // SEの停止
-            foreach (var index in _seIndexes)
-            {
-                _audioManager.StopSE(index);
-                Debug.Log("Stopped SE");
-            }
+            // // SEの一時停止
+            // foreach (var index in _seIndexes)
+            // {
+            //     _audioManager.PauseSE(index);
+            //     Debug.Log("Paused SE");
+            // }
+            //
+            // await UniTask.Delay(1000);
+            //
+            // // SEの再開
+            // foreach (var index in _seIndexes)
+            // {
+            //     _audioManager.ResumeSE(index);
+            //     Debug.Log("Resumed SE");
+            // }
+            //
+            // await UniTask.Delay(1000);
+            //
+            // // SEの停止
+            // foreach (var index in _seIndexes)
+            // {
+            //     _audioManager.StopSE(index);
+            //     Debug.Log("Stopped SE");
+            // }
         }
 
         async UniTaskVoid TestPlayME()
