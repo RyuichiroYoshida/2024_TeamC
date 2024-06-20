@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,16 +30,26 @@ namespace SoulRunProject.Common
         private void Start()
         {
             _criAudioManager = CriAudioManager.Instance;
-            // 初期値設定
-            _masterVolumeSlider.value = _criAudioManager.MasterVolume;
-            _bgmVolumeSlider.value = _criAudioManager.BGMVolume;
-            _seVolumeSlider.value = _criAudioManager.SEVolume;
-            _meVolumeSlider.value = _criAudioManager.MEVolume;
+            // スライダーの範囲を0～100に設定
+            _masterVolumeSlider.minValue = 0;
+            _masterVolumeSlider.maxValue = 100;
+            _bgmVolumeSlider.minValue = 0;
+            _bgmVolumeSlider.maxValue = 100;
+            _seVolumeSlider.minValue = 0;
+            _seVolumeSlider.maxValue = 100;
+            _meVolumeSlider.minValue = 0;
+            _meVolumeSlider.maxValue = 100;
 
-            _masterVolumeInput.text = _criAudioManager.MasterVolume.ToString();
-            _bgmVolumeInput.text = _criAudioManager.BGMVolume.ToString();
-            _seVolumeInput.text = _criAudioManager.SEVolume.ToString();
-            _meVolumeInput.text = _criAudioManager.MEVolume.ToString();
+            // 初期値設定
+            _masterVolumeSlider.value = _criAudioManager.MasterVolume * 100;
+            _bgmVolumeSlider.value = _criAudioManager.BGMVolume * 100;
+            _seVolumeSlider.value = _criAudioManager.SEVolume * 100;
+            _meVolumeSlider.value = _criAudioManager.MEVolume * 100;
+
+            _masterVolumeInput.text = (_criAudioManager.MasterVolume * 100).ToString(CultureInfo.CurrentCulture);
+            _bgmVolumeInput.text = (_criAudioManager.BGMVolume * 100).ToString();
+            _seVolumeInput.text = (_criAudioManager.SEVolume * 100).ToString();
+            _meVolumeInput.text = (_criAudioManager.MEVolume * 100).ToString();
 
             // イベント登録
             _masterVolumeSlider.onValueChanged.AddListener(OnMasterVolumeSliderChanged);
@@ -58,25 +69,25 @@ namespace SoulRunProject.Common
 
         private void OnMasterVolumeSliderChanged(float value)
         {
-            _criAudioManager.MasterVolume = value;
+            _criAudioManager.MasterVolume = value / 100;
             _masterVolumeInput.text = value.ToString();
         }
 
         private void OnBgmVolumeSliderChanged(float value)
         {
-            _criAudioManager.BGMVolume = value;
+            _criAudioManager.BGMVolume = value / 100;
             _bgmVolumeInput.text = value.ToString();
         }
 
         private void OnSeVolumeSliderChanged(float value)
         {
-            _criAudioManager.SEVolume = value;
+            _criAudioManager.SEVolume = value / 100;
             _seVolumeInput.text = value.ToString();
         }
 
         private void OnMeVolumeSliderChanged(float value)
         {
-            _criAudioManager.MEVolume = value;
+            _criAudioManager.MEVolume = value / 100;
             _meVolumeInput.text = value.ToString();
         }
 
@@ -84,7 +95,7 @@ namespace SoulRunProject.Common
         {
             if (float.TryParse(value, out float floatValue))
             {
-                _criAudioManager.MasterVolume = floatValue;
+                _criAudioManager.MasterVolume = floatValue / 100;
                 _masterVolumeSlider.value = floatValue;
             }
         }
@@ -93,7 +104,7 @@ namespace SoulRunProject.Common
         {
             if (float.TryParse(value, out float floatValue))
             {
-                _criAudioManager.BGMVolume = floatValue;
+                _criAudioManager.BGMVolume = floatValue / 100;
                 _bgmVolumeSlider.value = floatValue;
             }
         }
@@ -102,7 +113,7 @@ namespace SoulRunProject.Common
         {
             if (float.TryParse(value, out float floatValue))
             {
-                _criAudioManager.SEVolume = floatValue;
+                _criAudioManager.SEVolume = floatValue / 100;
                 _seVolumeSlider.value = floatValue;
             }
         }
@@ -111,7 +122,7 @@ namespace SoulRunProject.Common
         {
             if (float.TryParse(value, out float floatValue))
             {
-                _criAudioManager.MEVolume = floatValue;
+                _criAudioManager.MEVolume = floatValue / 100;
                 _meVolumeSlider.value = floatValue;
             }
         }
