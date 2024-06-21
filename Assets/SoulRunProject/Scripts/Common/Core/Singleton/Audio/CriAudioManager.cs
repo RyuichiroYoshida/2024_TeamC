@@ -276,13 +276,18 @@ namespace SoulRunProject.Common
 
         /// <summary>BGMを開始する</summary>
         /// <param name="cueName">流したいキューの名前</param>
-        public void PlayBGM(string cueName)
+        public void PlayBGM(string cueName = "BGM", float volume = 1f, bool is3d = false)
         {
             var cueSheet = CriAtom.GetCueSheet(_cueSheetBGM);
             if (cueSheet == null)
             {
                 Debug.LogError($"Cue sheet {_cueSheetBGM} not found.");
                 return;
+            }
+
+            if (!is3d)
+            {
+                is3d = IsCue3D(_cueSheetBGM, cueName);
             }
 
             var temp = cueSheet.acb;
@@ -336,7 +341,7 @@ namespace SoulRunProject.Common
         /// <param name="volume">音量</param>
         /// <param name="is3d"></param>
         /// <returns>停止する際に必要なIndex</returns>
-        public int PlaySE(string cueName, float volume = 1f , bool is3d = false)
+        public int PlaySE(string cueName, float volume = 1f, bool is3d = false)
         {
             CriPlayerData newAtomPlayer = new CriPlayerData();
 
@@ -350,6 +355,12 @@ namespace SoulRunProject.Common
             tempAcb.GetCueInfo(cueName, out var cueInfo);
 
             newAtomPlayer.CueInfo = cueInfo;
+
+            // Cueが3Dの設定の場合、自動的にis3dをtrueにする
+            if (!is3d)
+            {
+                is3d = IsCue3D(_cueSheetSe, cueName);
+            }
 
             if (newAtomPlayer.IsLoop)
             {
@@ -405,7 +416,7 @@ namespace SoulRunProject.Common
         /// <summary>MEを流す関数</summary>
         /// <param name="cueName">流したいキューの名前</param>
         /// <returns>停止する際に必要なIndex</returns>
-        public int PlayME(string cueName, float volume = 1f)
+        public int PlayME(string cueName,  float volume = 1f, bool is3d = false)
         {
             CriAtomEx.CueInfo cueInfo;
             CriPlayerData newAtomPlayer = new CriPlayerData();
@@ -449,6 +460,20 @@ namespace SoulRunProject.Common
             _meData[index].Playback.Stop();
         }
 
+        private bool IsCue3D(string cueSheetName, string cueName)
+        {
+            var acb = CriAtom.GetCueSheet(cueSheetName).acb;
+            if (acb != null)
+            {
+                CriAtomEx.CueInfo cueInfo;
+                acb.GetCueInfo(cueName, out cueInfo);
+                // pos3dInfoのデフォルト値で3D設定かどうかを判断する
+                return cueInfo.pos3dInfo.maxAttenuationDistance > 0;
+            }
+
+            return false;
+        }
+
         private void Unload(Scene scene)
         {
             StopLoopSE();
@@ -466,7 +491,7 @@ namespace SoulRunProject.Common
             {
                 _seData.RemoveAt(i);
             }
-            
+
             if (_listener != null)
             {
                 _sePlayer.Dispose();
