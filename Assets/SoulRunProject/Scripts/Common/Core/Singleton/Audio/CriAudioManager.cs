@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using CriWare;
-using UnityEngine.SceneManagement;
-using System;
+﻿using System;
 using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+using CriWare;
 
 namespace SoulRunProject.Common
 {
@@ -237,6 +237,9 @@ namespace SoulRunProject.Common
             SceneManager.sceneUnloaded -= Unload;
         }
 
+        /// <summary>
+        /// すべての音を一時停止させる
+        /// </summary>
         public void PauseAll()
         {
             if (_bgmPlayer.GetStatus() == CriAtomExPlayer.Status.Playing)
@@ -266,6 +269,9 @@ namespace SoulRunProject.Common
             }
         }
 
+        /// <summary>
+        /// 一時停止していた音を再開させる
+        /// </summary>
         public void ResumeAll()
         {
             _bgmPlayer.Resume(CriAtomEx.ResumeMode.PausedPlayback);
@@ -276,7 +282,7 @@ namespace SoulRunProject.Common
 
         /// <summary>BGMを開始する</summary>
         /// <param name="cueName">流したいキューの名前</param>
-        public void PlayBGM(string cueName = "BGM", float volume = 1f, bool is3d = false)
+        public void PlayBGM(string cueName, float volume = 1f, bool is3d = false)
         {
             var cueSheet = CriAtom.GetCueSheet(_cueSheetBGM);
             if (cueSheet == null)
@@ -285,6 +291,7 @@ namespace SoulRunProject.Common
                 return;
             }
 
+            // Cueが3Dの設定の場合、自動的にis3dをtrueにする
             if (!is3d)
             {
                 is3d = IsCue3D(_cueSheetBGM, cueName);
@@ -306,11 +313,14 @@ namespace SoulRunProject.Common
                 return;
             }
 
-            _bgmPlayer.SetCue(temp, cueName);
-            _bgmPlayback = _bgmPlayer.Start();
+            var player = is3d ? _3dSePlayer : _bgmPlayer;
+
+            player.SetCue(temp, cueName);
+            _bgmPlayback = player.Start();
             _currentBGMAcb = temp;
             _currentBGMCueName = cueName;
         }
+
 
         /// <summary>BGMを中断させる</summary>
         public void PauseBGM()
@@ -339,7 +349,7 @@ namespace SoulRunProject.Common
         /// <summary>SEを流す関数</summary>
         /// <param name="cueName">流したいキューの名前</param>
         /// <param name="volume">音量</param>
-        /// <param name="is3d"></param>
+        /// <param name="is3d">3Dサウンドかどうかのフラグ</param>
         /// <returns>停止する際に必要なIndex</returns>
         public int PlaySE(string cueName, float volume = 1f, bool is3d = false)
         {
@@ -415,8 +425,10 @@ namespace SoulRunProject.Common
 
         /// <summary>MEを流す関数</summary>
         /// <param name="cueName">流したいキューの名前</param>
+        /// <param name="volume">音量</param>
+        /// <param name="is3d">3Dサウンドかどうかのフラグ</param>
         /// <returns>停止する際に必要なIndex</returns>
-        public int PlayME(string cueName,  float volume = 1f, bool is3d = false)
+        public int PlayME(string cueName, float volume = 1f, bool is3d = false)
         {
             CriAtomEx.CueInfo cueInfo;
             CriPlayerData newAtomPlayer = new CriPlayerData();
@@ -426,16 +438,25 @@ namespace SoulRunProject.Common
 
             newAtomPlayer.CueInfo = cueInfo;
 
-            _mePlayer.SetCue(tempAcb, cueName);
-            _mePlayer.SetVolume(volume * _masterVolume * _meVolume);
-            newAtomPlayer.Playback = _mePlayer.Start();
+            // Cueが3Dの設定の場合、自動的にis3dをtrueにする
+            if (!is3d)
+            {
+                is3d = IsCue3D(_cueSheetMe, cueName);
+            }
+
+            var player = is3d ? _3dSePlayer : _mePlayer;
+
+            player.SetCue(tempAcb, cueName);
+            player.SetVolume(volume * _masterVolume * _meVolume);
+            newAtomPlayer.Playback = player.Start();
 
             _meData.Add(newAtomPlayer);
             return _meData.Count - 1;
         }
 
+
         /// <summary>MEをPauseさせる </summary>
-        /// <param name="index">一時停止させたいPlayVoice()の戻り値 (-1以下を渡すと処理を行わない)</param>
+        /// <param name="index">一時停止させたいPlayME()の戻り値 (-1以下を渡すと処理を行わない)</param>
         public void PauseME(int index)
         {
             if (index < 0) return;
