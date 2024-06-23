@@ -1,4 +1,5 @@
 using UniRx;
+using UniRx.Triggers;
 using UnityEngine;
 using UnityEditor;
 
@@ -24,15 +25,15 @@ namespace SoulRunProject.InGame
             GetComponent<DamageableEntity>().OnDamaged += (damage, isCritical) =>
             {
                 // 前回のUIが存在かつダメージ待機中であれば、ダメージの追加表示をする
-                if (_lastDisplayUI && _lastDisplayUI.WaitingForNextDamage)
+                if (_lastDisplayUI && _lastDisplayUI.gameObject.activeSelf && _lastDisplayUI.Parent == transform && _lastDisplayUI.WaitingForNextDamage)
                 {
                     _lastDisplayUI.AddDisplayDamage(damage);
                     return;
                 }
                 
-                _lastDisplayUI = (DamageDisplay)_damageUIPool.Rent();
-                DamageDisplay damageDisplay = _lastDisplayUI;
-                damageDisplay.ResetDisplay(transform, _uiPosition, damage);
+                DamageDisplay damageDisplay = (DamageDisplay)_damageUIPool.Rent();
+                _lastDisplayUI = damageDisplay;
+                damageDisplay.ResetDisplay(transform, _uiPosition, damage, isCritical);
                 damageDisplay.OnFinishedAsync.Take(1).Subscribe(_ => _damageUIPool.Return(damageDisplay));
             };
         }

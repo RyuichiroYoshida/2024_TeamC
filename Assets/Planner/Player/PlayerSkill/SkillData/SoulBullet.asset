@@ -55,7 +55,7 @@ MonoBehaviour:
         _multipleProjectionSpeed: 0
   _bullet: {fileID: 2092183155354231575, guid: 93ebba11e021a9d4b92b90f0aeb5ef5b, type: 3}
   _baseRotateY: 20
-  _muzzleOffset: {x: 0, y: 0, z: 2}
+  _muzzleOffset: {x: 0, y: 1.7, z: 2}
   references:
     version: 2
     RefIds:
