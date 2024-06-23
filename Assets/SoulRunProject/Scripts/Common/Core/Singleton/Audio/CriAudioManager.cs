@@ -13,7 +13,6 @@ namespace SoulRunProject.Common
         [SerializeField] private string _cueSheetBGM = "CueSheet_BGM"; //.acb
         [SerializeField] private string _awbPathBGM = "CueSheet_BGM"; //.awb
         [SerializeField] private string _cueSheetSe = "CueSheet_SE"; //.acb
-
         [SerializeField] private string _cueSheetMe = "CueSheet_ME"; //.acb
 
         private float _masterVolume = 1F;
