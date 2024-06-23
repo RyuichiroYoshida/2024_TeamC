@@ -94,20 +94,7 @@ namespace SoulRunProject.InGame
             var position = transform.position;
             SpawnerType?.DrawSpawnerArea(position);
             _spawnPattern?.DrawGizmos(position);
-
-            // TODO シーン上で生成パターンを見れるようにしたいね
-            // _spawnFlag = false;
-            // foreach (var pos in _spawnPattern.GetSpawnPositions())
-            // {
-            //     Gizmos.color = Color.red;
-            //     Gizmos.DrawWireSphere(pos, 1);
-            // }
         }
-        //
-        // public void SpawnEditorEntity()
-        // {
-        //     _spawnFlag = true;
-        // }
 #endif
     }
 }
