@@ -11,7 +11,7 @@ namespace SoulRunProject.Common
         float _spawnerEnableRange;
 
         public bool IsEnable(Vector3 playerPosition, Vector3 spawnerPosition) =>
-            _spawnerEnableRange > Vector3.Distance(playerPosition, spawnerPosition);
+            _spawnerEnableRange > spawnerPosition.z - playerPosition.z;
 
         public void DrawSpawnerArea(Vector3 pos)
         {
