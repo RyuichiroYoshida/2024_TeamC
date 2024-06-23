@@ -14,18 +14,20 @@ namespace SoulRunProject.InGame
         private readonly LevelUpState _levelUpState;
         private readonly LevelUpItemData _levelUpItemData;
         private readonly LevelUpView _levelUpView;
+        private readonly CommonView _commonView;
         private readonly SkillManager _skillManager;
         private readonly PlayerLevelManager _levelManager;
         private readonly CompositeDisposable _disposableOnUpdateUI = new();
         
         public LevelUpUIPresenter
             (PlayerManager playerManager, LevelUpState levelUpState, LevelUpItemData levelUpItemData,
-                LevelUpView levelUpView, SkillManager skillManager, PlayerLevelManager levelManager)
+                LevelUpView levelUpView, CommonView commonView, SkillManager skillManager, PlayerLevelManager levelManager)
         {
             _playerManager = playerManager;
             _levelUpState = levelUpState;
             _levelUpItemData = levelUpItemData;
             _levelUpView = levelUpView;
+            _commonView = commonView;
             _skillManager = skillManager;
             _levelManager = levelManager;
         }
@@ -117,6 +119,7 @@ namespace SoulRunProject.InGame
                 .Subscribe(_ =>
                 {
                     selectedStatusUpItems[0].ItemEffect();
+                    _commonView.SetPassiveItemIcon(selectedStatusUpItems[0].ItemIcon);
                     _levelUpState.EndSelectSkill();
                 }).AddTo(_disposableOnUpdateUI);
             _levelUpView.UpgradeButtons[1].NameAndLevelText.text = selectedStatusUpItems[0].ItemName;
@@ -126,6 +129,7 @@ namespace SoulRunProject.InGame
                 .Subscribe(_ =>
                 {
                     selectedStatusUpItems[1].ItemEffect();
+                    _commonView.SetPassiveItemIcon(selectedStatusUpItems[1].ItemIcon);
                     _levelUpState.EndSelectSkill();
                 }).AddTo(_disposableOnUpdateUI);
             _levelUpView.UpgradeButtons[2].NameAndLevelText.text = selectedStatusUpItems[1].ItemName;

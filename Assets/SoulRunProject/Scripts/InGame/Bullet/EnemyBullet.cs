@@ -31,7 +31,6 @@ namespace SoulRunProject.Common
 
         public void InitializeHoming(bool homingFlag, float homingTime)
         {
-            Debug.Log($"{homingFlag} : {homingTime}");
             _isHoming = homingFlag;
             _homingTime = homingTime;
         }
@@ -43,7 +42,6 @@ namespace SoulRunProject.Common
 
             if (_isHoming)
             {
-                Debug.Log("Hoge");
                 if (_timer < _homingTime)
                 {
                     _dir = Vector3.Normalize(_playerTransform.position - transform.position);

@@ -16,6 +16,8 @@ namespace SoulRunProject.InGame
         [SerializeField] private float _fadeDuration;
         [SerializeField, CustomLabel("合計ダメージとして加算する待機時間")] private float _timeToWaitNextDamage;
         [SerializeField, CustomLabel("UIのランダム位置範囲")] private Vector3 _randomPosRange;
+        [SerializeField, CustomLabel("通常色")] private Color _nomalColor;
+        [SerializeField, CustomLabel("クリティカル時の色")] private Color _critColor;
 
         /// <summary> 表示するダメージ </summary>
         private float _displayTotalDamage;
@@ -23,6 +25,7 @@ namespace SoulRunProject.InGame
         private Vector3 _position;
 
         public bool WaitingForNextDamage { get; private set; }
+        public Transform Parent => _parent;
         
         public override void Initialize(){}
 
@@ -34,14 +37,12 @@ namespace SoulRunProject.InGame
             }
         }
 
-        public void ResetDisplay(Transform tf, Vector3 position, float damage)
+        public void ResetDisplay(Transform tf, Vector3 position, float damage, bool isCrit)
         {
             // 表示のリセット
             _displayTotalDamage = damage;
             _damageText.text = ((int)_displayTotalDamage).ToString();
-            Color color = _damageText.color;
-            color.a = 1;
-            _damageText.color = color;
+            _damageText.color = isCrit? _critColor : _nomalColor;
             _damageText.fontSize = Mathf.Clamp((int)(35 * damage / 100), 15, 35);
             _parent = tf;
             _position = position + new Vector3(Random.Range(-_randomPosRange.x, _randomPosRange.x), 
