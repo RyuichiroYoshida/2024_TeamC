@@ -31,8 +31,7 @@ namespace SoulRunProject.InGame
         {
             if (!TryGetComponent(out _renderer))
             {
-                Debug.LogWarning($"{gameObject.name} のレンダラーがアタッチされていません");
-                return;
+                _renderer = GetComponentInChildren<Renderer>();
             }
             
             var material = new Material(_renderer.material);
