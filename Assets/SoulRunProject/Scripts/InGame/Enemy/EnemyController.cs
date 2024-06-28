@@ -74,7 +74,7 @@ namespace SoulRunProject.InGame
 
             if (_enemyLifeTime < _timer) _damageableEntity.Despawn();
 
-            if (_playerTransform.position.z > gameObject.transform.position.z) _damageableEntity.Despawn();
+            if (_playerTransform.position.z - 5 > gameObject.transform.position.z) _damageableEntity.Despawn();
         }
 
         public void Register()

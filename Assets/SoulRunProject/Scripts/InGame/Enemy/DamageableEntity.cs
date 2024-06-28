@@ -89,6 +89,7 @@ namespace SoulRunProject.InGame
         public void Death()
         {
             if (_lootTable) DropManager.Instance.RequestDrop(_lootTable, transform.position);
+            CriAudioManager.Instance.PlaySE("SE_Enemy_Dead");
 
             OnDead?.Invoke();
             Finish();
