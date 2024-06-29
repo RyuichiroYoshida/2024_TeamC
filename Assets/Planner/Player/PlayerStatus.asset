@@ -15,7 +15,7 @@ MonoBehaviour:
   _playerStatus:
     _hp: 100
     _attackValue: 10
-    _defenceValue: 10
+    _defenceValue: 0
     _coolTimeReductionRate: 1
     _skillSizeUpRate: 1
     _bulletSpeedUpRate: 1
@@ -23,7 +23,7 @@ MonoBehaviour:
     _bulletAmountExtension: 0
     _penetrateAmountExtension: 0
     _initialMoveSpeed: 30
-    _speedUpAtLevelUp: 2
+    _speedUpAtLevelUp: 1.4
     _healAtLevelUp: 20
     _growthSpeedUpRate: 1
     _goldLuckRate: 1
