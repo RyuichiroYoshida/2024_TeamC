@@ -46,10 +46,6 @@ namespace SoulRunProject.InGame
                     OnHit(other);
                 }
             }
-            else
-            {
-                OnHit(other);
-            }
         }
     }
 }
