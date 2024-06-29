@@ -68,7 +68,7 @@ GameObject:
   - component: {fileID: 158674725360675817}
   - component: {fileID: 396736799815293501}
   - component: {fileID: 896262867413627727}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HolyField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
