@@ -119,10 +119,7 @@ namespace SoulRunProject.Common
                 set => _cueInfo = value;
             }
 
-            public bool IsLoop
-            {
-                get => _cueInfo.length < 0;
-            }
+            public bool IsLoop => _cueInfo.length < 0;
         }
 
 
