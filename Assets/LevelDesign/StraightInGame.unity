@@ -1059,12 +1059,10 @@ MonoBehaviour:
   _stageData:
   - _fieldPatterns:
     - _mode: 0
-      _seconds: 120
+      _seconds: 0
       _fieldSegments:
         List:
         - {fileID: 4382749047587651699, guid: 8e41c6cf49444ff4e8f064638217e023, type: 3}
-        - {fileID: 4382749047587651699, guid: 2e429bc4d33dc5b49993a173527f76de, type: 3}
-        - {fileID: 4382749047587651699, guid: 55d1ce0e30d07ea45b633471918bfe39, type: 3}
       _adjacentGraph: {fileID: 0}
     _bossStageField: {fileID: 4382749047587651699, guid: ef4e6dd9e89f20544922b5cb4c210105,
       type: 3}
