@@ -55,6 +55,6 @@ MonoBehaviour:
     - rid: 3163472035625041923
       type: {class: AoESkillParameter, ns: SoulRunProject.Common, asm: Assembly-CSharp}
       data:
-        _attackDamage: 180
+        _attackDamage: 80
         _size: 3
         _getSoulPerSec: 1

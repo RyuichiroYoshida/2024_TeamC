@@ -12,6 +12,7 @@ namespace SoulRunProject.InGame
         public bool TurnSide { get; set; }
         #endregion
         #region Hovl_Studio
+        [SerializeField] private LayerMask _collisionLayer;
         [SerializeField] GameObject _hitEffect;
         [SerializeField] float _hitOffset = 0;
         [SerializeField] bool _useLaserRotation = false;
@@ -61,7 +62,7 @@ namespace SoulRunProject.InGame
             _laser.SetPosition(0, transform.position);
             RaycastHit hit; //DELETE THIS IF YOU WANT USE LASERS IN 2D
             //ADD THIS IF YOU WANNT TO USE LASERS IN 2D: RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.forward, MaxLength);       
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, _maxLength))//CHANGE THIS IF YOU WANT TO USE LASERRS IN 2D: if (hit.collider != null)
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, _maxLength, _collisionLayer))//CHANGE THIS IF YOU WANT TO USE LASERRS IN 2D: if (hit.collider != null)
             {
                 //End laser position if collides with object
                 _laser.SetPosition(1, hit.point);

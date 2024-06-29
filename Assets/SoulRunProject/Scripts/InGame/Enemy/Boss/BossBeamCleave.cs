@@ -11,6 +11,7 @@ namespace SoulRunProject.InGame
         [SerializeField, CustomLabel("エフェクトプレハブ")] private GameObject _razer;
         [SerializeField, CustomLabel("ビーム原点")] private Transform _beamOrigin;
         [SerializeField, CustomLabel("薙ぎ払いの幅")] private float _cleaveWidth;
+        [SerializeField, CustomLabel("当たるレイヤー")] private LayerMask _collisionLayer;
         [Header("性能")]
         [SerializeField, CustomLabel("薙ぎ払い時間")] private float _beamTime;
         [SerializeField, CustomLabel("ダメージ")] private float _damage;
@@ -52,7 +53,7 @@ namespace SoulRunProject.InGame
             
             // ビーム角度のリセット
             Vector3 playerPos = _playerTf.position;
-            playerPos.y = 0;
+            playerPos.y = 0.5f;
             _startImpactPosition = playerPos + Vector3.right * _cleaveWidth / 2;
             _finishImpactPosition = _startImpactPosition + Vector3.left * _cleaveWidth;
             Debug.Log($"{playerPos} {_startImpactPosition} {_finishImpactPosition}");
@@ -63,16 +64,7 @@ namespace SoulRunProject.InGame
 
         public override void UpdateAction(float deltaTime)
         {
-            // _beamOrigin.DOLocalRotateQuaternion(Quaternion.LookRotation(_finishImpactPosition - _beamOrigin.position), _beamTime)
-            //     .SetEase(Ease.Linear)
-            //     .OnComplete(() =>
-            //     {
-            //         // 終了処理
-            //         _laserInstance.SetActive(false);
-            //         CriAudioManager.Instance.PauseSE(_beamSoundIndex);
-            //         OnFinishAction?.Invoke();
-            //     });
-
+            // タイマー
             if (_cleaveTimer < _beamTime)
             {
                 _beamOrigin.rotation = Quaternion.LookRotation(Vector3.Lerp(_startImpactPosition - _beamOrigin.position,
@@ -88,8 +80,9 @@ namespace SoulRunProject.InGame
             }
             
             // 当たり判定
-            if (Physics.Raycast(_beamOrigin.position, _beamOrigin.forward, out RaycastHit hit))
+            if (Physics.Raycast(_beamOrigin.position, _beamOrigin.forward, out RaycastHit hit, float.MaxValue, _collisionLayer))
             {
+                Debug.Log(hit.collider.gameObject);
                 if (hit.collider.gameObject.TryGetComponent(out PlayerManager playerManager))
                 {
                     if (_hitCounter < _hitCount)
