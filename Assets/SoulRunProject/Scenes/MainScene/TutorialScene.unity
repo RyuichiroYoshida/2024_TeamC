@@ -992,6 +992,11 @@ PrefabInstance:
       propertyPath: _playerInput
       value: 
       objectReference: {fileID: 1366718267}
+    - target: {fileID: 3170939595594605857, guid: a0d7b3145875ab94e8f12f6d6119a4ed,
+        type: 3}
+      propertyPath: _endTutorial._loadSceneIndex
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
