@@ -98,7 +98,7 @@ namespace SoulRunProject.InGame
     {
         [SerializeField] private float _standbyTime;
         [SerializeField] private float _fadeTime;
-        [SerializeField] private string _loadSceneName;
+        [SerializeField] private int _loadSceneIndex;
         
         private Image _fadePanel;
         
@@ -115,7 +115,7 @@ namespace SoulRunProject.InGame
             color.a = 0;
             _fadePanel.color = color;
             await _fadePanel.DOFade(1, _fadeTime);
-            SceneManager.LoadScene(_loadSceneName);
+            SceneManager.LoadScene(_loadSceneIndex);
         }
     }
 
