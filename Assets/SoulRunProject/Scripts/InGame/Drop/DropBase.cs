@@ -67,7 +67,7 @@ namespace SoulRunProject.InGame
         {
             if (_isPause) return;
             //  プレイヤーより後ろに行ったら吸引処理を行わない
-            if (_player.transform.position.z > transform.position.z) return;
+            if (_player.transform.position.z + 10 > transform.position.z) return;
             
             var absorptionPower = _player.CurrentPlayerStatus.VacuumItemRange;
             var distance = _player.transform.position - transform.position;
