@@ -287,12 +287,6 @@ namespace SoulRunProject.Common
                 return;
             }
 
-            // Cueが3Dの設定の場合、自動的にis3dをtrueにする
-            if (!is3d)
-            {
-                is3d = IsCue3D(_cueSheetBGM, cueName);
-            }
-
             var temp = cueSheet.acb;
 
             if (_currentBGMAcb == temp && _currentBGMCueName == cueName &&
@@ -309,12 +303,13 @@ namespace SoulRunProject.Common
                 return;
             }
 
-            var player = is3d ? _3dSePlayer : _bgmPlayer;
+            var player = _bgmPlayer;
 
             player.SetCue(temp, cueName);
             _bgmPlayback = player.Start();
             _currentBGMAcb = temp;
             _currentBGMCueName = cueName;
+            Debug.Log($"<color=red>BGM: {cueName} is playing.</color>");
         }
 
 
@@ -494,7 +489,7 @@ namespace SoulRunProject.Common
         private void Unload(Scene scene)
         {
             StopLoopSE();
-
+            StopBGM();
             var removeIndex = new List<int>();
             for (int i = _seData.Count - 1; i >= 0; i--)
             {
