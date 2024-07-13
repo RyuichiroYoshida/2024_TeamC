@@ -447,7 +447,7 @@ MonoBehaviour:
         _razer: {fileID: 1395565506770744, guid: 8f1e2d60ac53aa54aa0e97a31edbafed,
           type: 3}
         _beamOrigin: {fileID: 6504038626365006790}
-        _cleaveWidth: 72
+        _cleaveWidth: 40
         _collisionLayer:
           serializedVersion: 2
           m_Bits: 247
@@ -466,10 +466,10 @@ MonoBehaviour:
         _flameBallPrefab: {fileID: 80501970798971705, guid: 835d64a7aa14fd34b84e2987143f9f94,
           type: 3}
         _actionTime: 4
-        _flameBallSpeed: 35
-        _flameBallNum: 10
+        _flameBallSpeed: 40
+        _flameBallNum: 30
         _flameDamage: 5
-        _deviationDistance: 5
+        _deviationDistance: 0
         _flameBallAccuracy: 0
         _powerUpBehaviors:
         - rid: 5361252326309625967
