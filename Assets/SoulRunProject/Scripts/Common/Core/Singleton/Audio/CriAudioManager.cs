@@ -60,7 +60,7 @@ namespace SoulRunProject.Audio
         {
             if (_audioPlayers.TryGetValue(type, out var player))
             {
-                Debug.Log($"CriAudioType: {type}, CueName: {cueName}");
+                //Debug.Log($"CriAudioType: {type}, CueName: {cueName}");
                 player.Play(cueName, volume, isLoop);
             }
             else
@@ -96,7 +96,7 @@ namespace SoulRunProject.Audio
         {
             if (_audioPlayers.TryGetValue(type, out var player))
             {
-                player.Pause(cueName);
+                //player.Pause(cueName);
             }
             else
             {
@@ -108,7 +108,7 @@ namespace SoulRunProject.Audio
         {
             if (_audioPlayers.TryGetValue(type, out var player))
             {
-                player.Resume(cueName);
+                //player.Resume(cueName);
             }
             else
             {

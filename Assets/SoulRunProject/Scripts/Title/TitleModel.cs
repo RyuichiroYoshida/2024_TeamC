@@ -17,7 +17,7 @@ namespace SoulRunProject.Title
 
         private void Start()
         {
-            CriAudioManager.Instance.Play(CriAudioType.CueSheet_BGM, "BGM_Title");
+            CriAudioManager.Instance.Play(CriAudioType.CueSheet_BGM, "BGM_Title", true);
         }
 
         public async void StartGame()

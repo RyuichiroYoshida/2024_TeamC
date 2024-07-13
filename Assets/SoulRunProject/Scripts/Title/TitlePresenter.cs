@@ -17,7 +17,7 @@ namespace SoulRunProject
 
         private void Start()
         {
-            CriAudioManager.Instance.Play(CriAudioType.CueSheet_BGM, "BGM_Title");
+            CriAudioManager.Instance.Play(CriAudioType.CueSheet_BGM, "BGM_Title", true);
             _titleView.StartButton.onClick.AsObservable().Subscribe(_ => _titleModel.StartGame());
             _titleView.OptionButton.onClick.AsObservable().Subscribe(_ => _titleModel.Option());
             _titleView.ExitButton.onClick.AsObservable().Subscribe(_ => _titleModel.Exit());
