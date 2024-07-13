@@ -21,7 +21,10 @@ namespace SoulRunProject.Audio
                 Debug.Log($"BGM Status Changed: {status}");
             });
         }
-
+        ~BGMPlayer()
+        {
+            _statusDisposable?.Dispose();
+        }
         public override void Play(string cueName, float volume, bool isLoop)
         {
             // 既存のBGMを停止する

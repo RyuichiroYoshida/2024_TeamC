@@ -12,7 +12,7 @@ namespace SoulRunProject.Audio
         protected readonly List<CriPlayerData> _playersData = new List<CriPlayerData>(); // 再生中のプレーヤーデータを保持
         private float _volume = 1f;
         private const float MasterVolume = 1f;
-
+        private CriAtomExVoicePool voicePool;
         public CriAudioPlayerService(string cueSheetName, CriAtomListener listener)
         {
             _cueSheetName = cueSheetName;
@@ -57,23 +57,21 @@ namespace SoulRunProject.Audio
         private CriPlayerData CreateAndConfigurePlayer(string cueName, float volume, bool isLoop)
         {
             var tempAcb = CriAtom.GetCueSheet(_cueSheetName).acb;
-            CriPlayerData playerData = new CriPlayerData();
             tempAcb.GetCueInfo(cueName, out var cueInfo);
-            playerData.CueInfo = cueInfo;
 
-            CriAtomExPlayer player = new CriAtomExPlayer();
+            var player = new CriAtomExPlayer();
             player.SetCue(tempAcb, cueName);
             player.SetVolume(volume * _volume * MasterVolume);
             player.Loop(isLoop);
-            playerData.Player = player;
-            playerData.IsLoop = isLoop;
 
-            return playerData;
+            var playback = player.Start();
+
+            return new CriPlayerData(player, playback, cueInfo, isLoop);
         }
 
         private CriAtomEx3dSource Create3dSource(Transform transform)
         {
-            CriAtomEx3dSource source = new CriAtomEx3dSource();
+            var source = new CriAtomEx3dSource();
             source.SetPosition(transform.position.x, transform.position.y, transform.position.z);
             source.Update();
             return source;
