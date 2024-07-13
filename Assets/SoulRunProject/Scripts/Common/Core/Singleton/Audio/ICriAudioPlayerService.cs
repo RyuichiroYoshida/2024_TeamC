@@ -14,5 +14,6 @@ namespace SoulRunProject.Audio
         void SetVolume(float volume);
         void StopAll();
         void PauseAll();
+        void ResumeAll();
     }
 }

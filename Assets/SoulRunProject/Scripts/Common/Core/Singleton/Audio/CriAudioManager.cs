@@ -197,6 +197,13 @@ namespace SoulRunProject.Audio
                 player.PauseAll();
             }
         }
+        public void ResumeAll()
+        {
+            foreach (var player in _audioPlayers.Values)
+            {
+                player.ResumeAll();
+            }
+        }
 
         public List<ICriAudioPlayerService> GetPlayers(CriAudioType type)
         {
