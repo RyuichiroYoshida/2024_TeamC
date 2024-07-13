@@ -3,11 +3,11 @@ using UniRx;
 
 namespace SoulRunProject.Audio
 {
-    public class SEPlayer : CriAudioPlayerService
+    public class VoicePlayer : CriAudioPlayerService
     {
         private readonly CompositeDisposable _disposables = new CompositeDisposable();
 
-        public SEPlayer(string cueSheetName, CriAtomListener listener)
+        public VoicePlayer(string cueSheetName, CriAtomListener listener)
             : base(cueSheetName, listener)
         {
             Observable.EveryUpdate()
@@ -15,7 +15,8 @@ namespace SoulRunProject.Audio
                 .AddTo(_disposables);
         }
 
-        ~SEPlayer()
+
+        ~VoicePlayer()
         {
             _disposables.Dispose();
         }

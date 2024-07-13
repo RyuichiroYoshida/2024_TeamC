@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using CriWare;
 using UnityEngine;
 
@@ -7,16 +6,21 @@ namespace SoulRunProject.Audio
 {
     public abstract class CriAudioPlayerService : ICriAudioPlayerService
     {
-        protected readonly string _cueSheetName;
-        protected readonly CriAtomListener _listener;
-        protected readonly List<CriPlayerData> _playersData = new List<CriPlayerData>(); // 再生中のプレーヤーデータを保持
-        private float _volume = 1f;
-        private const float MasterVolume = 1f;
-        private CriAtomExVoicePool voicePool;
-        public CriAudioPlayerService(string cueSheetName, CriAtomListener listener)
+        protected readonly CriAtomExPlayer _criAtomExPlayer; // 複数の音声を再生するためのプレイヤー
+        protected readonly CriAtomEx3dSource _criAtomEx3dSource; // 3D音源
+        protected readonly Dictionary<string, CriAtomExPlayback> _playbacks; // 再生中の音声を管理
+        protected readonly CriAtomListener _criAtomListener; // リスナー
+        protected readonly string _cueSheetName; // ACBファイルの名前
+        private const float MasterVolume = 1f; // マスターボリューム
+        private float _volume = 1f; // ボリューム
+
+        public CriAudioPlayerService(string cueSheetName, CriAtomListener criAtomListener)
         {
             _cueSheetName = cueSheetName;
-            _listener = listener;
+            _criAtomListener = criAtomListener;
+            _criAtomExPlayer = new CriAtomExPlayer();
+            _criAtomEx3dSource = new CriAtomEx3dSource();
+            _playbacks = new Dictionary<string, CriAtomExPlayback>();
         }
 
         ~CriAudioPlayerService()
@@ -24,7 +28,7 @@ namespace SoulRunProject.Audio
             Dispose();
         }
 
-        public virtual void Play(string cueName, float volume, bool isLoop)
+        public virtual void Play(string cueName, float volume = 1f, bool isLoop = false)
         {
             if (!CheckCueSheet())
             {
@@ -32,127 +36,107 @@ namespace SoulRunProject.Audio
                 return;
             }
 
-            var playerData = CreateAndConfigurePlayer(cueName, volume, isLoop);
-            playerData.Playback = playerData.Player.Start();
-            _playersData.Add(playerData);
-            OnPlayerCreated(playerData);
-        }
-
-        public virtual void Play3D(Transform transform, string cueName, float volume, bool isLoop)
-        {
-            if (!CheckCueSheet())
-            {
-                Debug.LogWarning($"ACBがNullです。CueSheet: {_cueSheetName}");
-                return;
-            }
-
-            var playerData = CreateAndConfigurePlayer(cueName, volume, isLoop);
-            playerData.Player.Set3dSource(Create3dSource(transform));
-            playerData.Player.Set3dListener(_listener.nativeListener);
-            playerData.Playback = playerData.Player.Start();
-            _playersData.Add(playerData); // プレーヤーデータをリストに追加
-            OnPlayerCreated(playerData);
-        }
-
-        private CriPlayerData CreateAndConfigurePlayer(string cueName, float volume, bool isLoop)
-        {
             var tempAcb = CriAtom.GetCueSheet(_cueSheetName).acb;
             tempAcb.GetCueInfo(cueName, out var cueInfo);
 
-            var player = new CriAtomExPlayer();
-            player.SetCue(tempAcb, cueName);
-            player.SetVolume(volume * _volume * MasterVolume);
-            player.Loop(isLoop);
 
-            var playback = player.Start();
+            PrePlayCheck(cueName);
+            _criAtomExPlayer.SetCue(tempAcb, cueName);
+            _criAtomExPlayer.SetVolume(volume * _volume * MasterVolume);
+            _criAtomExPlayer.Loop(isLoop);
 
-            return new CriPlayerData(player, playback, cueInfo, isLoop);
+            var playback = _criAtomExPlayer.Start();
+            _playbacks[cueName] = playback;
         }
 
-        private CriAtomEx3dSource Create3dSource(Transform transform)
+        public virtual void Play3D(Transform transform, string cueName, float volume = 1f, bool isLoop = false)
         {
-            var source = new CriAtomEx3dSource();
-            source.SetPosition(transform.position.x, transform.position.y, transform.position.z);
-            source.Update();
-            return source;
+            if (!CheckCueSheet())
+            {
+                Debug.LogWarning($"ACBがNullです。CueSheet: {_cueSheetName}");
+                return;
+            }
+
+            var tempAcb = CriAtom.GetCueSheet(_cueSheetName).acb;
+            tempAcb.GetCueInfo(cueName, out var cueInfo);
+
+            if (_playbacks.ContainsKey(cueName) && _playbacks[cueName].GetStatus() == CriAtomExPlayback.Status.Playing)
+            {
+                return;
+            }
+
+            PrePlayCheck(cueName);
+            _criAtomEx3dSource.SetPosition(transform.position.x, transform.position.y, transform.position.z);
+            _criAtomEx3dSource.Update();
+
+            _criAtomExPlayer.Set3dSource(_criAtomEx3dSource);
+            _criAtomExPlayer.Set3dListener(_criAtomListener.nativeListener);
+            _criAtomExPlayer.SetCue(tempAcb, cueName);
+            _criAtomExPlayer.SetVolume(volume * _volume * MasterVolume);
+            _criAtomExPlayer.Loop(isLoop);
+
+            var playback = _criAtomExPlayer.Start();
+            _playbacks[cueName] = playback;
+        }
+
+        public void Stop(string cueName)
+        {
+            if (_playbacks.ContainsKey(cueName))
+            {
+                _playbacks[cueName].Stop();
+                _playbacks.Remove(cueName);
+            }
         }
 
         public void Pause(string cueName)
         {
-            foreach (var playerData in _playersData)
+            if (_playbacks.ContainsKey(cueName))
             {
-                if (playerData.CueInfo.name == cueName &&
-                    playerData.Playback.GetStatus() == CriAtomExPlayback.Status.Playing)
-                {
-                    playerData.Player.Pause();
-                }
+                _playbacks[cueName].Pause();
             }
         }
 
         public void Resume(string cueName)
         {
-            foreach (var playerData in _playersData)
+            if (_playbacks.ContainsKey(cueName))
             {
-                if (playerData.CueInfo.name == cueName && playerData.Playback.IsPaused())
-                {
-                    playerData.Playback.Resume(CriAtomEx.ResumeMode.PausedPlayback);
-                }
+                _playbacks[cueName].Resume(CriAtomEx.ResumeMode.PausedPlayback);
             }
         }
 
-        public void Stop(string cueName)
+        public void StopAll()
         {
-            for (int i = _playersData.Count - 1; i >= 0; i--)
+            foreach (var playback in _playbacks.Values)
             {
-                var playerData = _playersData[i];
-                if (playerData.CueInfo.name == cueName)
-                {
-                    playerData.Player.Stop();
-                    playerData.Player.Dispose();
-                    _playersData.RemoveAt(i);
-                }
+                playback.Stop();
+            }
+
+            _playbacks.Clear();
+        }
+
+        public void PauseAll()
+        {
+            foreach (var playback in _playbacks.Values)
+            {
+                playback.Pause();
             }
         }
 
         public void SetVolume(float volume)
         {
             _volume = volume;
-            foreach (var playerData in _playersData)
-            {
-                playerData.Player.SetVolume(_volume);
-            }
-        }
-
-        public void PauseAll()
-        {
-            foreach (var playerData in _playersData)
-            {
-                if (playerData.Playback.GetStatus() == CriAtomExPlayback.Status.Playing)
-                {
-                    playerData.Player.Pause();
-                }
-            }
-        }
-
-        public void ResumeAll()
-        {
-            foreach (var playerData in _playersData)
-            {
-                if (playerData.Playback.IsPaused())
-                {
-                    playerData.Playback.Resume(CriAtomEx.ResumeMode.PausedPlayback);
-                }
-            }
+            _criAtomExPlayer.SetVolume(_volume * MasterVolume);
         }
 
         public void Dispose()
         {
-            foreach (var playerData in _playersData)
+            foreach (var playback in _playbacks.Values)
             {
-                playerData.Player.Dispose();
+                playback.Stop();
             }
 
-            _playersData.Clear();
+            _criAtomExPlayer.Dispose();
+            _criAtomEx3dSource.Dispose();
         }
 
         public bool CheckCueSheet()
@@ -167,20 +151,26 @@ namespace SoulRunProject.Audio
             return true;
         }
 
-        public bool CheckPlaying(string cueName)
+        public void CheckPlayerStatus()
         {
-            foreach (var playerData in _playersData)
+            var cuesToRemove = new List<string>();
+
+            foreach (var kvp in _playbacks)
             {
-                if (playerData.CueInfo.name == cueName &&
-                    playerData.Playback.GetStatus() == CriAtomExPlayback.Status.Playing)
+                if (kvp.Value.GetStatus() == CriAtomExPlayback.Status.Removed)
                 {
-                    return true;
+                    cuesToRemove.Add(kvp.Key);
                 }
             }
 
-            return false;
+            foreach (var cue in cuesToRemove)
+            {
+                _playbacks.Remove(cue);
+            }
         }
 
-        protected abstract void OnPlayerCreated(CriPlayerData playerData);
+        protected virtual void PrePlayCheck(string cueName)
+        {
+        }
     }
 }

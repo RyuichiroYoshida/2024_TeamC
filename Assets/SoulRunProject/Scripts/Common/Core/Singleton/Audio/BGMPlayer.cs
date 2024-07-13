@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using CriWare;
 using UniRx;
 using UnityEngine;
@@ -7,60 +7,40 @@ namespace SoulRunProject.Audio
 {
     public class BGMPlayer : CriAudioPlayerService
     {
-        private CriPlayerData? _currentBGM;
-        private readonly Subject<CriAtomExPlayback.Status> _statusSubject = new Subject<CriAtomExPlayback.Status>();
-        private IDisposable _statusDisposable;
-        private IDisposable _playbackStatusDisposable;
+        private readonly CompositeDisposable _disposables = new CompositeDisposable();
+
         public BGMPlayer(string cueSheetName, CriAtomListener listener)
             : base(cueSheetName, listener)
         {
-            _statusDisposable = _statusSubject
-            .DistinctUntilChanged()
-            .Subscribe(status =>
+            Observable.EveryUpdate()
+                .Subscribe(_ => CheckPlayerStatus())
+                .AddTo(_disposables);
+        }
+
+        protected override void PrePlayCheck(string cueName)
+        {
+            // 既に再生中の場合は再生しない
+            if (_playbacks.ContainsKey(cueName) && _playbacks[cueName].GetStatus() == CriAtomExPlayback.Status.Playing)
             {
-                Debug.Log($"BGM Status Changed: {status}");
-            });
-        }
-        ~BGMPlayer()
-        {
-            _statusDisposable?.Dispose();
-        }
-        public override void Play(string cueName, float volume, bool isLoop)
-        {
-            // 既存のBGMを停止する
+                return;
+            }
+
+            // BGM 再生時には既存の BGM を止める
             StopAllBGM();
-            // 新しいBGMを再生する
-            base.Play(cueName, volume, isLoop);
         }
 
         private void StopAllBGM()
         {
-            if (_currentBGM.HasValue && _currentBGM.Value.Playback.GetStatus() == CriAtomExPlayback.Status.Playing)
+            var cuesToStop = new List<string>(_playbacks.Keys);
+            foreach (var cue in cuesToStop)
             {
-                _currentBGM.Value.Player.Stop();
-                _currentBGM.Value.Player.Dispose();
-                _currentBGM = null;
+                Stop(cue);
             }
         }
 
-        protected override void OnPlayerCreated(CriPlayerData playerData)
+        ~BGMPlayer()
         {
-            _currentBGM = playerData;
-
-            // 以前の監視を解除
-            _playbackStatusDisposable?.Dispose();
-
-            // CriAtomExPlaybackのステータスを監視するObservableを作成
-            var playbackStatusObservable = Observable.EveryUpdate()
-                .Select(_ => _currentBGM?.Playback.GetStatus() ?? CriAtomExPlayback.Status.Removed)
-                .DistinctUntilChanged();
-
-            // 監視を開始し、ステータスをSubjectに通知
-            _playbackStatusDisposable = playbackStatusObservable
-                .Subscribe(status =>
-                {
-                    _statusSubject.OnNext(status);
-                });
+            _disposables.Dispose();
         }
     }
 }

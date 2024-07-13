@@ -8,6 +8,9 @@ using VContainer;
 
 namespace SoulRunProject.Audio
 {
+    /// <summary>
+    /// Audioの再生を管理するクラス
+    /// </summary>
     public class CriAudioManager : AbstractSingletonMonoBehaviour<CriAudioManager>
     {
         [SerializeField] private CriAudioSetting _audioSetting;
@@ -20,12 +23,65 @@ namespace SoulRunProject.Audio
         private CriAtomListener _listener; // リスナー
         protected override bool UseDontDestroyOnLoad => true;
 
+        [Inject]
+        private void Construct(CriAudioSetting audioSetting)
+        {
+            _audioSetting = audioSetting;
+        }
+
         private void Awake()
         {
-            InitializeCriAtom();
-            InitializeListeners();
-            InitializeAudioPlayers();
-            SubscribeToEvents();
+            // ACF設定
+            string path = Application.streamingAssetsPath + $"/{_audioSetting.StreamingAssetsPathAcf}.acf";
+            CriAtomEx.RegisterAcf(null, path);
+
+            // CriAtom作成
+            gameObject.AddComponent<CriAtom>();
+
+            _listener = FindObjectOfType<CriAtomListener>();
+            if (_listener == null)
+            {
+                _listener = gameObject.AddComponent<CriAtomListener>();
+            }
+
+            _audioPlayers = new Dictionary<CriAudioType, ICriAudioPlayerService>();
+
+            foreach (var cueSheet in _audioSetting.AudioCueSheet)
+            {
+                CriAtom.AddCueSheet(cueSheet.CueSheetName, $"{cueSheet.AcbPath}.acb",
+                    !string.IsNullOrEmpty(cueSheet.AwbPath) ? $"{cueSheet.AwbPath}.awb" : null, null);
+                if (cueSheet.CueSheetName == CriAudioType.CueSheet_BGM.ToString())
+                {
+                    _audioPlayers.Add(CriAudioType.CueSheet_BGM, new BGMPlayer(cueSheet.CueSheetName, _listener));
+                }
+                else if (cueSheet.CueSheetName == CriAudioType.CueSheet_SE.ToString())
+                {
+                    _audioPlayers.Add(CriAudioType.CueSheet_SE, new SEPlayer(cueSheet.CueSheetName, _listener));
+                }
+                else if (cueSheet.CueSheetName == CriAudioType.CueSheet_Voice.ToString())
+                {
+                    _audioPlayers.Add(CriAudioType.CueSheet_Voice, new VoicePlayer(cueSheet.CueSheetName, _listener));
+                }
+                else if (cueSheet.CueSheetName == CriAudioType.CueSheet_ME.ToString())
+                {
+                    _audioPlayers.Add(CriAudioType.CueSheet_ME, new MEPlayer(cueSheet.CueSheetName, _listener));
+                }
+                else if (cueSheet.CueSheetName == CriAudioType.Other.ToString())
+                {
+                    _audioPlayers.Add(CriAudioType.Other, new OtherPlayer(cueSheet.CueSheetName, _listener));
+                }
+                // 他のCriAudioTypeも同様に追加可能
+            }
+
+            _masterVolumeChanged += volume =>
+            {
+                foreach (var player in _audioPlayers)
+                {
+                    player.Value.SetVolume(volume);
+                }
+            };
+
+            SceneManager.sceneUnloaded += Unload;
         }
 
         private void OnDestroy()
@@ -38,11 +94,9 @@ namespace SoulRunProject.Audio
             get => _masterVolume;
             set
             {
-                if (Mathf.Abs(_masterVolume - value) > Diff)
-                {
-                    _masterVolume = value;
-                    _masterVolumeChanged?.Invoke(value);
-                }
+                if (!(_masterVolume + Diff < value) && !(_masterVolume - Diff > value)) return;
+                _masterVolumeChanged?.Invoke(value);
+                _masterVolume = value;
             }
         }
 
@@ -51,16 +105,16 @@ namespace SoulRunProject.Audio
             Play(type, cueName, 1f, false);
         }
 
-        public void Play(CriAudioType type, string cueName, bool isLoop)
+        public void Play(CriAudioType type, string cueName, bool isLoop = false)
         {
             Play(type, cueName, 1f, isLoop);
         }
 
-        public void Play(CriAudioType type, string cueName, float volume, bool isLoop)
+        public void Play(CriAudioType type, string cueName, float volume = 1f, bool isLoop = false)
         {
             if (_audioPlayers.TryGetValue(type, out var player))
             {
-                //Debug.Log($"CriAudioType: {type}, CueName: {cueName}");
+                Debug.Log($"CriAudioType: {type}, CueName: {cueName}");
                 player.Play(cueName, volume, isLoop);
             }
             else
@@ -79,7 +133,7 @@ namespace SoulRunProject.Audio
             Play3D(transform, type, cueName, 1f, isLoop);
         }
 
-        public void Play3D(Transform transform, CriAudioType type, string cueName, float volume, bool isLoop)
+        public void Play3D(Transform transform, CriAudioType type, string cueName, float volume = 1f, bool isLoop = false)
         {
             if (_audioPlayers.TryGetValue(type, out var player))
             {
@@ -96,7 +150,7 @@ namespace SoulRunProject.Audio
         {
             if (_audioPlayers.TryGetValue(type, out var player))
             {
-                //player.Pause(cueName);
+                player.Pause(cueName);
             }
             else
             {
@@ -108,7 +162,7 @@ namespace SoulRunProject.Audio
         {
             if (_audioPlayers.TryGetValue(type, out var player))
             {
-                //player.Resume(cueName);
+                player.Resume(cueName);
             }
             else
             {
@@ -127,20 +181,20 @@ namespace SoulRunProject.Audio
                 Debug.LogWarning($"Audio type {type} not supported.");
             }
         }
-
+        
+        public void StopAll()
+        {
+            foreach (var player in _audioPlayers.Values)
+            {
+                player.StopAll();
+            }
+        }
+        
         public void PauseAll()
         {
             foreach (var player in _audioPlayers.Values)
             {
                 player.PauseAll();
-            }
-        }
-
-        public void ResumeAll()
-        {
-            foreach (var player in _audioPlayers.Values)
-            {
-                player.ResumeAll();
             }
         }
 
@@ -169,62 +223,6 @@ namespace SoulRunProject.Audio
             {
                 player.Dispose();
             }
-        }
-
-        private void InitializeCriAtom()
-        {
-            string path = Application.streamingAssetsPath + $"/{_audioSetting.StreamingAssetsPathAcf}.acf";
-            CriAtomEx.RegisterAcf(null, path);
-            gameObject.AddComponent<CriAtom>();
-        }
-
-        private void InitializeListeners()
-        {
-            _listener = FindObjectOfType<CriAtomListener>();
-            if (_listener == null)
-            {
-                _listener = gameObject.AddComponent<CriAtomListener>();
-            }
-        }
-
-        private void InitializeAudioPlayers()
-        {
-            _audioPlayers = new Dictionary<CriAudioType, ICriAudioPlayerService>();
-
-            foreach (var cueSheet in _audioSetting.AudioCueSheet)
-            {
-                CriAtom.AddCueSheet(cueSheet.CueSheetName, $"{cueSheet.AcbPath}.acb",
-                    !string.IsNullOrEmpty(cueSheet.AwbPath) ? $"{cueSheet.AwbPath}.awb" : null, null);
-
-                switch (cueSheet.CueSheetName)
-                {
-                    case var name when name == CriAudioType.CueSheet_BGM.ToString():
-                        _audioPlayers.Add(CriAudioType.CueSheet_BGM, new BGMPlayer(cueSheet.CueSheetName, _listener));
-                        break;
-                    case var name when name == CriAudioType.CueSheet_SE.ToString():
-                        _audioPlayers.Add(CriAudioType.CueSheet_SE, new SEPlayer(cueSheet.CueSheetName, _listener));
-                        break;
-                    case var name when name == CriAudioType.CueSheet_ME.ToString():
-                        _audioPlayers.Add(CriAudioType.CueSheet_ME, new MEPlayer(cueSheet.CueSheetName, _listener));
-                        break;
-                    case var name when name == CriAudioType.Other.ToString():
-                        _audioPlayers.Add(CriAudioType.Other, new OtherPlayer(cueSheet.CueSheetName, _listener));
-                        break;
-                }
-            }
-        }
-
-        private void SubscribeToEvents()
-        {
-            _masterVolumeChanged += volume =>
-            {
-                foreach (var player in _audioPlayers.Values)
-                {
-                    player.SetVolume(volume);
-                }
-            };
-
-            SceneManager.sceneUnloaded += Unload;
         }
     }
 }
