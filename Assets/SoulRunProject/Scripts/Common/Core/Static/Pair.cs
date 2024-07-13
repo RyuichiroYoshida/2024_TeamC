@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HikanyanLaboratory.System
+namespace SoulRunProject.Common
 {
     /// <summary>
     /// ペア

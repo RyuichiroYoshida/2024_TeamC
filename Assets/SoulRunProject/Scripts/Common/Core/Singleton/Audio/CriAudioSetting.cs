@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections.Generic;
-using HikanyanLaboratory.System;
+using SoulRunProject.Common;
 
 namespace SoulRunProject.Audio
 {

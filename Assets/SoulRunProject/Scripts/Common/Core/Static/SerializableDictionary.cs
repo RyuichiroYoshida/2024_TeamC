@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HikanyanLaboratory.System
+namespace SoulRunProject.Common
 {
     [Serializable]
     public class SerializableDictionary<TKey, TValue, TPair> where TPair : Pair<TKey, TValue>

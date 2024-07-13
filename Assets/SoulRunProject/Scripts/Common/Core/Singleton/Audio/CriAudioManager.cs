@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using CriWare;
-using HikanyanLaboratory.System;
 using SoulRunProject.Common;
 using UnityEngine;
 using UnityEngine.SceneManagement;
