@@ -1,6 +1,7 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using SoulRunProject.Audio;
 using SoulRunProject.Common;
 using SoulRunProject.Skill;
 using UnityEngine;
@@ -51,7 +52,7 @@ namespace SoulRunProject.InGame
         /// <summary>シールド展開</summary>
         private void ActiveSkill()
         {
-            CriAudioManager.Instance.PlaySE("SE_Soulshell");
+            CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Soulshell");
             _damageCount = 0;
             _tweener?.Kill();
             _tweener = _instantiatedObject.DOScale(Vector3.one, 0.25f).SetLink(_instantiatedObject.gameObject);
@@ -71,7 +72,7 @@ namespace SoulRunProject.InGame
             //  再度チェックしてシールド枚数以上ならクールダウンを開始してreturn true
             if (_damageCount >= RuntimeParameter.ShieldCount)
             {
-                CriAudioManager.Instance.PlaySE("SE_DiableSoulShell");
+                CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_DiableSoulShell");
                 _linkedTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
                     _instantiatedObject.GetCancellationTokenOnDestroy());
                 CoolDown(_linkedTokenSource.Token).Forget();

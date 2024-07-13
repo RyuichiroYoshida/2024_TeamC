@@ -1,3 +1,4 @@
+using SoulRunProject.Audio;
 using SoulRunProject.Common;
 using UnityEngine;
 
@@ -15,7 +16,7 @@ namespace SoulRunProject.InGame
         {
             playerManager.ResourceContainer.Coin += _coin;
             Finish();
-            CriAudioManager.Instance.PlaySE("SE_CoinGet");
+            CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_CoinGet");
         }
     }
 }

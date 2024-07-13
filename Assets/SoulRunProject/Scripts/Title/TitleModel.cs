@@ -1,5 +1,6 @@
 using System;
 using Cysharp.Threading.Tasks;
+using SoulRunProject.Audio;
 using SoulRunProject.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,7 +17,7 @@ namespace SoulRunProject.Title
 
         private void Start()
         {
-            CriAudioManager.Instance.PlayBGM("BGM_title");
+            CriAudioManager.Instance.Play(CriAudioType.CueSheet_BGM, "BGM_Title");
         }
 
         public async void StartGame()
@@ -36,7 +37,7 @@ namespace SoulRunProject.Title
         {
             DebugClass.Instance.ShowLog("ゲーム終了");
 #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;//ゲームプレイ終了
+            UnityEditor.EditorApplication.isPlaying = false; //ゲームプレイ終了
 #else
     Application.Quit();//ゲームプレイ終了
 #endif

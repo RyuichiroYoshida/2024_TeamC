@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using SoulRunProject.Audio;
 using SoulRunProject.Common;
 using UnityEngine;
 
@@ -12,8 +13,10 @@ namespace SoulRunProject.InGame
         private UniTask.Awaiter _coolDownAwaiter;
         private LaserSkillData SkillData => (LaserSkillData)_skillData;
         private LaserSkillParameter RuntimeParameter => (LaserSkillParameter)_runtimeParameter;
-        private int _seIndex = -1;
-        public LaserSkill(AbstractSkillData skillData, in PlayerManager playerManager, in Transform playerTransform) : base(skillData, in playerManager, in playerTransform)
+        private string _se = "SE_Laser";
+
+        public LaserSkill(AbstractSkillData skillData, in PlayerManager playerManager, in Transform playerTransform) :
+            base(skillData, in playerManager, in playerTransform)
         {
         }
 
@@ -23,6 +26,7 @@ namespace SoulRunProject.InGame
             {
                 _laserList.Add(Object.Instantiate(SkillData.Original, _playerTransform));
             }
+
             Arrangement();
             Initialize();
         }
@@ -46,6 +50,7 @@ namespace SoulRunProject.InGame
                     {
                         endPos.x -= RuntimeParameter.Width / 2;
                     }
+
                     endPos.z += RuntimeParameter.Height * laser.TurnCount;
                     var laserPos = _playerTransform.position + laser.transform.localPosition;
                     laser.EndDirection = endPos - laserPos;
@@ -60,10 +65,11 @@ namespace SoulRunProject.InGame
 
                 var matrix2 = Matrix4x4.TRS(Vector3.zero, _playerTransform.rotation, Vector3.one);
                 //  プレイヤーが途中で回転してもいいようにベクトルに回転行列を掛ける。
-                laser.transform.rotation = 
-                    Quaternion.LookRotation(Vector3.Lerp(matrix2.MultiplyVector(laser.StartDirection), matrix2.MultiplyVector(laser.EndDirection), Mathf.Clamp01(laser.Timer)));
+                laser.transform.rotation =
+                    Quaternion.LookRotation(Vector3.Lerp(matrix2.MultiplyVector(laser.StartDirection),
+                        matrix2.MultiplyVector(laser.EndDirection), Mathf.Clamp01(laser.Timer)));
                 laser.Timer += Time.deltaTime * RuntimeParameter.Speed;
-                
+
                 if (Physics.Raycast(laser.transform.position, laser.transform.forward, out RaycastHit hit))
                 {
                     if (hit.collider.TryGetComponent(out DamageableEntity entity))
@@ -77,13 +83,12 @@ namespace SoulRunProject.InGame
             {
                 if (_coolDownAwaiter.IsCompleted && endCount >= _laserList.Count)
                 {
-                    CriAudioManager.Instance.StopSE(_seIndex);
+                    CriAudioManager.Instance.Stop(CriAudioType.CueSheet_SE, _se);
                     _coolDownAwaiter = CoolDown().GetAwaiter();
                 }
             }
             catch
             {
-                
             }
         }
 
@@ -96,17 +101,20 @@ namespace SoulRunProject.InGame
                 Object.Destroy(_laserList[endIndex]);
                 _laserList.RemoveAt(endIndex);
             }
+
             //  現在のパラメーターよりもリストのレーザーの数が少なければ同じになるまで増やす
             while (RuntimeParameter.Amount > _laserList.Count)
             {
                 _laserList.Add(AddLaser());
             }
+
             //  整列させる
             Arrangement();
         }
+
         async UniTask CoolDown()
         {
-            await UniTask.WaitForSeconds(RuntimeParameter.CoolTime, cancellationToken: 
+            await UniTask.WaitForSeconds(RuntimeParameter.CoolTime, cancellationToken:
                 _playerManagerInstance.destroyCancellationToken);
             Initialize();
         }
@@ -129,8 +137,10 @@ namespace SoulRunProject.InGame
                 _laserList[i].TurnSide = false;
                 _laserList[i].gameObject.SetActive(true);
             }
-            _seIndex = CriAudioManager.Instance.PlaySE("SE_Laser");
+
+            CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, _se);
         }
+
         LaserController AddLaser()
         {
             var laser = Object.Instantiate(SkillData.Original, _playerTransform);
@@ -144,6 +154,7 @@ namespace SoulRunProject.InGame
             laser.EndDirection = targetPos - laser.transform.position;
             return laser;
         }
+
         void Arrangement()
         {
             float angleDiff = 180f / _laserList.Count;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using SoulRunProject.Audio;
 using SoulRunProject.InGame;
 using SoulRunProject.SoulMixScene;
 using UniRx;
@@ -120,7 +121,7 @@ namespace SoulRunProject.Common
             
             // 白色点滅メソッド
             _hitDamageEffectManager.HitFadeBlinkWhite();
-            CriAudioManager.Instance.PlaySE( "SE_Damage");
+            CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Damage");
         }
 
         public void Heal(float value)

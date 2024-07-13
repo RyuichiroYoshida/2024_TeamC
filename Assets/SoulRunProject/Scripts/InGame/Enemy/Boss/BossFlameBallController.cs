@@ -1,3 +1,4 @@
+using SoulRunProject.Audio;
 using SoulRunProject.Common;
 using UniRx;
 using UniRx.Triggers;
@@ -70,7 +71,7 @@ namespace SoulRunProject.InGame
                 BossFlameFloorController flameFloor = Instantiate(_flameFloorPrefab, other.gameObject.transform);
                 flameFloor.transform.position = gameObject.transform.position;
                 flameFloor.Initialize(_flameFloorDamage);
-                CriAudioManager.Instance.PlaySE("SE_Fire_Hit"); // sound
+                CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Fire_Hit");
                 Destroy(gameObject);
             }
         }
