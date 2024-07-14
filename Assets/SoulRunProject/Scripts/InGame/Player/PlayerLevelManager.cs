@@ -1,4 +1,5 @@
 using System;
+using SoulRunProject.Audio;
 using SoulRunProject.Common;
 using SoulRunProject.SoulMixScene;
 using UniRx;
@@ -46,7 +47,7 @@ namespace SoulRunProject.InGame
             }
 
             _currentExp.Value += exp;
-            CriAudioManager.Instance.PlaySE("SE_EXGet");
+            CriAudioManager.Instance.Play( CriAudioType.CueSheet_SE, "SE_EXGet");
 
             while (_currentExp.Value >= CurrentExpToNextLevel)
             {
@@ -65,7 +66,7 @@ namespace SoulRunProject.InGame
             CurrentPlayerStatus.MoveSpeed += CurrentPlayerStatus.SpeedUpAtLevelUp;
             CurrentPlayerStatus.CurrentHp += CurrentPlayerStatus.HealAtLevelUp;
             _currentLevel.Value++;
-            CriAudioManager.Instance.PlaySE("SE_LevelUp");
+            CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_LevelUp");
         }
     }
 }

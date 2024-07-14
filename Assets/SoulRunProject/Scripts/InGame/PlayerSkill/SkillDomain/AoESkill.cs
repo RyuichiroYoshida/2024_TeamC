@@ -1,3 +1,4 @@
+using SoulRunProject.Audio;
 using SoulRunProject.Common;
 using UnityEngine;
 
@@ -18,7 +19,7 @@ namespace SoulRunProject.InGame
         {
             _aoeController = Object.Instantiate(SkillData.Original);
             _aoeController.ApplyParameter(RuntimeParameter, _playerManagerInstance);
-            CriAudioManager.Instance.PlaySE("SE_Holyfield");
+            CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Holyfield");
         }
 
         public override void UpdateSkill(float deltaTime)

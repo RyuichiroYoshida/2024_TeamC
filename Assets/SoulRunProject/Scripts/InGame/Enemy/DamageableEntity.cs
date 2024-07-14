@@ -1,4 +1,5 @@
 using System;
+using SoulRunProject.Audio;
 using SoulRunProject.Common;
 using SoulRunProject.Runtime;
 using UniRx;
@@ -13,22 +14,22 @@ namespace SoulRunProject.InGame
     {
         [SerializeField, CustomLabel("HP")] private float _maxHp = 30;
 
-        [SerializeField, CustomLabel("衝突ダメージ")] 
+        [SerializeField, CustomLabel("衝突ダメージ")]
         private float _collisionDamage;
 
-        [SerializeField, CustomLabel("ノックバックするかどうか")] 
+        [SerializeField, CustomLabel("ノックバックするかどうか")]
         private bool _canKnockback = true;
 
-        [SerializeField, CustomLabel("ノックバック方向"), ShowWhenBoolean(nameof(_canKnockback))]  
+        [SerializeField, CustomLabel("ノックバック方向"), ShowWhenBoolean(nameof(_canKnockback))]
         private Vector3 _direction = Vector3.one;
 
-        [SerializeField, CustomLabel("ノックバック処理"), ShowWhenBoolean(nameof(_canKnockback))]  
+        [SerializeField, CustomLabel("ノックバック処理"), ShowWhenBoolean(nameof(_canKnockback))]
         private TakeKnockBack _takeKnockBack;
 
-        [SerializeField, CustomLabel("ドロップデータ")] 
+        [SerializeField, CustomLabel("ドロップデータ")]
         private LootTable _lootTable;
 
-        [SerializeField, CustomLabel("ダメージエフェクト")] 
+        [SerializeField, CustomLabel("ダメージエフェクト")]
         private HitDamageEffectManager _hitDamageEffectManager;
 
         private FloatReactiveProperty _currentHp = new();
@@ -37,9 +38,11 @@ namespace SoulRunProject.InGame
         private float _knockBackResistance;
 
         private PlayerManager _player;
+
         /// <typeparam name="ダメージ"></typeparam>
         /// <typeparam name="クリティカルかどうか"></typeparam>
         public Action<float, bool> OnDamaged;
+
         public Action OnDead;
         public float MaxHp => _maxHp;
         public float CollisionDamage => _collisionDamage;
@@ -72,7 +75,7 @@ namespace SoulRunProject.InGame
             CurrentHp.Value -= calculatedDamage;
             OnDamaged?.Invoke(calculatedDamage, isCritical);
 
-            if (useSE) CriAudioManager.Instance.PlaySE("SE_Hit");
+            if (useSE) CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Hit");
 
             if (CurrentHp.Value <= 0) Death();
 
@@ -89,7 +92,7 @@ namespace SoulRunProject.InGame
         public void Death()
         {
             if (_lootTable) DropManager.Instance.RequestDrop(_lootTable, transform.position);
-            CriAudioManager.Instance.PlaySE("SE_Enemy_Dead");
+            CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Enemy_Dead");
 
             OnDead?.Invoke();
             Finish();
@@ -99,7 +102,7 @@ namespace SoulRunProject.InGame
         {
             Finish();
         }
-        
+
         private void OnTriggerEnter(Collider other)
         {
             if (!gameObject.activeSelf) return;

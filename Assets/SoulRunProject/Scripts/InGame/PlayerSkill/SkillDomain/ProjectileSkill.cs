@@ -1,3 +1,4 @@
+using SoulRunProject.Audio;
 using SoulRunProject.Common;
 using UniRx;
 using UnityEngine;
@@ -56,7 +57,7 @@ namespace SoulRunProject.InGame
                         bullet.OnFinishedAsync.Take(1).Subscribe(_ => _bulletPool.Return(bullet));
                     }
 
-                    CriAudioManager.Instance.PlaySE("SE_Soulbullet");
+                    CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Soulbullet");
                 }
             }
         }

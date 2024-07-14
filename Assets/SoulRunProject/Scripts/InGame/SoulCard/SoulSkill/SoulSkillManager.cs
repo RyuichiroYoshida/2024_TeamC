@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using SoulRunProject.Audio;
 using SoulRunProject.Common;
 using SoulRunProject.Framework;
 using SoulRunProject.SoulMixScene;
@@ -72,7 +73,7 @@ namespace SoulRunProject.InGame
             if (_currentSoul.Value >= RequiredSoul)
             {
                 _currentSoul.Value = RequiredSoul;
-                CriAudioManager.Instance.PlaySE("SE_SoulSkillAvailable");
+                CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_SoulSkillAvailable");
             }
         }
         
