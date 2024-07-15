@@ -30,7 +30,7 @@ namespace SoulRunProject.Audio
 
         public virtual void Play(string cueName, float volume = 1f, bool isLoop = false)
         {
-            if (!CheckCueSheet())
+            if (!CheckCueSheet(cueName))
             {
                 Debug.LogWarning($"ACBがNullです。CueSheet: {_cueSheetName}");
                 return;
@@ -51,7 +51,7 @@ namespace SoulRunProject.Audio
 
         public virtual void Play3D(Transform transform, string cueName, float volume = 1f, bool isLoop = false)
         {
-            if (!CheckCueSheet())
+            if (!CheckCueSheet(cueName))
             {
                 Debug.LogWarning($"ACBがNullです。CueSheet: {_cueSheetName}");
                 return;
@@ -81,10 +81,14 @@ namespace SoulRunProject.Audio
 
         public void Stop(string cueName)
         {
-            if (_playbacks.ContainsKey(cueName))
+            if (cueName != null && _playbacks.ContainsKey(cueName))
             {
                 _playbacks[cueName].Stop();
                 _playbacks.Remove(cueName);
+            }
+            else
+            {
+                Debug.LogWarning($"CueName: {cueName} は存在しません。");
             }
         }
 
@@ -147,7 +151,7 @@ namespace SoulRunProject.Audio
             _criAtomEx3dSource.Dispose();
         }
 
-        public bool CheckCueSheet()
+        public bool CheckCueSheet(string cueName = null)
         {
             var tempAcb = CriAtom.GetCueSheet(_cueSheetName)?.acb;
             if (tempAcb == null)
@@ -155,7 +159,11 @@ namespace SoulRunProject.Audio
                 Debug.LogWarning($"ACBがNullです。CueSheet: {_cueSheetName}");
                 return false;
             }
-
+            if (cueName == null)
+            {
+                Debug.LogWarning("Cue name is null.");
+                return false;
+            }
             return true;
         }
 
