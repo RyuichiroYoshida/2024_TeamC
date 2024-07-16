@@ -2545,6 +2545,7 @@ MonoBehaviour:
   _resultPanel: {fileID: 1359206112790873617}
   _scoreText: {fileID: 8350913862931511599}
   _coinText: {fileID: 7205900579782173670}
+  _displayDelayTime: 2.5
 --- !u!114 &3502769304525116568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3723,7 +3724,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _popupPanel: {fileID: 6057145276720290200}
-  _centerback: {fileID: 2637750818335127757}
   _popupContent: {fileID: 4727822967464617933}
   _fadeDuration: 0.1
   _maxHeight: 2169

@@ -36,20 +36,20 @@ namespace SoulRunProject.InGame
 
         private void Update()
         {
-            //  死亡時の演出
-            if (!_playerMovement || !_ragdoll) return;
-            
-            var threshold = _playerMovement.GroundHeight + _playerMovement.DistanceBetweenPivotAndGroundPoint;
-            if (_ragdoll.transform.position.y > threshold)
-            {
-                _ragdoll.transform.position += Vector3.down * (_ragdollFallSpeed * Time.unscaledDeltaTime);
-            }
-            else if(_ragdoll.transform.position.y < threshold)
-            {
-                var temp = _ragdoll.transform.position;
-                temp.y = threshold;
-                _ragdoll.transform.position = temp;
-            }
+            // //  死亡時の演出
+            // if (!_playerMovement || !_ragdoll) return;
+            //
+            // var threshold = _playerMovement.GroundHeight + _playerMovement.DistanceBetweenPivotAndGroundPoint;
+            // if (_ragdoll.transform.position.y > threshold)
+            // {
+            //     _ragdoll.transform.position += Vector3.down * (_ragdollFallSpeed * Time.unscaledDeltaTime);
+            // }
+            // else if(_ragdoll.transform.position.y < threshold)
+            // {
+            //     var temp = _ragdoll.transform.position;
+            //     temp.y = threshold;
+            //     _ragdoll.transform.position = temp;
+            // }
         }
 
         /// <summary>
