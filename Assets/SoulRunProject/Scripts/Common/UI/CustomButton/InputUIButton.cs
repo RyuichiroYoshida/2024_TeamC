@@ -1,6 +1,6 @@
 ﻿using System;
 using DG.Tweening;
-using SoulRunProject.Common;
+using SoulRunProject.Audio;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Events;
@@ -45,7 +45,7 @@ namespace SoulRun.InGame
 
         protected override void OnPointerDownEvent()
         {
-            CriAudioManager.Instance.PlaySE("SE_Decision");
+            CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Decision");
             // DOTweenを使ってスケールを小さくするアニメーションを実行
             transform.DOScale(_originalScale * 0.8f, _fadeTime).SetLink(gameObject).SetUpdate(UpdateType.Normal, true);
             _button.alpha = 0.5f;
@@ -66,7 +66,7 @@ namespace SoulRun.InGame
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            CriAudioManager.Instance.PlaySE("SE_Select");
+            CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Select");
             transform.DOScale(_originalScale * 1.2f, _fadeTime).SetLink(gameObject).SetUpdate(UpdateType.Normal, true);
         }
 

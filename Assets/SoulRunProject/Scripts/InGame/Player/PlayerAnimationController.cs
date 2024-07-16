@@ -1,3 +1,4 @@
+using SoulRunProject.Audio;
 using SoulRunProject.Common;
 using UnityEngine;
 using UniRx;
@@ -58,7 +59,7 @@ namespace SoulRunProject.InGame
         /// </summary>
         public void PlayRunSound()
         {
-            CriAudioManager.Instance.PlaySE("SE_Run");
+            CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Run");
         }
     }
 }

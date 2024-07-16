@@ -1,3 +1,4 @@
+using SoulRunProject.Audio;
 using SoulRunProject.Common;
 using SoulRunProject.Skill;
 using UnityEngine;
@@ -40,7 +41,7 @@ namespace SoulRunProject.InGame
         /// <summary> スキル発動 </summary>
         private void ActivateSkill()
         {
-            CriAudioManager.Instance.PlaySE("SE_Heal");
+            CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Heal");
             _coolTimer = RuntimeParameter.CoolTime;
             _playerManagerInstance.Heal(RuntimeParameter.HealAmount);
             _ps?.Play();
