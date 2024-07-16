@@ -62,7 +62,7 @@ MonoBehaviour:
     - _statusToUp: 4
       _upValue: 0.5
   - _itemName: "\u5929\u4F7F\u306E\u9769\u9774"
-    _itemIcon: {fileID: 0}
+    _itemIcon: {fileID: 21300000, guid: 929b8c49bf1ab1d4490eadb2524f61ce, type: 3}
     _explanatoryText: "\u30B9\u30D4\u30FC\u30C9\u4E0A\u304C\u308B"
     ItemEffects:
     - _statusToUp: 9
