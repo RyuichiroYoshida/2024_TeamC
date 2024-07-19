@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using SoulRunProject.Audio;
 using SoulRunProject.Common;
 using UniRx;
 using UniRx.Triggers;
@@ -19,7 +20,10 @@ namespace SoulRunProject.InGame
         [SerializeField] private float _jumpPower;
         [SerializeField] private float _grav;
         [SerializeField, CustomLabel("地面の高さ")] private float _yAxisGroundLine;
-        [SerializeField, CustomLabel("Pivotと接地点との距離")] private float _distanceBetweenPivotAndGroundPoint;
+
+        [SerializeField, CustomLabel("Pivotと接地点との距離")]
+        private float _distanceBetweenPivotAndGroundPoint;
+
         [SerializeField, HideInInspector] private float _xMoveRangeMin;
         [SerializeField, HideInInspector] private float _xMoveRangeMax;
 
@@ -27,10 +31,11 @@ namespace SoulRunProject.InGame
         private readonly BoolReactiveProperty _isGround = new BoolReactiveProperty(false);
         private Vector3 _playerVelocity;
         private bool _inPause;
-        private int _spinIndex;
+        private string _spin;
 
         public BoolReactiveProperty IsGround => _isGround;
         public event Action OnJumped;
+
         /// <summary> プレイヤー地点の地面の高さ </summary>
         public float GroundHeight => _yAxisGroundLine;
 
@@ -46,9 +51,9 @@ namespace SoulRunProject.InGame
             _isGround.SkipLatestValueOnSubscribe().Subscribe(flag =>
             {
                 if (flag)
-                    CriAudioManager.Instance.StopSE(_spinIndex);
+                    CriAudioManager.Instance.Stop(CriAudioType.CueSheet_SE, _spin);
                 else
-                    _spinIndex = CriAudioManager.Instance.PlaySE("SE_Spin");
+                    CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, _spin);
             }).AddTo(this);
         }
 
@@ -62,7 +67,7 @@ namespace SoulRunProject.InGame
         private void FixedUpdate()
         {
             if (_inPause) return;
-            
+
             if (_isGround.Value && _playerVelocity.y < 0)
             {
                 _playerVelocity.y = 0;
@@ -71,7 +76,7 @@ namespace SoulRunProject.InGame
             {
                 _playerVelocity.y -= _grav * Time.fixedDeltaTime;
             }
-            
+
             _rb.velocity = _playerVelocity;
         }
 
@@ -88,7 +93,7 @@ namespace SoulRunProject.InGame
             {
                 _playerVelocity.y = _jumpPower;
                 _isGround.Value = false;
-                CriAudioManager.Instance.PlaySE("SE_Jump");
+                CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Jump");
                 OnJumped?.Invoke();
             }
         }
@@ -109,7 +114,7 @@ namespace SoulRunProject.InGame
                     break;
                 }
             }
-            
+
             if (transform.position.y <= _yAxisGroundLine + DistanceBetweenPivotAndGroundPoint)
             {
                 Vector3 pos = transform.position;
@@ -118,7 +123,7 @@ namespace SoulRunProject.InGame
 
                 if (!_isGround.Value)
                 {
-                    CriAudioManager.Instance.PlaySE("SE_Landing");
+                    CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Landing");
                     _isGround.Value = true;
                 }
             }
@@ -170,9 +175,8 @@ namespace SoulRunProject.InGame
 
         public void RotatePlayer(Vector2 input)
         {
-            _playerAnimator.SetFloat("Direction" , input.x);
+            _playerAnimator.SetFloat("Direction", input.x);
         }
-
 
 
 #if UNITY_EDITOR
