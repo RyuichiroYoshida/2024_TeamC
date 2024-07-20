@@ -18,25 +18,30 @@ namespace SoulRunProject
         private CommonObjectPool _swordPool;
 
         // 魔法陣生成位置の座標リスト
-        private readonly List<Vector3> _magicSquarePos = new();
+        private readonly List<Vector3> _magicCirclePos = new();
 
         // 魔法陣ゲームオブジェクトリスト
-        private readonly List<GameObject> _magicSquaresRight = new();
-        private readonly List<GameObject> _magicSquaresLeft = new();
+        private readonly List<GameObject> _magicCirclesRight = new();
+        private readonly List<GameObject> _magicCirclesLeft = new();
 
         private float _timer;
         private float _delayTimer;
         private bool _swordShotFlag;
-        private bool _magicSquareFlag;
-        private int _defaultCount;
+        private bool _magicCircleFlag;
+        private int _lineCount = 1;
 
-        public SummoningProjectileSkill(AbstractSkillData skillData, in PlayerManager playerManager, in Transform playerTransform)
+        private const int AddXPos = 5;
+        private const int AddYPos = 5;
+
+        public SummoningProjectileSkill(AbstractSkillData skillData, in PlayerManager playerManager,
+            in Transform playerTransform)
             : base(skillData, in playerManager, in playerTransform)
         {
         }
-        
-        private SummoningProjectileSkillData SkillData => 
+
+        private SummoningProjectileSkillData SkillData =>
             (SummoningProjectileSkillData)_skillData;
+
         private ProjectileSkillParameter RuntimeParameter =>
             (ProjectileSkillParameter)_runtimeParameter;
 
@@ -45,16 +50,19 @@ namespace SoulRunProject
             _timer = 0f;
             _delayTimer = 0f;
 
-            _magicSquarePos.Clear();
-            _magicSquaresRight.Clear();
-            _magicSquaresLeft.Clear();
+            _magicCirclePos.Clear();
+            _magicCirclesRight.Clear();
+            _magicCirclesLeft.Clear();
 
             _cts = new CancellationTokenSource();
-            
+
             _swordPool = ObjectPoolManager.Instance.RequestPool(SkillData.Sword);
 
-            _defaultCount = RuntimeParameter.Amount;
-            CreateMagicSquare(RuntimeParameter.Amount, 0, 0);
+            // 魔法陣の初期生成
+
+            // 最初の1列はここで追加
+            _magicCirclePos.Add(new Vector3(AddXPos, AddYPos, -1));
+            SetMagicCirclePos();
         }
 
         public override void UpdateSkill(float deltaTime)
@@ -66,21 +74,21 @@ namespace SoulRunProject
             if (_timer > coolTime)
             {
                 // 念のためフラグで一回のみ回している
-                if (_magicSquareFlag == false)
+                if (_magicCircleFlag == false)
                 {
-                    foreach (var item in _magicSquaresRight)
+                    foreach (var item in _magicCirclesRight)
                     {
                         item.SetActive(true);
                         item.GetComponent<ParticleSystem>().Play();
                     }
 
-                    foreach (var item in _magicSquaresLeft)
+                    foreach (var item in _magicCirclesLeft)
                     {
                         item.SetActive(true);
                         item.GetComponent<ParticleSystem>().Play();
                     }
 
-                    _magicSquareFlag = true;
+                    _magicCircleFlag = true;
                 }
 
                 // 魔法陣起動から剣召喚までのタイマー
@@ -88,7 +96,7 @@ namespace SoulRunProject
 
                 if (_delayTimer > SkillData.SwordShotDelay)
                 {
-                    _magicSquareFlag = false;
+                    _magicCircleFlag = false;
                     _timer = 0;
                     _delayTimer = 0;
 
@@ -101,7 +109,7 @@ namespace SoulRunProject
                     _swordShotFlag = true;
 
                     // 魔法陣ゲームオブジェクトを格納しているリストの位置から剣を射出
-                    foreach (var obj in _magicSquaresRight)
+                    foreach (var obj in _magicCirclesRight)
                     {
                         try
                         {
@@ -113,7 +121,7 @@ namespace SoulRunProject
                         }
                     }
 
-                    foreach (var obj in _magicSquaresLeft)
+                    foreach (var obj in _magicCirclesLeft)
                     {
                         try
                         {
@@ -132,46 +140,57 @@ namespace SoulRunProject
 
         public override void OnLevelUp()
         {
-            CreateMagicSquare(RuntimeParameter.Amount, _magicSquarePos.Count, RuntimeParameter.Amount - _defaultCount);
+            SetMagicCirclePos();
+
+            // レベルアップ時にタイマーリセット
+            _timer = 0;
+            _delayTimer = 0;
         }
 
-        private void CreateMagicSquare(int loopCount, int startObjCount, int startLineCount)
+        private void SetMagicCirclePos()
         {
-            // 最初の1列はここで追加
-            _magicSquarePos.Add( new Vector3(5, 5, -1));
-            
             // 2列目からの生成位置を求めるループ
-            for (var i = startLineCount + 1; i < loopCount; i++)
+            for (var i = _lineCount; i < RuntimeParameter.Amount; i++, _lineCount++)
             {
-                var yPos = 5 + i;
-                for (var j = startLineCount; j <= i; j++)
+                var yPos = AddYPos + i;
+                for (var j = 0; j <= i; j++)
                 {
                     // 最初の箇所は基準になるので、処理を分ける
-                    if (j <= startLineCount)
+                    if (j <= 0)
                     {
-                        _magicSquarePos.Add(new Vector3(i + 5, yPos -= j, -(1 + i / 5)));
+                        _magicCirclePos.Add(new Vector3(i + AddXPos, yPos -= j, -1));
                         continue;
                     }
 
-                    _magicSquarePos.Add(new Vector3(i + 5, yPos -= 2, -(1 + i / 5)));
+                    _magicCirclePos.Add(new Vector3(i + AddXPos, yPos -= 2, -1));
                 }
             }
-            
-            // 魔法陣の生成処理
-            for (var i = startObjCount; i < _magicSquarePos.Count; i++)
-            {
-                // 魔法陣を左右それぞれリストに格納する
-                _magicSquaresRight.Add(Object.Instantiate(SkillData.MagicCirclePrefab, _playerTransform.position + _magicSquarePos[i],
-                    Quaternion.Euler(0, -15, 0)));
-                _magicSquaresRight[i].transform.parent = _playerTransform;
-                _magicSquaresRight[i].SetActive(false);
 
-                _magicSquaresLeft.Add(Object.Instantiate(SkillData.MagicCirclePrefab, _playerTransform.position +
-                    new Vector3(-_magicSquarePos[i].x, _magicSquarePos[i].y, _magicSquarePos[i].z),
-                    Quaternion.Euler(0, 15, 0)));
-                _magicSquaresLeft[i].transform.parent = _playerTransform;
-                _magicSquaresLeft[i].SetActive(false);
+            CreateMagicCircle();
+        }
+
+        private void CreateMagicCircle()
+        {
+            // 魔法陣の生成処理
+            for (var i = 0; i < _magicCirclePos.Count; i++)
+            {
+                var rightObj = Object.Instantiate(SkillData.MagicCirclePrefab,
+                    _playerTransform.position + _magicCirclePos[i],
+                    Quaternion.Euler(0, -15, 0));
+                rightObj.transform.parent = _playerTransform;
+                rightObj.SetActive(false);
+                _magicCirclesRight.Add(rightObj);
+
+                var leftObj = Object.Instantiate(SkillData.MagicCirclePrefab,
+                    _playerTransform.position +
+                    new Vector3(-_magicCirclePos[i].x, _magicCirclePos[i].y, _magicCirclePos[i].z),
+                    Quaternion.Euler(0, 15, 0));
+                leftObj.transform.parent = _playerTransform;
+                leftObj.SetActive(false);
+                _magicCirclesLeft.Add(leftObj);
             }
+
+            _magicCirclePos.Clear();
         }
 
         /// <summary>
@@ -193,10 +212,7 @@ namespace SoulRunProject
             sword.transform.parent = oldParent;
             obj.SetActive(false);
 
-            // // 待機後にランダムな角度で剣を飛ばす
-            // var randomRotationX = Random.Range(0f, 30);
-            // var randomRotationY = Random.Range(0f, 40);
-            // sword.transform.rotation = Quaternion.Euler(randomRotationX, -randomRotationY, 0);
+            // 待機後にランダムな角度で剣を飛ばす
             sword.ApplyParameter(RuntimeParameter);
             sword.Initialize();
             sword.GetReference(_playerManagerInstance);
