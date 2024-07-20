@@ -1313,7 +1313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e3723f97fa54d1aa78e67ec2ad6b2a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audioSetting: {fileID: 0}
+  _audioSetting: {fileID: 11400000, guid: 9fd076052083d224b9fe684fcf128f28, type: 2}
 --- !u!1001 &1404138651
 PrefabInstance:
   m_ObjectHideFlags: 0
