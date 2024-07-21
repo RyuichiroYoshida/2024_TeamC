@@ -2698,6 +2698,7 @@ MonoBehaviour:
   _resultPanel: {fileID: 1359206112790873617}
   _scoreText: {fileID: 8350913862931511599}
   _coinText: {fileID: 7205900579782173670}
+  _displayDelayTime: 2.5
 --- !u!114 &3502769304525116568
 MonoBehaviour:
   m_ObjectHideFlags: 0

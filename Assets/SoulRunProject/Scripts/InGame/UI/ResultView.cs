@@ -1,6 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using SoulRun.InGame;
 using SoulRunProject.Framework;
 using UnityEngine;
@@ -19,6 +18,7 @@ namespace SoulRunProject.InGame
         [SerializeField] private GameObject _resultPanel;
         [SerializeField] private Text _scoreText;
         [SerializeField] private Text _coinText;
+        [SerializeField, Tooltip("表示の遅延時間")] private float _displayDelayTime;
         
         public InputUIButton RestartButton => _restartButton;
         public InputUIButton ExitButton => _exitButton;
@@ -27,17 +27,18 @@ namespace SoulRunProject.InGame
         {
             _restartButton.OnClickAsObservable().Subscribe(_ => DebugClass.Instance.ShowLog("リスタートボタンが押されました。"));
         }
-
+        
         /// <summary>
         /// リザルト画面の表示非表示を設定する
         /// </summary>
         /// <param name="isShow"></param>
-        public void SetResultPanelVisibility(bool isShow)
+        public async void SetResultPanelVisibility(bool isShow)
         {
+            await UniTask.Delay(TimeSpan.FromSeconds(_displayDelayTime), DelayType.UnscaledDeltaTime);
             _resultPanel.SetActive(isShow);
         }
         
-        public void ShowResult(int score, int coin)
+        public void ReflectResultValue(int score, int coin)
         {
             _scoreText.text = score.ToString();
             _coinText.text = coin.ToString();
