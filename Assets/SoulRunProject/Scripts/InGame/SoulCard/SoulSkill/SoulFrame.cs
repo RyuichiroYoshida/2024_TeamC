@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using SoulRunProject.Audio;
 using SoulRunProject.Common;
 using UniRx;
 using UniRx.Triggers;
@@ -17,6 +18,7 @@ namespace SoulRunProject.InGame
         [SerializeField , CustomLabel("使用パーティクル")] private GameObject _particle;
         [SerializeField, CustomLabel("１発のダメージ")] private int _attackDamage;
         [SerializeField, CustomLabel("ノックバック")] private GiveKnockBack _giveKnockBack;
+        [SerializeField, CustomLabel("生成するプレイヤーからの相対座標")] private Vector3 _relativePosition;
         private GameObject _particleInstance;
         private ParticleSystem _meteorParticle;
         private Transform _playerTransform;
@@ -27,12 +29,19 @@ namespace SoulRunProject.InGame
             if (!_particleInstance)
             {
                 _particleInstance =  Instantiate(_particle , _playerTransform);
+                Vector3 pos = _particleInstance.transform.position;
+                _particleInstance.transform.position = pos + _relativePosition;
                 _particleInstance.OnParticleCollisionAsObservable().Subscribe(ParticleCollision).AddTo(_particleInstance);
                 _meteorParticle = _particleInstance.GetComponent<ParticleSystem>();
             }
+            // パーティクルの再生停止
             _meteorParticle.Play();
             Observable.Timer(TimeSpan.FromSeconds(_duration))
                 .Subscribe(_=> _meteorParticle.Stop()).AddTo(_particleInstance);
+            // 音の再生 パーティクルが火の玉を出しているからこうなる
+            Observable.Interval(TimeSpan.FromSeconds(0.1f))
+                .Take(25)
+                .Subscribe(_ => CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Soulflame"));
         }
 
         public override void UpdateSoulSkill(float deltaTime)
