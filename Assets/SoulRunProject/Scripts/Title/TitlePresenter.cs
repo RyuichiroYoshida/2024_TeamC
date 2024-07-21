@@ -19,8 +19,9 @@ namespace SoulRunProject
         {
             CriAudioManager.Instance.Play(CriAudioType.CueSheet_BGM, "BGM_Title", true);
             _titleView.StartButton.onClick.AsObservable().Subscribe(_ => _titleModel.StartGame());
-            _titleView.OptionButton.onClick.AsObservable().Subscribe(_ => _titleModel.Option());
+            _titleView.OptionButton.onClick.AsObservable().Subscribe(_ => _titleModel.Option(_titleView.OptionPanel));
             _titleView.ExitButton.onClick.AsObservable().Subscribe(_ => _titleModel.Exit());
+            _titleView.ReturnButton.onClick.AsObservable().Subscribe(_ => _titleModel.Return(_titleView.OptionPanel));
         }
     }
 }
