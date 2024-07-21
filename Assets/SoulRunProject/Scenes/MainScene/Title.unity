@@ -2370,8 +2370,10 @@ MonoBehaviour:
   _startButton: {fileID: 1404138653}
   _optionButton: {fileID: 326917305}
   _exitSimButton: {fileID: 200743533}
+  _returnButton: {fileID: 2073734630}
   _soulLight2D: {fileID: 1701414253}
   _particleSystem: {fileID: 771850833}
+  _optionPanel: {fileID: 144516639}
   minFalloffIntensity: 0.1
   maxFalloffIntensity: 0.5
   duration: 2
@@ -3073,6 +3075,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1210819500}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2073734630 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 385635325576972457, guid: 4a22e5c9b21e39341acb1afce880589e,
+    type: 3}
+  m_PrefabInstance: {fileID: 373380704}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70f75ebff9b6460890cd62d5c5857ddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2083446455
 GameObject:
   m_ObjectHideFlags: 0
