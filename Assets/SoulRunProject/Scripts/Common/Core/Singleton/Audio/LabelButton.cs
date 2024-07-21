@@ -19,6 +19,7 @@ namespace SoulRunProject.Audio
         private CriAudioType _audioType;
         private string _cueName;
         private bool _isLoop;
+        private Guid _currentPlaybackId;
 
         public void Initialize(string label, CriAudioType audioType, CueNameControl cueNameControl)
         {
@@ -42,24 +43,24 @@ namespace SoulRunProject.Audio
             _cueName = _cueNameControl.GetCueName();
             if (!string.IsNullOrEmpty(_cueName))
             {
-                _criAudioManager.Play(_audioType, _cueName, _isLoop);
+                _currentPlaybackId = _criAudioManager.Play(_audioType, _cueName, _isLoop);
                 Debug.Log($"CriAudioType: {_audioType}, CueName: {_cueName}, Loop: {_isLoop}");
             }
         }
 
         public void Pause()
         {
-            _criAudioManager.Pause(_audioType, _cueName);
+            _criAudioManager.Pause(_audioType, _currentPlaybackId);
         }
 
         public void Resume()
         {
-            _criAudioManager.Resume(_audioType, _cueName);
+            _criAudioManager.Resume(_audioType, _currentPlaybackId);
         }
 
         public void Stop()
         {
-            _criAudioManager.Stop(_audioType, _cueName);
+            _criAudioManager.Stop(_audioType, _currentPlaybackId);
         }
 
         public void Loop(bool isLoop)
