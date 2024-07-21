@@ -19,6 +19,7 @@ namespace SoulRunProject.InGame
         [SerializeField] private float _maxHeight = 2169;
         [SerializeField] private float _minHeight = 865;
         [SerializeField] private float _sizeChangeDuration = 0.2f;
+        [SerializeField] Ease _popupEase = Ease.OutQuad;
         private float _centerbackMaxSizeY = 1;
         private float _centerbackMinSizeY = 0.1f;
 
@@ -30,13 +31,10 @@ namespace SoulRunProject.InGame
             _popupPanel.gameObject.SetActive(true);
             Vector2 newSize = new Vector2(_popupPanel.rectTransform.sizeDelta.x, _maxHeight);
             _popupContent.gameObject.SetActive(false);
-            //_centerback.rectTransform.sizeDelta = new Vector2(_centerback.rectTransform.sizeDelta.x, _centerbackMinSizeY);
             //アニメーション
             var sequence = DOTween.Sequence();
             sequence.Append(_popupPanel.DOFade(1, _fadeDuration).SetLink(_popupPanel.gameObject))
                 .SetUpdate(true); // フェードイン
-            // sequence.Append(_centerback.rectTransform.DOScaleY(_centerbackMaxSizeY, _sizeChangeDuration)
-            //     .SetLink(_centerback.gameObject)).SetUpdate(true);
             sequence.Append(_popupPanel.rectTransform.DOSizeDelta(newSize, _sizeChangeDuration)
                     .SetLink(_popupPanel.gameObject)).SetUpdate(true)
                 .OnComplete(() => _popupContent.SetActive(true)); //画像の立幅を指定した秒数かけて変更
@@ -48,7 +46,6 @@ namespace SoulRunProject.InGame
             //下準備
             Vector2 newSize = new Vector2(_popupPanel.rectTransform.sizeDelta.x, _minHeight);
             _popupPanel.rectTransform.sizeDelta = new Vector2(_popupPanel.rectTransform.sizeDelta.x, _maxHeight);
-            // _popupPanel.gameObject.SetActive(true);
             _popupContent.gameObject.SetActive(false);
             //アニメーション
             var sequence = DOTween.Sequence();
@@ -56,11 +53,27 @@ namespace SoulRunProject.InGame
                 .SetLink(_popupPanel.gameObject))
                 .OnComplete(() => _popupContent.SetActive(false))
                 .SetUpdate(true); //画像の立幅を指定した秒数かけて変更
-            // sequence.Append(_centerback.rectTransform.DOScaleY(_centerbackMinSizeY, _sizeChangeDuration)
-            //     .SetLink(_centerback.gameObject)).SetUpdate(true);
             sequence.Append(_popupPanel.DOFade(0, _fadeDuration).SetLink(_popupPanel.gameObject))
                 .SetUpdate(true); // フェードアウト
             await sequence.Play().SetUpdate(true);
+        }
+
+        //リザルト用に使います
+        public async UniTask OpenResultPopUp()
+        {
+            //_popupPanel.color = new Color(255, 255, 255, 0);
+            _popupPanel.rectTransform.sizeDelta = new Vector2(_popupPanel.rectTransform.sizeDelta.x, _minHeight);
+            _popupPanel.gameObject.SetActive(true);
+            Vector2 newSize = new Vector2(_popupPanel.rectTransform.sizeDelta.x, _maxHeight);
+            _popupContent.gameObject.SetActive(false);
+            //アニメーション
+            var sequence = DOTween.Sequence();
+            sequence.Append(_popupPanel.DOFade(1, _fadeDuration).SetLink(_popupPanel.gameObject))
+                .SetUpdate(true); // フェードイン
+            sequence.Append(_popupPanel.rectTransform.DOSizeDelta(newSize, _sizeChangeDuration)
+                    .SetLink(_popupPanel.gameObject)).SetEase(_popupEase).SetUpdate(true)
+                .OnComplete(() => _popupContent.SetActive(true)); //画像の立幅を指定した秒数かけて変更
+            await sequence.Play().SetUpdate(true).ToUniTask();
         }
     }
 }
