@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Cysharp.Threading.Tasks;
 using SoulRun.InGame;
 using SoulRunProject.Framework;
 using UnityEngine;
@@ -26,6 +27,7 @@ namespace SoulRunProject.InGame
         [SerializeField] private Text _highScoreTitleText;
         [SerializeField] private PopupView _popupView;
         [SerializeField] private Image _rankImage;
+        [SerializeField, Tooltip("表示の遅延時間")] private float _displayDelayTime;
         
         public InputUIButton RestartButton => _restartButton;
         public InputUIButton ExitButton => _exitButton;
@@ -34,13 +36,14 @@ namespace SoulRunProject.InGame
         {
             _restartButton.OnClickAsObservable().Subscribe(_ => DebugClass.Instance.ShowLog("リスタートボタンが押されました。"));
         }
-
+        
         /// <summary>
         /// リザルト画面の表示非表示を設定する
         /// </summary>
         /// <param name="isShow"></param>
-        public void SetResultPanelVisibility(bool isShow)
+        public async void SetResultPanelVisibility(bool isShow)
         {
+            await UniTask.Delay(TimeSpan.FromSeconds(_displayDelayTime), DelayType.UnscaledDeltaTime);
             _resultPanel.SetActive(isShow);
         }
         
@@ -49,10 +52,10 @@ namespace SoulRunProject.InGame
         /// </summary>
         /// <param name="score"></param>
         /// <param name="coin"></param>
-        public async void ShowResult(int score, int coin)
+        public async void ReflectResultValue(int score, int coin)
         {
-            var targetScore = score.ToString();
-            var targetCoin = coin.ToString();
+            var targetScore = score;
+            var targetCoin = coin;
             var targetHighScore = PlayerPrefs.GetInt("HighScore", 0);
             _scoreText.text = "0";
             _coinText.text = "0";
@@ -70,15 +73,15 @@ namespace SoulRunProject.InGame
             sequence.AppendCallback(() => _scoreTitleText.gameObject.SetActive(true));
             sequence.AppendInterval(0.5f);
             sequence.AppendCallback(() => _scoreText.gameObject.SetActive(true));
-            sequence.Append(DOTween.To(() => int.Parse(_scoreText.text), x => _scoreText.text = x.ToString(), score, 1f));
+            sequence.Append(DOTween.To(() => int.Parse(_scoreText.text), x => _scoreText.text = x.ToString(), targetScore, 1f));
             sequence.AppendCallback(() => _coinTitleText.gameObject.SetActive(true));
             sequence.AppendInterval(0.5f);
             sequence.AppendCallback(() => _coinText.gameObject.SetActive(true));
-            sequence.Append(DOTween.To(() => int.Parse(_coinText.text), x => _coinText.text = x.ToString(), coin, 1f));
+            sequence.Append(DOTween.To(() => int.Parse(_coinText.text), x => _coinText.text = x.ToString(), targetCoin, 1f));
             sequence.AppendCallback(() => _highScoreTitleText.gameObject.SetActive(true));
             sequence.AppendInterval(0.5f);
             sequence.AppendCallback(() => _highScoreText.gameObject.SetActive(true));
-            sequence.Append(DOTween.To(() => int.Parse(_highScoreText.text), x => _highScoreText.text = x.ToString(), score > targetHighScore ? score : targetHighScore, 1f));
+            sequence.Append(DOTween.To(() => int.Parse(_highScoreText.text), x => _highScoreText.text = x.ToString(), targetScore > targetHighScore ? targetScore : targetHighScore, 1f));
             // ランク表示のイメージをアクティブにする
             sequence.AppendCallback(() => _rankImage.gameObject.SetActive(true));
             sequence.Play().SetUpdate(true).SetLink(this.gameObject);

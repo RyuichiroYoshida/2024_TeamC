@@ -11,15 +11,20 @@ namespace SoulRunProject.Title
         [SerializeField] private InputUIButton _startButton;
         [SerializeField] private InputUIButton _optionButton;
         [SerializeField] private InputUIButton _exitSimButton;
+        [SerializeField] private InputUIButton _returnButton;
         [SerializeField] private Light2D _soulLight2D;
         [SerializeField] private ParticleSystem _particleSystem;
-
+        [SerializeField] private GameObject _optionPanel;
         public InputUIButton StartButton => _startButton;
         public InputUIButton OptionButton => _optionButton;
         public InputUIButton ExitButton => _exitSimButton;
+        public InputUIButton ReturnButton => _returnButton;
+        
+        public GameObject OptionPanel => _optionPanel;
+        
         public float minFalloffIntensity = 0.5f;
         public float maxFalloffIntensity = 1f;
-        public float duration = 2.0f; 
+        public float duration = 2.0f;
 
         private void Start()
         {
