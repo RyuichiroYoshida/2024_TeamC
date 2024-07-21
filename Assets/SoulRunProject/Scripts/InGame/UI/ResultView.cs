@@ -38,7 +38,7 @@ namespace SoulRunProject.InGame
             _resultPanel.SetActive(isShow);
         }
         
-        public void ShowResult(int score, int coin)
+        public void ReflectResultValue(int score, int coin)
         {
             _scoreText.text = score.ToString();
             _coinText.text = coin.ToString();
