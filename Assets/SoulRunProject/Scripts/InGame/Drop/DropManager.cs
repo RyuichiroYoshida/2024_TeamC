@@ -63,16 +63,18 @@ namespace SoulRunProject.InGame
                     }
                     //  疑似的にフィールドの子オブジェクトにする(フィールドが破棄されても残る。座標は連動して動く。)
                     constraint.Targets.Add(drop.transform);
+                    drop.Parent = constraint;
+                    drop.ActiveParent = true;
                     //  親オブジェクトが破棄されたら、ドロップアイテムをプールに戻す
-                    // constraint.gameObject.OnDestroyAsObservable()
-                    //     .Subscribe(_ => drop.Finish()).AddTo(constraint.gameObject);
+                    constraint.gameObject.OnDestroyAsObservable()
+                        .Subscribe(_ => drop.Finish()).AddTo(constraint.gameObject);
                     
                     //dropが指定した座標以下に移動したらdropをプールに戻す
                     drop.transform.ObserveEveryValueChanged(t => t.position)
                         .Where(p => p.z < -200)
                         .Take(1)
                         .Subscribe(_ => drop.Finish())
-                        .AddTo(drop);
+                        .AddTo(constraint.gameObject);
                 }
             }
         }
