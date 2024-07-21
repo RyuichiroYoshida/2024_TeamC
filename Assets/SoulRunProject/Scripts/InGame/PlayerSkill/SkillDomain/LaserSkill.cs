@@ -76,6 +76,7 @@ namespace SoulRunProject.InGame
                 {
                     if (hit.collider.TryGetComponent(out DamageableEntity entity))
                     {
+                        _playerManagerInstance.AddSoul(RuntimeParameter.GetSoulPerSec * Time.deltaTime);
                         entity.Damage(RuntimeParameter.DamageOverTime * Time.deltaTime, useSE: false);
                     }
                 }
