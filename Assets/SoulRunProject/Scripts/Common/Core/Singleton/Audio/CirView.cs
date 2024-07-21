@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using UniRx;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
@@ -25,43 +26,35 @@ namespace SoulRunProject.Audio
 
         private CriAudioManager _criAudioManager;
 
-        private VolumeControl _masterVolumeControl;
-        private VolumeControl _bgmVolumeControl;
-        private VolumeControl _seVolumeControl;
-        private VolumeControl _meVolumeControl;
-        private VolumeControl _voiceVolumeControl;
+        private CriVolumeControl _masterCriVolumeControl;
+        private CriVolumeControl _bgmCriVolumeControl;
+        private CriVolumeControl _seCriVolumeControl;
+        private CriVolumeControl _meCriVolumeControl;
+        private CriVolumeControl _voiceCriVolumeControl;
 
         private CueNameControl _bgmCueNameControl;
         private CueNameControl _seCueNameControl;
         private CueNameControl _meCueNameControl;
         private CueNameControl _voiceCueNameControl;
 
-        private float _bgmVolume = 1f;
-        private float _seVolume = 1f;
-        private float _meVolume = 1f;
-        private float _voiceVolume = 1f;
-
-        [Inject]
-        public void Construct(CriAudioManager criAudioManager)
-        {
-            _criAudioManager = criAudioManager;
-        }
-
         private void Start()
         {
             _criAudioManager = CriAudioManager.Instance;
 
-            _masterVolumeControl = CreateVolumeControl("Master Volume", _criAudioManager.MasterVolume,
-                OnMasterVolumeSliderChanged, OnMasterVolumeInputChanged);
-            _bgmVolumeControl = CreateVolumeControl("BGM Volume", _bgmVolume, OnBgmVolumeSliderChanged,
-                OnBgmVolumeInputChanged);
-            _seVolumeControl =
-                CreateVolumeControl("SE Volume", _seVolume, OnSeVolumeSliderChanged, OnSeVolumeInputChanged);
-            _meVolumeControl =
-                CreateVolumeControl("ME Volume", _meVolume, OnMeVolumeSliderChanged, OnMeVolumeInputChanged);
-            _voiceVolumeControl =
-                CreateVolumeControl("Voice Volume", _voiceVolume, OnVoiceVolumeSliderChanged,
-                    OnVoiceVolumeInputChanged);
+            _masterCriVolumeControl = CreateVolumeControl("Master Volume", _criAudioManager.MasterVolume.Value,
+                CriAudioType.Master, OnMasterVolumeSliderChanged, OnMasterVolumeInputChanged);
+            _bgmCriVolumeControl = CreateVolumeControl("BGM Volume",
+                _criAudioManager.GetPlayerVolume(CriAudioType.CueSheet_BGM), CriAudioType.CueSheet_BGM,
+                OnBgmVolumeSliderChanged, OnBgmVolumeInputChanged);
+            _seCriVolumeControl = CreateVolumeControl("SE Volume",
+                _criAudioManager.GetPlayerVolume(CriAudioType.CueSheet_SE), CriAudioType.CueSheet_SE,
+                OnSeVolumeSliderChanged, OnSeVolumeInputChanged);
+            _meCriVolumeControl = CreateVolumeControl("ME Volume",
+                _criAudioManager.GetPlayerVolume(CriAudioType.CueSheet_ME), CriAudioType.CueSheet_ME,
+                OnMeVolumeSliderChanged, OnMeVolumeInputChanged);
+            _voiceCriVolumeControl = CreateVolumeControl("Voice Volume",
+                _criAudioManager.GetPlayerVolume(CriAudioType.CueSheet_Voice), CriAudioType.CueSheet_Voice,
+                OnVoiceVolumeSliderChanged, OnVoiceVolumeInputChanged);
 
             _bgmCueNameControl = CreateCueNameControl("BGM Cue Name");
             _seCueNameControl = CreateCueNameControl("SE Cue Name");
@@ -73,6 +66,8 @@ namespace SoulRunProject.Audio
             _meButton.Initialize(_meCueNameControl.GetCueName(), CriAudioType.CueSheet_ME, _meCueNameControl);
             _voiceButton.Initialize(_voiceCueNameControl.GetCueName(), CriAudioType.CueSheet_Voice,
                 _voiceCueNameControl);
+
+            BindVolumeControls();
         }
 
         private CueNameControl CreateCueNameControl(string label)
@@ -83,55 +78,67 @@ namespace SoulRunProject.Audio
             return cueNameControl;
         }
 
-        private VolumeControl CreateVolumeControl(string label, float initialValue, UnityAction<float> onSliderChanged,
-            UnityAction<string> onInputChanged)
+        private CriVolumeControl CreateVolumeControl(string label, float initialValue, CriAudioType audioType,
+            UnityAction<float> onSliderChanged, UnityAction<string> onInputChanged)
         {
             var volumeControlObject = Instantiate(_volumeControlPrefab, _volumeControlsParent);
-            var volumeControl = volumeControlObject.GetComponent<VolumeControl>();
-            volumeControl.Initialize(label, initialValue, onSliderChanged, onInputChanged);
+            var volumeControl = volumeControlObject.GetComponent<CriVolumeControl>();
+            volumeControl.Initialize(label, initialValue, audioType, onSliderChanged, onInputChanged);
             return volumeControl;
         }
 
         private void OnMasterVolumeSliderChanged(float value)
         {
-            _criAudioManager.MasterVolume = value / 100;
-            _masterVolumeControl.SetValue(value / 100);
+            _criAudioManager.MasterVolume.Value = value / 100;
+            _masterCriVolumeControl.SetVolume(value / 100); // スライダーの値を直接反映
         }
 
         private void OnBgmVolumeSliderChanged(float value)
         {
-            _bgmVolume = value / 100;
-            _bgmVolumeControl.SetValue(value / 100);
-            UpdateBGMVolume();
+            var player = _criAudioManager.GetPlayer(CriAudioType.CueSheet_BGM);
+            if (player != null)
+            {
+                player.Volume.Value = value / 100;
+                _bgmCriVolumeControl.SetVolume(value / 100); // スライダーの値を直接反映
+            }
         }
 
         private void OnSeVolumeSliderChanged(float value)
         {
-            _seVolume = value / 100;
-            _seVolumeControl.SetValue(value / 100);
-            UpdateSEVolume();
+            var player = _criAudioManager.GetPlayer(CriAudioType.CueSheet_SE);
+            if (player != null)
+            {
+                player.Volume.Value = value / 100;
+                _seCriVolumeControl.SetVolume(value / 100); // スライダーの値を直接反映
+            }
         }
 
         private void OnMeVolumeSliderChanged(float value)
         {
-            _meVolume = value / 100;
-            _meVolumeControl.SetValue(value / 100);
-            UpdateMEVolume();
+            var player = _criAudioManager.GetPlayer(CriAudioType.CueSheet_ME);
+            if (player != null)
+            {
+                player.Volume.Value = value / 100;
+                _meCriVolumeControl.SetVolume(value / 100); // スライダーの値を直接反映
+            }
         }
 
         private void OnVoiceVolumeSliderChanged(float value)
         {
-            _voiceVolume = value / 100;
-            _voiceVolumeControl.SetValue(value / 100);
-            UpdateVoiceVolume();
+            var player = _criAudioManager.GetPlayer(CriAudioType.CueSheet_Voice);
+            if (player != null)
+            {
+                player.Volume.Value = value / 100;
+                _voiceCriVolumeControl.SetVolume(value / 100); // スライダーの値を直接反映
+            }
         }
 
         private void OnMasterVolumeInputChanged(string value)
         {
             if (float.TryParse(value, out float floatValue))
             {
-                _criAudioManager.MasterVolume = floatValue / 100;
-                _masterVolumeControl.SetValue(floatValue / 100);
+                _criAudioManager.MasterVolume.Value = floatValue / 100;
+                _masterCriVolumeControl.SetVolume(floatValue / 100); // 入力フィールドの値を直接反映
             }
         }
 
@@ -139,9 +146,12 @@ namespace SoulRunProject.Audio
         {
             if (float.TryParse(value, out float floatValue))
             {
-                _bgmVolume = floatValue / 100;
-                _bgmVolumeControl.SetValue(floatValue / 100);
-                UpdateBGMVolume();
+                var player = _criAudioManager.GetPlayer(CriAudioType.CueSheet_BGM);
+                if (player != null)
+                {
+                    player.Volume.Value = floatValue / 100;
+                    _bgmCriVolumeControl.SetVolume(floatValue / 100); // 入力フィールドの値を直接反映
+                }
             }
         }
 
@@ -149,9 +159,12 @@ namespace SoulRunProject.Audio
         {
             if (float.TryParse(value, out float floatValue))
             {
-                _seVolume = floatValue / 100;
-                _seVolumeControl.SetValue(floatValue / 100);
-                UpdateSEVolume();
+                var player = _criAudioManager.GetPlayer(CriAudioType.CueSheet_SE);
+                if (player != null)
+                {
+                    player.Volume.Value = floatValue / 100;
+                    _seCriVolumeControl.SetVolume(floatValue / 100); // 入力フィールドの値を直接反映
+                }
             }
         }
 
@@ -159,9 +172,12 @@ namespace SoulRunProject.Audio
         {
             if (float.TryParse(value, out float floatValue))
             {
-                _meVolume = floatValue / 100;
-                _meVolumeControl.SetValue(floatValue / 100);
-                UpdateMEVolume();
+                var player = _criAudioManager.GetPlayer(CriAudioType.CueSheet_ME);
+                if (player != null)
+                {
+                    player.Volume.Value = floatValue / 100;
+                    _meCriVolumeControl.SetVolume(floatValue / 100); // 入力フィールドの値を直接反映
+                }
             }
         }
 
@@ -169,46 +185,39 @@ namespace SoulRunProject.Audio
         {
             if (float.TryParse(value, out float floatValue))
             {
-                _voiceVolume = floatValue / 100;
-                _voiceVolumeControl.SetValue(floatValue / 100);
-                UpdateVoiceVolume();
+                var player = _criAudioManager.GetPlayer(CriAudioType.CueSheet_Voice);
+                if (player != null)
+                {
+                    player.Volume.Value = floatValue / 100;
+                    _voiceCriVolumeControl.SetVolume(floatValue / 100); // 入力フィールドの値を直接反映
+                }
             }
         }
 
-        private void UpdateBGMVolume()
+        private void BindVolumeControls()
         {
-            var players = _criAudioManager.GetPlayers(CriAudioType.CueSheet_BGM);
-            foreach (var player in players)
+            _criAudioManager.GetPlayer(CriAudioType.CueSheet_BGM)?.Volume.Subscribe(volume =>
             {
-                player.SetVolume(_bgmVolume);
-            }
-        }
+                _bgmCriVolumeControl.SetVolume(volume);
+            }).AddTo(this);
 
-        private void UpdateSEVolume()
-        {
-            var players = _criAudioManager.GetPlayers(CriAudioType.CueSheet_SE);
-            foreach (var player in players)
+            _criAudioManager.GetPlayer(CriAudioType.CueSheet_SE)?.Volume.Subscribe(volume =>
             {
-                player.SetVolume(_seVolume);
-            }
-        }
+                _seCriVolumeControl.SetVolume(volume);
+            }).AddTo(this);
 
-        private void UpdateMEVolume()
-        {
-            var players = _criAudioManager.GetPlayers(CriAudioType.CueSheet_ME);
-            foreach (var player in players)
+            _criAudioManager.GetPlayer(CriAudioType.CueSheet_ME)?.Volume.Subscribe(volume =>
             {
-                player.SetVolume(_meVolume);
-            }
-        }
+                _meCriVolumeControl.SetVolume(volume);
+            }).AddTo(this);
 
-        private void UpdateVoiceVolume()
-        {
-            var players = _criAudioManager.GetPlayers(CriAudioType.CueSheet_Voice);
-            foreach (var player in players)
+            _criAudioManager.GetPlayer(CriAudioType.CueSheet_Voice)?.Volume.Subscribe(volume =>
             {
-                player.SetVolume(_voiceVolume);
-            }
+                _voiceCriVolumeControl.SetVolume(volume);
+            }).AddTo(this);
+
+            _criAudioManager.MasterVolume.Subscribe(volume => { _masterCriVolumeControl.SetVolume(volume); })
+                .AddTo(this);
         }
     }
 }

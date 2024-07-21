@@ -35,7 +35,7 @@ namespace SoulRunProject.InGame
         private Vector3 _finishImpactPosition;
         private float _cleaveTimer;
         private int _hitCounter;
-        private string _beamSound = "SE_Laser";
+        private Guid _beamSound;
 
         public override void Initialize(BossController bossController, Transform playerTf)
         {
@@ -52,7 +52,8 @@ namespace SoulRunProject.InGame
             }
 
             // sound
-            CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, _beamSound);
+
+            _beamSound = CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Laser");
             CriAudioManager.Instance.Pause(CriAudioType.CueSheet_SE, _beamSound);
         }
 

@@ -31,7 +31,7 @@ namespace SoulRunProject.InGame
         private readonly BoolReactiveProperty _isGround = new BoolReactiveProperty(false);
         private Vector3 _playerVelocity;
         private bool _inPause;
-        private string _spin;
+        private Guid _spin;
 
         public BoolReactiveProperty IsGround => _isGround;
         public event Action OnJumped;
@@ -53,7 +53,7 @@ namespace SoulRunProject.InGame
                 if (flag)
                     CriAudioManager.Instance.Stop(CriAudioType.CueSheet_SE, _spin);
                 else
-                    CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, _spin);
+                    _spin = CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Spin");
             }).AddTo(this);
         }
 
