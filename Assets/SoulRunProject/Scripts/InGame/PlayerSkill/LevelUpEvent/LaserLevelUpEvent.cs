@@ -33,7 +33,7 @@ namespace SoulRunProject.Common
                         param.Amount += _increaseLaserAmount;
                         break;
                     case LevelUpType.IncreaseDamageOverTime:
-                        param.DamageOverTime += _increaseDamageOverTime;
+                        param.BaseDamageOverTime += _increaseDamageOverTime;
                         break;
                 }
             }

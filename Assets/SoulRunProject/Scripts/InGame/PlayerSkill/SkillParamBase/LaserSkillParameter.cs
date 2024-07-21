@@ -7,13 +7,14 @@ namespace SoulRunProject.Common
     [Serializable]
     public class LaserSkillParameter : ISkillParameter
     {
-        [SerializeField, CustomLabel("1秒間あたりのダメージ量")] private float _damageOverTime = 10f;
+        [SerializeField, CustomLabel("1秒間あたりのダメージ量")]  private float _damageOverTime = 10f;
         [SerializeField, CustomLabel("レーザーの数")] private int _amount = 1;
         [SerializeField, CustomLabel("薙ぎ払いの距離(横)")] private float _width = 10f;
         [SerializeField, CustomLabel("折り返しで奥に進む距離(奥)")] private float _height = 2f;
         [SerializeField, CustomLabel("薙ぎ払いのスピード")] private float _speed = 1f;
         [SerializeField, CustomLabel("折り返し回数")] private int _turnCount = 15;
         [SerializeField, CustomLabel("折り返しが全て終わった後何秒で再起動するか")] private float _coolTime = 3f;
+        [SerializeField, CustomLabel("スキルを当てたときのソウルの増える量(秒)")] private float _getSoulPerSec;
         private PlayerStatus _status;
 
         public int Amount
@@ -49,12 +50,20 @@ namespace SoulRunProject.Common
         public float CoolTime
         {
             get => _coolTime;
-            set => _coolTime = value; }
+            set => _coolTime = value; 
+        }
 
-        public float DamageOverTime
+        public float BaseDamageOverTime
         {
             get => _damageOverTime;
             set => _damageOverTime = value;
+        }
+        public float DamageOverTime => _damageOverTime + _status.AttackValue;
+
+        public float GetSoulPerSec
+        {
+            get => _getSoulPerSec;
+            set => _getSoulPerSec = value;
         }
 
         public void SetPlayerStatus(in PlayerStatus status)
@@ -76,6 +85,7 @@ namespace SoulRunProject.Common
             _coolTime = param._coolTime;
             _damageOverTime = param._damageOverTime;
             _status = param._status;
+            _getSoulPerSec = param._getSoulPerSec;
         }
         public LaserSkillParameter(){}
     }
