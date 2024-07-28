@@ -1,4 +1,5 @@
-﻿using SoulRunProject.Common;
+﻿using SoulRunProject.Audio;
+using SoulRunProject.Common;
 using UnityEngine;
 
 namespace SoulRunProject.InGame
@@ -33,6 +34,7 @@ namespace SoulRunProject.InGame
 
         private void OnEnable()
         {
+            _damageableEntity.OnDead += () => CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Enemy_Dead");
             _timer = 0;
             _spawnFlag = true;
         }
