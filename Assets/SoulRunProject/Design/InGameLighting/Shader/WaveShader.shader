@@ -10,10 +10,10 @@ Shader "Custom/WaveShader"
         _PatternScale ("PatternScale", Range(0.0, 10.0)) = 1
         _ScrollSpeed ("ScrollSpeed", Range(0.0, 100.0)) = 1
         _PerlinNoise ("PerlinNoise", Range(0.0, 300.0)) = 0.02
-        _NoiseHight ("NoiseHight", Range(0.0, 3.0)) = 0.02
+        _NoiseHeight ("NoiseHeight", Range(0.0, 3.0)) = 0.02
         _NoiseThreshold ("NoiseThreshold", Range(0.0, 1.0)) = 0.00
-        _F0 ("F0", Range(0.0, 1.0)) = 0.02
-        _SpecPower ("Specular Power", Range(0,100)) = 3
+        //_F0 ("F0", Range(0.0, 1.0)) = 0.02
+        //_SpecPower ("Specular Power", Range(0,100)) = 3
     }
     SubShader
     {
@@ -75,7 +75,7 @@ Shader "Custom/WaveShader"
                 half _F0;
                 half _SpecPower;
                 half _PerlinNoise;
-                half _NoiseHight;
+                half _NoiseHeight;
                 half _NoiseThreshold;
             CBUFFER_END
 
@@ -154,7 +154,7 @@ Shader "Custom/WaveShader"
                 {
                     float noise = PerlinNoise(input.uv);
                     output.positionCS.g += sin(noise * _PerlinNoise * output.positionCS + _Time
-                        * 100) * _NoiseHight;
+                        * 100) * _NoiseHeight;
                 }
 
                 return output;
