@@ -21,15 +21,17 @@ namespace SoulRunProject.InGame
         private int _fieldSegmentIndex;
         private float _fieldTimer;
         private StageState _currentStageState;
+        private BossController _currentBoss;
 
-        public Action ToNextStage;
+        public Action OnBossDead;
         public Action ToBossStage;
+        public BossController CurrentBoss => _currentBoss;
 
         private void Start()
         {
             _currentStageState = StageState.PlayingRunGame;
 
-            ToNextStage += NextStage;
+            OnBossDead += NextStage;
             ToBossStage += BossStage;
         }
 
@@ -159,9 +161,9 @@ namespace SoulRunProject.InGame
         void SpawnBoss()
         {
             // ボスの生成と通知設定
-            BossController boss = Instantiate(_stageData[_stageDataIndex].BossPrefab);
-            boss.InitializePosition(_fieldMover.MoveSegments[^1].transform.TransformPoint(_fieldMover.MoveSegments[^1].StartPos).x);
-            boss.GetComponent<DamageableEntity>().OnDead += () => ToNextStage?.Invoke();
+            _currentBoss = Instantiate(_stageData[_stageDataIndex].BossPrefab);
+            _currentBoss.InitializePosition(_fieldMover.MoveSegments[^1].transform.TransformPoint(_fieldMover.MoveSegments[^1].StartPos).x);
+            _currentBoss.GetComponent<DamageableEntity>().OnDead += () => OnBossDead?.Invoke();
             CriAudioManager.Instance.Play(CriAudioType.CueSheet_BGM, "BGM_Boss", true);
         }
         
@@ -298,7 +300,7 @@ namespace SoulRunProject.InGame
     [Serializable]
     public class StageDatum
     {
-        [SerializeField, EnumDrawer(typeof(Count))] private List<FieldCreatePattern> _fieldPatterns;
+        [SerializeField, EnumDrawer(typeof(FieldPatternCount))] private List<FieldCreatePattern> _fieldPatterns;
         [SerializeField, CustomLabel("ボスステージのタイル")] private FieldSegment _bossStageField;
         [SerializeField, CustomLabel("ボス出現までのディレイ")] private float _delayBossSpawn;
         [SerializeField, CustomLabel("ボス")] private BossController _bossPrefab; // 仮
@@ -311,7 +313,7 @@ namespace SoulRunProject.InGame
         public BossController BossPrefab => _bossPrefab;
     }
 
-    public enum Count
+    public enum FieldPatternCount
     {
         pattern1,
         pattern2,

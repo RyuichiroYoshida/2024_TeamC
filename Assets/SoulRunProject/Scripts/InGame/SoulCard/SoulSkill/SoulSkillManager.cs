@@ -81,7 +81,7 @@ namespace SoulRunProject.InGame
         { 
             DebugClass.Instance.ShowLog($"現在のソウル値：{_currentSoul.Value}/必要ソウル値：{RequiredSoul}");
             //TODO 処理の前後をずらしてテストように呼び出せるようにしている
-            if (_currentSoul.Value < RequiredSoul && _usingSkillTimer <= 0)
+            if (_currentSoul.Value < RequiredSoul || _usingSkillTimer > 0)
             {
                 Debug.Log("ソウルが足りません。");
                 return;

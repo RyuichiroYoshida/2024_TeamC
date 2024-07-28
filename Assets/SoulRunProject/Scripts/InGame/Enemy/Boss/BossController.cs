@@ -24,6 +24,7 @@ namespace SoulRunProject.InGame
         [SerializeField, Tooltip("パワーアップする閾値(%)")] private float[] _powerUpThreshold; 
         [Header("ボスの行動"), CustomLabel("行動の種類"), SerializeReference, SubclassSelector] List<IBossBehavior> _bossBehaviors;
         [SerializeField, CustomLabel("行動待機時間")] private float _behaviorIntervalTime;
+        [SerializeField, CustomLabel("死亡アニメーション時間")] private float _deadAnimationTime;
 
         private BossState _currentState = BossState.Animation;
         private int _thresholdIndex;
@@ -31,6 +32,8 @@ namespace SoulRunProject.InGame
         /// <summary> 動いている行動 </summary>
         private IBossBehavior _inActionBehavior;
         private bool _isPause;
+
+        public float DeadAnimationTime => _deadAnimationTime;
 
         private void Awake()
         {

@@ -60,7 +60,7 @@ namespace SoulRunProject.InGame
                 })
                 .AddTo(_compositeDisposable);
 
-            _stageManager.ToNextStage += ToNextStage;
+            _stageManager.OnBossDead += ToNextStage;
         }
         
         protected override void OnUpdate()
@@ -71,7 +71,7 @@ namespace SoulRunProject.InGame
         protected override void OnExit(State nextState)
         {
             _compositeDisposable.Clear();
-            _stageManager.ToNextStage -= ToNextStage;
+            _stageManager.OnBossDead -= ToNextStage;
         }
 
         void ToNextStage()
