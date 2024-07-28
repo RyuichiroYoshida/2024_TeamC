@@ -16,7 +16,7 @@ namespace SoulRunProject.InGame
         [SerializeField] private float _ragdollFallSpeed = 2f;
         [SerializeField] private PlayerMovement _playerMovement;
         [SerializeField] private PlayerManager _playerManager;
-        [SerializeField] private float _moveSpeedDivisor = 10f;
+        [SerializeField] private float _moveSpeedDivisor = 15f;
         private SpriteRenderer _sr;
         private GameObject _ragdoll;
         private Animator _animator;
