@@ -15,7 +15,7 @@ MonoBehaviour:
   _skillType: 67108866
   _skillName: "\u30DB\u30FC\u30EA\u30FC\u30D5\u30A3\u30FC\u30EB\u30C9"
   _explanatoryText: "\u9B54\u6CD5\u9663\u4E0A\u306B\u4E57\u3063\u305F\u6575\u306B\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B\u3002"
-  _skillIcon: {fileID: 21300000, guid: 18005438a77f36d40812c23fce05b164, type: 3}
+  _skillIcon: {fileID: 21300000, guid: a24a67c64dc3ffb4283a42872fa1b1f7, type: 3}
   _maxSkillLevel: 5
   _skillParameter:
     rid: 3163472035625041923

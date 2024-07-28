@@ -188,6 +188,7 @@ MonoBehaviour:
   _playerCamera: {fileID: 6635071162787831542}
   _hitDamageEffectManager: {fileID: 5236282758698190153}
   _decreaseSpeed: 30
+  _deadAnimationTime: 2
   CurrentPlayerStatus:
     _hp: 530
     _attackValue: 10
@@ -205,9 +206,8 @@ MonoBehaviour:
     _goldLuckRate: 1
     _criticalRate: 0
     _criticalDamageRate: 1
-    _vacuumItemRangeRange: 15
+    _attractItemRange: 0
     _dropIncreasedRate: 5
-  HP: 0
 --- !u!114 &6519210490737000228
 MonoBehaviour:
   m_ObjectHideFlags: 0

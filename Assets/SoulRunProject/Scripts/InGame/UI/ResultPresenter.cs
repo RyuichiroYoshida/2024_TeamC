@@ -23,7 +23,7 @@ namespace SoulRunProject.InGame
             _resultState.OnStateEnter += _ =>
             {
                 _resultView.SetResultPanelVisibility(true);
-                _resultView.ReflectResultValue(ScoreManager.Instance.OnScoreChanged.Value, _playerManager.ResourceContainer.Coin);
+                _resultView.DisplayResult(ScoreManager.Instance.OnScoreChanged.Value, _playerManager.ResourceContainer.Coin);
             };
             _resultView.RestartButton.onClick.AsObservable().Subscribe(_ =>
             {

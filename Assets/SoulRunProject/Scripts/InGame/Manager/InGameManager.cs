@@ -28,7 +28,8 @@ namespace SoulRunProject.Common
             PlayingBossStageState playingBossStageState,
             ResultState resultState,
             PauseState pauseState,
-            LevelUpState levelUpState)
+            LevelUpState levelUpState,
+            ExitInGameState exitInGameState)
         {   //ステートの追加、遷移処理の設定を行う。
             _currentState = firstState;
             _owner = owner;
@@ -40,6 +41,7 @@ namespace SoulRunProject.Common
             AddState(6, resultState);
             AddState(7, pauseState);
             AddState(8, levelUpState);
+            AddState(9, exitInGameState);
             firstState.OnStateExit += _ => ChangeState(1);
             enterStageState.OnStateExit += _ => ChangeState(2);
             playingRunGameState.OnStateExit += _ =>
@@ -50,8 +52,8 @@ namespace SoulRunProject.Common
                     ChangeState(7);
                 else if (playingRunGameState.SwitchToLevelUpState) // LevelUpStateへの移行
                     ChangeState(8);
-                else if (playingRunGameState.IsPlayerDead) // ResultStateへの移行
-                    ChangeState(6);
+                else if (playingRunGameState.IsPlayerDead) // プレイヤーが死んだ
+                    ChangeState(9);
             };
             pauseState.OnStateExit += _ =>
             {
@@ -78,14 +80,18 @@ namespace SoulRunProject.Common
             enterBossStageState.OnStateExit += _ => ChangeState(5);
             playingBossStageState.OnStateExit += state =>
             {
-                if (playingBossStageState.IsBossDefeated) //ボスを倒した場合は通常のRunGameに戻る
-                    ChangeState(6);
+                if (playingBossStageState.IsBossDefeated) //ボスを倒した場合
+                    ChangeState(9);
                 else if (playingBossStageState.SwitchToPauseState) // PauseStateへの移行
                     ChangeState(7);
                 else if (playingBossStageState.SwitchToLevelUpState) // LevelUpStateへの移行
                     ChangeState(8);
                 else if (playingBossStageState.IsPlayerDead) //プレイヤーが死んだ場合
-                    ChangeState(6);
+                    ChangeState(9);
+            };
+            exitInGameState.OnStateExit += state =>
+            {
+                ChangeState(6);
             };
         }
 

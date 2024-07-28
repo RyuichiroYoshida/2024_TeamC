@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using DG.Tweening;
-using Cysharp.Threading.Tasks;
 using SoulRun.InGame;
 using SoulRunProject.Framework;
 using UnityEngine;
@@ -27,7 +23,6 @@ namespace SoulRunProject.InGame
         [SerializeField] private Text _highScoreTitleText;
         [SerializeField] private PopupView _popupView;
         [SerializeField] private Image _rankImage;
-        [SerializeField, Tooltip("表示の遅延時間")] private float _displayDelayTime;
         
         public InputUIButton RestartButton => _restartButton;
         public InputUIButton ExitButton => _exitButton;
@@ -43,7 +38,7 @@ namespace SoulRunProject.InGame
         /// <param name="isShow"></param>
         public async void SetResultPanelVisibility(bool isShow)
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(_displayDelayTime), DelayType.UnscaledDeltaTime);
+            //await UniTask.Delay(TimeSpan.FromSeconds(_displayDelayTime), DelayType.UnscaledDeltaTime);
             _resultPanel.SetActive(isShow);
         }
         
@@ -52,7 +47,7 @@ namespace SoulRunProject.InGame
         /// </summary>
         /// <param name="score"></param>
         /// <param name="coin"></param>
-        public async void ReflectResultValue(int score, int coin)
+        public async void DisplayResult(int score, int coin)
         {
             var targetScore = score;
             var targetCoin = coin;
