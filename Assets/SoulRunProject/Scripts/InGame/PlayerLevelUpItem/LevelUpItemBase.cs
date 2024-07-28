@@ -127,7 +127,7 @@ namespace SoulRunProject.InGame
                         playerManager.CurrentPlayerStatus.CriticalDamageRate += _upValue;
                         return;
                     case StatusType.SoulAbsorption:
-                        playerManager.CurrentPlayerStatus.VacuumItemRange += _upValue;
+                        playerManager.CurrentPlayerStatus.AttractItemRange += _upValue;
                         return;
                     case StatusType.SoulAcquisition:
                         playerManager.CurrentPlayerStatus.DropIncreasedRate += _upValue;

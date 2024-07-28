@@ -48,7 +48,7 @@ MonoBehaviour:
     - _statusToUp: 4
       _upValue: 0.2
   - _itemName: "\u6DF1\u6DF5\u306E\u66F8"
-    _itemIcon: {fileID: 21300000, guid: 9c4900f73033a164287af99f1c6c9eb8, type: 3}
+    _itemIcon: {fileID: 21300000, guid: 74cdd42081e177341b215c0aba16c61f, type: 3}
     _explanatoryText: "\u306A\u3093\u304B\u3044\u308D\u3044\u308D"
     ItemEffects:
     - _statusToUp: 4
@@ -62,7 +62,7 @@ MonoBehaviour:
     - _statusToUp: 4
       _upValue: 0.5
   - _itemName: "\u5929\u4F7F\u306E\u9769\u9774"
-    _itemIcon: {fileID: 21300000, guid: 929b8c49bf1ab1d4490eadb2524f61ce, type: 3}
+    _itemIcon: {fileID: 21300000, guid: 37d682cfc1084d64f98bd49b9baed0f8, type: 3}
     _explanatoryText: "\u30B9\u30D4\u30FC\u30C9\u4E0A\u304C\u308B"
     ItemEffects:
     - _statusToUp: 9
@@ -70,7 +70,7 @@ MonoBehaviour:
     - _statusToUp: 3
       _upValue: 0.2
   - _itemName: "\u5973\u6559\u7687\u306E\u982D\u51A0"
-    _itemIcon: {fileID: 0}
+    _itemIcon: {fileID: 21300000, guid: 6115e5294efa2a442bbde1b73588bd77, type: 3}
     _explanatoryText: "\u30B9\u30AD\u30EB\u306E\u52B9\u679C\u304C\u5EF6\u3073\u308B"
     ItemEffects:
     - _statusToUp: 6
@@ -80,7 +80,7 @@ MonoBehaviour:
     - _statusToUp: 4
       _upValue: 0.3
   - _itemName: "\u30BB\u30D5\u30A3\u30E9\u306E\u624B\u888B"
-    _itemIcon: {fileID: 0}
+    _itemIcon: {fileID: 21300000, guid: 6b21e7db9b7b7f746a5db383e7cd1601, type: 3}
     _explanatoryText: "\u5F3E\u304C\u5F37\u5316"
     ItemEffects:
     - _statusToUp: 8
