@@ -39,7 +39,7 @@ namespace SoulRunProject.Common
             // Whereでnullチェックとアクティブかどうかをチェックしてからダメージ処理
             foreach (var entity in _entities)
             {
-                entity.Damage(_param.BaseAttackDamage * Time.fixedDeltaTime, useSE: false);
+                entity.Damage(_param.AttackDamage * Time.fixedDeltaTime, useSE: false);
 
                 if (entity.IsEnemy) // 敵に対するヒット数によってもらえるソウルが増える
                 {
