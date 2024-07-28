@@ -19,8 +19,9 @@ namespace SoulRunProject.Common
         [SerializeField] private BaseStatus _baseStatus;
         [SerializeField] private PlayerCamera _playerCamera;
         [SerializeField] private HitDamageEffectManager _hitDamageEffectManager;
-
         [SerializeField, CustomLabel("ダメージを受けた時の速度減少量")] private float _decreaseSpeed;
+        [SerializeField, CustomLabel("死亡アニメーション時間")] private float _deadAnimationTime;
+        
         private IPlayerPausable[] _inGameTimes;
         private PlayerLevelManager _pLevelManager;
         private SkillManager _skillManager;
@@ -37,7 +38,7 @@ namespace SoulRunProject.Common
         
         /// <summary>ダメージを無効化出来るかどうかの条件を格納するリスト</summary>
         public List<Func<bool>> IgnoreDamagePredicates { get; } = new();
-
+        public float DeadAnimationTime => _deadAnimationTime;
         public event Action OnDead;
 
         private void Awake()
