@@ -586,6 +586,7 @@ MonoBehaviour:
   _ragdollFallSpeed: 2
   _playerMovement: {fileID: 6519210490737000228}
   _playerManager: {fileID: 9091037442287400240}
+  _moveSpeedDivisor: 15
 --- !u!114 &5236282758698190153
 MonoBehaviour:
   m_ObjectHideFlags: 0
