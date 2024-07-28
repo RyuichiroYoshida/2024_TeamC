@@ -37,7 +37,11 @@ Shader "Custom/CustomLitShader"
 
         Tags
         {
-            "RenderType"="Opaque" "RenderPipeline"="UniversalPipeline"
+            "RenderType"="Opaque"
+            "Queue" = "Geometry+1"
+            "RenderPipeline"="UniversalPipeline"
+            "UniversalMaterialType" = "Lit"
+            "IgnoreProjector" = "True"
         }
 
         HLSLINCLUDE
@@ -52,13 +56,11 @@ Shader "Custom/CustomLitShader"
             float4 _EmissionColor;
             float _Metallic;
             float _Smoothness;
-            //float _Roughness;
             float _Cutoff;
             half _DitherLevel;
 
             sampler2D _MetallicGlossMap;
             sampler2D _SmoothnessRoughnessMap;
-            //sampler2D _RoughnessMap;
         CBUFFER_END
         ENDHLSL
 
