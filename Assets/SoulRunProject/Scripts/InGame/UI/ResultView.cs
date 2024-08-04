@@ -1,9 +1,11 @@
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using SoulRun.InGame;
 using SoulRunProject.Framework;
 using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
+using UnityEngine.EventSystems;
 
 namespace SoulRunProject.InGame
 {
@@ -29,7 +31,7 @@ namespace SoulRunProject.InGame
 
         private void Start()
         {
-            _restartButton.OnClickAsObservable().Subscribe(_ => DebugClass.Instance.ShowLog("リスタートボタンが押されました。"));
+            _restartButton.OnClick.Subscribe(_ => DebugClass.Instance.ShowLog("リスタートボタンが押されました。"));
         }
         
         /// <summary>
@@ -79,7 +81,10 @@ namespace SoulRunProject.InGame
             sequence.Append(DOTween.To(() => int.Parse(_highScoreText.text), x => _highScoreText.text = x.ToString(), targetScore > targetHighScore ? targetScore : targetHighScore, 1f));
             // ランク表示のイメージをアクティブにする
             sequence.AppendCallback(() => _rankImage.gameObject.SetActive(true));
-            sequence.Play().SetUpdate(true).SetLink(this.gameObject);
+            sequence.Play().SetUpdate(true).SetLink(this.gameObject).ToUniTask();
+            await sequence;
+            EventSystem.current.SetSelectedGameObject(_restartButton.gameObject);
+            _restartButton.OnSelect(null);
         }
         
         public enum ResultType

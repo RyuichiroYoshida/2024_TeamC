@@ -21,7 +21,7 @@ namespace SoulRunProject
         {
             _playerManager = playerManager;
             _playerInput = playerInput;
-            pauseView.ResumeButton.onClick.AsObservable().Subscribe(_ =>
+            pauseView.ResumeButton.OnClick.Subscribe(_ =>
             {
                 StateChange();
             }).AddTo(pauseView);

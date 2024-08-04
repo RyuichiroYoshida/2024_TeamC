@@ -14,7 +14,7 @@ namespace SoulRunProject
 
         void Start()
         {
-            _button.onClick.AddListener(_ => LoadingScene.Instance.LoadNextScene(_sceneName));
+            _button.OnClick.Subscribe(_ => LoadingScene.Instance.LoadNextScene(_sceneName)).AddTo(this);
         }
     }
 }
