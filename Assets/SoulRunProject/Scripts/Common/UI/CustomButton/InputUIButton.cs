@@ -1,9 +1,5 @@
-﻿using System;
-using DG.Tweening;
-using SoulRunProject.Audio;
-using UniRx;
+﻿using DG.Tweening;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 namespace SoulRun.InGame
@@ -17,9 +13,6 @@ namespace SoulRun.InGame
         private Vector3 _originalScale;
         private const float FadeTime = 0.2f;
 
-        private readonly Subject<Unit> _onClickSubject = new Subject<Unit>();
-        public IObservable<Unit> OnClick => _onClickSubject;
-
         protected override void Awake () 
         {
             _button = GetComponent<CanvasGroup>();
@@ -27,11 +20,10 @@ namespace SoulRun.InGame
         }
         public override void OnSubmit(BaseEventData eventData)
         {
-            CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Decision");
+            base.OnSubmit(eventData);
             // DOTweenを使ってスケールを小さくするアニメーションを実行
             transform.DOScale(_originalScale * 0.8f, FadeTime).SetLink(gameObject).SetUpdate(UpdateType.Normal, true);
             _button.alpha = 0.5f;
-            _onClickSubject.OnNext(Unit.Default);
             transform.DOScale(_originalScale, FadeTime).SetLink(gameObject).SetUpdate(UpdateType.Normal, true);
             _button.alpha = 1f;
         }
@@ -39,7 +31,6 @@ namespace SoulRun.InGame
         public override void OnSelect(BaseEventData eventData)
         {
             base.OnSelect(eventData);
-            CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Select");
             transform.DOScale(_originalScale * _scaleMultiplier, FadeTime).SetLink(gameObject).SetUpdate(UpdateType.Normal, true);
         }
 
