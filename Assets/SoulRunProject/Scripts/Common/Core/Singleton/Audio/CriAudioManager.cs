@@ -121,7 +121,7 @@ namespace SoulRunProject.Audio
             if (_audioPlayers.TryGetValue(type, out var player))
             {
                 float adjustedVolume = Math.Min(volume, MasterVolume.Value * volume);
-                Debug.Log($"CriAudioType: {type}, CueName: {cueName}, Volume: {adjustedVolume}");
+                //Debug.Log($"CriAudioType: {type}, CueName: {cueName}, Volume: {adjustedVolume}");
                 return player.Play(cueName, adjustedVolume, isLoop);
             }
             else

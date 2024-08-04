@@ -8,6 +8,7 @@ namespace SoulRun.InGame
     [RequireComponent(typeof(CanvasGroup))]
     public class InputUIButton : InputUIButtonBase
     {
+        [SerializeField] private float _scaleMultiplier = 1.2f;
         private CanvasGroup _button;
         private Vector3 _originalScale;
         private const float FadeTime = 0.2f;
@@ -30,7 +31,7 @@ namespace SoulRun.InGame
         public override void OnSelect(BaseEventData eventData)
         {
             base.OnSelect(eventData);
-            transform.DOScale(_originalScale * 1.2f, FadeTime).SetLink(gameObject).SetUpdate(UpdateType.Normal, true);
+            transform.DOScale(_originalScale * _scaleMultiplier, FadeTime).SetLink(gameObject).SetUpdate(UpdateType.Normal, true);
         }
 
         public override void OnDeselect(BaseEventData eventData)
