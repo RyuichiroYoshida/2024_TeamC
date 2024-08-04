@@ -134,6 +134,7 @@ namespace SoulRunProject.Common
         private void Death()
         {
             OnDead?.Invoke();
+            CriAudioManager.Instance.StopAll();
             Debug.Log("GameOver");
             //SwitchPause(true);
         }

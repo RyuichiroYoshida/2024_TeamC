@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
+using SoulRunProject.Audio;
 using SoulRunProject.Common;
 using UniRx;
 using UnityEngine;
@@ -92,6 +93,12 @@ namespace SoulRunProject.InGame
                     }
                 })
                 .AddTo(this);
+
+            bossDamageable.OnDead += () =>
+            {
+                CriAudioManager.Instance.StopAll();
+                CriAudioManager.Instance.Play(CriAudioType.CueSheet_ME, "ME_Boss_Defeat");
+            };
 
             // 入場アニメーション
             _ = PlayEntryAnimation();

@@ -48,7 +48,7 @@ namespace SoulRunProject.InGame
             // upgradeされたら元のステートに戻る
             // foreach (var upgradeButton in _levelUpView.UpgradeButtons)
             // {
-            //     upgradeButton.InputUIButton.onClick.AsObservable().Subscribe(_ => _levelUpState.EndSelectSkill()).AddTo(_levelUpView);
+            //     upgradeButton.InputUIButton.OnClick.Subscribe(_ => _levelUpState.EndSelectSkill()).AddTo(_levelUpView);
             // }
 
             _disposableOnUpdateUI.AddTo(_levelUpView);
@@ -76,7 +76,7 @@ namespace SoulRunProject.InGame
                     .Where(skillBase => !_skillManager.CreatedSkillList.Select(skill=>skill.AbstractSkillData).Contains(skillBase)).ToArray();
                 selectedSkillData = notCreatedSkills[Random.Range(0, notCreatedSkills.Length)];
                 
-                _levelUpView.UpgradeButtons[0].InputUIButton.onClick.AsObservable()
+                _levelUpView.UpgradeButtons[0].InputUIButton.OnClick
                     .Subscribe( _ =>
                     {
                         _skillManager.AddSkill(selectedSkillData.SkillType);
@@ -89,7 +89,7 @@ namespace SoulRunProject.InGame
                 var createdSkill = _skillManager.CreatedSkillList[Random.Range(0, _skillManager.CreatedSkillList.Count)];
                 selectedSkillData = createdSkill.AbstractSkillData;
                 
-                _levelUpView.UpgradeButtons[0].InputUIButton.onClick.AsObservable()
+                _levelUpView.UpgradeButtons[0].InputUIButton.OnClick
                     .Subscribe(_ =>
                     {
                         _skillManager.LevelUpSkill(selectedSkillData.SkillType);
@@ -115,7 +115,7 @@ namespace SoulRunProject.InGame
                 selectedStatusUpItems[i] = _levelUpItemData.StatusUpItems[indexList[index]];
                 indexList.RemoveAt(index);
             }
-            _levelUpView.UpgradeButtons[1].InputUIButton.onClick.AsObservable()
+            _levelUpView.UpgradeButtons[1].InputUIButton.OnClick
                 .Subscribe(_ =>
                 {
                     selectedStatusUpItems[0].ItemEffect();
@@ -125,7 +125,7 @@ namespace SoulRunProject.InGame
             _levelUpView.UpgradeButtons[1].NameAndLevelText.text = selectedStatusUpItems[0].ItemName;
             _levelUpView.UpgradeButtons[1].ExplanatoryText.text = selectedStatusUpItems[0].ExplanatoryText;
             _levelUpView.UpgradeButtons[1].ButtonIconImage.sprite = selectedStatusUpItems[0].ItemIcon;
-            _levelUpView.UpgradeButtons[2].InputUIButton.onClick.AsObservable()
+            _levelUpView.UpgradeButtons[2].InputUIButton.OnClick
                 .Subscribe(_ =>
                 {
                     selectedStatusUpItems[1].ItemEffect();

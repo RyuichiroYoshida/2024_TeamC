@@ -16,18 +16,22 @@ namespace SoulRunProject.InGame
         [SerializeField] private float _ragdollFallSpeed = 2f;
         [SerializeField] private PlayerMovement _playerMovement;
         [SerializeField] private PlayerManager _playerManager;
+        [SerializeField] private float _moveSpeedDivisor = 15f;
         private SpriteRenderer _sr;
         private GameObject _ragdoll;
+        private Animator _animator;
         private void Awake()
         {
             _sr = GetComponent<SpriteRenderer>();
-            Animator playerAnimator = GetComponent<Animator>();
+            _animator = GetComponent<Animator>();
+            _playerManager.ObserveEveryValueChanged(pm => pm.CurrentPlayerStatus.MoveSpeed)
+                .Subscribe(speed=> _animator.SetFloat("MoveSpeed", speed / _moveSpeedDivisor)).AddTo(this);
             _playerMovement.IsGround.Subscribe(isGround =>
                 {
-                    playerAnimator.SetBool("IsGround", isGround);
+                    _animator.SetBool("IsGround", isGround);
                 })
                 .AddTo(this);
-            _playerMovement.OnJumped += () => playerAnimator.SetTrigger("OnJump");
+            _playerMovement.OnJumped += () => _animator.SetTrigger("OnJump");
             _playerManager.OnDead += () =>
             {
                 _ragdoll = Instantiate(_playerRagdoll, transform.position, quaternion.identity);
