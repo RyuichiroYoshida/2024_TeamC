@@ -33,7 +33,7 @@ namespace SoulRunProject.InGame
                 _pauseView.SetDisplay(false);
             };
             
-            _pauseView.ExitButton.onClick.AsObservable().Subscribe(_ =>
+            _pauseView.ExitButton.OnClick.Subscribe(_ =>
             {
                 _pauseState.ExitToTitle();
             }).AddTo(_pauseView);

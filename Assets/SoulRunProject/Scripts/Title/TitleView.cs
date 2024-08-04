@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using SoulRun.InGame;
+using UnityEngine.EventSystems;
 using UnityEngine.Rendering.Universal;
 
 namespace SoulRunProject.Title
@@ -28,6 +29,8 @@ namespace SoulRunProject.Title
 
         private void Start()
         {
+            EventSystem.current.SetSelectedGameObject(_startButton.gameObject);
+            _startButton.OnSelect(null);
             Debug.Log(_particleSystem);
             _particleSystem.Play();
             StartCoroutine(AnimateLightFalloff());
