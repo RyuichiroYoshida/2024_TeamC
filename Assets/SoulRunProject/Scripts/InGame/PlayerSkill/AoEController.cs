@@ -13,7 +13,7 @@ namespace SoulRunProject.Common
     public class AoEController : MonoBehaviour
     {
         [SerializeField] private float _rotateTime = 2f;
-        HashSet<DamageableEntity> _entities = new();
+        private HashSet<DamageableEntity> _entities = new();
         private AoESkillParameter _param;
         private PlayerManager _playerManager;
 
@@ -32,7 +32,7 @@ namespace SoulRunProject.Common
             param.ObserveEveryValueChanged(x => x.Size).Subscribe(x => transform.localScale = Vector3.one * x).AddTo(this);
         }
 
-        void FixedUpdate()
+        private void FixedUpdate()
         {
             _entities = _entities.Where(entity => entity && entity.gameObject.activeSelf).ToHashSet();
             // OnTriggerExitする前にDestroyすることがあるので、
@@ -48,7 +48,7 @@ namespace SoulRunProject.Common
             }
         }
 
-        void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter(Collider other)
         {
             if (other.TryGetComponent(out DamageableEntity entity))
             {
@@ -56,7 +56,7 @@ namespace SoulRunProject.Common
             }
         }
 
-        void OnTriggerExit(Collider other)
+        private void OnTriggerExit(Collider other)
         {
             if (other.TryGetComponent(out DamageableEntity entity))
             {
