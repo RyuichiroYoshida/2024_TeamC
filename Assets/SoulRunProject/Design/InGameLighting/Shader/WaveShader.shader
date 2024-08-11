@@ -153,7 +153,7 @@ Shader "Custom/WaveShader"
                 if (input.uv.g > _NoiseThreshold)
                 {
                     float noise = PerlinNoise(input.uv);
-                    output.positionCS.g += sin(noise * _PerlinNoise * output.positionCS + _Time
+                    output.positionCS.g += sin(noise * _PerlinNoise * input.positionOS + _Time
                         * 100) * _NoiseHeight;
                 }
 

@@ -104,6 +104,7 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
+    - _NoiseHeight: 0.02
     - _NoiseHight: 0.01
     - _NoiseThreshold: 0.1
     - _OcclusionStrength: 1
