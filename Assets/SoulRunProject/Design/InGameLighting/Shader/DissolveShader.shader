@@ -16,6 +16,7 @@ Shader "Custom/CustomDissolveShader"
         Tags
         {
             "RenderType"="Opaque"
+            "RenderPipeline"="UniversalPipeline"
         }
         LOD 100
         AlphaToMask On
