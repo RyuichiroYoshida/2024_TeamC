@@ -38,7 +38,7 @@ Shader "Custom/CustomLitShader"
         Tags
         {
             "RenderType"="Opaque"
-            "Queue" = "Geometry+1"
+            "Queue" = "Geometry-1"
             "RenderPipeline"="UniversalPipeline"
             "UniversalMaterialType" = "Lit"
             "IgnoreProjector" = "True"
@@ -115,10 +115,13 @@ Shader "Custom/CustomLitShader"
             #pragma multi_compile _ DIRLIGHTMAP_COMBINED
             #pragma multi_compile _ LIGHTMAP_ON
             #pragma multi_compile_fog
+            #pragma multi_compile_fragment _ _DBUFFER_MRT1 _DBUFFER_MRT2 _DBUFFER_MRT3
 
             // Includes
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/SurfaceInput.hlsl"
+            //#include "Packages/com.unity.render-pipelines.universal/Shaders/LitForwardPass.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DBuffer.hlsl"
             //#include "OutLine.hlsl"
 
             struct Attributes
@@ -156,6 +159,41 @@ Shader "Custom/CustomLitShader"
 
                 float4 positionSS : TEXCOORD8;
             };
+
+            // struct CustomFragOutput
+            // {
+            //     // half4 GBuffer0 : SV_Target0;
+            //     // half4 GBuffer1 : SV_Target1;
+            //     // half4 GBuffer2 : SV_Target2;
+            //     // half4 GBuffer3 : SV_Target3;
+            //     #ifdef GBUFFER_OPTIONAL_SLOT_1
+            //     GBUFFER_OPTIONAL_SLOT_1_TYPE GBuffer4 : SV_Target4;
+            //     #endif
+            //     #ifdef GBUFFER_OPTIONAL_SLOT_2
+            //     half4 GBuffer5 : SV_Target5;
+            //     #endif
+            //     #ifdef GBUFFER_OPTIONAL_SLOT_3
+            //      half4 GBuffer6 : SV_Target6;
+            //     #endif
+            //     float depth : SV_Depth;
+            // };
+
+            // struct MyDecalSurfaceData
+            // {
+            //     float3 baseColor;
+            //     float3 worldPos;
+            //     float3 worldNormal;
+            //     float3 viewDir;
+            //     float3 bentNormal;
+            //     float4 lightmapUV;
+            //     float4 shadowCoord;
+            //     float4 fogFactorAndVertexLight;
+            //     float3 specColor;
+            //     half occlusion;
+            //     float perceptualRoughness;
+            //     float smoothness;
+            //     half metallic;
+            // };
 
             // SurfaceInput.hlslで自動的に定義される。
             //TEXTURE2D(_BaseMap);
@@ -319,6 +357,19 @@ Shader "Custom/CustomLitShader"
                 return light;
             }
 
+            // DecalSurfaceData PopulateDecalSurfaceData(Varyings input)
+            // {
+            //     DecalSurfaceData decalData;
+            //     decalData.baseColor = input.color;
+            //     decalData.normalWS = half4(normalize(input.normalWS), 1.0);
+            //     decalData.emissive = half3(0.0, 0.0, 0.0); // 必要に応じて変更
+            //     decalData.metallic = _Metallic;
+            //     decalData.occlusion = 1.0; // 適切な値に設定
+            //     decalData.smoothness = _Smoothness;
+            //     decalData.MAOSAlpha = 1.0; // 必要に応じて変更
+            //     return decalData;
+            // }
+
             // 閾値マップ
             static const float4x4 pattern =
             {
@@ -335,16 +386,21 @@ Shader "Custom/CustomLitShader"
                 InputData inputData = InitializeInputData(input, surfaceData.normalTS);
                 Light mainLight = MyGetMainLight(inputData.shadowCoord);
 
+                // デカールを適用
+                #ifdef _DBUFFER
+                ApplyDecalToSurfaceData(input.positionCS, surfaceData, inputData);
+                #endif
+
                 // URP v10+ バージョンでは、これを使用できます。
                 // half4 color = UniversalFragmentPBR(inputData, surfaceData);
 
                 // ただし、他のバージョンでは、代わりにこれを使用する必要があります。
                 // SurfaceData 構造体の使用を完全に避けることもできますが、整理するのに役立ちます。
                 half4 color = UniversalFragmentPBR(inputData, surfaceData.albedo, surfaceData.metallic,
-                                           surfaceData.specular,
-                                           surfaceData.smoothness,
-                                           surfaceData.occlusion,
-                                           surfaceData.emission, surfaceData.alpha);
+                                                                  surfaceData.specular,
+                                                                  surfaceData.smoothness,
+                                                                  surfaceData.occlusion,
+                                                                  surfaceData.emission, surfaceData.alpha);
 
                 color.rgb = lerp(_ShadowColor.rgb, color, mainLight.shadowAttenuation);
                 color.rgb = MixFog(color.rgb, inputData.fogCoord);
@@ -485,6 +541,83 @@ Shader "Custom/CustomLitShader"
         // これはまだ SRP Batcher を壊しますが、それが重要なのかどうか興味があります。
         // メタ パスはライトマップのベイク処理にのみ使用されるため、エディターでのみ使用されるのでしょうか?
         // とにかく、独自のメタパスを作成したい場合は、URP がサンプルとして提供するシェーダを見てください。
+
+        Pass
+        {
+            Name "DepthNormals"
+            Tags
+            {
+                "LightMode" = "DepthNormals"
+            }
+
+            ZWrite On
+            //Cull [_Cull]
+
+            HLSLPROGRAM
+            #pragma shader_feature _ALPHATEST_ON
+            #pragma multi_compile_fragment _ _GBUFFER_NORMALS_OCT
+            #pragma multi_compile_instancing
+
+            #pragma prefer_hlslcc gles
+            #pragma exclude_renderers d3d11_9x
+            #pragma target 2.0
+
+            #pragma vertex Vert
+            //#pragma fragment Frag
+
+            int _Loop;
+            float _MinDistance;
+            float4 _Color;
+
+            struct Attributes
+            {
+                float4 positionOS : POSITION;
+                float3 normalOS : NORMAL;
+                UNITY_VERTEX_INPUT_INSTANCE_ID
+            };
+
+            struct Varyings
+            {
+                float4 positionCS : SV_POSITION;
+                float4 positionSS : TEXCOORD0;
+                float3 normalWS : TEXCOORD1;
+                float3 positionWS : TEXCOORD2;
+                UNITY_VERTEX_INPUT_INSTANCE_ID
+                UNITY_VERTEX_OUTPUT_STEREO
+            };
+
+            struct FragOutput
+            {
+                float4 normal : SV_Target;
+                float depth : SV_Depth;
+            };
+
+            Varyings Vert(Attributes input)
+            {
+                Varyings output = (Varyings)0;
+
+                UNITY_SETUP_INSTANCE_ID(input);
+                UNITY_TRANSFER_INSTANCE_ID(input, output);
+                UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(output);
+
+                VertexPositionInputs vertexInput = GetVertexPositionInputs(input.positionOS.xyz);
+                output.positionCS = vertexInput.positionCS;
+
+                output.positionWS = TransformObjectToWorld(input.positionOS.xyz);
+                output.normalWS = TransformObjectToWorldNormal(input.normalOS);
+
+                output.positionSS.z = -TransformWorldToView(output.positionWS).z;
+
+                return output;
+            }
+
+            // FragOutput Frag(Varyings input)
+            // {
+            //     UNITY_SETUP_INSTANCE_ID(input);
+            //     UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
+            // }
+            ENDHLSL
+        }
 
         Pass
         {

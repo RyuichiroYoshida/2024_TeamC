@@ -57,7 +57,7 @@ Material:
     - _EnableEmission: 1
     - _EnableMetallic: 1
     - _EnableOutLine: 0
-    - _Metallic: 0
+    - _Metallic: 0.142
     - _OutlineWidth: 0
     - _ShadowStrength: 0
     - _Smoothness: 0.142
