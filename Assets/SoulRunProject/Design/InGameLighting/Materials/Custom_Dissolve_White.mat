@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Custom_Dissolve
+  m_Name: Custom_Dissolve_White
   m_Shader: {fileID: 4800000, guid: 4d6250c9846742a4db3419f5f0a05be8, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -66,9 +66,9 @@ Material:
     - _Use_Gradient: 1
     - _cutoff: 0
     m_Colors:
-    - _BaseColor: {r: 2.9960785, g: 2.9960785, b: 2.9960785, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DamageColor: {r: 5.3403134, g: 1.7834629, b: 1.7834629, a: 1}
+    - _BaseColor: {r: 1.4980392, g: 1.4980392, b: 1.4980392, a: 1}
+    - _Color: {r: 1.4980391, g: 1.4980391, b: 1.4980391, a: 1}
+    - _DamageColor: {r: 5.9921575, g: 5.9921575, b: 5.9921575, a: 1}
     - _EdgeColor: {r: 2.6352932, g: 4.1581607, b: 23.968626, a: 1}
     - _EdgeColor1: {r: 1, g: 1, b: 1, a: 1}
     - _Emission: {r: 0, g: 0, b: 0, a: 0}
