@@ -2,7 +2,7 @@ Shader "Custom/CustomDissolveShader"
 {
     Properties
     {
-        [HDR] _Color ("Base Color", Color) = (1, 1, 1, 1)
+        [HDR] _BaseColor ("Base Color", Color) = (1, 1, 1, 1)
         [HDR] _DamageColor ("Damage Color", Color) = (1, 1, 1, 1)
         [HDR] _EdgeColor ("Dissolve Color", Color) = (0, 0, 0, 1)
         [Toggle(_Boolean)] _Boolean ("Damage Boolean", Float) = 0.0
@@ -43,7 +43,7 @@ Shader "Custom/CustomDissolveShader"
                 float4 vertex : SV_POSITION;
             };
 
-            half4 _Color;
+            half4 _BaseColor;
             half4 _DamageColor;
             half4 _EdgeColor;
             half _AlphaClipThreshold;
@@ -89,7 +89,7 @@ Shader "Custom/CustomDissolveShader"
                 }
                 else
                 {
-                    col = tex2D(_MainTex, input.uv) * _Color * edgeCol;
+                    col = tex2D(_MainTex, input.uv) * _BaseColor * edgeCol;
                 }
 
                 return col;
