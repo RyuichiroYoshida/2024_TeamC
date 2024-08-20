@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TutorialExpLoot
   m_EditorClassIdentifier: 
   _score: 0
-  _exp: 5
+  _exp: 10
   _coin: 0
   _soulCardID: 0
   _soulCardDropRate: 0

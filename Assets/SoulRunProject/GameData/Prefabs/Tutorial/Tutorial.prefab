@@ -185,7 +185,7 @@ MonoBehaviour:
       data:
         _standbyTime: 8
         _tutorialUI: {fileID: 867440101530565869}
-        _tutorialDuration: 7
+        _tutorialDuration: 4
         _expLoot: {fileID: 11400000, guid: 82cf20760b0489345a3c9e71d8913fe5, type: 2}
         _expSpawnPosition: {x: 0, y: 0, z: 80}
 --- !u!1 &2805036744985686314
