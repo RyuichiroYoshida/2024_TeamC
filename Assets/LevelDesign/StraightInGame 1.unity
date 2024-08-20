@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0019500202, g: 0.0038314078, b: 0.008843157, a: 1}
+  m_IndirectSpecularColor: {r: 0.0019524717, g: 0.003835365, b: 0.008846895, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -627,6 +627,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3698741979491483856, guid: e711c3a71f9df6b459a265a7a8d925ee,
         type: 3}
+      propertyPath: _expToNextLevel.Array.data[0]
+      value: 94
+      objectReference: {fileID: 0}
+    - target: {fileID: 3698741979491483856, guid: e711c3a71f9df6b459a265a7a8d925ee,
+        type: 3}
+      propertyPath: _expToNextLevel.Array.data[1]
+      value: 66
+      objectReference: {fileID: 0}
+    - target: {fileID: 3698741979491483856, guid: e711c3a71f9df6b459a265a7a8d925ee,
+        type: 3}
+      propertyPath: _expToNextLevel.Array.data[2]
+      value: 92
+      objectReference: {fileID: 0}
+    - target: {fileID: 3698741979491483856, guid: e711c3a71f9df6b459a265a7a8d925ee,
+        type: 3}
       propertyPath: _expToNextLevel.Array.data[10]
       value: 64
       objectReference: {fileID: 0}
@@ -1121,7 +1136,7 @@ Transform:
   m_GameObject: {fileID: 1341415491}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 6.5, z: -5}
+  m_LocalPosition: {x: 0, y: 5.4, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1140,9 +1155,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 297fcf76933fa474aa1642347abd95d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ZPosition: -4.82
-  m_YPosition: 6.5
-  _maxJumpedDistance: 0
 --- !u!1 &1481411172
 GameObject:
   m_ObjectHideFlags: 0
@@ -1289,7 +1301,7 @@ Transform:
   m_GameObject: {fileID: 1484104522}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 6.5, z: -5}
+  m_LocalPosition: {x: 0, y: 5.4, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1570,8 +1582,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd6043bde05a7fc4cba197d06915c1e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damping: {x: 0.2, y: 0, z: 0}
-  ShoulderOffset: {x: 0, y: 0, z: 0}
+  Damping: {x: 0.2, y: 1, z: 0}
+  ShoulderOffset: {x: 0, y: 5, z: 0}
   VerticalArmLength: 0.4
   CameraSide: 1
   CameraDistance: 5

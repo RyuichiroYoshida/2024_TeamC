@@ -7,6 +7,8 @@ using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
 using UniRx;
+using Unity.Mathematics;
+using Object = UnityEngine.Object;
 
 namespace SoulRunProject.InGame
 {
@@ -39,12 +41,8 @@ namespace SoulRunProject.InGame
             
             foreach (var tutorialContent in _tutorialContents)
             {
-                await UniTask.Delay(TimeSpan.FromSeconds(tutorialContent.StandbyTime));
-                _fadePanel.gameObject.SetActive(true);
-                tutorialContent.TutorialUI.SetActive(true);
-                await tutorialContent.WaitAction(_playerInput);
-                _fadePanel.gameObject.SetActive(false);
-                tutorialContent.TutorialUI.SetActive(false);
+                await UniTask.WaitForSeconds(tutorialContent.StandbyTime);
+                await tutorialContent.WaitAction(_playerInput, _fadePanel);
             }
             
             _endTutorial.Initialize(_fadePanel);
@@ -55,41 +53,70 @@ namespace SoulRunProject.InGame
     [Serializable, Name("移動")]
     public class MoveTutorial : TutorialContentBase
     {
-        public override async UniTask WaitAction(PlayerInput input)
+        public override async UniTask WaitAction(PlayerInput input, Image fadePanel)
         {
             PauseManager.Pause(true);
             input.MoveInputActive = true;
             input.ReflectInput();
+            fadePanel.gameObject.SetActive(true);
+            _tutorialUI.SetActive(true);
+            
             await input.MoveInput;
             await UniTask.WaitUntil(() => input.MoveInput.Value != Vector2.zero);
             PauseManager.Pause(false);
+            fadePanel.gameObject.SetActive(false);
+            _tutorialUI.SetActive(false);
         }
     }
 
     [Serializable, Name("ジャンプ")]
     public class JumpTutorial : TutorialContentBase
     {
-        public override async UniTask WaitAction(PlayerInput input)
+        public override async UniTask WaitAction(PlayerInput input, Image fadePanel)
         {
             PauseManager.Pause(true);
             input.JumpInputActive = true;
             input.ReflectInput();
+            fadePanel.gameObject.SetActive(true);
+            _tutorialUI.SetActive(true);
+            
             await UniTask.WaitUntil(() => input.JumpInput.Value);
             PauseManager.Pause(false);
+            fadePanel.gameObject.SetActive(false);
+            _tutorialUI.SetActive(false);
         }
     }
 
     [Serializable, Name("ソウル技")]
     public class SoulSkillTutorial : TutorialContentBase
     {
-        public override async UniTask WaitAction(PlayerInput input)
+        public override async UniTask WaitAction(PlayerInput input, Image fadePanel)
         {
             PauseManager.Pause(true);
             input.ShiftInputActive = true;
             input.ReflectInput();
+            fadePanel.gameObject.SetActive(true);
+            _tutorialUI.SetActive(true);
+            
             await input.ShiftInput;
             await UniTask.WaitUntil(() => input.ShiftInput.Value);
             PauseManager.Pause(false);
+            fadePanel.gameObject.SetActive(false);
+            _tutorialUI.SetActive(false);
+        }
+    }
+
+    [Serializable, Name("レベルアップ")]
+    public class LevelUpTutorial : TutorialContentBase
+    {
+        [SerializeField, Tooltip("流れてくる経験値を全て取得するので時間で終了する")] private float _tutorialDuration;
+        [SerializeField] private LootTable _expLoot;
+        [SerializeField] private Vector3 _expSpawnPosition;
+        
+        public override async UniTask WaitAction(PlayerInput input, Image fadePanel)
+        {
+            DropManager.Instance.RequestDrop(_expLoot, _expSpawnPosition);
+            await UniTask.WaitForSeconds(_tutorialDuration);
         }
     }
 
@@ -123,11 +150,11 @@ namespace SoulRunProject.InGame
     public class TutorialContentBase
     {
         [SerializeField] private float _standbyTime;
-        [SerializeField] private GameObject _tutorialUI;
+        [SerializeField] protected GameObject _tutorialUI;
 
         public float StandbyTime => _standbyTime;
         public GameObject TutorialUI => _tutorialUI;
 
-        public virtual async UniTask WaitAction(PlayerInput input){}
+        public virtual async UniTask WaitAction(PlayerInput input, Image fadePanel){}
     }
 }
