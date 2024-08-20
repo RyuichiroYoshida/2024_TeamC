@@ -7,8 +7,6 @@ using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
 using UniRx;
-using Unity.Mathematics;
-using Object = UnityEngine.Object;
 
 namespace SoulRunProject.InGame
 {
@@ -109,7 +107,7 @@ namespace SoulRunProject.InGame
     [Serializable, Name("レベルアップ")]
     public class LevelUpTutorial : TutorialContentBase
     {
-        [SerializeField, Tooltip("流れてくる経験値を全て取得するので時間で終了する")] private float _tutorialDuration;
+        [SerializeField, Tooltip("経験値スポーンからこのチュートリアル終了までの時間")] private float _tutorialDuration;
         [SerializeField] private LootTable _expLoot;
         [SerializeField] private Vector3 _expSpawnPosition;
         
