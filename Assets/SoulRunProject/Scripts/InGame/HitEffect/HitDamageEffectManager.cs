@@ -13,6 +13,8 @@ namespace SoulRunProject.InGame
         static readonly Color WhiteColor = new(0.85f, 0.85f, 0.85f, 0.6f);
         [SerializeField, CustomLabel("点滅間隔"), Range(0, 0.1f)] float _duration;
         [SerializeField, CustomLabel("点滅回数")] int _loopCount;
+        [SerializeField] private ParticleSystem _hitEffect;
+        [SerializeField] private Transform _hitEffectTransform;
         
         Renderer _renderer;
         Material _copyMaterial;
