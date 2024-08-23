@@ -1,5 +1,6 @@
 ﻿using SoulRun.InGame;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace SoulRunProject.InGame
@@ -28,6 +29,12 @@ namespace SoulRunProject.InGame
         public void SetDisplay(bool display)
         {
             _pausePanel.SetActive(display);
+            if (display)
+            {
+                EventSystem.current.SetSelectedGameObject(_resumeButton.gameObject);
+                _resumeButton.OnSelect(null);
+            }
+            
         }
 
         /// <summary> ゲーム内データをUIへ反映させる </summary>

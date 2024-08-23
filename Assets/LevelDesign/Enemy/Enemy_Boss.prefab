@@ -429,6 +429,7 @@ MonoBehaviour:
   - rid: 7007908318245552134
   - rid: 7007908318245552135
   _behaviorIntervalTime: 1
+  _deadAnimationTime: 2
   references:
     version: 2
     RefIds:
@@ -469,7 +470,7 @@ MonoBehaviour:
         _flameBallSpeed: 40
         _flameBallNum: 30
         _flameDamage: 5
-        _deviationDistance: 0
+        _deviationDistance: 10
         _flameBallAccuracy: 0
         _powerUpBehaviors:
         - rid: 5361252326309625967

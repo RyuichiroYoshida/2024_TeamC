@@ -42,6 +42,7 @@ namespace SoulRunProject.Common
             builder.Register<ResultState>(Lifetime.Singleton);
             builder.Register<PauseState>(Lifetime.Singleton);
             builder.Register<LevelUpState>(Lifetime.Singleton);
+            builder.Register<ExitInGameState>(Lifetime.Singleton);
             builder.Register<InGameManager>(Lifetime.Singleton);
             builder.RegisterInstance(_playerLevelManager);
             builder.RegisterInstance(_skillManager);
