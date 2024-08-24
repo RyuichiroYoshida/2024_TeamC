@@ -14841,3 +14841,5 @@ MonoBehaviour:
   _rotationOffset: {x: 0, y: 0, z: 0}
   _hitOffset: 0
   _lifeTime: 15
+  _onDamageEffect: {fileID: 1978194977426403011, guid: 5bf8c7f0645bd0b4b81fa20a268a0292,
+    type: 3}

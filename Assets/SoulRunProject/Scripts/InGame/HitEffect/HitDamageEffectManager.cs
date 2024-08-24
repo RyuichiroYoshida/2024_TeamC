@@ -13,6 +13,7 @@ namespace SoulRunProject.InGame
         static readonly Color WhiteColor = new(0.85f, 0.85f, 0.85f, 0.6f);
         [SerializeField, CustomLabel("点滅間隔"), Range(0, 0.1f)] float _duration;
         [SerializeField, CustomLabel("点滅回数")] int _loopCount;
+        [SerializeField, CustomLabel("ヒットエフェクト")] private ParticleSystem _hitEffect;
         
         Renderer _renderer;
         Material _copyMaterial;
@@ -87,6 +88,9 @@ namespace SoulRunProject.InGame
             _sequence.OnComplete(() => _hitFadeBlinking = false);
             _sequence.OnKill(ResetColor);
             _sequence.SetUpdate(true);
+
+            // ヒットエフェクトの再生
+            if (_hitEffect) _hitEffect.Play();
         }
     }
 }
