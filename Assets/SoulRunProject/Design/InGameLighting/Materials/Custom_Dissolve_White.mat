@@ -76,5 +76,5 @@ Material:
     - _EdgeColor: {r: 2.6352932, g: 4.1581607, b: 23.968626, a: 1}
     - _EdgeColor1: {r: 1, g: 1, b: 1, a: 1}
     - _Emission: {r: 0, g: 0, b: 0, a: 0}
-    - _HighlightColor: {r: 0.41493943, g: 0.48779467, b: 2.639016, a: 1}
+    - _HighlightColor: {r: 0.41493943, g: 0.48779467, b: 2.639016, a: 0.5019608}
   m_BuildTextureStacks: []

@@ -11,6 +11,7 @@ Shader "Custom/CustomDissolveShader"
         _Highlight("Highlight Texture", 2D) = "white" {}
         _DissolveTex ("Dissolve Texture", 2D) = "white" {}
         _AlphaClipThreshold ("Alpha Clip Threshold", Range(0, 1)) = 0.5
+        _HighlightOpacity ("Highlight Opacity", Range(0, 1)) = 1.0
         _EdgeWidth ("Disolve Margin Width", Range(0, 1)) = 0.01
     }
     SubShader
@@ -52,6 +53,9 @@ Shader "Custom/CustomDissolveShader"
             half _AlphaClipThreshold;
             half _EdgeWidth;
             float _Boolean;
+
+            half _HighlightIntensity;
+            half _HighlightOpacity;
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
@@ -101,6 +105,7 @@ Shader "Custom/CustomDissolveShader"
                 //_HighlightColor
 
                 half4 highlight = tex2D(_Highlight, input.uv);
+                highlight.a *= _HighlightOpacity;
                 col += half4(highlight.rgb * _HighlightColor * highlight.a, 0.0); // highlightの色を加算
 
 
