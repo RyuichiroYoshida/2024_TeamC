@@ -1,11 +1,13 @@
 using DG.Tweening;
+using SoulRunProject.InGame;
 using UnityEngine;
 
 namespace SoulRunProject
 {
     public class DissolveController : MonoBehaviour
     {
-        [SerializeField] private float _fadeTime = 1;
+        [SerializeField] private DamageableEntity _damageableEntity;
+        [SerializeField] private float _fadeTime = 1f;
 
         private Renderer _renderer;
         private Material _material;
@@ -28,12 +30,19 @@ namespace SoulRunProject
             {
                 _alphaClipThresholdID = Shader.PropertyToID("_AlphaClipThreshold");
             }
+
+            _damageableEntity.OnDead += DissolveFade;
         }
 
         private void OnEnable()
         {
             _sequence?.Kill();
             _material.SetFloat(_alphaClipThresholdID, 0);
+        }
+
+        private void OnDestroy()
+        {
+            _damageableEntity.OnDead -= DissolveFade;
         }
 
         /// <summary>ディゾルブ表現でのフェードアウトを行います</summary>
