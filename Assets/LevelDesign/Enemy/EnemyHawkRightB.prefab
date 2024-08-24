@@ -56,37 +56,6 @@ MonoBehaviour:
   m_Offset: {x: 0, y: 0, z: 5}
   m_Size: {x: 6.5, y: 5, z: 10}
   m_FadeFactor: 1
---- !u!1 &5650963811267642357
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8569591083728176492}
-  m_Layer: 0
-  m_Name: HitEffecyPosition
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8569591083728176492
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5650963811267642357}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.049999997, y: 0.059999995, z: -0.11999999}
-  m_LocalScale: {x: 1.4285713, y: 1.4285713, z: 1.4285713}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5964906941864461234}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6942516581084546689
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,7 +128,6 @@ Transform:
   - {fileID: 3962226045452640373}
   - {fileID: 508957490398112557}
   - {fileID: 8323743434035202270}
-  - {fileID: 8569591083728176492}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9165621589667773365
@@ -291,6 +259,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _duration: 0.1
   _loopCount: 1
+  _hitEffect: {fileID: 0}
+  _hitEffectTransform: {fileID: 0}
 --- !u!114 &5893449610729875164
 MonoBehaviour:
   m_ObjectHideFlags: 0
