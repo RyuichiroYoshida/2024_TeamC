@@ -6,7 +6,7 @@ Shader "Custom/WaveShader"
         _SubMap("SubTexture", 2D) = "white" {}
         _Blend("Blend",Range (0, 1)) = 0
         [HDR] [MainColor] _BaseColor("BaseColor", Color) = (1, 1, 1, 1)
-        [HDR] [MainColor] _SubColor("SubColor", Color) = (1, 1, 1, 1)
+        [HDR] [SubColor] _SubColor("SubColor", Color) = (1, 1, 1, 1)
         _PatternScale ("PatternScale", Range(0.0, 10.0)) = 1
         _ScrollSpeed ("ScrollSpeed", Range(0.0, 100.0)) = 1
         _PerlinNoise ("PerlinNoise", Range(0.0, 300.0)) = 0.02
@@ -191,11 +191,6 @@ Shader "Custom/WaveShader"
             }
             ENDHLSL
         }
-
-        //        Pass
-        //         {
-        //             
-        //         }
     }
     FallBack "Transparent/Diffuse"
 }
