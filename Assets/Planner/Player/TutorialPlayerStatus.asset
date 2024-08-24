@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b114a7cc77c94d6f82983505cdecf1d3, type: 3}
+  m_Name: TutorialPlayerStatus
+  m_EditorClassIdentifier: 
+  _playerStatus:
+    _hp: 100
+    _attackValue: 10
+    _defenceValue: 0
+    _coolTimeReductionRate: 1
+    _skillSizeUpRate: 1
+    _bulletSpeedUpRate: 1
+    _effectTimeExtension: 1
+    _bulletAmountExtension: 0
+    _penetrateAmountExtension: 0
+    _initialMoveSpeed: 20
+    _speedUpAtLevelUp: 1.4
+    _healAtLevelUp: 20
+    _growthSpeedUpRate: 1
+    _goldLuckRate: 1
+    _criticalRate: 0
+    _criticalDamageRate: 1.3
+    _attractItemRange: 30
+    _dropIncreasedRate: 5
