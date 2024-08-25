@@ -65,16 +65,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _impulseSource: {fileID: 3230847165229253650}
-  _player: {fileID: 3724060668842937376}
-  _offset: {x: 0, y: 0, z: 0}
-  _firstPos: {x: 0, y: 0, z: 0}
-  _shakeObj: {fileID: 3724060668842937376}
-  _shakeDur: 0.25
-  _shakePower: 100
-  _shakeVib: 30
-  _shakeRand: 5
-  _isSnap: 0
-  _isFade: 1
 --- !u!114 &3230847165229253650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,13 +173,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8f658ff644a4c5387a60090509359a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _useGodMode: 0
   _playerInput: {fileID: 8752523051839283500}
   _baseStatus: {fileID: 11400000, guid: d50a16b38666d804883e3040b335a638, type: 2}
   _playerCamera: {fileID: 6635071162787831542}
   _hitDamageEffectManager: {fileID: 5236282758698190153}
   _decreaseSpeed: 40
+  _deadAnimationTime: 0
   CurrentPlayerStatus:
-    _hp: 530
+    _hp: 235
     _attackValue: 10
     _defenceValue: 1
     _coolTimeReductionRate: 1.06
@@ -198,12 +190,14 @@ MonoBehaviour:
     _effectTimeExtension: 1
     _bulletAmountExtension: 0
     _penetrateAmountExtension: 1
-    _moveSpeedUpRate: 5
+    _initialMoveSpeed: 0
+    _speedUpAtLevelUp: 0
+    _healAtLevelUp: 0
     _growthSpeedUpRate: 0
     _goldLuckRate: 1
     _criticalRate: 0
     _criticalDamageRate: 1
-    _vacuumItemRangeRange: 15
+    _attractItemRange: 0
     _dropIncreasedRate: 5
 --- !u!114 &6519210490737000228
 MonoBehaviour:
@@ -701,6 +695,7 @@ MonoBehaviour:
   _ragdollFallSpeed: 5
   _playerMovement: {fileID: 6519210490737000228}
   _playerManager: {fileID: 9091037442287400240}
+  _moveSpeedDivisor: 15
 --- !u!114 &5236282758698190153
 MonoBehaviour:
   m_ObjectHideFlags: 0
