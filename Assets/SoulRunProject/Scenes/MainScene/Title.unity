@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &144516640
 Transform:
   m_ObjectHideFlags: 0
@@ -1631,6 +1631,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: CRIAudioCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5073192421441354234, guid: 7e16029877a0535449b8a613e70c2f45,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6002672933332235636, guid: 7e16029877a0535449b8a613e70c2f45,
+        type: 3}
+      propertyPath: _cueNameControlPrefab
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6019083972572939048, guid: 7e16029877a0535449b8a613e70c2f45,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -2085,6 +2095,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 9058516245735068127, guid: 7e16029877a0535449b8a613e70c2f45,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
