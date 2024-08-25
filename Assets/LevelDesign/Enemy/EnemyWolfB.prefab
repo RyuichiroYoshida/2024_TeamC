@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHp: 90
-  _collisionDamage: 15
+  _collisionDamage: 17
   _canKnockback: 1
   _direction: {x: 0, y: 0.5, z: 1}
   _takeKnockBack:
@@ -222,7 +222,7 @@ MonoBehaviour:
     _knockBackTime: 0.5
   _lootTable: {fileID: 11400000, guid: 78c612637147ee14ea9c379fd1842be8, type: 2}
   _hitDamageEffectManager: {fileID: 5490371727154280608}
-  _dissolveController: {fileID: 0}
+  _dissolveController: {fileID: 3681220482109137987}
 --- !u!114 &5490371727154280608
 MonoBehaviour:
   m_ObjectHideFlags: 0
