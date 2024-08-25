@@ -104,13 +104,13 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
-    - _NoiseHeight: 0.02
+    - _NoiseHeight: 0.01
     - _NoiseHight: 0.01
     - _NoiseThreshold: 0.1
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _PatternScale: 1
-    - _PerlinNoise: 100
+    - _PerlinNoise: 5
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _ScrollSpeed: 0

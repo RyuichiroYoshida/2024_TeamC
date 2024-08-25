@@ -1,11 +1,14 @@
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using SoulRunProject.InGame;
 using UnityEngine;
 
 namespace SoulRunProject
 {
     public class DissolveController : MonoBehaviour
     {
-        [SerializeField] private float _fadeTime = 1;
+        //[SerializeField] private DamageableEntity _damageableEntity;
+        [SerializeField] private float _fadeTime = 1f;
 
         private Renderer _renderer;
         private Material _material;
@@ -28,6 +31,8 @@ namespace SoulRunProject
             {
                 _alphaClipThresholdID = Shader.PropertyToID("_AlphaClipThreshold");
             }
+
+            //_damageableEntity.OnDead += DissolveFade;
         }
 
         private void OnEnable()
@@ -36,8 +41,13 @@ namespace SoulRunProject
             _material.SetFloat(_alphaClipThresholdID, 0);
         }
 
+        private void OnDestroy()
+        {
+            //_damageableEntity.OnDead -= DissolveFade;
+        }
+
         /// <summary>ディゾルブ表現でのフェードアウトを行います</summary>
-        public void DissolveFade()
+        public async UniTask DissolveFade()
         {
             if (!_material.HasFloat(_alphaClipThresholdID)) return;
 
@@ -45,6 +55,7 @@ namespace SoulRunProject
             _sequence = DOTween.Sequence();
             _sequence.Append(DOTween.To(() => _material.GetFloat(_alphaClipThresholdID),
                 a => _material.SetFloat(_alphaClipThresholdID, a), 1f, _fadeTime));
+            await _sequence.Play();
         }
     }
 }
