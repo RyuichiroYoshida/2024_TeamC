@@ -25,13 +25,10 @@ namespace SoulRunProject
         {
             _sequence?.Kill();
             _soulSkillManager = FindAnyObjectByType<SoulSkillManager>();
-            _soulSkillManager.CurrentSoul.Where(currentSoul => currentSoul >= _soulSkillManager.RequiredSoul).Subscribe(currentSoul =>
-            {
-                Debug.Log($"currentSoul : {currentSoul}");
-                Debug.Log($"RequiredSoul : {_soulSkillManager.RequiredSoul}");
-                SoulGaugeEffect();
-            }).AddTo(this);
-            _soulSkillManager.CurrentSoul.Where(currentSoul => currentSoul < _soulSkillManager.RequiredSoul).Subscribe(_ =>  _material.color = initialColor).AddTo(this);
+            _soulSkillManager.CurrentSoul.Where(currentSoul => currentSoul >= _soulSkillManager.RequiredSoul)
+                .Subscribe(_ => SoulGaugeEffect()).AddTo(this);
+            _soulSkillManager.CurrentSoul.Where(currentSoul => currentSoul < _soulSkillManager.RequiredSoul)
+                .Subscribe(_ => _material.color = initialColor).AddTo(this);
             _material = _image.material;
             initialColor = _material.GetColor(_baseColorParameterID);
 
@@ -39,7 +36,6 @@ namespace SoulRunProject
             {
                 _baseColorParameterID = Shader.PropertyToID("_BaseColor");
             }
-            
         }
 
         private void OnDisable()
