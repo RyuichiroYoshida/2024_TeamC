@@ -32,7 +32,7 @@ namespace SoulRunProject
             _material = _image.material;
             initialColor = _material.GetColor(_baseColorParameterID);
 
-            if (!_material.HasFloat(_baseColorParameterID)) // パラメータ名が存在しているか
+            if (!_material.HasColor(_baseColorParameterID)) // パラメータ名が存在しているか
             {
                 _baseColorParameterID = Shader.PropertyToID("_BaseColor");
             }
