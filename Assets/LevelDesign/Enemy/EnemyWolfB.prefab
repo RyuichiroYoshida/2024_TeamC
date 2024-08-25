@@ -222,6 +222,7 @@ MonoBehaviour:
     _knockBackTime: 0.5
   _lootTable: {fileID: 11400000, guid: 78c612637147ee14ea9c379fd1842be8, type: 2}
   _hitDamageEffectManager: {fileID: 5490371727154280608}
+  _dissolveController: {fileID: 3681220482109137987}
 --- !u!114 &5490371727154280608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,7 +238,6 @@ MonoBehaviour:
   _duration: 0.1
   _loopCount: 0
   _hitEffect: {fileID: 0}
-  _hitEffectTransform: {fileID: 0}
 --- !u!114 &4009990936954171281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,5 +314,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2763db5615df1494d9bfde43b65563e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damageableEntity: {fileID: 1120929885485965393}
   _fadeTime: 1

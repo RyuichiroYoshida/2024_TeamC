@@ -68,7 +68,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damageInterval: 1
-  _attackDamage: 10
+  _attackDamage: 3
 --- !u!114 &459684426416377975
 MonoBehaviour:
   m_ObjectHideFlags: 0
