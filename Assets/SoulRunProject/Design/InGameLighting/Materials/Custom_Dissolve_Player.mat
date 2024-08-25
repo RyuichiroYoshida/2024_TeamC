@@ -36,6 +36,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Highlight:
+        m_Texture: {fileID: 2800000, guid: a6f67aa7fb9503740810318be8d97f12, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -61,15 +65,17 @@ Material:
     - _EdgeSize: 0.2
     - _EdgeWidth: 0.086
     - _Glossiness: 0.5
+    - _HighlightOpacity: 1
     - _Metallic: 0
     - _NoiseStrength: 0.4
     - _Use_Gradient: 1
     - _cutoff: 0
     m_Colors:
-    - _BaseColor: {r: 0.7490196, g: 0.7490196, b: 0.7490196, a: 1}
+    - _BaseColor: {r: 0.74901956, g: 0.74901956, b: 0.74901956, a: 1}
     - _Color: {r: 1.4980391, g: 1.4980391, b: 1.4980391, a: 1}
     - _DamageColor: {r: 1.4980394, g: 1.4980394, b: 1.4980394, a: 1}
     - _EdgeColor: {r: 2.6352932, g: 4.1581607, b: 23.968626, a: 1}
     - _EdgeColor1: {r: 1, g: 1, b: 1, a: 1}
     - _Emission: {r: 0, g: 0, b: 0, a: 0}
+    - _HighlightColor: {r: 0.42832208, g: 0.4974063, b: 2.6390166, a: 0.5019608}
   m_BuildTextureStacks: []
