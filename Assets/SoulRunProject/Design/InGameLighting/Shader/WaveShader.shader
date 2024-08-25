@@ -3,10 +3,10 @@ Shader "Custom/WaveShader"
     Properties
     {
         [MainTexture] _BaseMap("MainTexture", 2D) = "white" {}
-        _SubMap("SubTexture", 2D) = "white" {}
-        _Blend("Blend",Range (0, 1)) = 0
+        //_SubMap("SubTexture", 2D) = "white" {}
+        //_Blend("Blend",Range (0, 1)) = 0
         [HDR] [MainColor] _BaseColor("BaseColor", Color) = (1, 1, 1, 1)
-        [HDR] [MainColor] _SubColor("SubColor", Color) = (1, 1, 1, 1)
+        //[HDR] [SubColor] _SubColor("SubColor", Color) = (1, 1, 1, 1)
         _PatternScale ("PatternScale", Range(0.0, 10.0)) = 1
         _ScrollSpeed ("ScrollSpeed", Range(0.0, 100.0)) = 1
         _PerlinNoise ("PerlinNoise", Range(0.0, 300.0)) = 0.02
@@ -66,10 +66,10 @@ Shader "Custom/WaveShader"
 
             CBUFFER_START(UnityPerMaterial)
                 float4 _BaseMap_ST;
-                float4 _SubMap_ST;
+                //float4 _SubMap_ST;
                 half4 _BaseColor;
-                half4 _SubColor;
-                float _Blend;
+                //half4 _SubColor;
+                //float _Blend;
                 half _PatternScale;
                 half _ScrollSpeed;
                 half _F0;
@@ -124,12 +124,13 @@ Shader "Custom/WaveShader"
             half4 BlendTexture(float2 uv)
             {
                 half4 baseColor = _BaseColor;
-                half4 subColor = _SubColor;
+                //half4 subColor = _SubColor;
 
                 half4 baseMap = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, uv);
                 half4 subMap = SAMPLE_TEXTURE2D(_SubMap, sampler_SubMap, uv);
 
-                half4 color = baseColor * baseMap * (1 - _Blend) + subColor * subMap * _Blend;
+                //half4 color = baseColor * baseMap * (1 - _Blend) + subColor * subMap * _Blend;
+                half4 color = baseColor * baseMap;
 
                 return color;
             }
@@ -191,11 +192,6 @@ Shader "Custom/WaveShader"
             }
             ENDHLSL
         }
-
-        //        Pass
-        //         {
-        //             
-        //         }
     }
     FallBack "Transparent/Diffuse"
 }

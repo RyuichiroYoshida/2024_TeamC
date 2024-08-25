@@ -8,7 +8,7 @@ Shader "Custom/CustomDissolveShader"
         [HDR] _EdgeColor ("Dissolve Color", Color) = (0, 0, 0, 1)
         [Toggle(_Boolean)] _Boolean ("Damage Boolean", Float) = 0.0
         _MainTex ("Texture", 2D) = "white" {}
-        _Highlight("Highlight Texture", 2D) = "white" {}
+        _Highlight("Highlight Texture", 2D) = "black" {}
         _DissolveTex ("Dissolve Texture", 2D) = "white" {}
         _AlphaClipThreshold ("Alpha Clip Threshold", Range(0, 1)) = 0.5
         _HighlightOpacity ("Highlight Opacity", Range(0, 1)) = 1.0
