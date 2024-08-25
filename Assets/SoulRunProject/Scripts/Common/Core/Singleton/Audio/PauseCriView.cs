@@ -23,12 +23,12 @@ namespace SoulRunProject.Audio
         {
             _criAudioManager = CriAudioManager.Instance;
 
-            _masterCriVolumeControl = CreateVolumeControl("Master Volume", _criAudioManager.MasterVolume.Value,
+            _masterCriVolumeControl = CreateVolumeControl("Master", _criAudioManager.MasterVolume.Value,
                 CriAudioType.Master, OnMasterVolumeSliderChanged, OnMasterVolumeInputChanged);
-            _bgmCriVolumeControl = CreateVolumeControl("BGM Volume",
+            _bgmCriVolumeControl = CreateVolumeControl("BGM",
                 _criAudioManager.GetPlayerVolume(CriAudioType.CueSheet_BGM), CriAudioType.CueSheet_BGM,
                 OnBgmAndMeVolumeSliderChanged, OnBgmAndMeVolumeInputChanged);
-            _seCriVolumeControl = CreateVolumeControl("SE Volume",
+            _seCriVolumeControl = CreateVolumeControl("SE",
                 _criAudioManager.GetPlayerVolume(CriAudioType.CueSheet_SE), CriAudioType.CueSheet_SE,
                 OnSeAndVoiceVolumeSliderChanged, OnSeAndVoiceVolumeInputChanged);
         }
