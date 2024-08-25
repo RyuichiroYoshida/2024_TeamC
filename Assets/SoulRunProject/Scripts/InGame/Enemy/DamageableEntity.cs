@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using SoulRunProject.Audio;
 using SoulRunProject.Common;
 using SoulRunProject.Runtime;
@@ -32,8 +33,12 @@ namespace SoulRunProject.InGame
         [SerializeField, CustomLabel("ダメージエフェクト")]
         private HitDamageEffectManager _hitDamageEffectManager;
 
+        [SerializeField, CustomLabel("Dead演出")]
+        private DissolveController _dissolveController;
+
         private FloatReactiveProperty _currentHp = new();
         private EnemyController _enemyController;
+        private Collider _hitCollider;
 
         private float _knockBackResistance;
 
@@ -53,6 +58,7 @@ namespace SoulRunProject.InGame
         {
             _player = FindObjectOfType<PlayerManager>();
             _enemyController = GetComponent<EnemyController>();
+            _hitCollider = GetComponent<Collider>();
             Initialize();
         }
 
@@ -77,7 +83,7 @@ namespace SoulRunProject.InGame
 
             if (useSE) CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Hit");
 
-            if (CurrentHp.Value <= 0) Death();
+            if (CurrentHp.Value <= 0) _ = Death();
 
             if (knockBack != null && _canKnockback) _takeKnockBack.KnockBack(transform, knockBack.Power, _direction);
 
@@ -89,11 +95,15 @@ namespace SoulRunProject.InGame
             OnDead = null;
         }
 
-        public void Death()
+        public async UniTask Death()
         {
             if (_lootTable) DropManager.Instance.RequestDrop(_lootTable, transform.position);
 
             OnDead?.Invoke();
+            // 死んでからの演出の時間当たり判定を無くす
+            _hitCollider.enabled = false;
+            if (_dissolveController) await _dissolveController.DissolveFade();
+            _hitCollider.enabled = true;
             Finish();
         }
 

@@ -9764,6 +9764,7 @@ GameObject:
   - component: {fileID: 4091674351751200}
   - component: {fileID: 120411782446683384}
   - component: {fileID: 4155619141305576982}
+  - component: {fileID: 4372430942261632599}
   m_Layer: 9
   m_Name: BossLaserBeam
   m_TagString: Untagged
@@ -9913,15 +9914,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24847bf6a8c54af087b3697e10dcad66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _collisionLayer:
-    serializedVersion: 2
-    m_Bits: 759
-  _hitEffect: {fileID: 1348276961250486}
-  _hitOffset: 0.01
-  _useLaserRotation: 0
-  _maxLength: 120
-  _mainTextureLength: 0.2
-  _noiseTextureLength: 0.2
+--- !u!114 &4372430942261632599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1395565506770744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ea4308861e24ac4caa06d26e151d595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageOverTime: 30
+  HitEffect: {fileID: 1348276961250486}
+  HitOffset: 0.01
+  useLaserRotation: 0
+  MaxLength: 50
+  MainTextureLength: 0.1
+  NoiseTextureLength: 0.5
 --- !u!1 &1436039344504592
 GameObject:
   m_ObjectHideFlags: 0
@@ -43830,8 +43841,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4746634502109430}
   m_Father: {fileID: 4091674351751200}
