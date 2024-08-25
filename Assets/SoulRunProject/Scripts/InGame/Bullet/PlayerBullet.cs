@@ -5,6 +5,8 @@ namespace SoulRunProject.InGame
 {
     public class PlayerBullet : BulletBase
     {
+        [SerializeField] private ParticleSystem _onDamageEffect;
+        
         float _attackDamage;
         float _range;
         float _speed;
@@ -44,6 +46,10 @@ namespace SoulRunProject.InGame
                 if (_hitCount > _penetration)
                 {
                     OnHit(other);
+                }
+                else if (_onDamageEffect)
+                {
+                    Instantiate(_onDamageEffect, transform.position, Quaternion.identity).Play();
                 }
             }
         }
