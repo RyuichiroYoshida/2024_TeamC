@@ -354,6 +354,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: InGameView
       objectReference: {fileID: 0}
+    - target: {fileID: 3904304599516141621, guid: 5158a5381bdfb5444b1247f8ca126484,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4274344218687408061, guid: 5158a5381bdfb5444b1247f8ca126484,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6813434337422649508, guid: 5158a5381bdfb5444b1247f8ca126484,
         type: 3}
       propertyPath: m_Pivot.x
