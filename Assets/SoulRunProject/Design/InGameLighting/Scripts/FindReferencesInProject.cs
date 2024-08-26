@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-#endif
 
 namespace FindReferencesInProject
 {
     public class FindReferencesInProject : EditorWindow
     {
-#if UNITY_EDITOR
         private static Dictionary<AssetData, List<AssetData>> Results = new Dictionary<AssetData, List<AssetData>>();
         private static Dictionary<AssetData, bool> Foldouts = new Dictionary<AssetData, bool>();
         private Vector2 ScrollPosition = Vector2.zero;
@@ -80,10 +78,8 @@ namespace FindReferencesInProject
 
             GUILayout.EndScrollView();
         }
-#endif
     }
 
-#if UNITY_EDITOR
     public class AssetData
     {
         public string Name { get; }
