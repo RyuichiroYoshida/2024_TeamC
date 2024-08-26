@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -23,10 +24,14 @@ namespace FindReferencesInProject
             Results.Clear();
             Foldouts.Clear();
 
-            foreach (var target in AssetDatabase.FindAssets("t:Scene t:Prefab").Select(AssetData.CreateByGuid)) {
+            foreach (var target in AssetDatabase.FindAssets("t:Scene t:Prefab").Select(AssetData.CreateByGuid))
+            {
                 foreach (var referent in AssetDatabase.GetDependencies(target.Path).Select(AssetData.CreateByPath))
                 {
-                    if (target.Equals(referent)) { continue; }
+                    if (target.Equals(referent))
+                    {
+                        continue;
+                    }
 
                     foreach (var selected in Selection.objects.Select(AssetData.CreateByObject))
                     {
@@ -58,7 +63,8 @@ namespace FindReferencesInProject
                         EditorGUIUtility.SetIconSize(Vector2.one * 16);
 
                         var obj = target.ToObject();
-                        var content = new GUIContent(target.Name, EditorGUIUtility.ObjectContent(obj, obj.GetType()).image);
+                        var content = new GUIContent(target.Name,
+                            EditorGUIUtility.ObjectContent(obj, obj.GetType()).image);
 
                         if (GUILayout.Button(content, "Label"))
                         {
@@ -128,7 +134,7 @@ namespace FindReferencesInProject
 
     public static class DictionaryExtension
     {
-        public static void AddSafety<K,V>(this Dictionary<K,V> self, K key, V value)
+        public static void AddSafety<K, V>(this Dictionary<K, V> self, K key, V value)
         {
             if (!self.ContainsKey(key))
             {
@@ -137,3 +143,4 @@ namespace FindReferencesInProject
         }
     }
 }
+#endif
