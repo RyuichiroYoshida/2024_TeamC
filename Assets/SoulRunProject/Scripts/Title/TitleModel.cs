@@ -1,9 +1,10 @@
 using System;
 using Cysharp.Threading.Tasks;
+using HikanyanLaboratory.Fade;
+using HikanyanLaboratory.SceneManagement;
 using SoulRunProject.Audio;
 using SoulRunProject.Framework;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using SoulRunProject.Common;
 
 namespace SoulRunProject.Title
@@ -14,6 +15,8 @@ namespace SoulRunProject.Title
     public class TitleModel : MonoBehaviour
     {
         [SerializeField] float _transitionTime = 1.0f;
+        [SerializeField] private string _tutorialScene = "TutorialScene";
+        [SerializeReference, SubclassSelector] IFadeStrategy _fadeStrategy;
 
         private void Start()
         {
@@ -24,8 +27,7 @@ namespace SoulRunProject.Title
         {
             DebugClass.Instance.ShowLog($"ゲーム開始:{_transitionTime}秒後にインゲーム画面に遷移します");
             //ここで実行
-            SceneManager.LoadScene("TutorialScene");
-            //LoadingScene.Instance.LoadNextScene("InGame").Forget();
+            await SceneManager.Instance.LoadSceneWithFade(_tutorialScene, _fadeStrategy);
         }
 
         public void Option(GameObject optionPanel)
