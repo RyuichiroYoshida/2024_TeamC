@@ -31,7 +31,7 @@ namespace SoulRunProject.SoulMixScene
         [SerializeField, CustomLabel("ゴールド獲得量増加"), Range( 0 , 5)] private float _goldLuckRate;
         [SerializeField, CustomLabel("クリティカル率"), Range( 0 , 100)] private float _criticalRate;
         [SerializeField, CustomLabel("クリティカルダメージ倍率"), Range( 0 , 5)] private float _criticalDamageRate;
-        [SerializeField, CustomLabel("アイテム吸収力範囲"), Range( 0 , 50)] private float _vacuumItemRangeRange;
+        [SerializeField, CustomLabel("アイテム吸収範囲"), Range( 0 , 50)] private float _attractItemRange;
         [SerializeField, CustomLabel("ドロップ率増加"), Range( 0 , 5)] private float _dropIncreasedRate;
 
         private FloatReactiveProperty _currentHp = new();
@@ -40,7 +40,7 @@ namespace SoulRunProject.SoulMixScene
         public PlayerStatus(float hp, int attackValue, int defenceValue, float coolTimeReductionRate, float skillSizeUpRate,
             float bulletSpeedUpRate, float effectTimeExtension, int bulletAmountExtension, int penetrateAmountExtension, 
             float initialMoveSpeed, float speedUpAtLevelUp, float healAtLevelUp, float growthSpeedUpRate, float goldLuckRate,
-            float criticalRate, float criticalDamageRate, float vacuumItemRangeRange, float dropIncreasedRate)
+            float criticalRate, float criticalDamageRate, float attractItemRange, float dropIncreasedRate)
         {
             _hp = hp;
             _currentHp.Value = _hp;
@@ -59,7 +59,7 @@ namespace SoulRunProject.SoulMixScene
             _goldLuckRate = goldLuckRate;
             _criticalRate = criticalRate;
             _criticalDamageRate = criticalDamageRate;
-            _vacuumItemRangeRange = vacuumItemRangeRange;
+            _attractItemRange = attractItemRange;
             _dropIncreasedRate = dropIncreasedRate;
         }
 
@@ -82,7 +82,7 @@ namespace SoulRunProject.SoulMixScene
             _goldLuckRate = playerStatus.GoldLuckRate;
             _criticalRate = playerStatus.CriticalRate;
             _criticalDamageRate = playerStatus.CriticalDamageRate;
-            _vacuumItemRangeRange = playerStatus.VacuumItemRange;
+            _attractItemRange = playerStatus.AttractItemRange;
             _dropIncreasedRate = playerStatus.DropIncreasedRate;
         }
 
@@ -205,11 +205,11 @@ namespace SoulRunProject.SoulMixScene
             get => _criticalDamageRate;
             set => _criticalDamageRate = Mathf.Max(value, 0.00f); // 0.00未満にならないように制限
         }
-        /// <summary> ソウル吸収力 </summary> 
-        public float VacuumItemRange
+        /// <summary> アイテム吸収範囲 </summary> 
+        public float AttractItemRange
         {
-            get => _vacuumItemRangeRange;
-            set => _vacuumItemRangeRange = Mathf.Max(value, 0.00f); // 0.00未満にならないように制限
+            get => _attractItemRange;
+            set => _attractItemRange = Mathf.Max(value, 0.00f); // 0.00未満にならないように制限
         }
 
         /// <summary> ソウル獲得率 </summary> 

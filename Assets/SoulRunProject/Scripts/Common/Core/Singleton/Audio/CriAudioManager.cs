@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CriWare;
 using SoulRunProject.Common;
+using UniRx;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using VContainer;
@@ -14,20 +15,19 @@ namespace SoulRunProject.Audio
     public class CriAudioManager : AbstractSingletonMonoBehaviour<CriAudioManager>
     {
         [SerializeField] private CriAudioSetting _audioSetting;
-        private float _masterVolume = 1F; // マスターボリューム
         private const float Diff = 0.01F; // 音量の変更があったかどうかの判定に使う
 
-        private Action<float> _masterVolumeChanged; // マスターボリューム変更時のイベント
         private Dictionary<CriAudioType, ICriAudioPlayerService> _audioPlayers; // 各音声の再生を管理するクラス
 
         private CriAtomListener _listener; // リスナー
         protected override bool UseDontDestroyOnLoad => true;
 
-        [Inject]
-        private void Construct(CriAudioSetting audioSetting)
-        {
-            _audioSetting = audioSetting;
-        }
+        public IReactiveProperty<float> MasterVolume { get; private set; } = new ReactiveProperty<float>(1f);
+        public IReactiveProperty<float> BgmVolume { get; private set; } = new ReactiveProperty<float>(1f);
+        public IReactiveProperty<float> SeVolume { get; private set; } = new ReactiveProperty<float>(1f);
+        public IReactiveProperty<float> MeVolume { get; private set; } = new ReactiveProperty<float>(1f);
+        public IReactiveProperty<float> VoiceVolume { get; private set; } = new ReactiveProperty<float>(1f);
+
 
         private void Awake()
         {
@@ -73,15 +73,32 @@ namespace SoulRunProject.Audio
                 // 他のCriAudioTypeも同様に追加可能
             }
 
-            _masterVolumeChanged += volume =>
-            {
-                foreach (var player in _audioPlayers)
-                {
-                    player.Value.SetVolume(volume);
-                }
-            };
+            // MasterVolumeの変更を監視して、各Playerに反映
+            MasterVolume.Subscribe(OnMasterVolumeChanged).AddTo(this);
+            BgmVolume.Subscribe(volume => OnVolumeChanged(CriAudioType.CueSheet_BGM, volume)).AddTo(this);
+            SeVolume.Subscribe(volume => OnVolumeChanged(CriAudioType.CueSheet_SE, volume)).AddTo(this);
+            MeVolume.Subscribe(volume => OnVolumeChanged(CriAudioType.CueSheet_ME, volume)).AddTo(this);
+            VoiceVolume.Subscribe(volume => OnVolumeChanged(CriAudioType.CueSheet_Voice, volume)).AddTo(this);
 
             SceneManager.sceneUnloaded += Unload;
+        }
+
+        private void OnMasterVolumeChanged(float volume)
+        {
+            // MasterVolumeの変更に伴い、各プレイヤーのボリュームを更新する
+            foreach (var player in _audioPlayers.Values)
+            {
+                player.SetVolume(Math.Min(volume, volume * VoiceVolume.Value));
+            }
+        }
+
+        private void OnVolumeChanged(CriAudioType type, float volume)
+        {
+            if (_audioPlayers.TryGetValue(type, out var player))
+            {
+                // 各プレイヤーのボリュームがMasterVolumeを超えないように制御する
+                player.SetVolume(MasterVolume.Value * volume);
+            }
         }
 
         private void OnDestroy()
@@ -89,68 +106,61 @@ namespace SoulRunProject.Audio
             SceneManager.sceneUnloaded -= Unload;
         }
 
-        public float MasterVolume
+        public Guid Play(CriAudioType type, string cueName)
         {
-            get => _masterVolume;
-            set
-            {
-                if (!(_masterVolume + Diff < value) && !(_masterVolume - Diff > value)) return;
-                _masterVolumeChanged?.Invoke(value);
-                _masterVolume = value;
-            }
+            return Play(type, cueName, 1f, false);
         }
 
-        public void Play(CriAudioType type, string cueName)
+        public Guid Play(CriAudioType type, string cueName, bool isLoop)
         {
-            Play(type, cueName, 1f, false);
+            return Play(type, cueName, 1f, isLoop);
         }
 
-        public void Play(CriAudioType type, string cueName, bool isLoop = false)
-        {
-            Play(type, cueName, 1f, isLoop);
-        }
-
-        public void Play(CriAudioType type, string cueName, float volume = 1f, bool isLoop = false)
+        public Guid Play(CriAudioType type, string cueName, float volume, bool isLoop = false)
         {
             if (_audioPlayers.TryGetValue(type, out var player))
             {
-                Debug.Log($"CriAudioType: {type}, CueName: {cueName}");
-                player.Play(cueName, volume, isLoop);
+                float adjustedVolume = Math.Min(volume, MasterVolume.Value * volume);
+                //Debug.Log($"CriAudioType: {type}, CueName: {cueName}, Volume: {adjustedVolume}");
+                return player.Play(cueName, adjustedVolume, isLoop);
             }
             else
             {
                 Debug.LogWarning($"Audio type {type} not supported.");
+                return Guid.Empty;
             }
         }
 
-        public void Play3D(Transform transform, CriAudioType type, string cueName)
+        public Guid Play3D(Transform transform, CriAudioType type, string cueName)
         {
-            Play3D(transform, type, cueName, 1f, false);
+            return Play3D(transform, type, cueName, 1f, false);
         }
 
-        public void Play3D(Transform transform, CriAudioType type, string cueName, bool isLoop)
+        public Guid Play3D(Transform transform, CriAudioType type, string cueName, bool isLoop)
         {
-            Play3D(transform, type, cueName, 1f, isLoop);
+            return Play3D(transform, type, cueName, 1f, isLoop);
         }
 
-        public void Play3D(Transform transform, CriAudioType type, string cueName, float volume = 1f, bool isLoop = false)
+        public Guid Play3D(Transform transform, CriAudioType type, string cueName, float volume, bool isLoop = false)
         {
             if (_audioPlayers.TryGetValue(type, out var player))
             {
+                float adjustedVolume = Math.Min(volume, MasterVolume.Value * volume);
                 Debug.Log($"CriAudioType: {type}, CueName: {cueName}");
-                player.Play3D(transform, cueName, volume, isLoop);
+                return player.Play3D(transform, cueName, adjustedVolume, isLoop);
             }
             else
             {
                 Debug.LogWarning($"3D audio type {type} not supported.");
+                return Guid.Empty;
             }
         }
 
-        public void Pause(CriAudioType type, string cueName)
+        public void Stop(CriAudioType type, Guid id)
         {
             if (_audioPlayers.TryGetValue(type, out var player))
             {
-                player.Pause(cueName);
+                player.Stop(id);
             }
             else
             {
@@ -158,11 +168,11 @@ namespace SoulRunProject.Audio
             }
         }
 
-        public void Resume(CriAudioType type, string cueName)
+        public void Pause(CriAudioType type, Guid id)
         {
             if (_audioPlayers.TryGetValue(type, out var player))
             {
-                player.Resume(cueName);
+                player.Pause(id);
             }
             else
             {
@@ -170,18 +180,32 @@ namespace SoulRunProject.Audio
             }
         }
 
-        public void Stop(CriAudioType type, string cueName)
+        public void Resume(CriAudioType type, Guid id)
         {
             if (_audioPlayers.TryGetValue(type, out var player))
             {
-                player.Stop(cueName);
+                player.Resume(id);
             }
             else
             {
                 Debug.LogWarning($"Audio type {type} not supported.");
             }
         }
-        
+
+        public void SetVolume(CriAudioType type, float volume)
+        {
+            if (_audioPlayers.TryGetValue(type, out var player))
+            {
+                float adjustedVolume = Math.Min(volume, MasterVolume.Value * volume);
+                player.SetVolume(adjustedVolume);
+            }
+            else
+            {
+                Debug.LogWarning($"Audio type {type} not supported.");
+            }
+        }
+
+
         public void StopAll()
         {
             foreach (var player in _audioPlayers.Values)
@@ -189,7 +213,7 @@ namespace SoulRunProject.Audio
                 player.StopAll();
             }
         }
-        
+
         public void PauseAll()
         {
             foreach (var player in _audioPlayers.Values)
@@ -197,6 +221,7 @@ namespace SoulRunProject.Audio
                 player.PauseAll();
             }
         }
+
         public void ResumeAll()
         {
             foreach (var player in _audioPlayers.Values)
@@ -205,14 +230,24 @@ namespace SoulRunProject.Audio
             }
         }
 
-        public List<ICriAudioPlayerService> GetPlayers(CriAudioType type)
+        public ICriAudioPlayerService GetPlayer(CriAudioType type)
         {
             if (_audioPlayers.TryGetValue(type, out var player))
             {
-                return new List<ICriAudioPlayerService> { player };
+                return player;
             }
 
-            return new List<ICriAudioPlayerService>();
+            return null;
+        }
+
+        public float GetPlayerVolume(CriAudioType type)
+        {
+            if (_audioPlayers.TryGetValue(type, out var player))
+            {
+                return player.Volume.Value;
+            }
+
+            return 1f;
         }
 
         private void Unload(Scene scene)

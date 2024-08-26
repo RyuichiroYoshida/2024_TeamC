@@ -2,6 +2,7 @@ using System;
 using Cysharp.Threading.Tasks;
 using SoulRun.InGame;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace SoulRunProject.InGame
@@ -25,6 +26,8 @@ namespace SoulRunProject.InGame
             Debug.Log("OpenLevelUpPanel");
             _levelUpPanel.SetActive(true);
             _popupView.OpenPopup();
+            EventSystem.current.SetSelectedGameObject(_upgradeButtons[0].InputUIButton.gameObject);
+            _upgradeButtons[0].InputUIButton.OnSelect(null);
         }
         
         public async UniTask CloseLevelUpPanel()

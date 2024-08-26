@@ -28,9 +28,17 @@ namespace SoulRunProject.Title
             //LoadingScene.Instance.LoadNextScene("InGame").Forget();
         }
 
-        public void Option()
+        public void Option(GameObject optionPanel)
         {
+            bool isActive = optionPanel.activeSelf;
+            optionPanel.SetActive(!isActive);
             DebugClass.Instance.ShowLog("オプション画面表示");
+        }
+
+        public void Return(GameObject optionPanel)
+        {
+            optionPanel.SetActive(false);
+            DebugClass.Instance.ShowLog("タイトル画面に戻る");
         }
 
         public void Exit()

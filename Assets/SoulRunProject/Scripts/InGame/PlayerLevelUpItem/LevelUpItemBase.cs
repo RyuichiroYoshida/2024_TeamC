@@ -112,7 +112,7 @@ namespace SoulRunProject.InGame
                         playerManager.CurrentPlayerStatus.PenetrateAmountExtension += (int)_upValue;
                         return;
                     case StatusType.MoveSpeed:
-                        playerManager.CurrentPlayerStatus.SpeedUpAtLevelUp += _upValue;
+                        playerManager.CurrentPlayerStatus.MoveSpeed += _upValue;
                         return;
                     case StatusType.GrowthSpeed:
                         playerManager.CurrentPlayerStatus.GrowthSpeedUpRate += _upValue;
@@ -127,7 +127,7 @@ namespace SoulRunProject.InGame
                         playerManager.CurrentPlayerStatus.CriticalDamageRate += _upValue;
                         return;
                     case StatusType.SoulAbsorption:
-                        playerManager.CurrentPlayerStatus.VacuumItemRange += _upValue;
+                        playerManager.CurrentPlayerStatus.AttractItemRange += _upValue;
                         return;
                     case StatusType.SoulAcquisition:
                         playerManager.CurrentPlayerStatus.DropIncreasedRate += _upValue;

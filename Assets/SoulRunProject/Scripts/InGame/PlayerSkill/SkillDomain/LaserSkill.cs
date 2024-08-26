@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using SoulRunProject.Audio;
 using SoulRunProject.Common;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace SoulRunProject.InGame
 {
@@ -13,7 +15,7 @@ namespace SoulRunProject.InGame
         private UniTask.Awaiter _coolDownAwaiter;
         private LaserSkillData SkillData => (LaserSkillData)_skillData;
         private LaserSkillParameter RuntimeParameter => (LaserSkillParameter)_runtimeParameter;
-        private string _se = "SE_Laser";
+        private Guid _se;
 
         public LaserSkill(AbstractSkillData skillData, in PlayerManager playerManager, in Transform playerTransform) :
             base(skillData, in playerManager, in playerTransform)
@@ -74,6 +76,7 @@ namespace SoulRunProject.InGame
                 {
                     if (hit.collider.TryGetComponent(out DamageableEntity entity))
                     {
+                        _playerManagerInstance.AddSoul(RuntimeParameter.GetSoulPerSec * Time.deltaTime);
                         entity.Damage(RuntimeParameter.DamageOverTime * Time.deltaTime, useSE: false);
                     }
                 }
@@ -138,7 +141,7 @@ namespace SoulRunProject.InGame
                 _laserList[i].gameObject.SetActive(true);
             }
 
-            CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, _se);
+            _se = CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Laser");
         }
 
         LaserController AddLaser()
