@@ -1318,7 +1318,7 @@ PrefabInstance:
     - target: {fileID: 2976286264063094494, guid: bb9e0b7ed13b5d741ad32191db07c964,
         type: 3}
       propertyPath: _spawnPattern
-      value: 5361251892614398085
+      value: 5904122979131588635
       objectReference: {fileID: 0}
     - target: {fileID: 2976286264063094494, guid: bb9e0b7ed13b5d741ad32191db07c964,
         type: 3}
@@ -1358,6 +1358,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2976286264063094494, guid: bb9e0b7ed13b5d741ad32191db07c964,
         type: 3}
+      propertyPath: managedReferences[5904122979131588634]
+      value: Assembly-CSharp SoulRunProject.Common.Interface.InvertedTrianglePattern
+      objectReference: {fileID: 0}
+    - target: {fileID: 2976286264063094494, guid: bb9e0b7ed13b5d741ad32191db07c964,
+        type: 3}
+      propertyPath: managedReferences[5904122979131588635]
+      value: Assembly-CSharp SoulRunProject.Common.Interface.TrianglePattern
+      objectReference: {fileID: 0}
+    - target: {fileID: 2976286264063094494, guid: bb9e0b7ed13b5d741ad32191db07c964,
+        type: 3}
       propertyPath: managedReferences[5361251892614398084]._spawnAngle
       value: 61.9
       objectReference: {fileID: 0}
@@ -1368,6 +1378,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2976286264063094494, guid: bb9e0b7ed13b5d741ad32191db07c964,
         type: 3}
+      propertyPath: managedReferences[5904122979131588634]._spawnAngle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2976286264063094494, guid: bb9e0b7ed13b5d741ad32191db07c964,
+        type: 3}
+      propertyPath: managedReferences[5904122979131588635]._spawnAngle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2976286264063094494, guid: bb9e0b7ed13b5d741ad32191db07c964,
+        type: 3}
       propertyPath: managedReferences[5361251892614398084]._entitySpacing
       value: 2.55
       objectReference: {fileID: 0}
@@ -1375,6 +1395,26 @@ PrefabInstance:
         type: 3}
       propertyPath: managedReferences[5361251892614398084]._spawnRowCount
       value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 2976286264063094494, guid: bb9e0b7ed13b5d741ad32191db07c964,
+        type: 3}
+      propertyPath: managedReferences[5904122979131588634]._entitySpacing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2976286264063094494, guid: bb9e0b7ed13b5d741ad32191db07c964,
+        type: 3}
+      propertyPath: managedReferences[5904122979131588634]._spawnRowCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2976286264063094494, guid: bb9e0b7ed13b5d741ad32191db07c964,
+        type: 3}
+      propertyPath: managedReferences[5904122979131588635]._entitySpacing
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2976286264063094494, guid: bb9e0b7ed13b5d741ad32191db07c964,
+        type: 3}
+      propertyPath: managedReferences[5904122979131588635]._spawnRowCount
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2976286264063094494, guid: bb9e0b7ed13b5d741ad32191db07c964,
         type: 3}
@@ -1409,7 +1449,7 @@ PrefabInstance:
     - target: {fileID: 8747319268006015908, guid: bb9e0b7ed13b5d741ad32191db07c964,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -42.2
+      value: 39.8
       objectReference: {fileID: 0}
     - target: {fileID: 8747319268006015908, guid: bb9e0b7ed13b5d741ad32191db07c964,
         type: 3}
