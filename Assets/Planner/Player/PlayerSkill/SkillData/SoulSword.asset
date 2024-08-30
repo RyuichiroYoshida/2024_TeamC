@@ -22,58 +22,38 @@ MonoBehaviour:
   _levelUpTable:
     List:
     - List:
-      - _levelUpType: 1
+      - _levelUpType: 0
         _increaseDamageValue: 5
         _increaseSummonLineValue: 1
         _increasePenetrationPower: 0
         _reduceCoolTime: 0
-      - _levelUpType: 3
-        _increaseDamageValue: 0
-        _increaseSummonLineValue: 0
-        _increasePenetrationPower: 0
-        _reduceCoolTime: 20
       - _levelUpType: 2
         _increaseDamageValue: 0
         _increaseSummonLineValue: 0
         _increasePenetrationPower: 1
         _reduceCoolTime: 20
     - List:
+      - _levelUpType: 1
+        _increaseDamageValue: 0
+        _increaseSummonLineValue: 1
+        _increasePenetrationPower: 1
+        _reduceCoolTime: 20
       - _levelUpType: 0
-        _increaseDamageValue: 7
-        _increaseSummonLineValue: 1
-        _increasePenetrationPower: 0
-        _reduceCoolTime: 0
-      - _levelUpType: 2
-        _increaseDamageValue: 0
-        _increaseSummonLineValue: 0
-        _increasePenetrationPower: 1
-        _reduceCoolTime: 0
-      - _levelUpType: 3
-        _increaseDamageValue: 0
-        _increaseSummonLineValue: 0
-        _increasePenetrationPower: 1
-        _reduceCoolTime: 20
-      - _levelUpType: 1
-        _increaseDamageValue: 0
+        _increaseDamageValue: 5
         _increaseSummonLineValue: 1
         _increasePenetrationPower: 1
         _reduceCoolTime: 20
     - List:
-      - _levelUpType: 1
-        _increaseDamageValue: 10
-        _increaseSummonLineValue: 1
-        _increasePenetrationPower: 0
-        _reduceCoolTime: 0
-      - _levelUpType: 3
-        _increaseDamageValue: 0
-        _increaseSummonLineValue: 0
-        _increasePenetrationPower: 1
-        _reduceCoolTime: 30
       - _levelUpType: 2
         _increaseDamageValue: 0
         _increaseSummonLineValue: 0
-        _increasePenetrationPower: 1
-        _reduceCoolTime: 30
+        _increasePenetrationPower: 2
+        _reduceCoolTime: 0
+      - _levelUpType: 0
+        _increaseDamageValue: 5
+        _increaseSummonLineValue: 0
+        _increasePenetrationPower: 0
+        _reduceCoolTime: 0
     - List:
       - _levelUpType: 1
         _increaseDamageValue: 0
