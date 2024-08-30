@@ -67,7 +67,8 @@ MonoBehaviour:
         _damageOverTime: 280
         _amount: 1
         _width: 70
-        _height: 4
-        _speed: 1.25
-        _turnCount: 12
-        _coolTime: 4
+        _height: 10
+        _speed: 1.5
+        _turnCount: 4
+        _coolTime: 3
+        _getSoulPerSec: 0

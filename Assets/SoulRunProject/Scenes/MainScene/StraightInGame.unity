@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.13040191, g: 0.09601602, b: 0.061815564, a: 1}
+  m_IndirectSpecularColor: {r: 0.13040084, g: 0.09601555, b: 0.06181498, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -788,7 +788,12 @@ PrefabInstance:
     - target: {fileID: 3932238436133655523, guid: e711c3a71f9df6b459a265a7a8d925ee,
         type: 3}
       propertyPath: _defaultPlayerSkills.Array.size
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3932238436133655523, guid: e711c3a71f9df6b459a265a7a8d925ee,
+        type: 3}
+      propertyPath: _defaultPlayerSkills.Array.data[0]
+      value: 536870913
       objectReference: {fileID: 0}
     - target: {fileID: 3932238436133655523, guid: e711c3a71f9df6b459a265a7a8d925ee,
         type: 3}
@@ -844,6 +849,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9091037442287400240, guid: e711c3a71f9df6b459a265a7a8d925ee,
+        type: 3}
+      propertyPath: CurrentPlayerStatus._hp
+      value: 400
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1689,6 +1699,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 529402716576496942, guid: 5158a5381bdfb5444b1247f8ca126484,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -78
+      objectReference: {fileID: 0}
     - target: {fileID: 949647711802883189, guid: 5158a5381bdfb5444b1247f8ca126484,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1828,6 +1843,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2541948264914513156, guid: 5158a5381bdfb5444b1247f8ca126484,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 488
+      objectReference: {fileID: 0}
+    - target: {fileID: 2541948264914513156, guid: 5158a5381bdfb5444b1247f8ca126484,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -389.1
       objectReference: {fileID: 0}
     - target: {fileID: 2924030149784610024, guid: 5158a5381bdfb5444b1247f8ca126484,
         type: 3}
@@ -2123,7 +2148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6aed2c5823e53b4795f0e13321347ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxSegmentCount: 4
+  _maxSegmentCount: 5
   _lerpPower: 5
 --- !u!1 &2053623494
 GameObject:
