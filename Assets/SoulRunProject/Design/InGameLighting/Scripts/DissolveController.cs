@@ -55,6 +55,7 @@ namespace SoulRunProject
             _sequence = DOTween.Sequence();
             _sequence.Append(DOTween.To(() => _material.GetFloat(_alphaClipThresholdID),
                 a => _material.SetFloat(_alphaClipThresholdID, a), 1f, _fadeTime));
+            _sequence.SetUpdate(true);
             await _sequence.Play();
         }
     }

@@ -95,7 +95,7 @@ Shader "Custom/CustomDissolveShader"
                 half4 col;
                 if (_Boolean)
                 {
-                    col = tex2D(_MainTex, input.uv).a * _DamageColor * edgeCol;
+                    col = tex2D(_MainTex, input.uv) * _DamageColor * edgeCol;
                 }
                 else
                 {

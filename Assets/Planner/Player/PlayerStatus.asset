@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerStatus
   m_EditorClassIdentifier: 
   _playerStatus:
-    _hp: 100
+    _hp: 250
     _attackValue: 10
     _defenceValue: 0
     _coolTimeReductionRate: 1

@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using SoulRunProject.Common;
 using UnityEngine;
@@ -50,6 +51,11 @@ namespace SoulRunProject.InGame
             {
                 Debug.LogWarning($"{gameObject.name}のMaterialが正常にコピー出来ていません");
             }
+        }
+
+        private void OnDisable()
+        {
+            _copyMaterial.color = _defaultColor;
         }
 
         /// <summary>
