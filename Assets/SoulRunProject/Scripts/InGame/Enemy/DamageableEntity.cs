@@ -33,9 +33,6 @@ namespace SoulRunProject.InGame
         [SerializeField, CustomLabel("ダメージエフェクト")]
         private HitDamageEffectManager _hitDamageEffectManager;
 
-        [SerializeField, CustomLabel("Dead演出")]
-        private DissolveController _dissolveController;
-
         private FloatReactiveProperty _currentHp = new();
         private EnemyController _enemyController;
         private Collider _hitCollider;
@@ -75,7 +72,7 @@ namespace SoulRunProject.InGame
         {
             if (!gameObject.activeSelf) return;
             if (!_player) return;
-            Debug.Log($"{damage}ダメージ");
+            
             bool isCritical = false;
             var calculatedDamage = Calculator.CalcDamage(damage, 0, _player.CurrentPlayerStatus.CriticalRate,
                 _player.CurrentPlayerStatus.CriticalDamageRate, ref isCritical);
@@ -99,11 +96,11 @@ namespace SoulRunProject.InGame
         public async UniTask Death()
         {
             if (_lootTable) DropManager.Instance.RequestDrop(_lootTable, transform.position);
-
+            
             OnDead?.Invoke();
             // 死んでからの演出の時間当たり判定を無くす
             _hitCollider.enabled = false;
-            if (_dissolveController) await _dissolveController.DissolveFade();
+            if (_hitDamageEffectManager) await _hitDamageEffectManager.DissolveFade();
             _hitCollider.enabled = true;
             Finish();
         }
