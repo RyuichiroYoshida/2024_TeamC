@@ -93,6 +93,7 @@ Transform:
   m_Children:
   - {fileID: 5056346136769984180}
   - {fileID: 6797719603844418428}
+  - {fileID: 6218610921940851567}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8160015286760555117
@@ -116,7 +117,6 @@ MonoBehaviour:
     _knockBackTime: 0.5
   _lootTable: {fileID: 11400000, guid: ae300057cdab20e47afd344dc593ddec, type: 2}
   _hitDamageEffectManager: {fileID: 8329125932870208999}
-  _dissolveController: {fileID: 428926227086017154}
 --- !u!65 &4104162914166171959
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -153,6 +153,7 @@ MonoBehaviour:
   _duration: 0.1
   _loopCount: 1
   _hitEffect: {fileID: 0}
+  _dissolveFadeTime: 1
 --- !u!114 &1321131542843227285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,3 +316,77 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1001 &7521217819048361255
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5964906941864461234}
+    m_Modifications:
+    - target: {fileID: 3380494263103336239, guid: 4ca5ee9642235884497e725721cae33e,
+        type: 3}
+      propertyPath: m_Name
+      value: hokori_effect_daiya_skelton_red
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480037566842742344, guid: 4ca5ee9642235884497e725721cae33e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480037566842742344, guid: 4ca5ee9642235884497e725721cae33e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480037566842742344, guid: 4ca5ee9642235884497e725721cae33e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480037566842742344, guid: 4ca5ee9642235884497e725721cae33e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480037566842742344, guid: 4ca5ee9642235884497e725721cae33e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480037566842742344, guid: 4ca5ee9642235884497e725721cae33e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480037566842742344, guid: 4ca5ee9642235884497e725721cae33e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480037566842742344, guid: 4ca5ee9642235884497e725721cae33e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480037566842742344, guid: 4ca5ee9642235884497e725721cae33e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480037566842742344, guid: 4ca5ee9642235884497e725721cae33e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4ca5ee9642235884497e725721cae33e, type: 3}
+--- !u!4 &6218610921940851567 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4480037566842742344, guid: 4ca5ee9642235884497e725721cae33e,
+    type: 3}
+  m_PrefabInstance: {fileID: 7521217819048361255}
+  m_PrefabAsset: {fileID: 0}
