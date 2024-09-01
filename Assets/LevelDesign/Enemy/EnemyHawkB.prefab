@@ -425,46 +425,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: hokori_effect_daiya_hawk_red
       objectReference: {fileID: 0}
-    - target: {fileID: 5634880522724459203, guid: 017455f825224be47852172e080e6c4f,
-        type: 3}
-      propertyPath: ShapeModule.type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5634880522724459203, guid: 017455f825224be47852172e080e6c4f,
-        type: 3}
-      propertyPath: ShapeModule.m_Scale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5634880522724459203, guid: 017455f825224be47852172e080e6c4f,
-        type: 3}
-      propertyPath: ShapeModule.m_Scale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5634880522724459203, guid: 017455f825224be47852172e080e6c4f,
-        type: 3}
-      propertyPath: ShapeModule.m_Scale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5634880522724459203, guid: 017455f825224be47852172e080e6c4f,
-        type: 3}
-      propertyPath: ShapeModule.radius.value
-      value: 5.92
-      objectReference: {fileID: 0}
-    - target: {fileID: 5634880522724459203, guid: 017455f825224be47852172e080e6c4f,
-        type: 3}
-      propertyPath: ShapeModule.radiusThickness
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5634880522724459203, guid: 017455f825224be47852172e080e6c4f,
-        type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5634880522724459203, guid: 017455f825224be47852172e080e6c4f,
-        type: 3}
-      propertyPath: InitialModule.startSize.minScalar
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6395938160744299636, guid: 017455f825224be47852172e080e6c4f,
         type: 3}
       propertyPath: m_LocalPosition.x
