@@ -75,6 +75,7 @@ namespace SoulRunProject.InGame
         {
             if (!gameObject.activeSelf) return;
             if (!_player) return;
+            Debug.Log($"{damage}ダメージ");
             bool isCritical = false;
             var calculatedDamage = Calculator.CalcDamage(damage, 0, _player.CurrentPlayerStatus.CriticalRate,
                 _player.CurrentPlayerStatus.CriticalDamageRate, ref isCritical);

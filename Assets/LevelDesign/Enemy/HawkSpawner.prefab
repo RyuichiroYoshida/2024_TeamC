@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6846621702326711844}
   - component: {fileID: 1093611889631341406}
   m_Layer: 0
-  m_Name: HawkSpawnerLeft
+  m_Name: HawkSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
