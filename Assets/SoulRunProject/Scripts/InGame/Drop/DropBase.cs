@@ -81,7 +81,7 @@ namespace SoulRunProject.InGame
             }
             
             var attractRange = _player.CurrentPlayerStatus.AttractItemRange;
-            var distance = _player.transform.position - transform.position;
+            var distance = _player.transform.position + _player.PlayerCenterOffset - transform.position;
             float attractSpeed = _player.CurrentPlayerStatus.MoveSpeed + attractRange;
             if (distance.sqrMagnitude < attractRange * attractRange)
             {

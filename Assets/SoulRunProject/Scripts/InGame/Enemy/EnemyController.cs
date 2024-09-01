@@ -62,7 +62,8 @@ namespace SoulRunProject.InGame
 
         public void Initialize()
         {
-            _attacker?.OnStart();
+            _attacker?.OnStart(transform);
+            if(_attacker != null) _attacker.Animator = _animator;
             _mover?.OnStart(transform, _playerManagerInstance);
         }
 
@@ -71,11 +72,13 @@ namespace SoulRunProject.InGame
             if (!_spawnFlag) return;
 
             _timer += Time.deltaTime;
-            _mover?.OnUpdateMove(transform, _playerTransform);
             _attacker?.OnUpdateAttack(transform, _playerTransform);
+            if (_attacker is EntityLongRangeAttacker { CanMove: true } or not EntityLongRangeAttacker)
+            {
+                _mover?.OnUpdateMove(transform, _playerTransform);
+            }
 
             if (_enemyLifeTime < _timer) _damageableEntity.Despawn();
-
             if (_playerTransform.position.z - 5 > gameObject.transform.position.z) _damageableEntity.Despawn();
         }
 

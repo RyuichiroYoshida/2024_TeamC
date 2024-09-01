@@ -48,7 +48,12 @@ namespace SoulRunProject.InGame
                 .SetEase(Ease.Linear)
                 .SetLink(myTransform.gameObject, LinkBehaviour.KillOnDisable)
                 .SetLink(myTransform.gameObject)
-                .OnComplete(() => Despawn());
+                .OnComplete(() => Despawn()).SetUpdate(UpdateType.Manual);
+        }
+
+        public override void OnUpdateMove(Transform myTransform, Transform playerTransform)
+        {
+            _tweener?.ManualUpdate(Time.deltaTime, Time.unscaledDeltaTime);
         }
     }
 }

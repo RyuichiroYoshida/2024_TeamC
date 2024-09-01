@@ -7,10 +7,11 @@ namespace SoulRunProject.InGame
     /// </summary>
     public abstract class EntityAttacker
     {
+        public Animator Animator;
         /// <summary>
         /// 起動時に一度のみ呼ばれる
         /// </summary>
-        public virtual void OnStart(){}
+        public virtual void OnStart(Transform myTransform){}
         /// <summary>
         /// Updateで呼ばれる攻撃処理
         /// </summary>
