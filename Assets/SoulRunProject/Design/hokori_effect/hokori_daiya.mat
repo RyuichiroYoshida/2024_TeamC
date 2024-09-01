@@ -8,7 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: hokori_daiya
-  m_Shader: {fileID: -6465566751694194690, guid: 9796696055fba1940a8d9ebef147246c, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 9796696055fba1940a8d9ebef147246c,
+    type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -119,7 +120,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 1024.0001, g: 1007.9163, b: 1007.9163, a: 1}
+    - _Color: {r: 5.992158, g: 5.8980403, b: 5.8980403, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
