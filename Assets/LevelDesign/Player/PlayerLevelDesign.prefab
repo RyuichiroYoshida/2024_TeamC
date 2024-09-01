@@ -648,7 +648,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _duration: 0.1
-  _loopCount: 3
+  _loopCount: 1
   _hitEffect: {fileID: 3726023518174682990}
 --- !u!212 &4722900643216877938
 SpriteRenderer:

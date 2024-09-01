@@ -1,7 +1,8 @@
-using System;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using SoulRunProject.Common;
 using UnityEngine;
+using Sequence = DG.Tweening.Sequence;
 
 namespace SoulRunProject.InGame
 {
@@ -10,19 +11,15 @@ namespace SoulRunProject.InGame
     /// </summary>
     public class HitDamageEffectManager : MonoBehaviour
     {
-        // 良い感じの白色
-        static readonly Color WhiteColor = new(0.85f, 0.85f, 0.85f, 0.6f);
-        [SerializeField, CustomLabel("点滅間隔"), Range(0, 0.1f)] float _duration;
+        [SerializeField, CustomLabel("点滅間隔"), Range(0, 0.5f)] float _duration;
         [SerializeField, CustomLabel("点滅回数")] int _loopCount;
         [SerializeField, CustomLabel("ヒットエフェクト")] private ParticleSystem _hitEffect;
+        [SerializeField] private float _dissolveFadeTime = 1f;
         
         Renderer _renderer;
-        Material _copyMaterial;
+        private Material _copyMaterial;
         Sequence _sequence;
-        Color _defaultColor;
-        bool _hitFadeBlinking;
-        // シェーダーのカラープロパティ取得
-        int _pramID = Shader.PropertyToID("_DamageColor");
+        private readonly int _alphaClipThresholdID = Shader.PropertyToID("_AlphaClipThreshold");
         
         public Material CopyMaterial => _copyMaterial;
 
@@ -36,16 +33,7 @@ namespace SoulRunProject.InGame
                 _renderer = GetComponentInChildren<Renderer>();
             }
             
-            var material = new Material(_renderer.material);
-            _copyMaterial = material;
-
-            if (!material.HasColor(_pramID)) // パラメータ名が存在しているか
-            {
-                _pramID = Shader.PropertyToID("_Color");
-            }
-            
-            _defaultColor = material.GetColor(_pramID);
-            _renderer.material = _copyMaterial;
+            _copyMaterial = _renderer.material;
 
             if (_copyMaterial == null)
             {
@@ -53,50 +41,51 @@ namespace SoulRunProject.InGame
             }
         }
 
-        private void OnDisable()
-        {
-            _copyMaterial.color = _defaultColor;
-        }
-
-        /// <summary>
-        /// 色リセットメソッド
-        /// </summary>
-        public void ResetColor()
-        {
-            if (!_copyMaterial) return;
-            _copyMaterial.SetColor(_pramID, _defaultColor);
-        }
-
         /// <summary>
         /// 白色点滅メソッド
         /// </summary>
         public void HitFadeBlinkWhite()
         {
-            HitFadeBlink(WhiteColor);
+            HitFadeBlink();
         }
 
         /// <summary>
         /// 色指定点滅メソッド
         /// </summary>
         /// <param name="color">点滅色</param>
-        public void HitFadeBlink(Color color)
+        public void HitFadeBlink()
         {
             _copyMaterial.SetBool("_Boolean", true);
             _sequence?.Kill();
             _sequence = DOTween.Sequence();
-            _sequence.Append(DOTween.To(() => _defaultColor, c => _copyMaterial.SetColor(_pramID, c), color, _duration));
-            _sequence.Append(DOTween.To(() => color, c => _copyMaterial.SetColor(_pramID, c), _defaultColor, _duration));
+            _sequence.AppendInterval(_duration);
             _sequence.AppendCallback(() => _copyMaterial.SetBool("_Boolean", false));
             _sequence.SetLoops(_loopCount, LoopType.Restart);
             _sequence.SetLink(gameObject);//.SetLink(gameObject, LinkBehaviour.KillOnDisable);
             _sequence.Play();
-            _hitFadeBlinking = true;
-            _sequence.OnComplete(() => _hitFadeBlinking = false);
-            _sequence.OnKill(ResetColor);
             _sequence.SetUpdate(true);
 
             // ヒットエフェクトの再生
             if (_hitEffect) _hitEffect.Play();
+        }
+
+        private void OnEnable()
+        {
+            _copyMaterial.SetFloat(_alphaClipThresholdID, 0);
+        }
+
+        public async UniTask DissolveFade()
+        {
+            if (!_copyMaterial.HasFloat(_alphaClipThresholdID)) return;
+            
+            await DOTween.To(() => _copyMaterial.GetFloat(_alphaClipThresholdID),
+                    a => _copyMaterial.SetFloat(_alphaClipThresholdID, a), 1f, _dissolveFadeTime)
+                .SetUpdate(true);
+        }
+
+        private void OnDestroy()
+        {
+            Destroy(_copyMaterial);
         }
     }
 }
