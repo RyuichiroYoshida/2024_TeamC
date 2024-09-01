@@ -511,6 +511,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2646974274986136710, guid: 5158a5381bdfb5444b1247f8ca126484,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 8.700012
+      objectReference: {fileID: 0}
     - target: {fileID: 3490469551287386231, guid: 5158a5381bdfb5444b1247f8ca126484,
         type: 3}
       propertyPath: m_Name
@@ -819,6 +824,10 @@ MonoBehaviour:
       _seconds: 100
       _fieldSegments:
         List:
+        - {fileID: 4382749047587651699, guid: 8e41c6cf49444ff4e8f064638217e023, type: 3}
+        - {fileID: 4382749047587651699, guid: 8e41c6cf49444ff4e8f064638217e023, type: 3}
+        - {fileID: 4382749047587651699, guid: d516e9659bb422942bb71259dea831d3, type: 3}
+        - {fileID: 4382749047587651699, guid: 8e41c6cf49444ff4e8f064638217e023, type: 3}
         - {fileID: 4382749047587651699, guid: 8e41c6cf49444ff4e8f064638217e023, type: 3}
       _adjacentGraph: {fileID: 0}
     _bossStageField: {fileID: 2321524878127961784, guid: 03bca0da78a3a7c4cb908d93888a31e7,
@@ -1368,6 +1377,11 @@ PrefabInstance:
       propertyPath: _playerInput
       value: 
       objectReference: {fileID: 1366718267}
+    - target: {fileID: 3170939595594605857, guid: a0d7b3145875ab94e8f12f6d6119a4ed,
+        type: 3}
+      propertyPath: _tutorialContents.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3200518197180015001, guid: a0d7b3145875ab94e8f12f6d6119a4ed,
         type: 3}
       propertyPath: m_IsActive
