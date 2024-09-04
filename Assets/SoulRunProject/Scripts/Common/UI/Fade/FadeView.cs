@@ -2,12 +2,13 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using HikanyanLaboratory.Fade;
+using SoulRunProject.Common;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace GameJamProject.SceneManagement
 {
-    public class FadeView : MonoBehaviour
+    public class FadeView : AbstractSingletonMonoBehaviour<FadeView>
     {
         [SerializeField] private GameObject _loadingUI;
         [SerializeField] private Material _fadeMaterial;
@@ -17,6 +18,8 @@ namespace GameJamProject.SceneManagement
         private static readonly int MaskTex = Shader.PropertyToID("_MaskTex");
 
         public Material FadeMaterial => _fadeMaterial;
+
+        protected override bool UseDontDestroyOnLoad => true;
 
         private void Awake()
         {
