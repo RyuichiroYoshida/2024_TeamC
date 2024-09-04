@@ -16,7 +16,7 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 1
-  m_FogColor: {r: 0.5660378, g: 0.41313487, b: 0.27447492, a: 1}
+  m_FogColor: {r: 0.16470589, g: 0.2, b: 0.3019608, a: 1}
   m_FogMode: 1
   m_FogDensity: 0.01
   m_LinearFogStart: 100
@@ -27,7 +27,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: e391f00234292cc4f935308c11cf0e54, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 9af23ba5fa5364ff598888460e0e2759, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.13040014, g: 0.096015215, b: 0.06181486, a: 1}
+  m_IndirectSpecularColor: {r: 0.0032013855, g: 0.0063153747, b: 0.014413998, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1050,7 +1050,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 1223929605}
   m_Follow: {fileID: 1223929601}
   m_Lens:
-    FieldOfView: 114
+    FieldOfView: 120
     OrthographicSize: 9.7
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -1203,7 +1203,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 114
+  field of view: 120
   orthographic: 0
   orthographic size: 9.7
   m_Depth: -1
@@ -1687,7 +1687,12 @@ PrefabInstance:
     - target: {fileID: 529402716576496942, guid: 5158a5381bdfb5444b1247f8ca126484,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -78
+      value: -99.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 529402716576496942, guid: 5158a5381bdfb5444b1247f8ca126484,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 55.4
       objectReference: {fileID: 0}
     - target: {fileID: 949647711802883189, guid: 5158a5381bdfb5444b1247f8ca126484,
         type: 3}
@@ -1752,7 +1757,7 @@ PrefabInstance:
     - target: {fileID: 1359206112790873617, guid: 5158a5381bdfb5444b1247f8ca126484,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1662000364379603724, guid: 5158a5381bdfb5444b1247f8ca126484,
         type: 3}
@@ -1837,12 +1842,12 @@ PrefabInstance:
     - target: {fileID: 2541948264914513156, guid: 5158a5381bdfb5444b1247f8ca126484,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 488
+      value: 82
       objectReference: {fileID: 0}
     - target: {fileID: 2541948264914513156, guid: 5158a5381bdfb5444b1247f8ca126484,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -389.1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2924030149784610024, guid: 5158a5381bdfb5444b1247f8ca126484,
         type: 3}
@@ -1903,6 +1908,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4318498780283876678, guid: 5158a5381bdfb5444b1247f8ca126484,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 32.8
       objectReference: {fileID: 0}
     - target: {fileID: 4509189559107230985, guid: 5158a5381bdfb5444b1247f8ca126484,
         type: 3}
