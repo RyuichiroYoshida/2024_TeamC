@@ -1,19 +1,22 @@
 name: Acquire activation file
-on: # 本来は開始条件を記述する
+on:
   workflow_dispatch: {}
 jobs:
   activation:
     name: Request manual activation file
-    runs-on: ubuntu-latest # OSを選ぶ。一部料金の発生するOSがある。
+    runs-on: ubuntu-latest
     steps:
-      # GameCIのActivationを利用してalfファイルを生成する
-    - name: Request manual activation file
-      id: getManualLicenseFile
-      uses: game-ci/unity-request-activation-file@v2
-      with:
-        unityVersion: 2022.3.5f1
-    - name: Expose as artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: ${{ steps.getManualLicenseFile.outputs.filePath }}
-        path: ${{ steps.getManualLicenseFile.outputs.filePath }}
+      # GameCI の Activation を利用して alf ファイルを発行する
+      - name: Request manual activation file
+        id: getManualLicenseFile
+        uses: game-ci/unity-request-activation-file@v2
+        with:
+          # Unity プロジェクトのバージョンを指定する
+          # ProjectSettings/ProjectVersion.txt に記載されているバージョンを入力すれば OK
+          unityVersion: 2022.3.5f1
+      # Upload artifact (Unity_v20XX.X.XXXX.alf)
+      - name: Expose as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ steps.getManualLicenseFile.outputs.filePath }}
+          path: ${{ steps.getManualLicenseFile.outputs.filePath }}
