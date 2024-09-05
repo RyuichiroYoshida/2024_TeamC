@@ -9763,8 +9763,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4091674351751200}
   - component: {fileID: 120411782446683384}
-  - component: {fileID: 4155619141305576982}
-  - component: {fileID: 4372430942261632599}
+  - component: {fileID: -3777726583274390503}
   m_Layer: 9
   m_Name: BossLaserBeam
   m_TagString: Untagged
@@ -9797,7 +9796,7 @@ LineRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1395565506770744}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -9902,7 +9901,7 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 0
---- !u!114 &4155619141305576982
+--- !u!114 &-3777726583274390503
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9911,28 +9910,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1395565506770744}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24847bf6a8c54af087b3697e10dcad66, type: 3}
+  m_Script: {fileID: 11500000, guid: ea6c7f0a212426744b7facfa3940e9b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4372430942261632599
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1395565506770744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ea4308861e24ac4caa06d26e151d595, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageOverTime: 30
-  HitEffect: {fileID: 1348276961250486}
-  HitOffset: 0.01
-  useLaserRotation: 0
-  MaxLength: 50
-  MainTextureLength: 0.1
-  NoiseTextureLength: 0.5
+  _flashEffectObj: {fileID: 1792845831420340}
+  _hitEffectObj: {fileID: 1348276961250486}
+  _maxLength: 74.9
+  _hitOffset: 0.1
 --- !u!1 &1436039344504592
 GameObject:
   m_ObjectHideFlags: 0

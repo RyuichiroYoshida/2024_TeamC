@@ -466,8 +466,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e91850b292134f24a8ef6e7ce567f766, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _duration: 0.1
-  _loopCount: 0
+  _duration: 0.05
+  _loopCount: 1
   _hitEffect: {fileID: 0}
   _dissolveFadeTime: 1
 --- !u!114 &493474759675345639
@@ -507,16 +507,20 @@ MonoBehaviour:
     - rid: 7007908318245552134
       type: {class: BossBeamCleave, ns: SoulRunProject.InGame, asm: Assembly-CSharp}
       data:
-        _razer: {fileID: 1395565506770744, guid: 8f1e2d60ac53aa54aa0e97a31edbafed,
+        _beamEffect: {fileID: 1395565506770744, guid: 8f1e2d60ac53aa54aa0e97a31edbafed,
+          type: 3}
+        _chargeEffect: {fileID: 7128520110420670827, guid: ae29cc96bfd928b4ba34902f6aafb33f,
           type: 3}
         _beamOrigin: {fileID: 6504038626365006790}
-        _cleaveWidth: 40
+        _beamStarPosZ: 20
+        _beamHitLength: 23
         _collisionLayer:
           serializedVersion: 2
-          m_Bits: 247
+          m_Bits: 97
         _beamTime: 1.5
+        _chargeDuration: 2.2
         _damage: 15
-        _hitCount: 2
+        _hitCount: 1
         _powerUpBehaviors:
         - rid: 1007958178315632815
     - rid: 7007908318245552135
@@ -806,7 +810,7 @@ Transform:
   m_GameObject: {fileID: 8952397705782560484}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.12, y: 11.79, z: -4.04}
+  m_LocalPosition: {x: 7.12, y: 11.79, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
