@@ -9,12 +9,12 @@ namespace SoulRunProject.Common
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <summary> シングルトンの基底クラス </summary>
-    public abstract class AbstractSingletonMonoBehaviour<T> : MonoBehaviour, ISingleton<T> where T : MonoBehaviour
+    public abstract class AbstractSingletonMonoBehaviour<T> : MonoBehaviour where T : Component
     {
         /// <summary>
         /// 継承先でDontDestroyOnLoadを使用するかどうかを制御します。
         /// </summary>
-        protected abstract bool UseDontDestroyOnLoad { get; }
+        protected virtual bool UseDontDestroyOnLoad { get; } = false;
 
         private static T _instance;
 
@@ -23,13 +23,21 @@ namespace SoulRunProject.Common
             get
             {
                 if (_instance != null) return _instance;
+
+                // シーン内で既存のインスタンスを検索
                 _instance = FindObjectOfType<T>();
-                if (_instance != null) return _instance;
-                GameObject singletonObject = new GameObject(typeof(T).Name);
-                _instance = singletonObject.AddComponent<T>();
-                if ((_instance as AbstractSingletonMonoBehaviour<T>).UseDontDestroyOnLoad)
+
+                // インスタンスが見つからなかった場合に新しいオブジェクトを生成
+                if (_instance == null)
                 {
-                    DontDestroyOnLoad(singletonObject);
+                    GameObject singletonObject = new GameObject();
+                    _instance = singletonObject.AddComponent<T>();
+                    singletonObject.name = typeof(T).Name + " (Singleton)";
+
+                    if ((_instance as AbstractSingletonMonoBehaviour<T>).UseDontDestroyOnLoad)
+                    {
+                        DontDestroyOnLoad(singletonObject);
+                    }
                 }
 
                 return _instance;
@@ -52,6 +60,8 @@ namespace SoulRunProject.Common
             {
                 Destroy(gameObject);
             }
+
+            OnAwake();
         }
 
         /// <summary> Awake時に実行される処理 </summary>
@@ -61,9 +71,11 @@ namespace SoulRunProject.Common
 
         private void OnDestroy()
         {
-            if (_instance != this) return;
-            _instance = null;
-            OnDestroyed();
+            if (_instance == this)
+            {
+                _instance = null;
+                OnDestroyed();
+            }
         }
 
         /// <summary> OnDestroy時に実行される処理 </summary>
