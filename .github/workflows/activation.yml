@@ -24,7 +24,7 @@ jobs:
         id: alfFile
         uses: game-ci/unity-request-activation-file@main
         with:
-          unityVersion: ${{ env.UNITY_VERSION }}
+          unityVersion: 2022.3.5f1
 
       # Upload artifact (Unity_v20XX.X.XXXX.alf)
       - name: Expose as artifact
