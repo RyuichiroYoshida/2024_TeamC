@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ef424d786b4ebd4ea7ddc1567786d35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHp: 45
+  _maxHp: 60
   _collisionDamage: 14
   _canKnockback: 1
   _direction: {x: 0, y: 0.5, z: 1}

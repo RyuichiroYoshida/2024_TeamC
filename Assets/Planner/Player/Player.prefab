@@ -182,7 +182,7 @@ MonoBehaviour:
   _deadAnimationTime: 0
   _playerCenterOffset: {x: 0, y: 0.5, z: 0}
   CurrentPlayerStatus:
-    _hp: 235
+    _hp: 22
     _attackValue: 10
     _defenceValue: 1
     _coolTimeReductionRate: 1.06
@@ -245,7 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _initialLevel: 1
-  _expToNextLevel: 05000000080000000a0000000f0000001200000014000000190000001c0000001e000000
+  _expToNextLevel: 01000000080000000a0000000f0000001200000014000000190000001c0000001e00000023000000260000002d000000300000003200000034000000370000003a0000003c000000
 --- !u!114 &3932238436133655523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -712,6 +712,7 @@ MonoBehaviour:
   _duration: 0.1
   _loopCount: 3
   _hitEffect: {fileID: 0}
+  _dissolveFadeTime: 1
 --- !u!212 &4722900643216877938
 SpriteRenderer:
   m_ObjectHideFlags: 0
