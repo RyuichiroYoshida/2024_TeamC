@@ -2,6 +2,7 @@ using System;
 using DG.Tweening;
 using SoulRunProject.Audio;
 using SoulRunProject.Common;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace SoulRunProject.InGame
@@ -10,18 +11,27 @@ namespace SoulRunProject.InGame
     public class BossBeamCleave : BossBehaviorBase
     {
         [SerializeField, CustomLabel("エフェクトプレハブ")]
-        private GameObject _razer;
+        private GameObject _beamEffect;
+
+        [SerializeField, CustomLabel("チャージエフェクト")]
+        private ParticleSystem _chargeEffect;
 
         [SerializeField, CustomLabel("ビーム原点")] private Transform _beamOrigin;
 
-        [SerializeField, CustomLabel("薙ぎ払いの幅")]
-        private float _cleaveWidth;
+        [SerializeField, CustomLabel("開始着弾地点Z座標(プレイヤーからの相対)")]
+        private float _beamStarPosZ;
+        
+        [SerializeField, CustomLabel("着弾距離")]
+        private float _beamHitLength;
 
         [SerializeField, CustomLabel("当たるレイヤー")]
         private LayerMask _collisionLayer;
 
         [Header("性能")] [SerializeField, CustomLabel("薙ぎ払い時間")]
         private float _beamTime;
+
+        [SerializeField, CustomLabel("チャージ時間")]
+        private float _chargeDuration;
 
         [SerializeField, CustomLabel("ダメージ")] private float _damage;
         [SerializeField] private int _hitCount; // 多段ヒットなのか1回だけなのか
@@ -34,14 +44,18 @@ namespace SoulRunProject.InGame
         private Vector3 _startImpactPosition;
         private Vector3 _finishImpactPosition;
         private float _cleaveTimer;
+        private float _chargeTimer;
         private int _hitCounter;
         private Guid _beamSound;
 
         public override void Initialize(BossController bossController, Transform playerTf)
         {
             // エフェクトインスタンスの初期化
-            _laserInstance = GameObject.Instantiate(_razer, _beamOrigin);
+            _laserInstance = GameObject.Instantiate(_beamEffect, _beamOrigin);
+            _laserInstance.GetComponent<LaserEffectController>().HitLayer = _collisionLayer;
             _laserInstance.SetActive(false);
+            _chargeEffect = GameObject.Instantiate(_chargeEffect, _beamOrigin);
+            _chargeEffect.Stop();
             _playerTf = playerTf;
 
             // 行動パワーアップの代入
@@ -61,23 +75,37 @@ namespace SoulRunProject.InGame
         {
             _hitCounter = 0;
             _cleaveTimer = 0;
+            _chargeTimer = 0;
 
             // ビーム角度のリセット
-            Vector3 playerPos = _playerTf.position;
-            playerPos.y = 0.5f;
-            _startImpactPosition = playerPos + Vector3.right * _cleaveWidth / 2;
-            _finishImpactPosition = _startImpactPosition + Vector3.left * _cleaveWidth;
-            Debug.Log($"{playerPos} {_startImpactPosition} {_finishImpactPosition}");
-            _beamOrigin.rotation = Quaternion.LookRotation(_startImpactPosition - _beamOrigin.position);
-            _laserInstance.SetActive(true);
-            CriAudioManager.Instance.Resume(CriAudioType.CueSheet_SE, _beamSound);
+            // Vector3 playerPos = _playerTf.position;
+            // _startImpactPosition = new Vector3(playerPos.x, 0, _playerTf.position.z + _beamStarPosZ);
+            // _finishImpactPosition = new Vector3(playerPos.x, 0, _playerTf.position.z + _beamStarPosZ - _beamHitLength);
+            // _beamOrigin.rotation = Quaternion.LookRotation(_startImpactPosition - _beamOrigin.position);
+            //_laserInstance.SetActive(true);
+            _chargeEffect.Play();
         }
 
         public override void UpdateAction(float deltaTime)
         {
-            // タイマー
-            if (_cleaveTimer < _beamTime)
+            if (_chargeTimer < _chargeDuration)
             {
+                _chargeTimer += deltaTime;
+
+                if (_chargeTimer >= _chargeDuration)
+                {
+                    // ビーム角度のリセット
+                    Vector3 playerPos = _playerTf.position;
+                    _startImpactPosition = new Vector3(playerPos.x, 0, _playerTf.position.z + _beamStarPosZ);
+                    _finishImpactPosition = new Vector3(playerPos.x, 0, _playerTf.position.z + _beamStarPosZ - _beamHitLength);
+                    _beamOrigin.rotation = Quaternion.LookRotation(_startImpactPosition - _beamOrigin.position);
+                    // sound
+                    CriAudioManager.Instance.Resume(CriAudioType.CueSheet_SE, _beamSound);
+                }
+            }
+            else if (_cleaveTimer < _beamTime)
+            {
+                _laserInstance.SetActive(true);
                 _beamOrigin.rotation = Quaternion.LookRotation(Vector3.Lerp(_startImpactPosition - _beamOrigin.position,
                     _finishImpactPosition - _beamOrigin.position, _cleaveTimer));
                 _cleaveTimer += deltaTime;
@@ -94,7 +122,6 @@ namespace SoulRunProject.InGame
             if (Physics.Raycast(_beamOrigin.position, _beamOrigin.forward, out RaycastHit hit, float.MaxValue,
                     _collisionLayer))
             {
-                Debug.Log(hit.collider.gameObject);
                 if (hit.collider.gameObject.TryGetComponent(out PlayerManager playerManager))
                 {
                     if (_hitCounter < _hitCount)
