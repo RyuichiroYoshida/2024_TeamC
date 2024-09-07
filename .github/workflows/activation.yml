@@ -1,38 +1,52 @@
-name: GitHub Actions Sample
+name: activation
 
 # GitHub上でワークフローを手動実行できるようにする
-on: workflow_dispatch
+on:
+  workflow_dispatch: {}
 
 jobs:
     test:
         name: Run TestFramework
         runs-on: ubuntu-latest
         steps:
-            # Checkout
-            - name: Checkout repository
-              uses: actions/checkout@v4
+            - name: Unity - Activate
+              id: getManualLicenseFile
+              uses: game-ci/unity-activate@v2.0.0
               with:
-                lfs: true
+                unityVersion: 2022.3.5f1
+            - name: Expose as artifact
+              uses: actions/upload-artifact@v2
+              with:
+                name: ${{ steps.getManualLicenseFile.outputs.filePath }}
+                path: ${{ steps.getManualLicenseFile.outputs.filePath }}   
+
+
+      
+            # # Checkout
+            # - name: Checkout repository
+            #   uses: actions/checkout@v4
+            #   with:
+            #     lfs: false
 
             # Test
-            - name: Run Tests
-              uses: game-ci/unity-test-runner@v4
-              env:
-                UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-                UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-                UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-              with:
-                # secrets.GITHUB_TOKENは自動生成されるので自身で設定する必要はない
-                githubToken: ${{ secrets.GITHUB_TOKEN }}
-                # Unity プロジェクトのバージョンを指定する(ProjectSettings/ProjectVersion.txt に記載されているバージョンを入力)
-                unityVersion: 2021.3.0f1
-                # TestするModeを指定する
-                testMode: editmode
+            # - name: Run Tests
+            #   uses: game-ci/unity-test-runner@v4
+            #   env:
+            #     UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+            #     UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+            #     UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+            #   with:
+            #     # secrets.GITHUB_TOKENは自動生成されるので自身で設定する必要はない
+            #     githubToken: ${{ secrets.GITHUB_TOKEN }}
+            #     # Unity プロジェクトのバージョンを指定する(ProjectSettings/ProjectVersion.txt に記載されているバージョンを入力)
+            #     unityVersion: 2022.3.5f1
+            #     # TestするModeを指定する
+            #     testMode: editmode
 
-            # Test結果をアップロードする (デフォルトでは Test Framwork は結果を artifacts という名前のフォルダに出力)
-            - name: Upload Test Results
-              uses: actions/upload-artifact@v3
-              if: always()
-              with:
-                name: Test results
-                path: artifacts
+            # # Test結果をアップロードする (デフォルトでは Test Framwork は結果を artifacts という名前のフォルダに出力)
+            # - name: Upload Test Results
+            #   uses: actions/upload-artifact@v3
+            #   if: always()
+            #   with:
+            #     name: Test results
+            #     path: artifacts
