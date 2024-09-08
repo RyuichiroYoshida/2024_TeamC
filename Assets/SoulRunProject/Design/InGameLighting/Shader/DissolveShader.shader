@@ -12,7 +12,7 @@ Shader "Custom/CustomDissolveShader"
         _DissolveTex ("Dissolve Texture", 2D) = "white" {}
         _AlphaClipThreshold ("Alpha Clip Threshold", Range(0, 1)) = 0.5
         _HighlightOpacity ("Highlight Opacity", Range(0, 1)) = 1.0
-        _HightScale ("Gray Scale", Float) = 20.0
+        _HeightScale ("Height Scale", Float) = 20.0
         _EdgeWidth ("Disolve Margin Width", Range(0, 1)) = 0.01
     }
     SubShader
@@ -65,7 +65,7 @@ Shader "Custom/CustomDissolveShader"
             half _HighlightIntensity;
             half _HighlightOpacity;
 
-            half _GrayScale;
+            half _HeightScale;
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
@@ -142,7 +142,7 @@ Shader "Custom/CustomDissolveShader"
                 half gray = (col.r + col.g + col.b) / 3;
                 half4 grayCol = half4(gray, gray, gray, col.a);
 
-                col = half4(col.rgb * (grayCol * input.lightDir.r) * _GrayScale, col.a);
+                col = half4(col.rgb * (grayCol * input.lightDir.r) * _HeightScale, col.a);
 
                 return col;
             }
