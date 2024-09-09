@@ -65,6 +65,7 @@ Material:
     - _EdgeSize: 0.2
     - _EdgeWidth: 0.086
     - _Glossiness: 0.5
+    - _GrayScale: 30
     - _HighlightOpacity: 1
     - _Metallic: 0
     - _NoiseStrength: 0.4

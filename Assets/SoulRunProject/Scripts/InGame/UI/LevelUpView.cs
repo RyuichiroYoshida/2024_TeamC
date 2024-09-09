@@ -1,6 +1,8 @@
 using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using SoulRun.InGame;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -16,6 +18,7 @@ namespace SoulRunProject.InGame
         [SerializeField] private ButtonAndView[] _upgradeButtons;
 
         public ButtonAndView[] UpgradeButtons => _upgradeButtons;
+        private CancellationTokenSource _cts = new CancellationTokenSource();
 
         /// <summary>
         /// LevelUpPanelの表示を切り替える
@@ -23,18 +26,20 @@ namespace SoulRunProject.InGame
         /// <param name="isShow"></param>
         public void OpenLevelUpPanel()
         {
-            Debug.Log("OpenLevelUpPanel");
+            if (_cts != null)
+            {
+                _cts.Cancel();
+            }
             _levelUpPanel.SetActive(true);
             _popupView.OpenPopup();
             EventSystem.current.SetSelectedGameObject(_upgradeButtons[0].InputUIButton.gameObject);
             _upgradeButtons[0].InputUIButton.OnSelect(null);
         }
         
-        public async UniTask CloseLevelUpPanel()
+        public void CloseLevelUpPanel()
         {
-            Debug.Log("CloseLevelUpPanel");
-            await _popupView.ClosePopup();
-            _levelUpPanel.SetActive(false);
+            _cts = new CancellationTokenSource();
+            _popupView.ClosePopup(_cts.Token).Forget();
         }
 
         /// <summary>

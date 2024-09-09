@@ -397,10 +397,10 @@ Shader "Custom/CustomLitShader"
                 // ただし、他のバージョンでは、代わりにこれを使用する必要があります。
                 // SurfaceData 構造体の使用を完全に避けることもできますが、整理するのに役立ちます。
                 half4 color = UniversalFragmentPBR(inputData, surfaceData.albedo, surfaceData.metallic,
-                                                                  surfaceData.specular,
-                                                                  surfaceData.smoothness,
-                                                                  surfaceData.occlusion,
-                                                                  surfaceData.emission, surfaceData.alpha);
+                                                   surfaceData.specular,
+                                                   surfaceData.smoothness,
+                                                   surfaceData.occlusion,
+                                                   surfaceData.emission, surfaceData.alpha);
 
                 color.rgb = lerp(_ShadowColor.rgb, color, mainLight.shadowAttenuation);
                 color.rgb = MixFog(color.rgb, inputData.fogCoord);

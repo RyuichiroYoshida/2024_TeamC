@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Custom_Dissolve_Boss
+  m_Name: Custom_Dissolve_Wolf_Red
   m_Shader: {fileID: 4800000, guid: 4d6250c9846742a4db3419f5f0a05be8, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -65,14 +65,14 @@ Material:
     - _EdgeSize: 0.2
     - _EdgeWidth: 0.086
     - _Glossiness: 0.5
-    - _GrayScale: 75
+    - _GrayScale: 30
     - _HighlightOpacity: 1
     - _Metallic: 0
     - _NoiseStrength: 0.4
     - _Use_Gradient: 1
     - _cutoff: 0
     m_Colors:
-    - _BaseColor: {r: 0.7490196, g: 0.7490196, b: 0.7490196, a: 1}
+    - _BaseColor: {r: 0.7490196, g: 0, b: 0, a: 1}
     - _Color: {r: 1.4980391, g: 1.4980391, b: 1.4980391, a: 1}
     - _DamageColor: {r: 1.4980394, g: 1.4980394, b: 1.4980394, a: 1}
     - _EdgeColor: {r: 2.6352932, g: 4.1581607, b: 23.968626, a: 1}

@@ -22,7 +22,7 @@ namespace SoulRunProject.InGame
 
         public void EndSelectSkill()
         {
-            PauseManager.Pause(false);
+            //PauseManager.Pause(false);
             StateChange();
         }
     }
