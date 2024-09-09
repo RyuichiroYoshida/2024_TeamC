@@ -62,7 +62,7 @@ namespace SoulRunProject.InGame
         public override void Initialize()
         {
             CurrentHp.Value = _maxHp;
-            if (_enemyController) _enemyController.Initialize();
+            if(_enemyController) _enemyController.Initialize().Forget();
         }
 
         /// <summary>
