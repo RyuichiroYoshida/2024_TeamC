@@ -35,7 +35,7 @@ namespace SoulRunProject.InGame
             var dis = _spawnPos - self.position;
             if (Math.Abs(dis.x) >= _despawnRange || Math.Abs(dis.y) >= _despawnRange || Math.Abs(dis.z) >= _despawnRange)
             {
-                Despawn();
+                Complete();
             }
         }
 
