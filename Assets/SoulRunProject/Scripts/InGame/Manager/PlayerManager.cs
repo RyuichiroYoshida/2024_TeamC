@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using SoulRunProject.Audio;
 using SoulRunProject.InGame;
 using SoulRunProject.SoulMixScene;
@@ -125,6 +126,12 @@ namespace SoulRunProject.Common
             // 白色点滅メソッド
             _hitDamageEffectManager.HitFadeBlinkWhite();
             CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Damage");
+        }
+
+        // ノックバックを与える
+        public void TakeKnockBack(float targetPosX, float duration)
+        {
+            transform.DOBlendableMoveBy(new Vector3(targetPosX - transform.position.x, 0, 0), duration);
         }
 
         public void Heal(float value)
