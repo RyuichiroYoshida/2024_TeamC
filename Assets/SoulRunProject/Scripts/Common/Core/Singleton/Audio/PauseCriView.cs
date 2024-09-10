@@ -111,7 +111,7 @@ namespace SoulRunProject.Audio
                 _seVoiceCriVolumeControl.SetVolume(value / 100);
             }
 
-            var voicePlayer = _criAudioManager.GetPlayer(CriAudioType.CueSheet_Voice);
+            var voicePlayer = _criAudioManager.GetPlayer(CriAudioType.CueSheet_VOICE);
             if (voicePlayer != null)
             {
                 voicePlayer.Volume.Value = value / 100;
@@ -131,7 +131,7 @@ namespace SoulRunProject.Audio
                     _seVoiceCriVolumeControl.SetVolume(floatValue / 100);
                 }
 
-                var voicePlayer = _criAudioManager.GetPlayer(CriAudioType.CueSheet_Voice);
+                var voicePlayer = _criAudioManager.GetPlayer(CriAudioType.CueSheet_VOICE);
                 if (voicePlayer != null)
                 {
                     voicePlayer.Volume.Value = floatValue / 100;
