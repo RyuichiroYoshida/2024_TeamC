@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using SoulRunProject.Audio;
 using SoulRunProject.InGame;
 using SoulRunProject.SoulMixScene;
@@ -21,6 +22,7 @@ namespace SoulRunProject.Common
         [SerializeField] private HitDamageEffectManager _hitDamageEffectManager;
         [SerializeField, CustomLabel("ダメージを受けた時の速度減少量")] private float _decreaseSpeed;
         [SerializeField, CustomLabel("死亡アニメーション時間")] private float _deadAnimationTime;
+        [SerializeField, CustomLabel("プレイヤーの中心座標。足元からのオフセット。")] private Vector3 _playerCenterOffset = new(0, 0.5f, 0);
         
         private IPlayerPausable[] _inGameTimes;
         private PlayerLevelManager _pLevelManager;
@@ -32,6 +34,7 @@ namespace SoulRunProject.Common
         private FieldMover _fieldMover;
         public ReadOnlyReactiveProperty<float> CurrentHp => CurrentPlayerStatus.CurrentHpProperty;
         public PlayerResourceContainer ResourceContainer => _resourceContainer;
+        public Vector3 PlayerCenterOffset => _playerCenterOffset;
         //public PlayerStatusManager PlayerStatusManager => _statusManager;
         
         [CustomLabel("現在のプレイヤーのステータス")]　public PlayerStatus CurrentPlayerStatus;
@@ -123,6 +126,12 @@ namespace SoulRunProject.Common
             // 白色点滅メソッド
             _hitDamageEffectManager.HitFadeBlinkWhite();
             CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Damage");
+        }
+
+        // ノックバックを与える
+        public void TakeKnockBack(float targetPosX, float duration)
+        {
+            transform.DOBlendableMoveBy(new Vector3(targetPosX - transform.position.x, 0, 0), duration);
         }
 
         public void Heal(float value)

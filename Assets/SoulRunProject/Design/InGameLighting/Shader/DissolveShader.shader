@@ -12,6 +12,7 @@ Shader "Custom/CustomDissolveShader"
         _DissolveTex ("Dissolve Texture", 2D) = "white" {}
         _AlphaClipThreshold ("Alpha Clip Threshold", Range(0, 1)) = 0.5
         _HighlightOpacity ("Highlight Opacity", Range(0, 1)) = 1.0
+        _HeightScale ("Height Scale", Float) = 20.0
         _EdgeWidth ("Disolve Margin Width", Range(0, 1)) = 0.01
     }
     SubShader
@@ -33,17 +34,24 @@ Shader "Custom/CustomDissolveShader"
             //#pragma shader_feature _Boolean
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 
             struct Attributes
             {
                 float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
+                float3 normal : NORMAL;
+                float4 tangent : TANGENT;
             };
 
             struct Varyings
             {
                 float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
+                float3 viewDirTS : TEXCOORD1;
+                float3 lightDir : TEXCOORD2;
+                float3 worldPos : TEXCOORD3;
+                float3 lightColor : COLOR;
             };
 
             half4 _BaseColor;
@@ -56,6 +64,8 @@ Shader "Custom/CustomDissolveShader"
 
             half _HighlightIntensity;
             half _HighlightOpacity;
+
+            half _HeightScale;
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
@@ -71,6 +81,20 @@ Shader "Custom/CustomDissolveShader"
                 Varyings output;
                 output.vertex = TransformObjectToHClip(input.vertex);
                 output.uv = TRANSFORM_TEX(input.uv, _MainTex);
+
+                float3 binormal = cross(normalize(input.normal), normalize(input.tangent.xyz)) * input.tangent.w;
+                float3x3 rotation = float3x3(input.tangent.xyz, binormal, input.normal);
+
+                Light light = GetMainLight();
+                /*
+                 * ピクセルシェーダーに受け渡される光源ベクトルや視線ベクトルを
+                 * 法線マップを適用するポリゴン基準の座標系とテクスチャの座標系が合うように変換する
+                 * ピクセルシェーダーで座標変換すると全ピクセルにおいて、取り出した法線ベクトルに対して座標変換するので負荷が重い
+                 */
+                output.lightDir = mul(rotation, light.direction);
+                output.viewDirTS = mul(rotation, GetObjectSpaceNormalizeViewDir(input.vertex));
+                output.lightColor = light.color;
+
                 return output;
             }
 
@@ -108,6 +132,17 @@ Shader "Custom/CustomDissolveShader"
                 highlight.a *= _HighlightOpacity;
                 col += half4(highlight.rgb * _HighlightColor * highlight.a, 0.0); // highlightの色を加算
 
+                input.lightDir = normalize(input.lightDir);
+                //input.viewDirTS = normalize(input.viewDirTS);
+                //float3 halfVec = normalize(input.lightDir + input.viewDirTS);
+
+                // Diffuse
+
+                //単純平均法で完全なグレースケール化した値を取得
+                half gray = (col.r + col.g + col.b) / 3;
+                half4 grayCol = half4(gray, gray, gray, col.a);
+
+                col = half4(col.rgb * (grayCol * input.lightDir.r) * _HeightScale, col.a);
 
                 return col;
             }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
@@ -41,7 +42,7 @@ namespace SoulRunProject.InGame
             sequence.Play().SetUpdate(true);
         }
 
-        public async UniTask ClosePopup()
+        public async UniTask ClosePopup(CancellationToken token)
         {
             //下準備
             Vector2 newSize = new Vector2(_popupPanel.rectTransform.sizeDelta.x, _minHeight);
@@ -49,13 +50,16 @@ namespace SoulRunProject.InGame
             _popupContent.gameObject.SetActive(false);
             //アニメーション
             var sequence = DOTween.Sequence();
-            sequence.Append(_popupPanel.rectTransform.DOSizeDelta(newSize, _sizeChangeDuration)
-                .SetLink(_popupPanel.gameObject))
-                .OnComplete(() => _popupContent.SetActive(false))
-                .SetUpdate(true); //画像の立幅を指定した秒数かけて変更
-            sequence.Append(_popupPanel.DOFade(0, _fadeDuration).SetLink(_popupPanel.gameObject))
-                .SetUpdate(true); // フェードアウト
-            await sequence.Play().SetUpdate(true);
+            sequence.Append(_popupPanel.rectTransform.DOSizeDelta(newSize, _sizeChangeDuration));//画像の立幅を指定した秒数かけて変更
+            sequence.Append(_popupPanel.DOFade(0, _fadeDuration));// フェードアウト
+            sequence.Play().SetUpdate(true)
+                .OnComplete(() => gameObject.SetActive(false))
+                .OnKill(() =>
+                {
+                    _popupPanel.DOComplete();
+                    gameObject.SetActive(false);
+                })
+                .ToUniTask(cancellationToken: token);
         }
 
         //リザルト用に使います

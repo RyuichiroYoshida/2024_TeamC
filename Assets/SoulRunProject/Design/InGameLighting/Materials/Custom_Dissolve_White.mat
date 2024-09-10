@@ -65,6 +65,7 @@ Material:
     - _EdgeSize: 0.2
     - _EdgeWidth: 0.123
     - _Glossiness: 0.5
+    - _GrayScale: 30
     - _HighlightOpacity: 1
     - _Metallic: 0
     - _NoiseStrength: 0.4
@@ -73,7 +74,7 @@ Material:
     m_Colors:
     - _BaseColor: {r: 0.7490196, g: 0.7490196, b: 0.7490196, a: 1}
     - _Color: {r: 1.4980391, g: 1.4980391, b: 1.4980391, a: 1}
-    - _DamageColor: {r: 1.4980394, g: 1.4980394, b: 1.4980394, a: 1}
+    - _DamageColor: {r: 3.9999995, g: 2.5130887, b: 2.528436, a: 1}
     - _EdgeColor: {r: 2.6352932, g: 4.1581607, b: 23.968626, a: 1}
     - _EdgeColor1: {r: 1, g: 1, b: 1, a: 1}
     - _Emission: {r: 0, g: 0, b: 0, a: 0}

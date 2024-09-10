@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _skillType: 536870913
   _skillName: "\u30BD\u30A6\u30EB\u30D0\u30EC\u30C3\u30C8"
-  _explanatoryText: "\u6700\u521D\u304B\u3089\u6301\u3063\u3066\u3044\u308B\u30B9\u30AD\u30EB\u3002\u30D7\u30EC\u30A4\u30E4\u30FC\u304B\u3089\u5E38\u6642\u653E\u305F\u308C\u308B\u3002"
+  _explanatoryText: "\u64CD\u4F5C\u30AD\u30E3\u30E9\u304C\u6700\u521D\u304B\u3089\u6240\u6301\u3057\u3066\u3044\u308B\u30B9\u30AD\u30EB\u3002\u30BD\u30A6\u30EB\u306E\u5F3E\u3092\u5E38\u6642\u653E\u3064"
   _skillIcon: {fileID: 21300000, guid: 9ced87deec738d147be4ef69b9d0d555, type: 3}
   _maxSkillLevel: 5
   _skillParameter:
@@ -23,17 +23,17 @@ MonoBehaviour:
     List:
     - List:
       - _levelUpType: 0
-        _reduceCoolTime: 10
+        _reduceCoolTime: 5
         _addAmountCount: 0
         _multipleProjectionSpeed: 0
-      - _levelUpType: 2
+      - _levelUpType: 1
         _reduceCoolTime: 25
-        _addAmountCount: 0
+        _addAmountCount: 2
         _multipleProjectionSpeed: 10
     - List:
       - _levelUpType: 0
-        _reduceCoolTime: 15
-        _addAmountCount: 0
+        _reduceCoolTime: 10
+        _addAmountCount: 2
         _multipleProjectionSpeed: 0
       - _levelUpType: 2
         _reduceCoolTime: 20
@@ -41,13 +41,13 @@ MonoBehaviour:
         _multipleProjectionSpeed: 10
     - List:
       - _levelUpType: 0
-        _reduceCoolTime: 15
+        _reduceCoolTime: 5
         _addAmountCount: 0
         _multipleProjectionSpeed: 0
-      - _levelUpType: 1
+      - _levelUpType: 2
         _reduceCoolTime: 75
-        _addAmountCount: 2
-        _multipleProjectionSpeed: 40
+        _addAmountCount: 1
+        _multipleProjectionSpeed: 20
     - List:
       - _levelUpType: 0
         _reduceCoolTime: 20

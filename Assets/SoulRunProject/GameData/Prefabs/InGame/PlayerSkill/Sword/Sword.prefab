@@ -5002,7 +5002,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useFirePointRotation: 0
   _useFlash: 0
-  _hit: {fileID: 1105495686751570, guid: 4328596502e67c1468c5794bdd5067b4, type: 3}
+  _hit: {fileID: 0}
   _flash: {fileID: 0}
   _detached: []
   _collider: {fileID: 2150742800137183200}

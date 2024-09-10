@@ -39,7 +39,7 @@ namespace SoulRunProject
             _playerInput.PauseInput
                 .SkipLatestValueOnSubscribe()
                 .Where(x => x)
-                .Subscribe( _ =>
+                .Subscribe(_ =>
                 {
                     StateChange();
                 })

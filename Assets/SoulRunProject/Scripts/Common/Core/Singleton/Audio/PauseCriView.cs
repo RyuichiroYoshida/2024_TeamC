@@ -80,7 +80,7 @@ namespace SoulRunProject.Audio
 
         private void OnVoiceVolumeSliderChanged(float value)
         {
-            var player = _criAudioManager.GetPlayer(CriAudioType.CueSheet_Voice);
+            var player = _criAudioManager.GetPlayer(CriAudioType.CueSheet_VOICE);
             if (player != null)
             {
                 player.Volume.Value = value / 100;
@@ -140,7 +140,7 @@ namespace SoulRunProject.Audio
         {
             if (float.TryParse(value, out float floatValue))
             {
-                var player = _criAudioManager.GetPlayer(CriAudioType.CueSheet_Voice);
+                var player = _criAudioManager.GetPlayer(CriAudioType.CueSheet_VOICE);
                 if (player != null)
                 {
                     player.Volume.Value = floatValue / 100;
@@ -166,7 +166,7 @@ namespace SoulRunProject.Audio
                 _meCriVolumeControl.SetVolume(volume);
             }).AddTo(this);
 
-            _criAudioManager.GetPlayer(CriAudioType.CueSheet_Voice)?.Volume.Subscribe(volume =>
+            _criAudioManager.GetPlayer(CriAudioType.CueSheet_VOICE)?.Volume.Subscribe(volume =>
             {
                 _voiceCriVolumeControl.SetVolume(volume);
             }).AddTo(this);
@@ -201,7 +201,7 @@ namespace SoulRunProject.Audio
                 _seCriVolumeControl.SetVolume(value / 100); // スライダーの値を直接反映
             }
 
-            var voicePlayer = _criAudioManager.GetPlayer(CriAudioType.CueSheet_Voice);
+            var voicePlayer = _criAudioManager.GetPlayer(CriAudioType.CueSheet_VOICE);
             if (voicePlayer != null)
             {
                 voicePlayer.Volume.Value = value / 100;
@@ -240,7 +240,7 @@ namespace SoulRunProject.Audio
                     _seCriVolumeControl.SetVolume(floatValue / 100); // 入力フィールドの値を直接反映
                 }
 
-                var voicePlayer = _criAudioManager.GetPlayer(CriAudioType.CueSheet_Voice);
+                var voicePlayer = _criAudioManager.GetPlayer(CriAudioType.CueSheet_VOICE);
                 if (voicePlayer != null)
                 {
                     voicePlayer.Volume.Value = floatValue / 100;

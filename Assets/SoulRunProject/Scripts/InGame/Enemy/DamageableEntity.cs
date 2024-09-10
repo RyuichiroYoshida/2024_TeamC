@@ -33,9 +33,6 @@ namespace SoulRunProject.InGame
         [SerializeField, CustomLabel("ダメージエフェクト")]
         private HitDamageEffectManager _hitDamageEffectManager;
 
-        [SerializeField, CustomLabel("Dead演出")]
-        private DissolveController _dissolveController;
-
         private FloatReactiveProperty _currentHp = new();
         private EnemyController _enemyController;
         private Collider _hitCollider;
@@ -47,6 +44,9 @@ namespace SoulRunProject.InGame
         /// <typeparam name="ダメージ"></typeparam>
         /// <typeparam name="クリティカルかどうか"></typeparam>
         public Action<float, bool> OnDamaged;
+
+        /// <summary> 衝突ダメージを与えたとき </summary>
+        public event Action<PlayerManager> OnCollisionDamage; 
 
         public Action OnDead;
         public float MaxHp => _maxHp;
@@ -65,7 +65,7 @@ namespace SoulRunProject.InGame
         public override void Initialize()
         {
             CurrentHp.Value = _maxHp;
-            if (_enemyController) _enemyController.Initialize();
+            if(_enemyController) _enemyController.Initialize().Forget();
         }
 
         /// <summary>
@@ -75,6 +75,7 @@ namespace SoulRunProject.InGame
         {
             if (!gameObject.activeSelf) return;
             if (!_player) return;
+            
             bool isCritical = false;
             var calculatedDamage = Calculator.CalcDamage(damage, 0, _player.CurrentPlayerStatus.CriticalRate,
                 _player.CurrentPlayerStatus.CriticalDamageRate, ref isCritical);
@@ -98,11 +99,11 @@ namespace SoulRunProject.InGame
         public async UniTask Death()
         {
             if (_lootTable) DropManager.Instance.RequestDrop(_lootTable, transform.position);
-
+            
             OnDead?.Invoke();
             // 死んでからの演出の時間当たり判定を無くす
             _hitCollider.enabled = false;
-            if (_dissolveController) await _dissolveController.DissolveFade();
+            if (_hitDamageEffectManager) await _hitDamageEffectManager.DissolveFade();
             _hitCollider.enabled = true;
             Finish();
         }
@@ -115,8 +116,12 @@ namespace SoulRunProject.InGame
         private void OnTriggerEnter(Collider other)
         {
             if (!gameObject.activeSelf) return;
+
             if (other.gameObject.TryGetComponent(out PlayerManager playerManager))
+            {
                 playerManager.Damage(_collisionDamage);
+                OnCollisionDamage?.Invoke(playerManager);
+            }
         }
     }
 }

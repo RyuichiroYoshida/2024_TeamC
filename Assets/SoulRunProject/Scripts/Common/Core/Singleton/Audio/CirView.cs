@@ -53,7 +53,7 @@ namespace SoulRunProject.Audio
                 _criAudioManager.GetPlayerVolume(CriAudioType.CueSheet_ME), CriAudioType.CueSheet_ME,
                 OnMeVolumeSliderChanged, OnMeVolumeInputChanged);
             _voiceCriVolumeControl = CreateVolumeControl("Voice Volume",
-                _criAudioManager.GetPlayerVolume(CriAudioType.CueSheet_Voice), CriAudioType.CueSheet_Voice,
+                _criAudioManager.GetPlayerVolume(CriAudioType.CueSheet_VOICE), CriAudioType.CueSheet_VOICE,
                 OnVoiceVolumeSliderChanged, OnVoiceVolumeInputChanged);
 
             _bgmCueNameControl = CreateCueNameControl("BGM Cue Name");
@@ -64,7 +64,7 @@ namespace SoulRunProject.Audio
             _bgmButton.Initialize(_bgmCueNameControl.GetCueName(), CriAudioType.CueSheet_BGM, _bgmCueNameControl);
             _seButton.Initialize(_seCueNameControl.GetCueName(), CriAudioType.CueSheet_SE, _seCueNameControl);
             _meButton.Initialize(_meCueNameControl.GetCueName(), CriAudioType.CueSheet_ME, _meCueNameControl);
-            _voiceButton.Initialize(_voiceCueNameControl.GetCueName(), CriAudioType.CueSheet_Voice,
+            _voiceButton.Initialize(_voiceCueNameControl.GetCueName(), CriAudioType.CueSheet_VOICE,
                 _voiceCueNameControl);
 
             BindVolumeControls();
@@ -125,7 +125,7 @@ namespace SoulRunProject.Audio
 
         private void OnVoiceVolumeSliderChanged(float value)
         {
-            var player = _criAudioManager.GetPlayer(CriAudioType.CueSheet_Voice);
+            var player = _criAudioManager.GetPlayer(CriAudioType.CueSheet_VOICE);
             if (player != null)
             {
                 player.Volume.Value = value / 100;
@@ -185,7 +185,7 @@ namespace SoulRunProject.Audio
         {
             if (float.TryParse(value, out float floatValue))
             {
-                var player = _criAudioManager.GetPlayer(CriAudioType.CueSheet_Voice);
+                var player = _criAudioManager.GetPlayer(CriAudioType.CueSheet_VOICE);
                 if (player != null)
                 {
                     player.Volume.Value = floatValue / 100;
@@ -211,7 +211,7 @@ namespace SoulRunProject.Audio
                 _meCriVolumeControl.SetVolume(volume);
             }).AddTo(this);
 
-            _criAudioManager.GetPlayer(CriAudioType.CueSheet_Voice)?.Volume.Subscribe(volume =>
+            _criAudioManager.GetPlayer(CriAudioType.CueSheet_VOICE)?.Volume.Subscribe(volume =>
             {
                 _voiceCriVolumeControl.SetVolume(volume);
             }).AddTo(this);

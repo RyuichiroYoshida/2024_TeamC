@@ -9,14 +9,12 @@ namespace HikanyanLaboratory.SceneManagement
     public class SceneManager : AbstractSingletonMonoBehaviour<SceneManager>
     {
         protected override bool UseDontDestroyOnLoad => true;
-        FadeController _fadeController;
 
         private bool _isTransitioning;
 
         public override async void OnAwake()
         {
             base.OnAwake();
-            _fadeController = FadeController.Instance;
         }
 
         public async UniTask LoadSceneWithFade(string sceneName, IFadeStrategy fadeStrategy = null)
@@ -31,7 +29,7 @@ namespace HikanyanLaboratory.SceneManagement
 
             try
             {
-                if (_fadeController == null)
+                if (FadeController.Instance == null)
                 {
                     Debug.LogError("FadeControllerが設定されていません。");
                     return;
@@ -39,7 +37,7 @@ namespace HikanyanLaboratory.SceneManagement
 
                 fadeStrategy ??= new BasicFadeStrategy();
 
-                await _fadeController.FadeOut(fadeStrategy);
+                await FadeController.Instance.FadeOut(fadeStrategy);
 
                 var loadSceneOperation =
                     UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
@@ -54,7 +52,7 @@ namespace HikanyanLaboratory.SceneManagement
                 await UniTask.Yield();
 
 
-                await _fadeController.FadeIn(fadeStrategy);
+                await FadeController.Instance.FadeIn(fadeStrategy);
             }
             finally
             {
