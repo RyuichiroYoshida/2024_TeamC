@@ -44,6 +44,7 @@ namespace SoulRunProject.Title
             optionPanel.SetActive(false);
             _optionModel.SetPausedState(false);
             DebugClass.Instance.ShowLog("タイトル画面に戻る");
+            
         }
 
         public void Exit()
