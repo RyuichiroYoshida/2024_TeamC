@@ -14,7 +14,7 @@ namespace SoulRunProject
     {
         [SerializeField] private TitleModel _titleModel;
         [SerializeField] private TitleView _titleView;
-
+        [SerializeField] private OptionPresenter _optionPresenter;
         private void Start()
         {
             CriAudioManager.Instance.Play(CriAudioType.CueSheet_BGM, "BGM_Title", true);
