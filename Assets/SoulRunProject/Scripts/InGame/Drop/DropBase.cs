@@ -107,6 +107,11 @@ namespace SoulRunProject.InGame
             _rotateTween = null;
             _projectileMotionSequence?.Kill();
             _projectileMotionSequence = null;
+            if (Parent && ActiveParent)
+            {
+                Parent.Targets.Remove(transform);
+                ActiveParent = false;
+            }
         }
 
         private void OnTriggerEnter(Collider other)

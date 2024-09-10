@@ -536,7 +536,7 @@ MonoBehaviour:
         _flameBallSpeed: 40
         _flameBallNum: 30
         _flameDamage: 5
-        _deviationDistance: 10
+        _deviationDistance: 20
         _flameBallAccuracy: 0
         _powerUpBehaviors:
         - rid: 5361252326309625967

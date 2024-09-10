@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1555214661050289247
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2017585361622114513}
+  m_Layer: 0
+  m_Name: start
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2017585361622114513
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1555214661050289247}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 17.57, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6986030557025884598}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4905882750540987877
 GameObject:
   m_ObjectHideFlags: 0
@@ -56,6 +87,39 @@ MonoBehaviour:
   m_Offset: {x: 0, y: 0, z: 5}
   m_Size: {x: 6.5, y: 5, z: 10}
   m_FadeFactor: 1
+--- !u!1 &6305856347272781424
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6986030557025884598}
+  m_Layer: 0
+  m_Name: StartMove
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6986030557025884598
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6305856347272781424}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2017585361622114513}
+  - {fileID: 2890140829826590286}
+  m_Father: {fileID: 5964906941864461234}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6942516581084546689
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,7 +184,7 @@ Transform:
   m_GameObject: {fileID: 7073754473475370446}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
   m_LocalScale: {x: 1.8, y: 1.8, z: 1.8}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -128,6 +192,7 @@ Transform:
   - {fileID: 3141307629397546487}
   - {fileID: 8489408933112773328}
   - {fileID: 5081056898249130639}
+  - {fileID: 6986030557025884598}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9165621589667773365
@@ -215,7 +280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ef424d786b4ebd4ea7ddc1567786d35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHp: 75
+  _maxHp: 120
   _collisionDamage: 10
   _canKnockback: 0
   _direction: {x: 1, y: 1, z: 1}
@@ -275,27 +340,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attacker:
     rid: 8478225676376211456
+  _startMover:
+    rid: 7921966093198163971
   _mover:
-    rid: 5361252003259088908
+    rid: 7921966093198163972
   _enemyLifeTime: 60
   references:
     version: 2
     RefIds:
-    - rid: 5361252003259088908
-      type: {class: CurveMover, ns: SoulRunProject.InGame, asm: Assembly-CSharp}
+    - rid: 7921966093198163971
+      type: {class: PathMover, ns: SoulRunProject.InGame, asm: Assembly-CSharp}
       data:
-        _moveSpeed: 5
+        _moveSpeed: 1.5
+        _posMarkers:
+        - {fileID: 1555214661050289247}
+        - {fileID: 7369963339054197846}
+        _isPosLoop: 0
+        _notFirstInterpolate: 1
+        _returnToInitialPosition: 1
+        _loopCount: 0
+        _type: 0
+        _easeType: 15
+    - rid: 7921966093198163972
+      type: {class: PathMover, ns: SoulRunProject.InGame, asm: Assembly-CSharp}
+      data:
+        _moveSpeed: 6
         _posMarkers:
         - {fileID: 6942516581084546689}
         - {fileID: 7699666227352543159}
         _isPosLoop: 0
-        _loopCount: 999
+        _notFirstInterpolate: 0
+        _returnToInitialPosition: 0
+        _loopCount: -1
         _type: 1
+        _easeType: 4
     - rid: 8478225676376211456
       type: {class: EntityLongRangeAttacker, ns: SoulRunProject.InGame, asm: Assembly-CSharp}
       data:
         Animator: {fileID: 0}
-        _interval: 5
+        _interval: 3
         _enemyBullet: {fileID: 1312205383257055634, guid: caf0a23a1824b59448852c93b13230cf,
           type: 3}
         _isHoming: 1
@@ -331,6 +414,37 @@ MonoBehaviour:
   _damageUIPrefab: {fileID: -8645444479275004511, guid: abba775fb86727447918faadc8d0e920,
     type: 3}
   _uiPosition: {x: 0, y: 4.89, z: 0}
+--- !u!1 &7369963339054197846
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2890140829826590286}
+  m_Layer: 0
+  m_Name: end
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2890140829826590286
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7369963339054197846}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6986030557025884598}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7699666227352543159
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using SoulRunProject.Common;
 using SoulRunProject.Framework;
 using UniRx;
+using UnityEngine;
 
 namespace SoulRunProject.InGame
 {
@@ -34,14 +35,16 @@ namespace SoulRunProject.InGame
             PauseManager.Pause(false);
             SwitchToLevelUpState = false;
             ArrivedBossStagePosition = false;
+            SwitchToPauseState = false;
             
             // PlayerInputへの購読
             _playerInput.PauseInput
                 .SkipLatestValueOnSubscribe()
-                .Subscribe(toPause =>
+                .Where(x => x)
+                .Subscribe(_ =>
                 {
-                    SwitchToPauseState = toPause;
-                    if (toPause) StateChange();
+                    SwitchToPauseState = true;
+                    StateChange();
                 })
                 .AddTo(_compositeDisposable);
             

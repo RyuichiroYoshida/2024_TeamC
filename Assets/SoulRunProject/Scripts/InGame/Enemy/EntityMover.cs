@@ -12,6 +12,6 @@ namespace SoulRunProject.InGame
         [SerializeField, CustomLabel("移動速度")] protected float _moveSpeed;
         public virtual void OnStart(Transform myTransform = null, PlayerManager pm = null){}
         public virtual void OnUpdateMove(Transform myTransform, Transform playerTransform){}
-        public Action Despawn;
+        public Action Complete;
     }
 }
