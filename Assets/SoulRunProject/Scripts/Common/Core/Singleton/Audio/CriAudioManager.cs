@@ -199,6 +199,10 @@ namespace SoulRunProject.Audio
                 float adjustedVolume = Math.Min(volume, MasterVolume.Value * volume);
                 player.SetVolume(adjustedVolume);
             }
+            else if (type == CriAudioType.Master)
+            {
+                //Debug.Log($"MasterVolume: {volume}");
+            }
             else
             {
                 Debug.LogWarning($"Audio type {type} not supported.");
