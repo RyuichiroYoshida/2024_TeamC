@@ -8,15 +8,17 @@ namespace SoulRunProject.InGame
 {
     public class ResultPresenter : IInitializable
     {
-        ResultView _resultView;
-        ResultState _resultState;
+        private ResultView _resultView;
+        private ResultState _resultState;
         private PlayerManager _playerManager;
+        private ScoreData _scoreData;
         
-        public ResultPresenter(ResultView resultView, ResultState resultState, PlayerManager playerManager)
+        public ResultPresenter(ResultView resultView, ResultState resultState, PlayerManager playerManager, ScoreData scoreData)
         {
             _resultView = resultView;
             _resultState = resultState;
             _playerManager = playerManager;
+            _scoreData = scoreData;
         }
 
         public void Initialize()
@@ -24,7 +26,8 @@ namespace SoulRunProject.InGame
             _resultState.OnStateEnter += _ =>
             {
                 _resultView.SetResultPanelVisibility(true);
-                _resultView.DisplayResult(ScoreManager.Instance.OnScoreChanged.Value, _playerManager.ResourceContainer.Coin);
+                var score = ScoreManager.Instance.OnScoreChanged.Value;
+                _resultView.DisplayResult(score, _playerManager.ResourceContainer.Coin, _scoreData.GetSprite(score));
                 CriAudioManager.Instance.Play(CriAudioType.CueSheet_ME, _playerManager.CurrentHp.Value > 0 ?
                     "ME_Stage_Clear" : "ME_GameOver");
             };
