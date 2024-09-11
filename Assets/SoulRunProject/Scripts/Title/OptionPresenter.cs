@@ -10,26 +10,7 @@ namespace SoulRunProject.Title
 
         private void Start()
         {
-            // オプション画面を開く
-            _optionView.DisplayOption();
-
-            // リジュームボタンが押された時、ポーズ解除してオプション画面を閉じる
-            _optionView.ResumeButton.OnClickAsObservable()
-                .Subscribe(_ =>
-                {
-                    _optionView.CloseOption(); // ポップアップを閉じる
-                    _titleModel.Return(_optionView.gameObject); // タイトル画面に戻す
-                })
-                .AddTo(this);
-
-            // エグジットボタンが押された時、ポップアップを閉じてタイトルに戻る
-            _optionView.ExitButton.OnClickAsObservable()
-                .Subscribe(_ =>
-                {
-                    _optionView.CloseOption(); // ポップアップを閉じる
-                    _titleModel.Return(_optionView.gameObject); // タイトル画面に戻す
-                })
-                .AddTo(this);
+            _optionView.ReturnButton.OnClick.Subscribe(_ => _titleModel.Option(_optionView.OptionPanel));
         }
     }
 }
