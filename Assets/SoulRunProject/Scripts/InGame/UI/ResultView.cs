@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using SoulRun.InGame;
+using SoulRunProject.Common;
 using SoulRunProject.Framework;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,17 +15,17 @@ namespace SoulRunProject.InGame
     /// </summary>
     public class ResultView : MonoBehaviour
     {
-        [SerializeField] private InputUIButton _restartButton;
-        [SerializeField] private InputUIButton _exitButton;
-        [SerializeField] private GameObject _resultPanel;
-        [SerializeField] private Text _scoreText;
-        [SerializeField] private Text _scoreTitleText;
-        [SerializeField] private Text _coinText;
-        [SerializeField] private Text _coinTitleText;
-        [SerializeField] private Text _highScoreText;
-        [SerializeField] private Text _highScoreTitleText;
-        [SerializeField] private PopupView _popupView;
-        [SerializeField] private Image _rankImage;
+        [SerializeField, CustomLabel("リスタート")] private InputUIButton _restartButton;
+        [SerializeField, CustomLabel("終了")] private InputUIButton _exitButton;
+        [SerializeField, CustomLabel("リザルトパネル")] private GameObject _resultPanel;
+        [SerializeField, CustomLabel("スコア数値表示")] private Text _scoreText;
+        [SerializeField, CustomLabel("スコア文字表示")] private Text _scoreTitleText;
+        [SerializeField, CustomLabel("コイン数値表示")] private Text _coinText;
+        [SerializeField, CustomLabel("コイン文字表示")] private Text _coinTitleText;
+        [SerializeField, CustomLabel("ハイスコア数値表示")] private Text _highScoreText;
+        [SerializeField, CustomLabel("ハイスコア文字表示")] private Text _highScoreTitleText;
+        [SerializeField, CustomLabel("リザルトパネルポップアップ")] private PopupView _popupView;
+        [SerializeField, CustomLabel("ランク表示")] private Image _rankImage;
         
         public InputUIButton RestartButton => _restartButton;
         public InputUIButton ExitButton => _exitButton;
@@ -49,8 +50,9 @@ namespace SoulRunProject.InGame
         /// </summary>
         /// <param name="score"></param>
         /// <param name="coin"></param>
-        public async void DisplayResult(int score, int coin)
+        public async void DisplayResult(int score, int coin, Sprite rankSprite)
         {
+            if(_rankImage) _rankImage.sprite = rankSprite;
             var targetScore = score;
             var targetCoin = coin;
             var targetHighScore = PlayerPrefs.GetInt("HighScore", 0);
