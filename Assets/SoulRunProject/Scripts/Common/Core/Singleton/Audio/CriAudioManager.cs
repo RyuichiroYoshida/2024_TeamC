@@ -29,7 +29,7 @@ namespace SoulRunProject.Audio
         public IReactiveProperty<float> VoiceVolume { get; private set; } = new ReactiveProperty<float>(1f);
 
 
-        private void Awake()
+        public override void OnAwake()
         {
             // ACF設定
             string path = Application.streamingAssetsPath + $"/{_audioSetting.StreamingAssetsPathAcf}.acf";
@@ -79,8 +79,6 @@ namespace SoulRunProject.Audio
             SeVolume.Subscribe(volume => OnVolumeChanged(CriAudioType.CueSheet_SE, volume)).AddTo(this);
             MeVolume.Subscribe(volume => OnVolumeChanged(CriAudioType.CueSheet_ME, volume)).AddTo(this);
             VoiceVolume.Subscribe(volume => OnVolumeChanged(CriAudioType.CueSheet_VOICE, volume)).AddTo(this);
-
-            SceneManager.sceneUnloaded += Unload;
         }
 
         private void OnMasterVolumeChanged(float volume)
@@ -256,15 +254,6 @@ namespace SoulRunProject.Audio
 
         private void Unload(Scene scene)
         {
-            foreach (var player in _audioPlayers.Values)
-            {
-                player.Dispose();
-            }
-        }
-
-        public void Dispose()
-        {
-            SceneManager.sceneUnloaded -= Unload;
             foreach (var player in _audioPlayers.Values)
             {
                 player.Dispose();
