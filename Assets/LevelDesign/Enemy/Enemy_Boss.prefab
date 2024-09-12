@@ -485,45 +485,36 @@ MonoBehaviour:
   _defaultPos: {x: 0, y: 90, z: 25}
   _hpImage: {fileID: 591339365316218285}
   _bossAnimator: {fileID: 4926363286030084361}
-  _powerUpThreshold:
-  - 50
+  _powerUpThreshold: 90
   _bossBehaviors:
-  - rid: 7007908318245552134
-  - rid: 7007908318245552135
+  - rid: 4288447401758818515
+  - rid: 4288447401758818516
   _behaviorIntervalTime: 1
+  _buffedIntervalTime: 0.3
   _deadAnimationTime: 2
   references:
     version: 2
     RefIds:
-    - rid: 1007958178315632815
-      type: {class: BossBeamCleave/SpeedPowerUp, ns: SoulRunProject.InGame, asm: Assembly-CSharp}
-      data:
-        _timeReductionRatio: 0.6
-    - rid: 5361252326309625967
-      type: {class: BossFlameFloor/SpeedPowerUp, ns: SoulRunProject.InGame, asm: Assembly-CSharp}
-      data:
-        _timeReductionRatio: 0.8
-        _speedUpRatio: 1.2
-    - rid: 7007908318245552134
+    - rid: 4288447401758818515
       type: {class: BossBeamCleave, ns: SoulRunProject.InGame, asm: Assembly-CSharp}
       data:
-        _beamEffect: {fileID: 1395565506770744, guid: 8f1e2d60ac53aa54aa0e97a31edbafed,
+        _beamPrefab: {fileID: -3777726583274390503, guid: 8f1e2d60ac53aa54aa0e97a31edbafed,
           type: 3}
         _chargeEffect: {fileID: 7128520110420670827, guid: ae29cc96bfd928b4ba34902f6aafb33f,
           type: 3}
         _beamOrigin: {fileID: 6504038626365006790}
         _beamStarPosZ: 20
-        _beamHitLength: 23
+        _beamHitLength: 25
+        _randomRange: 5
         _collisionLayer:
           serializedVersion: 2
-          m_Bits: 97
-        _beamTime: 1.5
+          m_Bits: 65
+        _beamTime: 1
         _chargeDuration: 2.2
         _damage: 15
-        _hitCount: 1
-        _powerUpBehaviors:
-        - rid: 1007958178315632815
-    - rid: 7007908318245552135
+        _beamDistance: 15
+        _chargeDurationBuffed: 1
+    - rid: 4288447401758818516
       type: {class: BossFlameFloor, ns: SoulRunProject.InGame, asm: Assembly-CSharp}
       data:
         _animator: {fileID: 4926363286030084361}
@@ -534,12 +525,12 @@ MonoBehaviour:
           type: 3}
         _actionTime: 4
         _flameBallSpeed: 40
-        _flameBallNum: 30
+        _flameBallCount: 10
         _flameDamage: 5
         _deviationDistance: 20
-        _flameBallAccuracy: 0
-        _powerUpBehaviors:
-        - rid: 5361252326309625967
+        _flameBallAccuracy: 3
+        _actionTimeBuffed: 2.5
+        _flameBallCountBuffed: 20
 --- !u!65 &2838193289605637035
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -810,7 +801,7 @@ Transform:
   m_GameObject: {fileID: 8952397705782560484}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.12, y: 11.79, z: 0}
+  m_LocalPosition: {x: 7.12, y: 11.79, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
