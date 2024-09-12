@@ -9913,7 +9913,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea6c7f0a212426744b7facfa3940e9b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _flashEffectObj: {fileID: 1792845831420340}
+  _flashObj: {fileID: 1792845831420340}
   _hitEffectObj: {fileID: 1348276961250486}
   _maxLength: 74.9
   _hitOffset: 0.1

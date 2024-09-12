@@ -141,7 +141,7 @@ namespace SoulRunProject.InGame
                 _laserList[i].gameObject.SetActive(true);
             }
 
-            _se = CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Laser");
+            _se = CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_SoulRay");
         }
 
         LaserController AddLaser()
