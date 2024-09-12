@@ -66,14 +66,14 @@ namespace SoulRunProject.Audio
         private void OnBgmAndMeVolumeSliderChanged(float value)
         {
             var bgmPlayer = _criAudioManager.GetPlayer(CriAudioType.CueSheet_BGM);
-            if (bgmPlayer != null)
+            if (bgmPlayer != null && _bgmMeCriVolumeControl != null)
             {
                 bgmPlayer.Volume.Value = value / 100;
                 _bgmMeCriVolumeControl.SetVolume(value / 100);
             }
 
             var mePlayer = _criAudioManager.GetPlayer(CriAudioType.CueSheet_ME);
-            if (mePlayer != null)
+            if (mePlayer != null && _bgmMeCriVolumeControl != null)
             {
                 mePlayer.Volume.Value = value / 100;
                 _bgmMeCriVolumeControl.SetVolume(value / 100);

@@ -249,7 +249,7 @@ namespace SoulRunProject.Audio
                 return player.Volume.Value;
             }
 
-            return 1f;
+            return type == CriAudioType.Master ? MasterVolume.Value : 1f;
         }
 
         private void Unload(Scene scene)
