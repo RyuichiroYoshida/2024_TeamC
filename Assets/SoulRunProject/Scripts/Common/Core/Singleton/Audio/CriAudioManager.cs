@@ -12,7 +12,6 @@ namespace SoulRunProject.Audio
     /// <summary>
     /// Audioの再生を管理するクラス
     /// </summary>
-    
     public class CriAudioManager : AbstractSingletonMonoBehaviour<CriAudioManager>
     {
         [SerializeField] private CriAudioSetting _audioSetting;
@@ -32,8 +31,6 @@ namespace SoulRunProject.Audio
 
         private void Awake()
         {
-            DontDestroyOnLoad(gameObject);
-
             // ACF設定
             string path = Application.streamingAssetsPath + $"/{_audioSetting.StreamingAssetsPathAcf}.acf";
             CriAtomEx.RegisterAcf(null, path);
