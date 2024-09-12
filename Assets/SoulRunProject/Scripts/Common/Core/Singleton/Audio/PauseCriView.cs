@@ -21,7 +21,7 @@ namespace SoulRunProject.Audio
             _criAudioManager = CriAudioManager.Instance;
 
             // マスターボリュームコントロールを作成
-            _masterCriVolumeControl = CreateVolumeControl("Master", 
+            _masterCriVolumeControl = CreateVolumeControl("Master",
                 _criAudioManager.MasterVolume.Value,
                 CriAudioType.Master, OnMasterVolumeSliderChanged, OnMasterVolumeInputChanged);
 
@@ -48,6 +48,7 @@ namespace SoulRunProject.Audio
         // マスターボリュームのスライダーが変更された時の処理
         private void OnMasterVolumeSliderChanged(float value)
         {
+            if (_masterCriVolumeControl == null) return;
             _criAudioManager.MasterVolume.Value = value / 100;
             _masterCriVolumeControl.SetVolume(value / 100);
         }
@@ -55,25 +56,23 @@ namespace SoulRunProject.Audio
         // マスターボリュームの入力フィールドが変更された時の処理
         private void OnMasterVolumeInputChanged(string value)
         {
-            if (float.TryParse(value, out float floatValue))
-            {
-                _criAudioManager.MasterVolume.Value = floatValue / 100;
-                _masterCriVolumeControl.SetVolume(floatValue / 100);
-            }
+            if (!float.TryParse(value, out float floatValue) || _masterCriVolumeControl == null) return;
+            _criAudioManager.MasterVolume.Value = floatValue / 100;
+            _masterCriVolumeControl.SetVolume(floatValue / 100);
         }
 
         // BGMとMEのスライダーが変更された時の処理
         private void OnBgmAndMeVolumeSliderChanged(float value)
         {
             var bgmPlayer = _criAudioManager.GetPlayer(CriAudioType.CueSheet_BGM);
-            if (bgmPlayer != null)
+            if (bgmPlayer != null && _bgmMeCriVolumeControl != null)
             {
                 bgmPlayer.Volume.Value = value / 100;
                 _bgmMeCriVolumeControl.SetVolume(value / 100);
             }
 
             var mePlayer = _criAudioManager.GetPlayer(CriAudioType.CueSheet_ME);
-            if (mePlayer != null)
+            if (mePlayer != null && _bgmMeCriVolumeControl != null)
             {
                 mePlayer.Volume.Value = value / 100;
                 _bgmMeCriVolumeControl.SetVolume(value / 100);
@@ -105,14 +104,14 @@ namespace SoulRunProject.Audio
         private void OnSeAndVoiceVolumeSliderChanged(float value)
         {
             var sePlayer = _criAudioManager.GetPlayer(CriAudioType.CueSheet_SE);
-            if (sePlayer != null)
+            if (sePlayer != null && _seVoiceCriVolumeControl != null)
             {
                 sePlayer.Volume.Value = value / 100;
                 _seVoiceCriVolumeControl.SetVolume(value / 100);
             }
 
             var voicePlayer = _criAudioManager.GetPlayer(CriAudioType.CueSheet_VOICE);
-            if (voicePlayer != null)
+            if (voicePlayer != null && _seVoiceCriVolumeControl != null)
             {
                 voicePlayer.Volume.Value = value / 100;
                 _seVoiceCriVolumeControl.SetVolume(value / 100);

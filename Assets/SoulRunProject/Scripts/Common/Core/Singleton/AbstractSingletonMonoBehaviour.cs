@@ -60,8 +60,6 @@ namespace SoulRunProject.Common
             {
                 Destroy(gameObject);
             }
-
-            OnAwake();
         }
 
         /// <summary> Awake時に実行される処理 </summary>

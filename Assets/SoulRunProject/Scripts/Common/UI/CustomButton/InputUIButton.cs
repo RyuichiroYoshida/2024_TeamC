@@ -1,4 +1,6 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
+using UniRx;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -12,7 +14,8 @@ namespace SoulRun.InGame
         private CanvasGroup _button;
         private Vector3 _originalScale;
         private const float FadeTime = 0.2f;
-
+        private readonly Subject<Unit> _onClick = new Subject<Unit>();
+        public IObservable<Unit> OnClickAsObservable() => _onClick;
         protected override void Awake () 
         {
             _button = GetComponent<CanvasGroup>();
@@ -40,5 +43,7 @@ namespace SoulRun.InGame
             transform.DOScale(_originalScale, FadeTime).SetLink(gameObject).SetUpdate(UpdateType.Normal, true);
             _button.alpha = 1f;
         }
+        
+        
     }
 }

@@ -17,7 +17,7 @@ namespace SoulRunProject.Audio
         private float _currentValue;
         private CriAudioManager _criAudioManager; // CriAudioManagerのインスタンスを保持
         private CriAudioType _audioType; // 音声タイプを保持
-        public IReactiveProperty<float> Volume { get; } = new ReactiveProperty<float>(1f);
+        public IReactiveProperty<float> Volume { get; private set; } = new ReactiveProperty<float>(1f);
 
         public void Initialize(string label, float initialValue, CriAudioType audioType,
             UnityAction<float> onSliderChanged, UnityAction<string> onInputChanged)
@@ -39,6 +39,7 @@ namespace SoulRunProject.Audio
             _volumeInputField.onEndEdit.AddListener(onInputChanged);
             _volumeInputField.onEndEdit.AddListener(OnInputChanged);
 
+            Volume.Value = initialValue;
             Volume.Subscribe(SetVolume).AddTo(this);
         }
 
