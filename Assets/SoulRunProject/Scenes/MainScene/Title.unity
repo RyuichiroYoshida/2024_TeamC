@@ -138,6 +138,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FadeScene
       objectReference: {fileID: 0}
+    - target: {fileID: 1770480420346926836, guid: ee80934541d0e6e4cab1ff660dc718b2,
+        type: 3}
+      propertyPath: _maskTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: 73ef3314cfb232b4fb44cb5df3da455b, type: 3}
     - target: {fileID: 8450631843179219438, guid: ee80934541d0e6e4cab1ff660dc718b2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -557,7 +562,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &144516640
 RectTransform:
   m_ObjectHideFlags: 0
@@ -616,6 +621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e5bf34448dfbf6489efa0439b9d6ec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _optionPanel: {fileID: 144516639}
   _returnButton: {fileID: 1386852637}
   _popupView: {fileID: 341121557}
 --- !u!223 &144516644
@@ -4912,7 +4918,7 @@ MonoBehaviour:
     - rid: 155680450577694722
       type: {class: BasicFadeStrategy, ns: HikanyanLaboratory.Fade, asm: Assembly-CSharp}
       data:
-        _maskTexture: {fileID: 2800000, guid: 0551ecbdb6391584a84e987a0f632e12, type: 3}
+        _maskTexture: {fileID: 2800000, guid: 73ef3314cfb232b4fb44cb5df3da455b, type: 3}
         _fadeDuration: 1
         _cutoutRange: 0
         _ease: 30
