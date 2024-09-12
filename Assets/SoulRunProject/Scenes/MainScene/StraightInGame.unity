@@ -743,6 +743,7 @@ MonoBehaviour:
   _stageNameView: {fileID: 300482969}
   _levelUpView: {fileID: 300482968}
   _pauseView: {fileID: 1885331155}
+  _scoreData: {fileID: 11400000, guid: 1552b9a87df032f4ab6a7aa4ff53dc44, type: 2}
 --- !u!114 &1174502022
 MonoBehaviour:
   m_ObjectHideFlags: 0
