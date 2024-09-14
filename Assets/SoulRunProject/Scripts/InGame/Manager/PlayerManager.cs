@@ -125,7 +125,8 @@ namespace SoulRunProject.Common
             
             // 白色点滅メソッド
             _hitDamageEffectManager.HitFadeBlinkWhite();
-            CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Damage");
+            CriAudioManager.Instance.Play(CriAudioType.CueSheet_VOICE, "VOICE_Hit");
+            //CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Damage");
         }
 
         // ノックバックを与える
@@ -144,8 +145,7 @@ namespace SoulRunProject.Common
         {
             OnDead?.Invoke();
             CriAudioManager.Instance.StopAll();
-            Debug.Log("GameOver");
-            //SwitchPause(true);
+            CriAudioManager.Instance.Play(CriAudioType.CueSheet_VOICE, "VOICE_Death");
         }
 
         #region SoulSkill関連
