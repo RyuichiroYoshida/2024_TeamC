@@ -20,8 +20,8 @@ MonoBehaviour:
     _lowerThreshold: 20001
     _rankSprite: {fileID: 21300000, guid: d53c5bb177efa24419952bff0ae4b168, type: 3}
   - _upperThreshold: 30000
-    _lowerThreshold: 25001
+    _lowerThreshold: 30000
     _rankSprite: {fileID: 21300000, guid: f1481de688cbfb24d99dddf7c4728648, type: 3}
   - _upperThreshold: 2147483647
-    _lowerThreshold: 30001
+    _lowerThreshold: 50000
     _rankSprite: {fileID: 21300000, guid: 4a3c3452d2961e44a8c0924f756255f1, type: 3}
