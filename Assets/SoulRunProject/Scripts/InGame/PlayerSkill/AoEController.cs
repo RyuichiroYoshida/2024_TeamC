@@ -34,7 +34,7 @@ namespace SoulRunProject.Common
 
         private void FixedUpdate()
         {
-            _entities = _entities.Where(entity => entity && entity.gameObject.activeSelf).ToHashSet();
+            _entities = _entities.Where(entity => entity && entity.gameObject.activeSelf && entity.CurrentHp.Value > 0).ToHashSet();
             // OnTriggerExitする前にDestroyすることがあるので、
             // Whereでnullチェックとアクティブかどうかをチェックしてからダメージ処理
             foreach (var entity in _entities)
