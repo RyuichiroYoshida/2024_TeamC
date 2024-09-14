@@ -12,10 +12,6 @@ namespace HikanyanLaboratory.SceneManagement
 
         private bool _isTransitioning;
 
-        public override async void OnAwake()
-        {
-            base.OnAwake();
-        }
 
         public async UniTask LoadSceneWithFade(string sceneName, IFadeStrategy fadeStrategy = null)
         {

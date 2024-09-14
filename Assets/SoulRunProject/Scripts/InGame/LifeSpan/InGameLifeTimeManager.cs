@@ -23,6 +23,7 @@ namespace SoulRunProject.Common
         [SerializeField] private StageNameView _stageNameView;
         [SerializeField] private LevelUpView _levelUpView;
         [SerializeField] private PauseView _pauseView;
+        [SerializeField] private ScoreData _scoreData;
         protected override void Configure(IContainerBuilder builder)
         {
             //ドメイン層
@@ -48,6 +49,7 @@ namespace SoulRunProject.Common
             builder.RegisterInstance(_skillManager);
             builder.RegisterInstance(_soulSkillManager);
             builder.RegisterInstance(_levelUpItemData);
+            builder.RegisterInstance(_scoreData);
             
             //プレゼンテーション層
             builder.RegisterComponent(_resultView);

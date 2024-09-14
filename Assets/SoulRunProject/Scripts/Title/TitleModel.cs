@@ -17,6 +17,7 @@ namespace SoulRunProject.Title
         [SerializeField] float _transitionTime = 1.0f;
         [SerializeField] private string _tutorialScene = "TutorialScene";
         [SerializeReference, SubclassSelector] IFadeStrategy _fadeStrategy;
+        [SerializeField] private OptionModel _optionModel;
 
         private void Start()
         {
@@ -34,13 +35,16 @@ namespace SoulRunProject.Title
         {
             bool isActive = optionPanel.activeSelf;
             optionPanel.SetActive(!isActive);
+            _optionModel.SetPausedState(isActive);
             DebugClass.Instance.ShowLog("オプション画面表示");
         }
 
         public void Return(GameObject optionPanel)
         {
             optionPanel.SetActive(false);
+            _optionModel.SetPausedState(false);
             DebugClass.Instance.ShowLog("タイトル画面に戻る");
+            
         }
 
         public void Exit()

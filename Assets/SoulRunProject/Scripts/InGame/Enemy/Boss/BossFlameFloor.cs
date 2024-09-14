@@ -1,6 +1,5 @@
 using SoulRunProject.Common;
 using UnityEngine;
-using System;
 using SoulRunProject.Audio;
 
 namespace SoulRunProject.InGame
@@ -28,7 +27,7 @@ namespace SoulRunProject.InGame
         private float _flameBallSpeed;
 
         [SerializeField, CustomLabel("一回の行動の火炎弾の数")]
-        private float _flameBallNum;
+        private int _flameBallCount;
 
         [SerializeField, CustomLabel("延焼ダメージ(秒)")]
         private float _flameDamage;
@@ -39,8 +38,12 @@ namespace SoulRunProject.InGame
         [SerializeField, CustomLabel("着弾地点の最大のずれ幅")]
         private float _flameBallAccuracy;
 
-        [Header("強化内容"), EnumDrawer(typeof(PowerUpName)), SerializeReference, SubclassSelector]
-        PowerUpBehaviorBase[] _powerUpBehaviors;
+        [Header("強化後性能")] 
+        [SerializeField, CustomLabel("行動時間")]
+        private float _actionTimeBuffed;
+
+        [SerializeField, CustomLabel("火炎弾の数")] 
+        private int _flameBallCountBuffed;
 
         // 移動
         private float _actionTimer;
@@ -57,13 +60,6 @@ namespace SoulRunProject.InGame
             _bossTransform = bossController.transform;
             _defaultBossPos = _bossTransform.position;
             _playerTransform = playerTf;
-
-            // 行動パワーアップの代入
-            foreach (var powerUpBehavior in _powerUpBehaviors)
-            {
-                powerUpBehavior.Initialize(this);
-                PowerUpBejaviors.Add(powerUpBehavior.PowerUpBehavior);
-            }
         }
 
         public override void BeginAction()
@@ -78,7 +74,7 @@ namespace SoulRunProject.InGame
             // flame
             _flameBallTimer += deltaTime;
 
-            if (_flameBallTimer >= _actionTime / _flameBallNum)
+            if (_flameBallTimer >= _actionTime / _flameBallCount)
             {
                 _flameBallTimer = 0;
 
@@ -86,7 +82,7 @@ namespace SoulRunProject.InGame
                 BossFlameBallController flameBall =
                     GameObject.Instantiate(_flameBallPrefab, _firingPosition.position, Quaternion.identity);
                 Vector3 impactPos = _playerTransform.position;
-                impactPos.x += UnityEngine.Random.Range(-_flameBallAccuracy, _flameBallAccuracy);
+                impactPos.x += Random.Range(-_flameBallAccuracy, _flameBallAccuracy);
                 impactPos.y = 0; // fieldの高さ
                 impactPos.z += _deviationDistance;
                 flameBall.transform.LookAt(impactPos);
@@ -104,33 +100,10 @@ namespace SoulRunProject.InGame
             }
         }
 
-        [Serializable, Name("抽象クラス")]
-        abstract class PowerUpBehaviorBase
+        public override void BuffBehavior(BossController bossController)
         {
-            protected BossFlameFloor _instance;
-
-            public void Initialize(BossFlameFloor bossFlameFloor)
-            {
-                _instance = bossFlameFloor;
-            }
-
-            public abstract void PowerUpBehavior(BossController controller);
-        }
-
-        [Serializable, Name("スピードアップ")]
-        class SpeedPowerUp : PowerUpBehaviorBase
-        {
-            [SerializeField, CustomLabel("時間短縮割合")]
-            private float _timeReductionRatio;
-
-            [SerializeField, CustomLabel("火炎弾のスピード上昇割合")]
-            private float _speedUpRatio;
-
-            public override void PowerUpBehavior(BossController controller)
-            {
-                _instance._actionTime *= _timeReductionRatio;
-                _instance._flameBallSpeed *= _speedUpRatio;
-            }
+            _flameBallCount = _flameBallCountBuffed;
+            _actionTime = _actionTimeBuffed;
         }
     }
 }

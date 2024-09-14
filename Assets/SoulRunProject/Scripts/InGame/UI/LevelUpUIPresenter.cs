@@ -42,7 +42,7 @@ namespace SoulRunProject.InGame
             };
             _levelUpState.OnStateExit += _ =>
             {
-                _levelUpView.CloseLevelUpPanel().Forget();
+                _levelUpView.CloseLevelUpPanel();
             };
             
             // upgradeされたら元のステートに戻る

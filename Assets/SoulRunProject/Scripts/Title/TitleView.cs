@@ -19,7 +19,7 @@ namespace SoulRunProject.Title
         public InputUIButtonBase StartButton => _startButton;
         public InputUIButtonBase OptionButton => _optionButton;
         public InputUIButtonBase ExitButton => _exitSimButton;
-        public InputUIButtonBase ReturnButton => _returnButton;
+        //public InputUIButtonBase ReturnButton => _returnButton;
         
         public GameObject OptionPanel => _optionPanel;
         
