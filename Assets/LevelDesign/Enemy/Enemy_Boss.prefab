@@ -485,7 +485,7 @@ MonoBehaviour:
   _defaultPos: {x: 0, y: 90, z: 25}
   _hpImage: {fileID: 591339365316218285}
   _bossAnimator: {fileID: 4926363286030084361}
-  _powerUpThreshold: 90
+  _powerUpThreshold: 50
   _bossBehaviors:
   - rid: 4288447401758818515
   - rid: 4288447401758818516
