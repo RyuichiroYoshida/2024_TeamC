@@ -86,6 +86,7 @@ namespace SoulRunProject.InGame
                 Debug.Log("ソウルが足りません。");
                 return;
             }
+            CriAudioManager.Instance.Play(CriAudioType.CueSheet_VOICE, "VOICE_SoulSkill");
             _currentSoulSkill.StartSoulSkill();
             _usingSkillTimer = _currentSoulSkill.Duration;
         }
