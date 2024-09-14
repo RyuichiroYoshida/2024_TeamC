@@ -26,5 +26,9 @@ MonoBehaviour:
     CueSheetName: CueSheet_SE
     AcbPath: CueSheet_SE
     AwbPath: 
+  - Type: CueSheet_VOICE
+    CueSheetName: CueSheet_VOICE
+    AcbPath: CueSheet_VOICE
+    AwbPath: 
   _cueSheetDictionary:
     _pairs: []

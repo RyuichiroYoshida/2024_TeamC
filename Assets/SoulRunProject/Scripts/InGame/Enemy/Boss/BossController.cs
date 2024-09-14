@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using SoulRunProject.Audio;
@@ -128,6 +127,7 @@ namespace SoulRunProject.InGame
             await UniTask.WaitUntil(() => _bossAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f, 
                 cancellationToken: this.GetCancellationTokenOnDestroy());
             _currentState = BossState.Standby;
+            CriAudioManager.Instance.Play(CriAudioType.CueSheet_VOICE, "VOICE_BossLaughing");
         }
 
         private enum BossState
