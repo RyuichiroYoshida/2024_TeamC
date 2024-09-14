@@ -14834,6 +14834,7 @@ MonoBehaviour:
   _useFlash: 0
   _hit: {fileID: 1089465354904564, guid: f0855940e22dbcd4aad5ca152a089348, type: 3}
   _flash: {fileID: 1367524815892938, guid: 40f5e004d2504a04db181f5453658776, type: 3}
+  _fireCueName: SE_Soulbullet
   _detached: []
   _collider: {fileID: 7728589861092496342}
   _light: {fileID: 0}
