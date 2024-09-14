@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using SoulRunProject.Audio;
 using SoulRunProject.Common;
 using SoulRunProject.InGame;
 using SoulRunProject.Skill;
@@ -89,6 +90,7 @@ namespace SoulRunProject
                     }
 
                     _magicCircleFlag = true;
+                    CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_SoulSwordMagicSquare");
                 }
 
                 // 魔法陣起動から剣召喚までのタイマー
@@ -212,7 +214,7 @@ namespace SoulRunProject
             sword.transform.parent = oldParent;
             obj.SetActive(false);
 
-            // 待機後にランダムな角度で剣を飛ばす
+            // 待機後に剣を飛ばす
             sword.ApplyParameter(RuntimeParameter);
             sword.Initialize();
             sword.GetReference(_playerManagerInstance);

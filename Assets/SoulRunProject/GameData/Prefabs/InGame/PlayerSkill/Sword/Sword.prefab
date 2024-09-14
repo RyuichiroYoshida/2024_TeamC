@@ -5004,6 +5004,7 @@ MonoBehaviour:
   _useFlash: 0
   _hit: {fileID: 0}
   _flash: {fileID: 0}
+  _fireCueName: ShootSoulSword
   _detached: []
   _collider: {fileID: 2150742800137183200}
   _light: {fileID: 0}
