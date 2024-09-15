@@ -10,61 +10,30 @@ namespace GameJamProject.SceneManagement
 {
     public class FadeView : AbstractSingletonMonoBehaviour<FadeView>
     {
-        [SerializeField] private GameObject _loadingUI;
-        [SerializeField] private Material _fadeMaterial;
-        [SerializeField] private Texture _maskTexture;
-        [SerializeField] private Slider _slider;
-        private FadeController _fadeController;
+        [SerializeField, Tooltip("フェード用のImageを設定")]
+        private Material _fadeMaterial;
+
+        [SerializeField, Tooltip("Fade用テクスチャ")]
+        private Texture _maskTexture;
+
+
+        [SerializeField, Tooltip("フェード時間を設定")] private float _fadeDuration = 1f;
+
+        [SerializeField, Tooltip("フェードのイージングを設定")]
+        private Ease _fadeEase = Ease.Linear;
+
         private static readonly int MaskTex = Shader.PropertyToID("_MaskTex");
-
-        public Material FadeMaterial => _fadeMaterial;
-
-        protected override bool UseDontDestroyOnLoad => true;
 
         private void Awake()
         {
-            _fadeController = FadeController.Instance;
-            DontDestroyOnLoad(this);
+            var fadeManager = FadeController.Instance;
 
-            if (_fadeController != null)
-            {
-                _fadeController.SetFadeMaterial(_fadeMaterial);
-            }
-            else
-            {
-                Debug.LogError("FadeControllerが見つかりません。");
-            }
-
-            if (_fadeMaterial != null && _maskTexture != null)
+            if (_fadeMaterial == null) return;
+            fadeManager.SetFadeMaterial(_fadeMaterial);
+            if (_maskTexture != null)
             {
                 _fadeMaterial.SetTexture(MaskTex, _maskTexture);
             }
-        }
-
-        public void SetLoadingUIActive(bool isActive)
-        {
-            _loadingUI.SetActive(isActive);
-        }
-
-        public async UniTask FadeOut(IFadeStrategy fadeStrategy = null)
-        {
-            if (_fadeController != null)
-            {
-                await _fadeController.FadeOut(fadeStrategy);
-            }
-        }
-
-        public async UniTask FadeIn(IFadeStrategy fadeStrategy = null)
-        {
-            if (_fadeController != null)
-            {
-                await _fadeController.FadeIn(fadeStrategy);
-            }
-        }
-
-        public void UpdateProgress(float progress)
-        {
-            _slider.value = progress;
         }
     }
 }
