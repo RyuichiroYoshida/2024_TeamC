@@ -14587,6 +14587,7 @@ MonoBehaviour:
   _useFlash: 0
   _hit: {fileID: 1120835270511274, guid: 33cfc2755a55b7e4c86c9d7018efbaaa, type: 3}
   _flash: {fileID: 1795330392712688, guid: 7f11cfb7c95c8df45beb2209791430c4, type: 3}
+  _fireCueName: SE_HowkAttack
   _detached:
   - {fileID: 0}
   _collider: {fileID: 8565290360454055666}

@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using SoulRunProject.Audio;
 using SoulRunProject.Common;
 using UniRx;
 using UniRx.Triggers;
@@ -13,6 +14,7 @@ namespace SoulRunProject.InGame
         [SerializeField] bool _useFlash;
         [SerializeField] GameObject _hit;
         [SerializeField] GameObject _flash;
+        [SerializeField] string _fireCueName;
         [SerializeField] GameObject[] _detached;
         [SerializeField] Collider _collider;
         [SerializeField] Light _light;
@@ -104,6 +106,9 @@ namespace SoulRunProject.InGame
                     Destroy(flashInstance, flashPsParts.main.duration);
                 }
             }
+            
+            // 撃った時の音
+            CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, _fireCueName);
         }
 
         public abstract void Move();
