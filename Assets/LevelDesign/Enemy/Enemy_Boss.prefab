@@ -509,7 +509,7 @@ MonoBehaviour:
         _collisionLayer:
           serializedVersion: 2
           m_Bits: 65
-        _beamTime: 1
+        _beamTime: 0.8
         _chargeDuration: 2.2
         _damage: 20
         _beamDistance: 15
