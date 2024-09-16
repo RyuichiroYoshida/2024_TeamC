@@ -461,6 +461,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _duration: 0.1
   _loopCount: 1
+  _hitEffect: {fileID: 0}
+  _dissolveFadeTime: 1
 --- !u!114 &493474759675345639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -476,37 +478,33 @@ MonoBehaviour:
   _defaultPos: {x: 0, y: -8, z: 25}
   _hpImage: {fileID: 591339365316218285}
   _bossAnimator: {fileID: 4926363286030084361}
-  _powerUpThreshold:
-  - 50
+  _powerUpThreshold: 0
   _bossBehaviors:
   - rid: 7007908318245552134
   - rid: 7007908318245552135
   _behaviorIntervalTime: 2
+  _buffedIntervalTime: 0
+  _deadAnimationTime: 0
   references:
     version: 2
     RefIds:
-    - rid: 1007958178315632815
-      type: {class: BossBeamCleave/SpeedPowerUp, ns: SoulRunProject.InGame, asm: Assembly-CSharp}
-      data:
-        _timeReductionRatio: 0.5
-    - rid: 1007958178315632817
-      type: {class: BossFlameFloor/SpeedPowerUp, ns: SoulRunProject.InGame, asm: Assembly-CSharp}
-      data:
-        _timeReductionRatio: 0.5
-        _speedUpRatio: 2
     - rid: 7007908318245552134
       type: {class: BossBeamCleave, ns: SoulRunProject.InGame, asm: Assembly-CSharp}
       data:
-        _razer: {fileID: 1818483698145146, guid: 6028b5b4fbbf45e45a362de709aa2e18,
-          type: 3}
+        _beamPrefab: {fileID: 0}
+        _chargeEffect: {fileID: 0}
         _beamOrigin: {fileID: 6504038626365006790}
-        _startImpactPosition: {x: 12, y: -9, z: -25}
-        _finishImpactPosition: {x: -12, y: -9, z: -25}
+        _beamStarPosZ: 0
+        _beamHitLength: 0
+        _randomRange: 0
+        _collisionLayer:
+          serializedVersion: 2
+          m_Bits: 0
         _beamTime: 1.5
+        _chargeDuration: 0
         _damage: 15
-        _hitCount: 2
-        _powerUpBehaviors:
-        - rid: 1007958178315632815
+        _beamDistance: 0
+        _chargeDurationBuffed: 0
     - rid: 7007908318245552135
       type: {class: BossFlameFloor, ns: SoulRunProject.InGame, asm: Assembly-CSharp}
       data:
@@ -518,12 +516,12 @@ MonoBehaviour:
           type: 3}
         _actionTime: 5
         _flameBallSpeed: 10
-        _flameBallNum: 10
+        _flameBallCount: 0
         _flameDamage: 5
         _deviationDistance: 5
         _flameBallAccuracy: 0
-        _powerUpBehaviors:
-        - rid: 1007958178315632817
+        _actionTimeBuffed: 0
+        _flameBallCountBuffed: 0
 --- !u!114 &-3820245366408176591
 MonoBehaviour:
   m_ObjectHideFlags: 0
