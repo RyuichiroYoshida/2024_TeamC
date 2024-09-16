@@ -36,7 +36,7 @@ namespace SoulRunProject.Common
         }
 
         public float AttackDamage => BaseAttackDamage + _status.AttackValue;
-        public float CoolTime => BaseCoolTime * _status.CoolTimeReductionRate;
+        public float CoolTime => BaseCoolTime / _status.CoolTimeReductionRate;
         public float Size => BaseSize * _status.SkillSizeUpRate;
         public int Amount => BaseAmount + _status.BulletAmountExtension;
         public float Speed => BaseSpeed * _status.BulletSpeedUpRate;
