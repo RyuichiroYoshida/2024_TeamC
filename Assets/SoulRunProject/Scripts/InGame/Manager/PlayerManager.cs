@@ -121,12 +121,16 @@ namespace SoulRunProject.Common
             }
             _fieldMover.DownSpeed(_decreaseSpeed);
             _playerCamera.DamageCam();
-            CurrentPlayerStatus.CurrentHp -= Calculator.CalcDamage(damage, CurrentPlayerStatus.DefenceValue, 0, 1);
             
             // 白色点滅メソッド
             _hitDamageEffectManager.HitFadeBlinkWhite();
             CriAudioManager.Instance.Play(CriAudioType.CueSheet_VOICE, "VOICE_Hit");
-            //CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Damage");
+            
+            // DeathでCriにStopAllがかかるのでVoiceの後にする
+            CurrentPlayerStatus.CurrentHp -= Calculator.CalcDamage(damage, CurrentPlayerStatus.DefenceValue, 0, 1);
+            
+            // Hit音は出したいのでHp計算の後
+            CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Damage");
         }
 
         // ノックバックを与える
