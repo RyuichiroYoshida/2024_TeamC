@@ -65,7 +65,7 @@ Material:
     - _EnableMetallic: 0
     - _EnableOutLine: 0
     - _HeightScale: 20
-    - _HighlightOpacity: 1
+    - _HighlightOpacity: 0
     - _Metallic: 0.5
     - _OutlineWidth: 0
     - _ShadowStrength: 1
