@@ -27,28 +27,44 @@ namespace HikanyanLaboratory.SceneManagement
             {
                 if (FadeController.Instance == null)
                 {
-                    Debug.LogError("FadeControllerが設定されていません。");
+                    Debug.LogError("FadeControllerが設定されていません。シーン遷移を中止します。");
                     return;
                 }
 
                 fadeStrategy ??= new BasicFadeStrategy();
 
+                // フェードアウト
                 await FadeController.Instance.FadeOut(fadeStrategy);
 
+                // シーンを非同期でロード
                 var loadSceneOperation =
                     UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
-                loadSceneOperation.allowSceneActivation = false;
-
-                while (loadSceneOperation.progress < 0.9f)
+                if (loadSceneOperation != null)
                 {
-                    await UniTask.Yield();
+                    loadSceneOperation.allowSceneActivation = false;
+
+                    // ロードが完了するまで進行状況を監視
+                    while (loadSceneOperation.progress < 0.9f)
+                    {
+                        await UniTask.Yield();
+                    }
+
+                    // シーンをアクティブにする
+                    loadSceneOperation.allowSceneActivation = true;
+
+                    // シーンが完全にアクティブになるまで待機
+                    while (!loadSceneOperation.isDone)
+                    {
+                        await UniTask.Yield();
+                    }
                 }
 
-                loadSceneOperation.allowSceneActivation = true;
-                await UniTask.Yield();
-
-
+                // フェードイン
                 await FadeController.Instance.FadeIn(fadeStrategy);
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"シーン遷移中にエラーが発生しました: {ex.Message}");
             }
             finally
             {

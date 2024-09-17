@@ -25,7 +25,7 @@ namespace GameJamProject.SceneManagement
         private static readonly int MaskTex = Shader.PropertyToID("_MaskTex");
         protected override bool UseDontDestroyOnLoad => true;
 
-        private void Awake()
+        public override void OnAwake()
         {
             var fadeManager = FadeController.Instance;
 

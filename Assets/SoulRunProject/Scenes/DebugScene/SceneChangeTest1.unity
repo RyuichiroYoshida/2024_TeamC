@@ -4829,18 +4829,8 @@ PrefabInstance:
     - target: {fileID: 401826291027671531, guid: 5c3380132c4f6944598b539c3a1bc326,
         type: 3}
       propertyPath: m_Name
-      value: FadeView_1
+      value: FadeView
       objectReference: {fileID: 0}
-    - target: {fileID: 1243567908549913307, guid: 5c3380132c4f6944598b539c3a1bc326,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 1243567908549913307, guid: 5c3380132c4f6944598b539c3a1bc326,
-        type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 2100000, guid: a700d5e31d4293f4a9387e0ace169877, type: 2}
     - target: {fileID: 5387747315914269879, guid: 5c3380132c4f6944598b539c3a1bc326,
         type: 3}
       propertyPath: m_LocalPosition.x
