@@ -12,7 +12,7 @@ namespace SoulRunProject.Common
         private PlayerStatus _status;
         public float BaseCoolTime { get => _coolTime; set => _coolTime = value; }
         public int BaseShieldCount { get => _shieldCount; set => _shieldCount = value; }
-        public float CoolTime => BaseCoolTime * _status.CoolTimeReductionRate;
+        public float CoolTime => BaseCoolTime / _status.CoolTimeReductionRate;
         public float ShieldCount => BaseShieldCount;
         public void SetPlayerStatus(in PlayerStatus status)
         {

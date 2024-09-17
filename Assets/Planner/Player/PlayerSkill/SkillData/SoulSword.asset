@@ -83,7 +83,7 @@ MonoBehaviour:
       data:
         _coolTime: 5
         _amount: 2
-        _attackDamage: 30
+        _attackDamage: 20
         _size: 3
         _speed: 100
         _penetration: 3

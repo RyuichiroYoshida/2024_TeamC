@@ -5,6 +5,7 @@ using SoulRunProject.Common;
 using SoulRunProject.Runtime;
 using UniRx;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 namespace SoulRunProject.InGame
 {
@@ -40,6 +41,7 @@ namespace SoulRunProject.InGame
         private float _knockBackResistance;
 
         private PlayerManager _player;
+        private DecalProjector _decalProjector;
 
         /// <typeparam name="ダメージ"></typeparam>
         /// <typeparam name="クリティカルかどうか"></typeparam>
@@ -59,6 +61,7 @@ namespace SoulRunProject.InGame
             _player = FindObjectOfType<PlayerManager>();
             _enemyController = GetComponent<EnemyController>();
             _hitCollider = GetComponent<Collider>();
+            _decalProjector = GetComponentInChildren<DecalProjector>();
             Initialize();
         }
 
@@ -103,8 +106,10 @@ namespace SoulRunProject.InGame
             OnDead?.Invoke();
             // 死んでからの演出の時間当たり判定を無くす
             _hitCollider.enabled = false;
+            _decalProjector.enabled = false;
             if (_hitDamageEffectManager) await _hitDamageEffectManager.DissolveFade();
             _hitCollider.enabled = true;
+            _decalProjector.enabled = true;
             Finish();
         }
 
