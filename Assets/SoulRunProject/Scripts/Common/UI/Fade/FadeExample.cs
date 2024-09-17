@@ -6,41 +6,25 @@ namespace HikanyanLaboratory.Fade
 {
     public class FadeExample : MonoBehaviour
     {
+        [SerializeReference, SubclassSelector, Tooltip("FadeStrategyを設定して下さい")]
+        private IFadeStrategy _fadeStrategy;
+
         private FadeController _fadeController;
-        [SerializeReference, SubclassSelector] IFadeStrategy _fadeStrategy;
 
         private void Start()
         {
             _fadeController = FadeController.Instance;
-            if (_fadeController == null)
-            {
-                Debug.LogError("FadeControllerが見つかりません。");
-            }
-
             // 何らかの条件でフェードを開始する
             StartFadeExample().Forget();
         }
 
         private async UniTaskVoid StartFadeExample()
         {
-            if (_fadeController == null)
-            {
-                Debug.LogError("FadeControllerが設定されていません。");
-                return;
-            }
-
-            // フェードアウト
-            Debug.Log("Fade out started.");
+            Debug.Log("FadeOut");
             await _fadeController.FadeOut(_fadeStrategy);
-
-            // ここでシーンの切り替えや他の処理を行います
-            await UniTask.Delay(1000); // 1秒の遅延を挟む
-
-            // フェードイン
-            Debug.Log("Fade in started.");
+            await UniTask.Delay(1000);
+            Debug.Log("FadeIn");
             await _fadeController.FadeIn(_fadeStrategy);
-
-            Debug.Log("Fade completed.");
         }
     }
 }
