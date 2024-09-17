@@ -23,6 +23,7 @@ namespace GameJamProject.SceneManagement
         private Ease _fadeEase = Ease.Linear;
 
         private static readonly int MaskTex = Shader.PropertyToID("_MaskTex");
+        protected override bool UseDontDestroyOnLoad => true;
 
         private void Awake()
         {
