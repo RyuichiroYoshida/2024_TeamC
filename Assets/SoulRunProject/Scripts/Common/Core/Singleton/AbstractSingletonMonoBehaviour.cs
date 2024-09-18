@@ -11,52 +11,37 @@ namespace SoulRunProject.Common
     /// <summary> シングルトンの基底クラス </summary>
     public abstract class AbstractSingletonMonoBehaviour<T> : MonoBehaviour where T : Component
     {
-        /// <summary>
-        /// 継承先でDontDestroyOnLoadを使用するかどうかを制御します。
-        /// </summary>
-        protected virtual bool UseDontDestroyOnLoad { get; } = false;
-
         private static T _instance;
-
         public static T Instance
         {
             get
             {
-                if (_instance != null) return _instance;
-
-                // シーン内で既存のインスタンスを検索
-                _instance = FindObjectOfType<T>();
-
+                if (_instance) return _instance;
+                var foundInstance = FindObjectOfType<T>();
+                if (foundInstance) return foundInstance;
                 // インスタンスが見つからなかった場合に新しいオブジェクトを生成
-                if (_instance == null)
-                {
-                    GameObject singletonObject = new GameObject();
-                    _instance = singletonObject.AddComponent<T>();
-                    singletonObject.name = typeof(T).Name + " (Singleton)";
-
-                    if ((_instance as AbstractSingletonMonoBehaviour<T>).UseDontDestroyOnLoad)
-                    {
-                        DontDestroyOnLoad(singletonObject);
-                    }
-                }
-
-                return _instance;
+                GameObject singletonObject = new GameObject();
+                singletonObject.name = typeof(T).Name + " (Singleton)";
+                var instance = singletonObject.AddComponent<T>();
+                return instance;
             }
         }
-
+        /// <summary>
+        /// 継承先でDontDestroyOnLoadを使用するかどうかを制御します。
+        /// </summary>
+        protected virtual bool UseDontDestroyOnLoad { get; } = false;
         private void Awake()
         {
             if (_instance == null)
-            {
+            {   //  シーン上に配置されていてstatic変数にインスタンスが無ければここで初期化される
                 _instance = this as T;
                 if (UseDontDestroyOnLoad)
                 {
                     DontDestroyOnLoad(gameObject);
                 }
-
                 OnAwake();
             }
-            else if (_instance != this)
+            else
             {
                 Destroy(gameObject);
             }

@@ -31,7 +31,7 @@ namespace SoulRunProject.Title
         {
             EventSystem.current.SetSelectedGameObject(_startButton.gameObject);
             _startButton.OnSelect(null);
-            Debug.Log(_particleSystem);
+            //Debug.Log(_particleSystem);
             _particleSystem.Play();
             StartCoroutine(AnimateLightFalloff());
         }

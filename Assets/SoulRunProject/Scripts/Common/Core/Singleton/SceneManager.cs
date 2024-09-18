@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using HikanyanLaboratory.Fade;
 using SoulRunProject.Common;
 using UnityEngine;
@@ -13,7 +14,7 @@ namespace HikanyanLaboratory.SceneManagement
         private bool _isTransitioning;
 
 
-        public async UniTask LoadSceneWithFade(string sceneName, IFadeStrategy fadeStrategy = null)
+        public async UniTask LoadSceneWithFade(string sceneName)
         {
             if (_isTransitioning)
             {
@@ -30,11 +31,9 @@ namespace HikanyanLaboratory.SceneManagement
                     Debug.LogError("FadeControllerが設定されていません。シーン遷移を中止します。");
                     return;
                 }
-
-                fadeStrategy ??= new BasicFadeStrategy();
-
+                
                 // フェードアウト
-                await FadeController.Instance.FadeOut(fadeStrategy);
+                await FadeController.Instance.FadeOut(1f, Ease.Linear);
 
                 // シーンを非同期でロード
                 var loadSceneOperation =
@@ -60,7 +59,7 @@ namespace HikanyanLaboratory.SceneManagement
                 }
 
                 // フェードイン
-                await FadeController.Instance.FadeIn(fadeStrategy);
+                await FadeController.Instance.FadeIn(1f, Ease.Linear);
             }
             catch (System.Exception ex)
             {
