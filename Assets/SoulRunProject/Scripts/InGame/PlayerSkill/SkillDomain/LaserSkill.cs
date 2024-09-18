@@ -79,6 +79,8 @@ namespace SoulRunProject.InGame
                         _playerManagerInstance.AddSoul(RuntimeParameter.GetSoulPerSec * Time.deltaTime);
                         entity.Damage(RuntimeParameter.DamageOverTime * Time.deltaTime, useSE: false);
                     }
+
+                    laser.HitEffect.transform.position = hit.point;
                 }
             }
 
@@ -139,6 +141,13 @@ namespace SoulRunProject.InGame
                 _laserList[i].TurnCount = 2;
                 _laserList[i].TurnSide = false;
                 _laserList[i].gameObject.SetActive(true);
+
+                foreach (var particle in _laserList[i].ParticleSystems)
+                {
+                    // パーティクル的に着弾まで時間がかかるので1秒スキップする
+                    particle.Simulate(1);
+                    particle.Play();
+                }
             }
 
             _se = CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_SoulRay");
