@@ -3,6 +3,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using SoulRunProject.Audio;
 using SoulRunProject.InGame;
+using UniRx;
 using UnityEngine;
 
 namespace SoulRunProject.Common
@@ -11,6 +12,8 @@ namespace SoulRunProject.Common
     {
         private static List<IPausable> _pausables = new();
         private static bool _isPause;
+
+        public static BoolReactiveProperty IsPause = new();
 
         public static void RegisterPausableObject(IPausable pausable)
         {
@@ -38,6 +41,7 @@ namespace SoulRunProject.Common
             }
 
             _isPause = isPause;
+            IsPause.Value = isPause;
         }
         /// <summary>
         /// ポーズに対応した待機処理、キャンセルされるとfalseを返す

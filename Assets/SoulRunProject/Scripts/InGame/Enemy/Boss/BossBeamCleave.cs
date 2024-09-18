@@ -4,6 +4,8 @@ using SoulRunProject.Audio;
 using SoulRunProject.Common;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using UniRx;
+using UnityEngine.SceneManagement;
 
 namespace SoulRunProject.InGame
 {
@@ -66,8 +68,16 @@ namespace SoulRunProject.InGame
             _playerTf = playerTf;
 
             // sound
-            _beamSound = CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Laser");
-            CriAudioManager.Instance.Pause(CriAudioType.CueSheet_SE, _beamSound);
+            PauseManager.IsPause.Subscribe(isPause =>
+            {
+                if (isPause) CriAudioManager.Instance.Pause(CriAudioType.CueSheet_SE, _beamSound);
+                else CriAudioManager.Instance.Resume(CriAudioType.CueSheet_SE, _beamSound);
+            });
+
+            SceneManager.sceneLoaded += (arg0, mode) =>
+            {
+                CriAudioManager.Instance.Stop(CriAudioType.CueSheet_SE, _beamSound);
+            };
         }
 
         public override void BeginAction()
@@ -105,7 +115,7 @@ namespace SoulRunProject.InGame
                     }
                     
                     // sound
-                    CriAudioManager.Instance.Resume(CriAudioType.CueSheet_SE, _beamSound);
+                    _beamSound = CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Laser");
                 }
             }
             else if (_cleaveTimer < _beamTime)
@@ -126,7 +136,7 @@ namespace SoulRunProject.InGame
                     beam.IsActiveBeam = false;
                 }
                 
-                CriAudioManager.Instance.Pause(CriAudioType.CueSheet_SE, _beamSound);
+                CriAudioManager.Instance.Stop(CriAudioType.CueSheet_SE, _beamSound);
                 OnFinishAction?.Invoke();
             }
 

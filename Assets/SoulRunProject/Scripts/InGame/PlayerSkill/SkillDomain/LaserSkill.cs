@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using SoulRunProject.Audio;
 using SoulRunProject.Common;
+using UniRx;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
 
 namespace SoulRunProject.InGame
@@ -20,6 +22,16 @@ namespace SoulRunProject.InGame
         public LaserSkill(AbstractSkillData skillData, in PlayerManager playerManager, in Transform playerTransform) :
             base(skillData, in playerManager, in playerTransform)
         {
+            PauseManager.IsPause.Subscribe(isPause =>
+            {
+                if (isPause) CriAudioManager.Instance.Pause(CriAudioType.CueSheet_SE, _se);
+                else CriAudioManager.Instance.Resume(CriAudioType.CueSheet_SE, _se);
+            });
+
+            SceneManager.sceneLoaded += (arg0, mode) =>
+            {
+                CriAudioManager.Instance.Stop(CriAudioType.CueSheet_SE, _se);
+            };
         }
 
         public override void StartSkill()
