@@ -129,7 +129,6 @@ GameObject:
   - component: {fileID: 7117807622772118339}
   - component: {fileID: 9091037442287400240}
   - component: {fileID: 6519210490737000228}
-  - component: {fileID: 8752523051839283500}
   - component: {fileID: 3698741979491483856}
   - component: {fileID: 3932238436133655523}
   - component: {fileID: 2245462467506778556}
@@ -174,12 +173,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _useGodMode: 0
-  _playerInput: {fileID: 8752523051839283500}
+  _playerInputManager: {fileID: 0}
   _baseStatus: {fileID: 11400000, guid: d50a16b38666d804883e3040b335a638, type: 2}
   _playerCamera: {fileID: 6635071162787831542}
   _hitDamageEffectManager: {fileID: 5236282758698190153}
   _decreaseSpeed: 30
   _deadAnimationTime: 2
+  _playerCenterOffset: {x: 0, y: 0.5, z: 0}
   CurrentPlayerStatus:
     _hp: 530
     _attackValue: 10
@@ -219,18 +219,6 @@ MonoBehaviour:
   _distanceBetweenPivotAndGroundPoint: 0.1
   _xMoveRangeMin: -21
   _xMoveRangeMax: 21
---- !u!114 &8752523051839283500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 392928014464894764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67af9876f0281cf40b526c49962e4dae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3698741979491483856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -650,6 +638,7 @@ MonoBehaviour:
   _duration: 0.1
   _loopCount: 1
   _hitEffect: {fileID: 3726023518174682990}
+  _dissolveFadeTime: 1
 --- !u!212 &4722900643216877938
 SpriteRenderer:
   m_ObjectHideFlags: 0
