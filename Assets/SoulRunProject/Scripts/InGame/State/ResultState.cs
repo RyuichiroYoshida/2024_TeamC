@@ -1,6 +1,7 @@
 using SoulRunProject.Common;
 using SoulRunProject.Framework;
 using UnityEngine.SceneManagement;
+using ActionMapType = SoulRunProject.InGame.PlayerInputManager.ActionMapType;
 
 namespace SoulRunProject.InGame
 {
@@ -10,15 +11,18 @@ namespace SoulRunProject.InGame
     public class ResultState : State
     {
         private PlayerManager _playerManager;
+        private readonly PlayerInputManager _playerInputManager;
         
-        public ResultState(PlayerManager playerManager)
+        public ResultState(PlayerManager playerManager, PlayerInputManager playerInputManager)
         {
             _playerManager = playerManager;
+            _playerInputManager = playerInputManager;
         }
         
         protected override void OnEnter(State currentState)
         {
             DebugClass.Instance.ShowLog("リザルトステート開始");
+            _playerInputManager.SwitchActionMap(ActionMapType.UI);
             PauseManager.Pause(true);
         }
 
@@ -38,6 +42,7 @@ namespace SoulRunProject.InGame
 
         public void RetryStage()
         {
+            _playerInputManager.SwitchActionMap(ActionMapType.Player);
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
