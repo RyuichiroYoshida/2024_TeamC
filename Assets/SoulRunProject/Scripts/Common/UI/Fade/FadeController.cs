@@ -6,43 +6,42 @@ namespace HikanyanLaboratory.Fade
 {
     public class FadeController : AbstractSingletonMonoBehaviour<FadeController>
     {
-        private IFadeStrategy _fadeStrategy;
         private Material _fadeMaterial;
         protected override bool UseDontDestroyOnLoad => true;
 
+        /// <summary>
+        /// FadeOut用
+        /// IFadeStrategyを指定しない場合、FadeViewの設定を優先します
+        /// </summary>
         public async UniTask FadeOut(IFadeStrategy fadeStrategy = null)
         {
-            // Debug.Log("Starting FadeOut");
-            fadeStrategy ??= _fadeStrategy;
             if (fadeStrategy != null)
             {
                 await fadeStrategy.FadeOut(_fadeMaterial);
             }
-
-            // Debug.Log("FadeOut complete");
         }
 
+        /// <summary>
+        /// FadeIn用
+        /// IFadeStrategyを指定しない場合、FadeViewの設定を優先します
+        /// </summary>
+        /// <param name="fadeStrategy"></param>
         public async UniTask FadeIn(IFadeStrategy fadeStrategy = null)
         {
-            // Debug.Log("Starting FadeIn");
-            fadeStrategy ??= _fadeStrategy;
             if (fadeStrategy != null)
             {
                 await fadeStrategy.FadeIn(_fadeMaterial);
             }
-
-            // Debug.Log("FadeIn complete");
         }
 
 
-        public void SetFadeMaterial(Material fadeMaterial)
+        /// <summary>
+        /// FadeViewのMaterialを取得
+        /// </summary>
+        /// <param name="material"></param>
+        public void SetFadeMaterial(Material material)
         {
-            _fadeMaterial = fadeMaterial;
-        }
-
-        public void SetFadeStrategy(IFadeStrategy fadeStrategy)
-        {
-            _fadeStrategy = fadeStrategy;
+            _fadeMaterial = material;
         }
     }
 }

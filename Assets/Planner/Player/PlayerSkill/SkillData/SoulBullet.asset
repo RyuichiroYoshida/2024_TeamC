@@ -23,22 +23,18 @@ MonoBehaviour:
     List:
     - List:
       - _levelUpType: 0
-        _reduceCoolTime: 5
-        _addAmountCount: 0
-        _multipleProjectionSpeed: 0
-      - _levelUpType: 1
-        _reduceCoolTime: 25
+        _reduceCoolTime: 10
         _addAmountCount: 2
-        _multipleProjectionSpeed: 10
+        _multipleProjectionSpeed: 5
     - List:
-      - _levelUpType: 0
+      - _levelUpType: 1
         _reduceCoolTime: 10
         _addAmountCount: 2
         _multipleProjectionSpeed: 0
       - _levelUpType: 2
         _reduceCoolTime: 20
         _addAmountCount: 0
-        _multipleProjectionSpeed: 10
+        _multipleProjectionSpeed: 5
     - List:
       - _levelUpType: 0
         _reduceCoolTime: 5
@@ -47,7 +43,7 @@ MonoBehaviour:
       - _levelUpType: 2
         _reduceCoolTime: 75
         _addAmountCount: 1
-        _multipleProjectionSpeed: 20
+        _multipleProjectionSpeed: 5
     - List:
       - _levelUpType: 0
         _reduceCoolTime: 20
