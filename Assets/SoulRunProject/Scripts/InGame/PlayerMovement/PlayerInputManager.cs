@@ -4,6 +4,7 @@ using SoulRunProject.Common;
 using UniRx;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Users;
 
 namespace SoulRunProject.InGame
 {
@@ -45,7 +46,9 @@ namespace SoulRunProject.InGame
             BindAction(ActionMapType.Player, ActionType.UseSoulSkill, true);
             BindAction(ActionMapType.Player, ActionType.Menu, true);
             BindAction(ActionMapType.UI, ActionType.Menu, true);
-
+            
+            //  ユーザーのidに更新をかけることでInput.validプロパティでfalseが出力されるのを回避する。
+            InputUser.CreateUserWithoutPairedDevices();
             InputSystem.onDeviceChange += DeviceUpdate;
             DeviceUpdate(null, default);
         }
