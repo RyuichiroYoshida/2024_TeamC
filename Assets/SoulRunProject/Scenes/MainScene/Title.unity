@@ -143,6 +143,16 @@ PrefabInstance:
       propertyPath: _maskTexture
       value: 
       objectReference: {fileID: 2800000, guid: 73ef3314cfb232b4fb44cb5df3da455b, type: 3}
+    - target: {fileID: 1770480420346926836, guid: ee80934541d0e6e4cab1ff660dc718b2,
+        type: 3}
+      propertyPath: _fadeMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: a700d5e31d4293f4a9387e0ace169877, type: 2}
+    - target: {fileID: 1911810731136631479, guid: ee80934541d0e6e4cab1ff660dc718b2,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: a700d5e31d4293f4a9387e0ace169877, type: 2}
     - target: {fileID: 8450631843179219438, guid: ee80934541d0e6e4cab1ff660dc718b2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1531,7 +1541,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5a924a7adf544fe43b699fe9a398bb78, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 07694b079b88737438fd9be224ffd759, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -4852,7 +4862,6 @@ MonoBehaviour:
       data:
         _maskTexture: {fileID: 2800000, guid: 73ef3314cfb232b4fb44cb5df3da455b, type: 3}
         _fadeDuration: 1
-        _cutoutRange: 0
         _ease: 30
 --- !u!1 &1400692640
 GameObject:

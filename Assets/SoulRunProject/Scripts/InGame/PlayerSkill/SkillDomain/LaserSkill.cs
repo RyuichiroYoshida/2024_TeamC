@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using SoulRunProject.Audio;
 using SoulRunProject.Common;
+using UniRx;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
 
 namespace SoulRunProject.InGame
@@ -20,6 +22,16 @@ namespace SoulRunProject.InGame
         public LaserSkill(AbstractSkillData skillData, in PlayerManager playerManager, in Transform playerTransform) :
             base(skillData, in playerManager, in playerTransform)
         {
+            PauseManager.IsPause.Subscribe(isPause =>
+            {
+                if (isPause) CriAudioManager.Instance.Pause(CriAudioType.CueSheet_SE, _se);
+                else CriAudioManager.Instance.Resume(CriAudioType.CueSheet_SE, _se);
+            });
+
+            SceneManager.sceneLoaded += (arg0, mode) =>
+            {
+                CriAudioManager.Instance.Stop(CriAudioType.CueSheet_SE, _se);
+            };
         }
 
         public override void StartSkill()
@@ -79,6 +91,8 @@ namespace SoulRunProject.InGame
                         _playerManagerInstance.AddSoul(RuntimeParameter.GetSoulPerSec * Time.deltaTime);
                         entity.Damage(RuntimeParameter.DamageOverTime * Time.deltaTime, useSE: false);
                     }
+
+                    laser.HitEffect.transform.position = hit.point;
                 }
             }
 
@@ -139,6 +153,13 @@ namespace SoulRunProject.InGame
                 _laserList[i].TurnCount = 2;
                 _laserList[i].TurnSide = false;
                 _laserList[i].gameObject.SetActive(true);
+
+                foreach (var particle in _laserList[i].ParticleSystems)
+                {
+                    // パーティクル的に着弾まで時間がかかるので1秒スキップする
+                    particle.Simulate(1);
+                    particle.Play();
+                }
             }
 
             _se = CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_SoulRay");
