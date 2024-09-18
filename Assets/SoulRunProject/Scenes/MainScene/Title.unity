@@ -1575,7 +1575,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5a924a7adf544fe43b699fe9a398bb78, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 07694b079b88737438fd9be224ffd759, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -3274,9 +3274,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c713c91060d8e44a9600e5ce4fafd2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _volumeText: {fileID: 1288631463}
+  _volumeText: {fileID: 0}
   _volumeSlider: {fileID: 1961318880}
-  _volumeInputField: {fileID: 471543068}
 --- !u!1 &1105037373
 GameObject:
   m_ObjectHideFlags: 0
@@ -4715,9 +4714,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c713c91060d8e44a9600e5ce4fafd2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _volumeText: {fileID: 1003626368}
+  _volumeText: {fileID: 0}
   _volumeSlider: {fileID: 103095650}
-  _volumeInputField: {fileID: 174982843}
 --- !u!1 &1386852635
 GameObject:
   m_ObjectHideFlags: 0
@@ -4961,9 +4959,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c713c91060d8e44a9600e5ce4fafd2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _volumeText: {fileID: 2025023467}
+  _volumeText: {fileID: 0}
   _volumeSlider: {fileID: 1296198705}
-  _volumeInputField: {fileID: 104748835}
 --- !u!1 &1409838499
 GameObject:
   m_ObjectHideFlags: 0
