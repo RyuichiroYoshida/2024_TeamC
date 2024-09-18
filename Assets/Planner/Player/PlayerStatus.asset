@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerStatus:
     _hp: 150
-    _attackValue: 10
+    _attackValue: 5
     _defenceValue: 0
     _coolTimeReductionRate: 1
     _skillSizeUpRate: 1
