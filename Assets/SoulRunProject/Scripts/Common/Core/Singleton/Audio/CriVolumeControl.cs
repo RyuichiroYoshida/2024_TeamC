@@ -1,5 +1,4 @@
 ﻿using System.Globalization;
-using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Events;
@@ -9,9 +8,9 @@ namespace SoulRunProject.Audio
 {
     public class CriVolumeControl : MonoBehaviour, ICriVolume
     {
-        [SerializeField] private TextMeshProUGUI _volumeText;
+        [SerializeField] private Text _volumeText;
         [SerializeField] private Slider _volumeSlider;
-        [SerializeField] private TMP_InputField _volumeInputField;
+        // [SerializeField] private InputField _volumeInputField;
 
         private string _label;
         private float _currentValue;
@@ -35,9 +34,9 @@ namespace SoulRunProject.Audio
             _volumeSlider.onValueChanged.AddListener(onSliderChanged);
             _volumeSlider.onValueChanged.AddListener(OnSliderChanged);
 
-            _volumeInputField.text = (initialValue * 100).ToString(CultureInfo.CurrentCulture);
-            _volumeInputField.onEndEdit.AddListener(onInputChanged);
-            _volumeInputField.onEndEdit.AddListener(OnInputChanged);
+            // _volumeInputField.text = (initialValue * 100).ToString(CultureInfo.CurrentCulture);
+            // _volumeInputField.onEndEdit.AddListener(onInputChanged);
+            // _volumeInputField.onEndEdit.AddListener(OnInputChanged);
 
             Volume.Value = initialValue;
             Volume.Subscribe(SetVolume).AddTo(this);
@@ -47,13 +46,13 @@ namespace SoulRunProject.Audio
         {
             _currentValue = volume;
             _volumeSlider.value = volume * 100;
-            _volumeInputField.text = (volume * 100).ToString(CultureInfo.CurrentCulture);
+            // _volumeInputField.text = (volume * 100).ToString(CultureInfo.CurrentCulture);
         }
 
         private void OnSliderChanged(float value)
         {
             _currentValue = value / 100;
-            _volumeInputField.text = value.ToString(CultureInfo.CurrentCulture);
+            // _volumeInputField.text = value.ToString(CultureInfo.CurrentCulture);
             _criAudioManager?.SetVolume(_audioType, _currentValue);
             Volume.Value = _currentValue;
         }
