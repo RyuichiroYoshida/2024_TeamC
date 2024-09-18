@@ -1979,52 +1979,52 @@ PrefabInstance:
     - target: {fileID: 3698741979491483856, guid: e711c3a71f9df6b459a265a7a8d925ee,
         type: 3}
       propertyPath: _expToNextLevel.Array.data[1]
-      value: 8
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 3698741979491483856, guid: e711c3a71f9df6b459a265a7a8d925ee,
         type: 3}
       propertyPath: _expToNextLevel.Array.data[2]
-      value: 10
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 3698741979491483856, guid: e711c3a71f9df6b459a265a7a8d925ee,
         type: 3}
       propertyPath: _expToNextLevel.Array.data[3]
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 3698741979491483856, guid: e711c3a71f9df6b459a265a7a8d925ee,
-        type: 3}
-      propertyPath: _expToNextLevel.Array.data[4]
       value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 3698741979491483856, guid: e711c3a71f9df6b459a265a7a8d925ee,
         type: 3}
-      propertyPath: _expToNextLevel.Array.data[5]
+      propertyPath: _expToNextLevel.Array.data[4]
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3698741979491483856, guid: e711c3a71f9df6b459a265a7a8d925ee,
         type: 3}
-      propertyPath: _expToNextLevel.Array.data[6]
+      propertyPath: _expToNextLevel.Array.data[5]
       value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3698741979491483856, guid: e711c3a71f9df6b459a265a7a8d925ee,
         type: 3}
-      propertyPath: _expToNextLevel.Array.data[7]
-      value: 28
-      objectReference: {fileID: 0}
-    - target: {fileID: 3698741979491483856, guid: e711c3a71f9df6b459a265a7a8d925ee,
-        type: 3}
-      propertyPath: _expToNextLevel.Array.data[8]
+      propertyPath: _expToNextLevel.Array.data[6]
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3698741979491483856, guid: e711c3a71f9df6b459a265a7a8d925ee,
         type: 3}
-      propertyPath: _expToNextLevel.Array.data[9]
+      propertyPath: _expToNextLevel.Array.data[7]
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 3698741979491483856, guid: e711c3a71f9df6b459a265a7a8d925ee,
+        type: 3}
+      propertyPath: _expToNextLevel.Array.data[8]
       value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 3698741979491483856, guid: e711c3a71f9df6b459a265a7a8d925ee,
         type: 3}
-      propertyPath: _expToNextLevel.Array.data[10]
+      propertyPath: _expToNextLevel.Array.data[9]
       value: 38
+      objectReference: {fileID: 0}
+    - target: {fileID: 3698741979491483856, guid: e711c3a71f9df6b459a265a7a8d925ee,
+        type: 3}
+      propertyPath: _expToNextLevel.Array.data[10]
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 3698741979491483856, guid: e711c3a71f9df6b459a265a7a8d925ee,
         type: 3}

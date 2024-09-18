@@ -26,10 +26,14 @@ MonoBehaviour:
         _reduceCoolTime: 10
         _addAmountCount: 2
         _multipleProjectionSpeed: 5
+      - _levelUpType: 1
+        _reduceCoolTime: 10
+        _addAmountCount: 1
+        _multipleProjectionSpeed: 5
     - List:
       - _levelUpType: 1
         _reduceCoolTime: 10
-        _addAmountCount: 2
+        _addAmountCount: 1
         _multipleProjectionSpeed: 0
       - _levelUpType: 2
         _reduceCoolTime: 20
