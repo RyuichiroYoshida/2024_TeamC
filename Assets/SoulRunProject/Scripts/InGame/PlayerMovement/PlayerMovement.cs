@@ -6,6 +6,7 @@ using UniRx;
 using UniRx.Triggers;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace SoulRunProject.InGame
 {
@@ -55,6 +56,20 @@ namespace SoulRunProject.InGame
                 else
                     _spin = CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Spin");
             }).AddTo(this);
+        }
+
+        private void Start()
+        {
+            PauseManager.IsPause.Subscribe(isPause =>
+            {
+                if (isPause) CriAudioManager.Instance.Pause(CriAudioType.CueSheet_SE, _spin);
+                else CriAudioManager.Instance.Resume(CriAudioType.CueSheet_SE, _spin);
+            });
+
+            SceneManager.sceneLoaded += (arg0, mode) =>
+            {
+                CriAudioManager.Instance.Stop(CriAudioType.CueSheet_SE, _spin);
+            };
         }
 
         private void Update()
