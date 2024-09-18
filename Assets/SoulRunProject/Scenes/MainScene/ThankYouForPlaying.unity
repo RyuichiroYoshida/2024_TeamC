@@ -439,7 +439,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62cd617551b36e141aad25e2a188c22a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _duration: 5
+  _duration: 8
   _bgmName: BGM_ThankYouForPlating
 --- !u!4 &1811589907
 Transform:
