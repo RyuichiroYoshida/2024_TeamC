@@ -2,7 +2,6 @@ using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using SoulRun.InGame;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -48,12 +47,12 @@ namespace SoulRunProject.InGame
         [Serializable]
         public class ButtonAndView
         {
-            [SerializeField] private InputUIButton _inputUIButton;
+            [SerializeField] private InputUIButtonBase _inputUIButton;
             [SerializeField] private Text _nameAndLevelText;
             [SerializeField] private Text _explanatoryText;
             [SerializeField] private Image _buttonIconImage;
             
-            public InputUIButton InputUIButton => _inputUIButton;
+            public InputUIButtonBase InputUIButton => _inputUIButton;
             public Text NameAndLevelText => _nameAndLevelText;
             public Text ExplanatoryText => _explanatoryText;
             public Image ButtonIconImage => _buttonIconImage;

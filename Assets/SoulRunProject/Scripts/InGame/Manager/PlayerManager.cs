@@ -16,7 +16,6 @@ namespace SoulRunProject.Common
     public class PlayerManager : MonoBehaviour, IPausable
     {
         [SerializeField] private bool _useGodMode;
-        [SerializeField] private PlayerInput _playerInput;
         [SerializeField] private BaseStatus _baseStatus;
         [SerializeField] private PlayerCamera _playerCamera;
         [SerializeField] private HitDamageEffectManager _hitDamageEffectManager;
@@ -72,10 +71,11 @@ namespace SoulRunProject.Common
         /// </summary>
         private void InitializeInput()
         {
-            _playerInput.MoveInput.Subscribe(input => _playerMovement.InputMove(input));
-            _playerInput.MoveInput.Subscribe(input => _playerMovement.RotatePlayer(input));
-            _playerInput.JumpInput.Where(x => x).Subscribe(_ => _playerMovement.Jump()).AddTo(this);
-            _playerInput.ShiftInput.Where(x => x).Subscribe(_ => UseSoulSkill()).AddTo(this);
+            var inputManager = PlayerInputManager.Instance;
+            inputManager.MoveInput.Subscribe(input => _playerMovement.InputMove(input)).AddTo(this);
+            inputManager.MoveInput.Subscribe(input => _playerMovement.RotatePlayer(input)).AddTo(this);
+            inputManager.JumpInput.Subscribe(_ => _playerMovement.Jump()).AddTo(this);
+            inputManager.SoulSkillInput.Subscribe(_ => UseSoulSkill()).AddTo(this);
         }
         public void Register()
         {

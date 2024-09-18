@@ -12,7 +12,7 @@ namespace SoulRunProject.InGame
     {
         private StageManager _stageManager;
         private PlayerManager _playerManager;
-        private PlayerInput _playerInput;
+        private PlayerInputManager _playerInputManager;
         private PlayerLevelManager _playerLevelManager;
         private CompositeDisposable _compositeDisposable = new CompositeDisposable();
         
@@ -21,11 +21,11 @@ namespace SoulRunProject.InGame
         public bool IsPlayerDead { get; private set; }
         public bool SwitchToLevelUpState { get; private set; }
         public PlayingRunGameState(StageManager stageManager, PlayerManager playerManager, 
-            PlayerInput playerInput, PlayerLevelManager playerLevelManager)
+            PlayerInputManager playerInputManager, PlayerLevelManager playerLevelManager)
         {
             _stageManager = stageManager;
             _playerManager = playerManager;
-            _playerInput = playerInput;
+            this._playerInputManager = playerInputManager;
             _playerLevelManager = playerLevelManager;
         }
         
@@ -38,9 +38,7 @@ namespace SoulRunProject.InGame
             SwitchToPauseState = false;
             
             // PlayerInputへの購読
-            _playerInput.PauseInput
-                .SkipLatestValueOnSubscribe()
-                .Where(x => x)
+            _playerInputManager.PauseInput
                 .Subscribe(_ =>
                 {
                     SwitchToPauseState = true;

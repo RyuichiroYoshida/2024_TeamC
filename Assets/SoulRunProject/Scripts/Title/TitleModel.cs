@@ -1,11 +1,8 @@
-using System;
-using Cysharp.Threading.Tasks;
-using HikanyanLaboratory.Fade;
 using HikanyanLaboratory.SceneManagement;
 using SoulRunProject.Audio;
 using SoulRunProject.Framework;
 using UnityEngine;
-using SoulRunProject.Common;
+using SoulRunProject.InGame;
 
 namespace SoulRunProject.Title
 {
@@ -16,7 +13,7 @@ namespace SoulRunProject.Title
     {
         [SerializeField] float _transitionTime = 1.0f;
         [SerializeField] private string _tutorialScene = "TutorialScene";
-        [SerializeReference, SubclassSelector] IFadeStrategy _fadeStrategy;
+        //[SerializeReference, SubclassSelector] IFadeStrategy _fadeStrategy;
         [SerializeField] private OptionModel _optionModel;
 
         private void Start()
@@ -28,7 +25,9 @@ namespace SoulRunProject.Title
         {
             DebugClass.Instance.ShowLog($"ゲーム開始:{_transitionTime}秒後にインゲーム画面に遷移します");
             //ここで実行
-            await SceneManager.Instance.LoadSceneWithFade(_tutorialScene, _fadeStrategy);
+            await SceneManager.Instance.LoadSceneWithFade(_tutorialScene);
+            //  アクションマップをプレイヤーに変更する。
+            PlayerInputManager.Instance.SwitchActionMap(PlayerInputManager.ActionMapType.Player);
         }
 
         public void Option(GameObject optionPanel)
