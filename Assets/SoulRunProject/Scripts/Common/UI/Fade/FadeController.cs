@@ -1,41 +1,38 @@
 ﻿using Cysharp.Threading.Tasks;
-using DG.Tweening;
 using SoulRunProject.Common;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace HikanyanLaboratory.Fade
 {
     public class FadeController : AbstractSingletonMonoBehaviour<FadeController>
     {
-        [SerializeField] private Image _fadeImage;
-        private static readonly int Range1 = Shader.PropertyToID("_Range");
-        private static readonly int MaskTex = Shader.PropertyToID("_MaskTex");
+        [SerializeField] private Material _fadeMaterial;
         protected override bool UseDontDestroyOnLoad => true;
 
-        /// <summary>
-        /// FadeOut用
-        /// IFadeStrategyを指定しない場合、FadeViewの設定を優先します
-        /// </summary>
-        public async UniTask FadeOut(float duration, Ease ease)
+        public async UniTask FadeOut(IFadeStrategy fadeStrategy = null)
         {
-            var material = _fadeImage.material;
-            // フェードアウト中にRangeを更新しながらアルファをフェード
-            await DOTween.To(() => material.GetFloat(Range1), 
-                x => material.SetFloat(Range1, x), 0f, duration).SetEase(ease);
+            if (fadeStrategy != null)
+            {
+                await fadeStrategy.FadeOut(_fadeMaterial);
+            }
+            else
+            {
+                Debug.LogWarning("FadeStrategy is null");
+            }
+            // Debug.Log("FadeOut complete");
         }
 
-        /// <summary>
-        /// FadeIn用
-        /// IFadeStrategyを指定しない場合、FadeViewの設定を優先します
-        /// </summary>
-        /// <param name="fadeStrategy"></param>
-        public async UniTask FadeIn(float duration, Ease ease)
+        public async UniTask FadeIn(IFadeStrategy fadeStrategy = null)
         {
-            var material = _fadeImage.material;
-            // フェードイン中にRangeを更新しながらアルファをフェード
-            await DOTween.To(() => material.GetFloat(Range1), 
-                x => material.SetFloat(Range1, x), 1f, duration).SetEase(ease);
+            if (fadeStrategy != null)
+            {
+                await fadeStrategy.FadeIn(_fadeMaterial);
+            }
+            else
+            {
+                Debug.LogWarning("FadeStrategy is null");
+            }
+            // Debug.Log("FadeIn complete");
         }
     }
 }
