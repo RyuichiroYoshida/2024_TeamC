@@ -6807,6 +6807,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2397603264551695568, guid: 4bbd1fb0729550e43a5e65d298f92bfd,
+        type: 3}
+      propertyPath: _resultToTitle._fadeDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2397603264551695568, guid: 4bbd1fb0729550e43a5e65d298f92bfd,
+        type: 3}
+      propertyPath: _titleToTutorial._fadeDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2397603264551695568, guid: 4bbd1fb0729550e43a5e65d298f92bfd,
+        type: 3}
+      propertyPath: _mainGameToResult._fadeDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2397603264551695568, guid: 4bbd1fb0729550e43a5e65d298f92bfd,
+        type: 3}
+      propertyPath: _tutorialToMainGame._fadeDuration
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6273566354014551281, guid: 4bbd1fb0729550e43a5e65d298f92bfd,
         type: 3}
       propertyPath: m_LocalPosition.x
