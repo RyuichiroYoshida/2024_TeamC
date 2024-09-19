@@ -26,7 +26,7 @@ namespace SoulRunProject.Audio
                 CriAudioType.Master, OnMasterVolumeSliderChanged, OnMasterVolumeInputChanged);
 
             // BGMとMEのボリュームコントロールを作成
-            _bgmMeCriVolumeControl = CreateVolumeControl("BGM/ME",
+            _bgmMeCriVolumeControl = CreateVolumeControl("BGM",
                 _criAudioManager.GetPlayerVolume(CriAudioType.CueSheet_BGM), CriAudioType.CueSheet_BGM,
                 OnBgmAndMeVolumeSliderChanged, OnBgmAndMeVolumeInputChanged);
 
