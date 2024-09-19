@@ -3876,7 +3876,7 @@ MonoBehaviour:
   _startButton: {fileID: 8012216851515710666}
   _optionButton: {fileID: 943700132}
   _exitSimButton: {fileID: 289527817}
-  _returnButton: {fileID: 0}
+  _returnButton: {fileID: 1386852637}
   _soulLight2D: {fileID: 1701414253}
   _particleSystem: {fileID: 771850833}
   _optionPanel: {fileID: 144516639}
@@ -5573,7 +5573,7 @@ RectTransform:
   m_GameObject: {fileID: 1716927627}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10.015, y: 10.015, z: 10.015}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1386852636}
@@ -5605,11 +5605,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 33905450e86b2cc4c8f643fdcc53b869, type: 3}
-    m_FontSize: 17
+    m_FontSize: 300
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
-    m_MaxSize: 238
+    m_MaxSize: 300
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
