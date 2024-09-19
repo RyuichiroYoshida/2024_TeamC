@@ -1802,7 +1802,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cff4ea480093e64cad8308c137dd5f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fadeImage: {fileID: 1517516224}
+  _fadeMaterial: {fileID: 0}
 --- !u!1001 &1594618513
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2108,6 +2108,12 @@ PrefabInstance:
       propertyPath: _initialSoul
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 2245462467506778556, guid: e711c3a71f9df6b459a265a7a8d925ee,
+        type: 3}
+      propertyPath: _currentSoulSkill
+      value: 
+      objectReference: {fileID: 11400000, guid: 95369f5c160473b4287d5a8e74d1fc47,
+        type: 2}
     - target: {fileID: 2245462467506778556, guid: e711c3a71f9df6b459a265a7a8d925ee,
         type: 3}
       propertyPath: _regenerativePerSec
