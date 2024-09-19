@@ -4833,7 +4833,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _transitionTime: 1
   _tutorialScene: TutorialScene
-  _optionModel: {fileID: 0}
+  _optionModel: {fileID: 144516641}
 --- !u!1 &1400692640
 GameObject:
   m_ObjectHideFlags: 0
