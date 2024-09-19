@@ -84,7 +84,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8450631843179219438}
-  - component: {fileID: 1770480420346926836}
+  - component: {fileID: 7662387974729240922}
   m_Layer: 0
   m_Name: FadeScene
   m_TagString: Untagged
@@ -109,7 +109,7 @@ Transform:
   - {fileID: 8122523079487674484}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1770480420346926836
+--- !u!114 &7662387974729240922
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,13 +118,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1235467133541110771}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66895f677d5a35a41be11fe4de170b29, type: 3}
+  m_Script: {fileID: 11500000, guid: 3cff4ea480093e64cad8308c137dd5f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadingUI: {fileID: 6857001998640010958}
   _fadeMaterial: {fileID: 2100000, guid: 1f1f2053aab619047ab1c7f55efd57cb, type: 2}
-  _maskTexture: {fileID: 2800000, guid: f06065455180d3c4b9f15cfbca7b310e, type: 3}
-  _slider: {fileID: 7570571971841470218}
 --- !u!1 &1857165570490874375
 GameObject:
   m_ObjectHideFlags: 0
