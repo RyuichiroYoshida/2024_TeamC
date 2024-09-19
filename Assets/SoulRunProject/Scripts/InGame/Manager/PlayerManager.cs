@@ -161,10 +161,6 @@ namespace SoulRunProject.Common
             _soulSkillManager.UseSoulSkill();
         }
         
-        public void SetSoulSkill(SoulSkillType soulSkillType)
-        {
-            _soulSkillManager.SetSoulSkill(soulSkillType);
-        }
         
         public void AddSoul(float soul)
         {
