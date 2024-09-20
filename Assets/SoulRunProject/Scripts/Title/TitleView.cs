@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using SoulRun.InGame;
@@ -11,17 +10,18 @@ namespace SoulRunProject.Title
     {
         [SerializeField] private InputUIButtonBase _startButton;
         [SerializeField] private InputUIButtonBase _optionButton;
-        [SerializeField] private InputUIButtonBase _exitSimButton;
-        [SerializeField] private InputUIButtonBase _returnButton;
+        [SerializeField] private InputUIButtonBase _exitButton;
+        [SerializeField] private InputUIButtonBase _optionCloseButton;
         [SerializeField] private Light2D _soulLight2D;
         [SerializeField] private ParticleSystem _particleSystem;
-        [SerializeField] private GameObject _optionPanel;
+        [SerializeField] private CanvasGroup _optionPanel;
+        [SerializeField] private CanvasGroup _basePanel;
         public InputUIButtonBase StartButton => _startButton;
         public InputUIButtonBase OptionButton => _optionButton;
-        public InputUIButtonBase ExitButton => _exitSimButton;
-        //public InputUIButtonBase ReturnButton => _returnButton;
-        
-        public GameObject OptionPanel => _optionPanel;
+        public InputUIButtonBase OptionCloseButton => _optionCloseButton;
+        public InputUIButtonBase ExitButton => _exitButton;
+        public CanvasGroup OptionPanel => _optionPanel;
+        public CanvasGroup BasePanel => _basePanel;
         
         public float minFalloffIntensity = 0.5f;
         public float maxFalloffIntensity = 1f;

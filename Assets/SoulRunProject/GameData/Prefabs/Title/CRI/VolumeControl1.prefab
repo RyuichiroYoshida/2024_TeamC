@@ -72,7 +72,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 300
-    m_Alignment: 5
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
@@ -535,7 +535,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6448008242329902732}
-  - component: {fileID: 1488987549564719640}
+  - component: {fileID: 5680709052945463665}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -567,7 +567,7 @@ RectTransform:
   m_AnchoredPosition: {x: 35.30569, y: -15}
   m_SizeDelta: {x: 202.5335, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1488987549564719640
+--- !u!114 &5680709052945463665
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -576,7 +576,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8936856631001948557}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Script: {fileID: 11500000, guid: a96ffa7b19bd4af8a80e68a074a73169, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -618,6 +618,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+  _scaleMultiplier: 1.2
 --- !u!1 &9066335460321275038
 GameObject:
   m_ObjectHideFlags: 0
@@ -669,4 +670,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _volumeText: {fileID: 1852791926267970394}
-  _volumeSlider: {fileID: 1488987549564719640}
+  _volumeSlider: {fileID: 5680709052945463665}

@@ -13,9 +13,7 @@ namespace SoulRunProject.Title
     {
         [SerializeField] float _transitionTime = 1.0f;
         [SerializeField] private string _tutorialScene = "TutorialScene";
-        //[SerializeReference, SubclassSelector] IFadeStrategy _fadeStrategy;
-        [SerializeField] private OptionModel _optionModel;
-
+        [SerializeField] private int _tutorialFadeTextureIndex;
         private void Start()
         {
             CriAudioManager.Instance.Play(CriAudioType.CueSheet_BGM, "BGM_Title", true);
@@ -30,20 +28,22 @@ namespace SoulRunProject.Title
             PlayerInputManager.Instance.SwitchActionMap(PlayerInputManager.ActionMapType.Player);
         }
 
-        public void Option(GameObject optionPanel)
+        public void OpenOption(CanvasGroup optionPanel, CanvasGroup basePanel)
         {
-            bool isActive = optionPanel.activeSelf;
-            optionPanel.SetActive(!isActive);
-            _optionModel.SetPausedState(isActive);
-            DebugClass.Instance.ShowLog("オプション画面表示");
+            basePanel.interactable = false;
+            basePanel.blocksRaycasts = false;
+            optionPanel.interactable = true;
+            optionPanel.blocksRaycasts = true;
+            optionPanel.alpha = 1f;
         }
 
-        public void Return(GameObject optionPanel)
+        public void CloseOption(CanvasGroup optionPanel, CanvasGroup basePanel)
         {
-            optionPanel.SetActive(false);
-            _optionModel.SetPausedState(false);
-            DebugClass.Instance.ShowLog("タイトル画面に戻る");
-            
+            basePanel.interactable = true;
+            basePanel.blocksRaycasts = true;
+            optionPanel.interactable = false;
+            optionPanel.blocksRaycasts = false;
+            optionPanel.alpha = 0f;
         }
 
         public void Exit()
