@@ -673,6 +673,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerLevelDesign
       objectReference: {fileID: 0}
+    - target: {fileID: 879699045138072142, guid: e711c3a71f9df6b459a265a7a8d925ee,
+        type: 3}
+      propertyPath: _improveRate
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 879699045138072142, guid: e711c3a71f9df6b459a265a7a8d925ee,
+        type: 3}
+      propertyPath: _crampRotateZ
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 879699045138072142, guid: e711c3a71f9df6b459a265a7a8d925ee,
+        type: 3}
+      propertyPath: _decreaseRate
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1570944140317407289, guid: e711c3a71f9df6b459a265a7a8d925ee,
         type: 3}
       propertyPath: m_SpotAngle
@@ -1438,7 +1453,7 @@ MonoBehaviour:
   m_IgnoreTimeScale: 0
   m_WorldUpOverride: {fileID: 0}
   m_UpdateMethod: 0
-  m_BlendUpdateMethod: 1
+  m_BlendUpdateMethod: 0
   m_DefaultBlend:
     m_Style: 1
     m_Time: 2

@@ -40,6 +40,11 @@ namespace SoulRunProject.InGame
 
         private void Update()
         {
+
+        }
+
+        private void FixedUpdate()
+        {
             if (_isPause) return;
             List<FieldSegment> list = new();
 
@@ -47,7 +52,7 @@ namespace SoulRunProject.InGame
             //  フィールドタイル移動処理
             for (var i = 0; i < MoveSegments.Count; i++)
             {
-                MoveSegments[i].transform.position += Vector3.back * (_scrollSpeed * Time.deltaTime);
+                MoveSegments[i].transform.position += Vector3.back * (_scrollSpeed * Time.fixedDeltaTime);
                 //  FieldMoverのz座標より後ろに行ったら消す
                 if (MoveSegments[i].transform.TransformPoint(MoveSegments[i].EndPos).z < transform.position.z)
                 {
@@ -66,10 +71,6 @@ namespace SoulRunProject.InGame
 
             //  Destroyした要素を取り除く
             MoveSegments = list;
-        }
-
-        private void FixedUpdate()
-        {
             //  現在のスピードが、ほぼ最大スピードでなければ
             if (!Mathf.Approximately(CurrentPlayerStatus.MoveSpeed , _scrollSpeed))
             {
