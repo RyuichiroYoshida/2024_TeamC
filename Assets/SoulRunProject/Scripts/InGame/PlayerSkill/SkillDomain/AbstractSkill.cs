@@ -20,7 +20,7 @@ namespace SoulRunProject.InGame
             _runtimeParameter.SetPlayerStatus(playerManager.CurrentPlayerStatus);
         }
         public int CurrentLevel { get; private set; } = 1;
-        public bool CanLevelUp => CurrentLevel <= _skillData.MaxSkillLevel;
+        public bool CanLevelUp => CurrentLevel < _skillData.MaxSkillLevel;
         public abstract void StartSkill();
 
         public abstract void UpdateSkill(float deltaTime);
@@ -30,9 +30,9 @@ namespace SoulRunProject.InGame
         /// <summary>スキル進化</summary>
         public void LevelUp()
         {
-            CurrentLevel++;
             if (CanLevelUp)
             {
+                CurrentLevel++;
                 LevelUpParameter(CurrentLevel);
                 OnLevelUp();
             }

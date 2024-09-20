@@ -75,6 +75,7 @@ namespace HikanyanLaboratory.SceneManagement
                 }
 
                 // シーンを切り替えたらPause解除
+                _isTransitioning = false;
                 PauseManager.Pause(false);
                 // フェードイン
                 await FadeController.Instance.FadeIn(CheckFadeStrategy(sceneName));
@@ -82,10 +83,6 @@ namespace HikanyanLaboratory.SceneManagement
             catch (System.Exception ex)
             {
                 Debug.LogError($"シーン遷移中にエラーが発生しました: {ex.Message}");
-            }
-            finally
-            {
-                _isTransitioning = false;
             }
         }
 
