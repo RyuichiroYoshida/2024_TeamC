@@ -2112,8 +2112,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _currentSoulSkill
       value: 
-      objectReference: {fileID: 11400000, guid: 95369f5c160473b4287d5a8e74d1fc47,
-        type: 2}
+      objectReference: {fileID: 1826133786}
     - target: {fileID: 2245462467506778556, guid: e711c3a71f9df6b459a265a7a8d925ee,
         type: 3}
       propertyPath: _regenerativePerSec
@@ -2409,6 +2408,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36e8fdec0a21ddc4c9ff68fbc6305570, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1826133786 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7575172253712227642, guid: e711c3a71f9df6b459a265a7a8d925ee,
+    type: 3}
+  m_PrefabInstance: {fileID: 1826133782}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5461754b41f557447a03bf580e1bce57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1826133787 stripped
