@@ -49,28 +49,28 @@ namespace SoulRunProject.InGame
             _meteorParticle.Play();
             _delayTimer = _attackDelay;
             _attackTimer = _duration;
-            // 音の再生 パーティクルが火の玉を出しているからこうなる
-            Observable.Interval(TimeSpan.FromSeconds(0.1f))
-                .Take(25)
-                .Subscribe(_ => CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Soulflame"))
-                .AddTo(_meteorParticle);
+        }
+        //使わない。
+        public override void UpdateSoulSkill(float deltaTime)
+        {
             
         }
-        public override void UpdateSoulSkill(float deltaTime)
+        //使わない。
+        public override void PauseSoulSkill(bool isPause)
         {
             
         }
 
         private void Update()
         {
-            if (!_isAttack) return;
+            if (!_isAttack || Time.timeScale == 0f) return;
             if (_delayTimer >= 0f)
             {
                 _delayTimer -= Time.deltaTime;
             }
             else
             {
-                if (_attackTimer >= 0f && !_isPause)
+                if (_attackTimer >= 0f)
                 {
                     if (_attackTimer < _attackDelay && _meteorParticle.isPlaying)
                     {
@@ -95,6 +95,7 @@ namespace SoulRunProject.InGame
                         // パーティクルの位置が一定の距離を超えているか確認
                         if (particles[i].position.y <= _groundPos)
                         {
+                            CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Soulflame");
                             var hitEffect = Instantiate( _hitMeteorPrefab , particles[i].position , Quaternion.identity , null );
                             Destroy(hitEffect , _hitMeteorLifeTime);
                             particles[i].position = new Vector3(0, 1000, 0);
@@ -107,19 +108,6 @@ namespace SoulRunProject.InGame
                 {
                     _isAttack = false;
                 }
-            }
-        }
-        public override void PauseSoulSkill(bool isPause)
-        {
-            _isPause = isPause;
-            if (!_meteorParticle) return;
-            if (isPause)
-            {
-                _meteorParticle.Pause();
-            }
-            else
-            {
-                _meteorParticle.Play();
             }
         }
     }
