@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 3698741979491483856}
   - component: {fileID: 3932238436133655523}
   - component: {fileID: 2245462467506778556}
+  - component: {fileID: 7575172253712227642}
   - component: {fileID: 6585847965433512431}
   - component: {fileID: 5880127536023217182}
   m_Layer: 0
@@ -173,7 +174,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _useGodMode: 0
-  _playerInputManager: {fileID: 0}
   _baseStatus: {fileID: 11400000, guid: d50a16b38666d804883e3040b335a638, type: 2}
   _playerCamera: {fileID: 6635071162787831542}
   _hitDamageEffectManager: {fileID: 5236282758698190153}
@@ -260,8 +260,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c77eda4c25f42df42900dfed143ab44a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _currentSoulSkill: {fileID: 0}
   _initialSoul: 0
   _regenerativePerSec: 0.2
+--- !u!114 &7575172253712227642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 392928014464894764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5461754b41f557447a03bf580e1bce57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _skillType: 0
+  _name: "\u30BD\u30A6\u30EB\u30D5\u30EC\u30A4\u30E0"
+  _description: "\u30E1\u30C6\u30AA"
+  _requiredSoul: 100
+  _duration: 3
+  _meteorPrefab: {fileID: 1247631016516920979, guid: 9f96e5b5c8ea06a48a28b24a13e95b2b,
+    type: 3}
+  _hitMeteorPrefab: {fileID: 9136087545407824072, guid: 06efdcd4a7f3f684390c99f113852ccf,
+    type: 3}
+  _hitMeteorLifeTime: 0.5
+  _groundPos: 0.1
+  _attackDelay: 0.4
+  _attackDamage: 1000
+  _giveKnockBack:
+    _power: 0
+  _relativePosition: {x: 0, y: 0, z: 0}
+  _attackPositionOffset: {x: 0, y: 0, z: 30}
+  _attackArea: {x: 30, y: 20, z: 60}
+  _gizmoColor: {r: 1, g: 0, b: 0.14901961, a: 0.19215687}
 --- !u!54 &6585847965433512431
 Rigidbody:
   m_ObjectHideFlags: 0
