@@ -1,7 +1,7 @@
+using HikanyanLaboratory.SceneManagement;
 using SoulRunProject.Audio;
 using SoulRunProject.Common;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace SoulRunProject
 {
@@ -18,7 +18,7 @@ namespace SoulRunProject
 
         void ToTitle()
         {
-            SceneManager.LoadScene(0);
+            _ = SceneManager.Instance.LoadSceneWithFade("Title");
         }
     }
 }
