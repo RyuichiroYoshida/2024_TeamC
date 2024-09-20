@@ -213,8 +213,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: [{fileID: 1770480420346926836, guid: ee80934541d0e6e4cab1ff660dc718b2,
-        type: 3}]
+    m_RemovedComponents:
+    - {fileID: 1770480420346926836, guid: ee80934541d0e6e4cab1ff660dc718b2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1262,7 +1262,7 @@ GameObject:
   - component: {fileID: 1153406992}
   - component: {fileID: 1153406991}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: VolumePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
