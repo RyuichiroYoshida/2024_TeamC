@@ -86,7 +86,8 @@ namespace SoulRunProject.InGame
             }
             else // 所持スキルのレベルアップ
             {
-                var createdSkill = _skillManager.CreatedSkillList[Random.Range(0, _skillManager.CreatedSkillList.Count)];
+                var canLevelUpSkillList = _skillManager.CreatedSkillList.Where(skill => skill.CanLevelUp).ToArray();
+                var createdSkill = canLevelUpSkillList[Random.Range(0, canLevelUpSkillList.Length)];
                 selectedSkillData = createdSkill.AbstractSkillData;
                 
                 _levelUpView.UpgradeButtons[0].InputUIButton.OnClick
