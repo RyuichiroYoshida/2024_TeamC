@@ -106,10 +106,10 @@ namespace SoulRunProject.InGame
             OnDead?.Invoke();
             // 死んでからの演出の時間当たり判定を無くす
             _hitCollider.enabled = false;
-            _decalProjector.enabled = false;
+            if(_decalProjector) _decalProjector.enabled = false;
             if (_hitDamageEffectManager) await _hitDamageEffectManager.DissolveFade();
             _hitCollider.enabled = true;
-            _decalProjector.enabled = true;
+            if(_decalProjector) _decalProjector.enabled = true;
             Finish();
         }
 

@@ -1,7 +1,8 @@
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using SoulRunProject.Common;
 using SoulRunProject.Framework;
 using UniRx;
-using UnityEngine;
 
 namespace SoulRunProject.InGame
 {
@@ -25,7 +26,7 @@ namespace SoulRunProject.InGame
         {
             _stageManager = stageManager;
             _playerManager = playerManager;
-            this._playerInputManager = playerInputManager;
+            _playerInputManager = playerInputManager;
             _playerLevelManager = playerLevelManager;
         }
         
@@ -36,15 +37,15 @@ namespace SoulRunProject.InGame
             SwitchToLevelUpState = false;
             ArrivedBossStagePosition = false;
             SwitchToPauseState = false;
-            
+
+            var cts = CancellationTokenSource.CreateLinkedTokenSource(_playerManager.destroyCancellationToken);
             // PlayerInputへの購読
             _playerInputManager.PauseInput
                 .Subscribe(_ =>
                 {
                     SwitchToPauseState = true;
                     StateChange();
-                })
-                .AddTo(_compositeDisposable);
+                }).AddTo(_compositeDisposable).AddTo(cts.Token);
             
             // レベルアップの購読
             _playerLevelManager.OnLevelUp

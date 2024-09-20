@@ -1,12 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using SoulRunProject.Audio;
-using SoulRunProject.Common;
 using SoulRunProject.Title;
 using UniRx;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace SoulRunProject
 {
@@ -18,10 +13,11 @@ namespace SoulRunProject
         private void Start()
         {
             CriAudioManager.Instance.Play(CriAudioType.CueSheet_BGM, "BGM_Title", true);
-            _titleView.StartButton.OnClick.Subscribe(_ => _titleModel.StartGame());
-            _titleView.OptionButton.OnClick.Subscribe(_ => _titleModel.Option(_titleView.OptionPanel));
-            _titleView.ExitButton.OnClick.Subscribe(_ => _titleModel.Exit());
-            //_titleView.ReturnButton.OnClick.Subscribe(_ => _titleModel.Return(_titleView.OptionPanel));
+            _titleView.StartButton.OnClick.Subscribe(_ => _titleModel.StartGame()).AddTo(this);
+            _titleView.OptionButton.OnClick.Subscribe(_ => _titleModel.OpenOption(_titleView.OptionPanel, _titleView.BasePanel)).AddTo(this);
+            _titleView.OptionCloseButton.OnClick.Subscribe(_ => _titleModel.CloseOption(_titleView.OptionPanel, _titleView.BasePanel)).AddTo(this);
+            _titleView.ExitButton.OnClick.Subscribe(_ => _titleModel.Exit()).AddTo(this);
+            _titleModel.CloseOption(_titleView.OptionPanel, _titleView.BasePanel);
         }
     }
 }
