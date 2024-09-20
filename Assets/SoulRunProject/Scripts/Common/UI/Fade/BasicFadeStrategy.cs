@@ -35,7 +35,7 @@ namespace HikanyanLaboratory.Fade
                     // Debug.Log($"CutoutRange{_cutoutRange}");
                 })
                 .SetEase(_ease)
-                .ToUniTask();
+                .SetUpdate(true); // DeltaTimeの影響を受けない
         }
 
         /// <summary>

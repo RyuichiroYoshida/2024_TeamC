@@ -1,5 +1,7 @@
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using HikanyanLaboratory.SceneManagement;
 using SoulRun.InGame;
 using SoulRunProject.Common;
 using SoulRunProject.Framework;
@@ -26,6 +28,7 @@ namespace SoulRunProject.InGame
         [SerializeField, CustomLabel("ハイスコア文字表示")] private Text _highScoreTitleText;
         [SerializeField, CustomLabel("リザルトパネルポップアップ")] private PopupView _popupView;
         [SerializeField, CustomLabel("ランク表示")] private Image _rankImage;
+        [SerializeField] private float _duration;
         
         public InputUIButton RestartButton => _restartButton;
         public InputUIButton ExitButton => _exitButton;
@@ -87,6 +90,11 @@ namespace SoulRunProject.InGame
             await sequence;
             EventSystem.current.SetSelectedGameObject(_restartButton.gameObject);
             _restartButton.OnSelect(null);
+            var ctSource = new CancellationTokenSource();
+            // exitボタン、または時間でシーン遷移
+            await UniTask.WhenAny(UniTask.WaitForSeconds(_duration, ignoreTimeScale: true, cancellationToken:ctSource.Token), _exitButton.OnClick.First().ToUniTask(cancellationToken: ctSource.Token));
+            ctSource.Cancel();
+            await SceneManager.Instance.LoadSceneWithFade("ThankYouForPlaying");
         }
         
         public enum ResultType
