@@ -40,7 +40,6 @@ namespace SoulRunProject.InGame
             _resultView.ExitButton.OnClick.Subscribe(_ =>
             {
                 _resultView.SetResultPanelVisibility(false);
-                _resultState.ExitToThankYouForPlaying();
             });
             
             _resultView.SetResultPanelVisibility(false);

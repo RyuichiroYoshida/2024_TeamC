@@ -74,6 +74,8 @@ namespace HikanyanLaboratory.SceneManagement
                     }
                 }
 
+                // シーンを切り替えたらPause解除
+                PauseManager.Pause(false);
                 // フェードイン
                 await FadeController.Instance.FadeIn(CheckFadeStrategy(sceneName));
             }

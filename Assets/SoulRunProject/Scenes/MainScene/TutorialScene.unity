@@ -740,6 +740,12 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &960917020 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 392928014464894764, guid: e711c3a71f9df6b459a265a7a8d925ee,
+    type: 3}
+  m_PrefabInstance: {fileID: 1826133782}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &964224220
 GameObject:
   m_ObjectHideFlags: 0
@@ -2112,6 +2118,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _currentSoulSkill
       value: 
+      objectReference: {fileID: 1826133791}
+    - target: {fileID: 2245462467506778556, guid: e711c3a71f9df6b459a265a7a8d925ee,
+        type: 3}
+      propertyPath: _currentSoulSkill
+      value: 
       objectReference: {fileID: 1826133786}
     - target: {fileID: 2245462467506778556, guid: e711c3a71f9df6b459a265a7a8d925ee,
         type: 3}
@@ -2251,7 +2262,7 @@ PrefabInstance:
     - target: {fileID: 6519210490737000228, guid: e711c3a71f9df6b459a265a7a8d925ee,
         type: 3}
       propertyPath: _moveSpeed
-      value: 40
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6519210490737000228, guid: e711c3a71f9df6b459a265a7a8d925ee,
         type: 3}
@@ -2372,7 +2383,9 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents: [{targetCorrespondingSourceObject: {fileID: 392928014464894764,
+          guid: e711c3a71f9df6b459a265a7a8d925ee, type: 3}, insertIndex: 6, addedObject: {
+          fileID: 1826133791}}]
   m_SourcePrefab: {fileID: 100100000, guid: e711c3a71f9df6b459a265a7a8d925ee, type: 3}
 --- !u!114 &1826133783 stripped
 MonoBehaviour:
@@ -2380,7 +2393,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1826133782}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 960917020}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c77eda4c25f42df42900dfed143ab44a, type: 3}
@@ -2392,7 +2405,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1826133782}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 960917020}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6075843f4893e842bfcc7a2cfcae3dc, type: 3}
@@ -2404,7 +2417,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1826133782}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 960917020}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36e8fdec0a21ddc4c9ff68fbc6305570, type: 3}
@@ -2428,7 +2441,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1826133782}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 960917020}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8f658ff644a4c5387a60090509359a1, type: 3}
@@ -2446,6 +2459,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc6a0ff9f4ca4c34bac1d94e85af1139, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1826133791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 960917020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5461754b41f557447a03bf580e1bce57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _skillType: 0
+  _name: "\u30BD\u30A6\u30EB\u30D5\u30EC\u30A4\u30E0"
+  _description: "\u30E1\u30C6\u30AA"
+  _requiredSoul: 100
+  _duration: 3
+  _meteorPrefab: {fileID: 1247631016516920979, guid: 9f96e5b5c8ea06a48a28b24a13e95b2b,
+    type: 3}
+  _hitMeteorPrefab: {fileID: 9136087545407824072, guid: 06efdcd4a7f3f684390c99f113852ccf,
+    type: 3}
+  _hitMeteorLifeTime: 0.5
+  _groundPos: 0.1
+  _attackDelay: 0.4
+  _attackDamage: 1000
+  _giveKnockBack:
+    _power: 0
+  _relativePosition: {x: 0, y: 0, z: 0}
+  _attackPositionOffset: {x: 0, y: 0, z: 30}
+  _attackArea: {x: 30, y: 20, z: 60}
+  _gizmoColor: {r: 1, g: 0, b: 0.14901961, a: 0.19215687}
 --- !u!4 &1862962855 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5395494242152793296, guid: e711c3a71f9df6b459a265a7a8d925ee,
