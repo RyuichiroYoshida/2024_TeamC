@@ -9,7 +9,7 @@ namespace SoulRunProject.Audio
 {
     public class SEPlayer : CriAudioPlayerService
     {
-        private readonly int maxSameSePlayCount = 10; // 同時再生数の上限
+        private const int MaxSameSePlayCount = 10; // 同時再生数の上限
         private readonly Dictionary<string, int> sePlayCountDict = new Dictionary<string, int>(); // SEの再生回数をカウント
 
         private readonly CompositeDisposable _disposables = new CompositeDisposable();
@@ -37,9 +37,9 @@ namespace SoulRunProject.Audio
             }
 
             // 同じSEの再生回数が上限に達している場合、再生しない
-            if (sePlayCountDict[cueName] >= maxSameSePlayCount)
+            if (sePlayCountDict[cueName] >= MaxSameSePlayCount)
             {
-                Debug.LogWarning($"SE {cueName} の再生が制限されました（上限: {maxSameSePlayCount}）");
+                Debug.LogWarning($"SE {cueName} の再生が制限されました（上限: {MaxSameSePlayCount}）");
                 return Guid.Empty;
             }
 
