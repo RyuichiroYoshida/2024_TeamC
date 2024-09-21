@@ -130,6 +130,7 @@ MonoBehaviour:
     _knockBackTime: 0.5
   _lootTable: {fileID: 0}
   _hitDamageEffectManager: {fileID: 0}
+  _useHitSe: 0
 --- !u!114 &-8645483376259840638
 MonoBehaviour:
   m_ObjectHideFlags: 0

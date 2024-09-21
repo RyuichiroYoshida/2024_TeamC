@@ -87,12 +87,15 @@ namespace SoulRunProject.InGame
     [Serializable, Name("ソウル技")]
     public class SoulSkillTutorial : TutorialContentBase
     {
+        [SerializeField] private SoulSkillManager _soulSkillManager;
+        
         public override async UniTask WaitAction(PlayerInputManager inputManager, Image fadePanel, CancellationToken ct)
         {
             PauseManager.Pause(true);
             inputManager.BindAction(ActionMapType.Player, ActionType.UseSoulSkill, true);
             fadePanel.gameObject.SetActive(true);
             _tutorialUI.SetActive(true);
+            _soulSkillManager.AddSoul(1000);
             
             await inputManager.SoulSkillInput.First().ToUniTask(cancellationToken:ct);
             PauseManager.Pause(false);
