@@ -1000,7 +1000,7 @@ PrefabInstance:
     - target: {fileID: -317040318902373902, guid: 2aebc27326b334d448fc6e342738767c,
         type: 3}
       propertyPath: _direction
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 521327528283528100, guid: 2aebc27326b334d448fc6e342738767c,
         type: 3}
