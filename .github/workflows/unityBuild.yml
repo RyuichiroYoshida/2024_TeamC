@@ -1,0 +1,14 @@
+name: unityBuild
+
+on:
+    workflow_dispatch: {}
+jobs:
+    build:
+    # Self-hosted runnerを使用時にはruns-on: self-hostedを指定する    
+        runs-on: self-hosted
+        steps:
+            - name: Checkout
+                uses: actions/checkout@v2
+                run: echo self-hosted runner working
+            - name: test
+                run: test.bat
