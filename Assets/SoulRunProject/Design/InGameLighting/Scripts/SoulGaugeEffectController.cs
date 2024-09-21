@@ -31,12 +31,12 @@ namespace SoulRunProject
                 _baseColorParameterID = Shader.PropertyToID("_BaseColor");
             }
 
+            _initialColor = _material.GetColor(_baseColorParameterID);
             _soulSkillManager = FindAnyObjectByType<SoulSkillManager>();
             _soulSkillManager.CurrentSoul.Where(currentSoul => currentSoul >= _soulSkillManager.RequiredSoul)
                 .Subscribe(_ => SoulGaugeEffect()).AddTo(this);
             _soulSkillManager.CurrentSoul.Where(currentSoul => currentSoul < _soulSkillManager.RequiredSoul)
                 .Subscribe(_ => _material.color = _initialColor).AddTo(this);
-            _initialColor = _material.GetColor(_baseColorParameterID);
         }
 
         private void OnDisable()

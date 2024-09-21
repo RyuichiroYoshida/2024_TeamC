@@ -19,8 +19,8 @@ Shader "Custom/WaveShader"
     {
         Tags
         {
-            "RenderType" = "Transparent"
-            "Queue" = "Transparent+1"
+            "RenderType" = "Opaque"
+            //"Queue" = "Transparent+1"
             "IgnoreProjector" = "True"
             "RenderPipeline" = "UniversalPipeline"
             "ShaderModel"="4.5"
