@@ -199,6 +199,7 @@ GameObject:
   - component: {fileID: 5893449610729875164}
   - component: {fileID: 2864036152119371475}
   - component: {fileID: 3318894658695142911}
+  - component: {fileID: 4938950069758850485}
   m_Layer: 0
   m_Name: EnemyHawkB
   m_TagString: Untagged
@@ -450,6 +451,18 @@ MonoBehaviour:
   _damageUIPrefab: {fileID: -8645444479275004511, guid: abba775fb86727447918faadc8d0e920,
     type: 3}
   _uiPosition: {x: 0, y: 4.89, z: 0}
+--- !u!114 &4938950069758850485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7073754473475370446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ca8b0b35c49d8140a3c7078bb835b2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7699666227352543159
 GameObject:
   m_ObjectHideFlags: 0
