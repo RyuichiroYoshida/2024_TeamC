@@ -43,7 +43,7 @@ namespace SoulRunProject.InGame
             _displayTotalDamage = damage;
             _damageText.text = ((int)_displayTotalDamage).ToString();
             _damageText.color = isCrit? _critColor : _nomalColor;
-            _damageText.fontSize = Mathf.Clamp((int)(35 * damage / 100), 15, 35);
+            _damageText.fontSize = Mathf.Clamp((int)(25 * damage / 100), 15, 25);
             _parent = tf;
             _position = position + new Vector3(Random.Range(-_randomPosRange.x, _randomPosRange.x), 
                 Random.Range(-_randomPosRange.y, _randomPosRange.y), 0);
