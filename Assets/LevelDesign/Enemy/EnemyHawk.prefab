@@ -289,6 +289,7 @@ MonoBehaviour:
     _knockBackTime: 0.5
   _lootTable: {fileID: 11400000, guid: 63db857d10388f045ba96c3f88375172, type: 2}
   _hitDamageEffectManager: {fileID: 8329125932870208999}
+  _useHitSe: 1
 --- !u!65 &4104162914166171959
 BoxCollider:
   m_ObjectHideFlags: 0

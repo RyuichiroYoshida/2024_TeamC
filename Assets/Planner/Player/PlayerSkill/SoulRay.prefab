@@ -172,6 +172,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4346073968443669858, guid: 62e1992976100384db2e49888962ebbf,
         type: 3}
+      propertyPath: SizeModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4346073968443669858, guid: 62e1992976100384db2e49888962ebbf,
+        type: 3}
       propertyPath: InitialModule.size3D
       value: 0
       objectReference: {fileID: 0}
@@ -183,12 +188,17 @@ PrefabInstance:
     - target: {fileID: 4346073968443669858, guid: 62e1992976100384db2e49888962ebbf,
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5234202099436537471, guid: 62e1992976100384db2e49888962ebbf,
         type: 3}
       propertyPath: InitialModule.startSize.scalar
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5234202099436537471, guid: 62e1992976100384db2e49888962ebbf,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5453949201689154720, guid: 62e1992976100384db2e49888962ebbf,
         type: 3}

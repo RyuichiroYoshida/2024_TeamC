@@ -132,6 +132,7 @@ MonoBehaviour:
     _knockBackTime: 0.5
   _lootTable: {fileID: 11400000, guid: 336e4d9ca71d4f8498bc390b9e894732, type: 2}
   _hitDamageEffectManager: {fileID: 8329125932870208999}
+  _useHitSe: 1
 --- !u!65 &4104162914166171959
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -167,6 +168,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _duration: 0.1
   _loopCount: 1
+  _hitEffect: {fileID: 0}
+  _dissolveFadeTime: 1
 --- !u!114 &1321131542843227285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,8 +184,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attacker:
     rid: -2
+  _startMover:
+    rid: -2
   _mover:
     rid: 8478225587102023693
+  _enemyLifeTime: 20
   references:
     version: 2
     RefIds:
@@ -193,7 +199,7 @@ MonoBehaviour:
       data:
         _moveSpeed: 30
         _direction: 3
-        _despawnRange: 130
+        _despawnRange: 250
 --- !u!114 &7205482879741107916
 MonoBehaviour:
   m_ObjectHideFlags: 0
