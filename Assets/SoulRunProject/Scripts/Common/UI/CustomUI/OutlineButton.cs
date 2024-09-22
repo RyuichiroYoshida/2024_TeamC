@@ -9,6 +9,7 @@ namespace SoulRun.InGame
     {
         [SerializeField] private Image _outlineImage;
         [SerializeField] private float _fadeDuration = 0.25f;
+        private Tween _tween;
         protected override void Awake()
         {
             base.Awake();
@@ -25,6 +26,7 @@ namespace SoulRun.InGame
             base.OnDisable();
             if (_outlineImage)
             {
+                _tween?.Kill();
                 var color = _outlineImage.color;
                 color.a = 0f;
                 _outlineImage.color = color;
@@ -34,13 +36,21 @@ namespace SoulRun.InGame
         public override void OnSelect(BaseEventData eventData)
         {
             base.OnSelect(eventData);
-            _outlineImage?.DOFade(1, _fadeDuration).SetLink(gameObject).SetUpdate(true);
+            if (_outlineImage)
+            {
+                _tween?.Kill();
+                _tween = _outlineImage.DOFade(1, _fadeDuration).SetLink(gameObject).SetUpdate(true);
+            }
         }
 
         public override void OnDeselect(BaseEventData eventData)
         {
             base.OnDeselect(eventData);
-            _outlineImage?.DOFade(0, _fadeDuration).SetLink(gameObject).SetUpdate(true);
+            if (_outlineImage)
+            {
+                _tween?.Kill();
+                _tween = _outlineImage.DOFade(0, _fadeDuration).SetLink(gameObject).SetUpdate(true);
+            }
         }
     }
 }
