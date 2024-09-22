@@ -34,6 +34,8 @@ namespace SoulRunProject.InGame
         [SerializeField, CustomLabel("ダメージエフェクト")]
         private HitDamageEffectManager _hitDamageEffectManager;
 
+        [SerializeField] private bool _useHitSe = true;
+
         private FloatReactiveProperty _currentHp = new();
         private EnemyController _enemyController;
         private Collider _hitCollider;
@@ -85,7 +87,7 @@ namespace SoulRunProject.InGame
             CurrentHp.Value -= calculatedDamage;
             OnDamaged?.Invoke(calculatedDamage, isCritical);
 
-            if (useSE) CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Hit");
+            if (useSE && _useHitSe) CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Hit");
 
             if (CurrentHp.Value <= 0) _ = Death();
 

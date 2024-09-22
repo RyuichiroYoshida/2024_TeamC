@@ -1202,6 +1202,11 @@ PrefabInstance:
       propertyPath: _playerInputManager
       value: 
       objectReference: {fileID: 1594618514}
+    - target: {fileID: 3170939595594605857, guid: a0d7b3145875ab94e8f12f6d6119a4ed,
+        type: 3}
+      propertyPath: managedReferences[1007958140928917553]._soulSkillManager
+      value: 
+      objectReference: {fileID: 1826133783}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2098,7 +2103,7 @@ PrefabInstance:
     - target: {fileID: 2245462467506778556, guid: e711c3a71f9df6b459a265a7a8d925ee,
         type: 3}
       propertyPath: _initialSoul
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2245462467506778556, guid: e711c3a71f9df6b459a265a7a8d925ee,
         type: 3}
@@ -2108,7 +2113,7 @@ PrefabInstance:
     - target: {fileID: 2245462467506778556, guid: e711c3a71f9df6b459a265a7a8d925ee,
         type: 3}
       propertyPath: _regenerativePerSec
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3698741979491483856, guid: e711c3a71f9df6b459a265a7a8d925ee,
         type: 3}

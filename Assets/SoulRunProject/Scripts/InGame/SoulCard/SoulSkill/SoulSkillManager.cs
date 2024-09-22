@@ -1,9 +1,6 @@
 using System;
-using System.Collections.Generic;
 using SoulRunProject.Audio;
-using SoulRunProject.Common;
 using SoulRunProject.Framework;
-using SoulRunProject.SoulMixScene;
 using UniRx;
 using UnityEngine;
 
