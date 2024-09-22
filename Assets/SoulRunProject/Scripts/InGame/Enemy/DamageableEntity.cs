@@ -82,6 +82,7 @@ namespace SoulRunProject.InGame
             if (!_player) return;
             
             bool isCritical = false;
+            damage = damage * UnityEngine.Random.Range(0.8f , 1.2f) * (1.0f + _player.PlayerCurrentLevel / 10f);
             var calculatedDamage = Calculator.CalcDamage(damage, 0, _player.CurrentPlayerStatus.CriticalRate,
                 _player.CurrentPlayerStatus.CriticalDamageRate, ref isCritical);
             CurrentHp.Value -= calculatedDamage;

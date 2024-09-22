@@ -34,6 +34,7 @@ namespace SoulRunProject.Common
         public ReadOnlyReactiveProperty<float> CurrentHp => CurrentPlayerStatus.CurrentHpProperty;
         public PlayerResourceContainer ResourceContainer => _resourceContainer;
         public Vector3 PlayerCenterOffset => _playerCenterOffset;
+        public int PlayerCurrentLevel => _pLevelManager.OnLevelUp.Value;
         //public PlayerStatusManager PlayerStatusManager => _statusManager;
         
         [CustomLabel("現在のプレイヤーのステータス")]　public PlayerStatus CurrentPlayerStatus;
