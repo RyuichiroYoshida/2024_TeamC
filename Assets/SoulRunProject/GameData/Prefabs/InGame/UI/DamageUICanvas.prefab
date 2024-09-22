@@ -121,6 +121,9 @@ MonoBehaviour:
   _randomPosRange: {x: 2, y: 2, z: 0}
   _nomalColor: {r: 1, g: 1, b: 1, a: 1}
   _critColor: {r: 1, g: 0.34439367, b: 0, a: 1}
+  _damageToSizeRate: 0.35
+  _minSize: 15
+  _maxSize: 30
 --- !u!1 &5793987831604402248
 GameObject:
   m_ObjectHideFlags: 0
