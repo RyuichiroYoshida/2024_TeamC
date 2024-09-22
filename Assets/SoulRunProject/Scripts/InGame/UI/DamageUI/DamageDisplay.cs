@@ -18,6 +18,9 @@ namespace SoulRunProject.InGame
         [SerializeField, CustomLabel("UIのランダム位置範囲")] private Vector3 _randomPosRange;
         [SerializeField, CustomLabel("通常色")] private Color _nomalColor;
         [SerializeField, CustomLabel("クリティカル時の色")] private Color _critColor;
+        [SerializeField] private float _damageToSizeRate;
+        [SerializeField] private int _minSize;
+        [SerializeField] private int _maxSize;
 
         /// <summary> 表示するダメージ </summary>
         private float _displayTotalDamage;
@@ -43,7 +46,7 @@ namespace SoulRunProject.InGame
             _displayTotalDamage = damage;
             _damageText.text = ((int)_displayTotalDamage).ToString();
             _damageText.color = isCrit? _critColor : _nomalColor;
-            _damageText.fontSize = Mathf.Clamp((int)(25 * damage / 100), 15, 25);
+            _damageText.fontSize = Mathf.Clamp((int)(_damageToSizeRate * damage), _minSize, _maxSize);
             _parent = tf;
             _position = position + new Vector3(Random.Range(-_randomPosRange.x, _randomPosRange.x), 
                 Random.Range(-_randomPosRange.y, _randomPosRange.y), 0);
