@@ -76,7 +76,7 @@ namespace SoulRunProject.InGame
                     .Where(skillBase => !_skillManager.CreatedSkillList.Select(skill=>skill.AbstractSkillData).Contains(skillBase)).ToArray();
                 selectedSkillData = notCreatedSkills[Random.Range(0, notCreatedSkills.Length)];
                 
-                _levelUpView.UpgradeButtons[0].InputUIButton.OnClick
+                _levelUpView.UpgradeButtons[0].CustomButton.OnClick
                     .Subscribe( _ =>
                     {
                         _skillManager.AddSkill(selectedSkillData.SkillType);
@@ -90,7 +90,7 @@ namespace SoulRunProject.InGame
                 var createdSkill = canLevelUpSkillList[Random.Range(0, canLevelUpSkillList.Length)];
                 selectedSkillData = createdSkill.AbstractSkillData;
                 
-                _levelUpView.UpgradeButtons[0].InputUIButton.OnClick
+                _levelUpView.UpgradeButtons[0].CustomButton.OnClick
                     .Subscribe(_ =>
                     {
                         _skillManager.LevelUpSkill(selectedSkillData.SkillType);
@@ -116,7 +116,7 @@ namespace SoulRunProject.InGame
                 selectedStatusUpItems[i] = _levelUpItemData.StatusUpItems[indexList[index]];
                 indexList.RemoveAt(index);
             }
-            _levelUpView.UpgradeButtons[1].InputUIButton.OnClick
+            _levelUpView.UpgradeButtons[1].CustomButton.OnClick
                 .Subscribe(_ =>
                 {
                     selectedStatusUpItems[0].ItemEffect();
@@ -126,7 +126,7 @@ namespace SoulRunProject.InGame
             _levelUpView.UpgradeButtons[1].NameAndLevelText.text = selectedStatusUpItems[0].ItemName;
             _levelUpView.UpgradeButtons[1].ExplanatoryText.text = selectedStatusUpItems[0].ExplanatoryText;
             _levelUpView.UpgradeButtons[1].ButtonIconImage.sprite = selectedStatusUpItems[0].ItemIcon;
-            _levelUpView.UpgradeButtons[2].InputUIButton.OnClick
+            _levelUpView.UpgradeButtons[2].CustomButton.OnClick
                 .Subscribe(_ =>
                 {
                     selectedStatusUpItems[1].ItemEffect();

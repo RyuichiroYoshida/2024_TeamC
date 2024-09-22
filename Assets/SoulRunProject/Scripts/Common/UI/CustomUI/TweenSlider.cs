@@ -18,6 +18,12 @@ namespace SoulRunProject
             _originalScale = transform.localScale;
         }
 
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            transform.localScale = _originalScale;
+        }
+
         public override void OnSelect(BaseEventData eventData)
         {
             base.OnSelect(eventData);

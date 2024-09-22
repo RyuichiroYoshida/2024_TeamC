@@ -3,6 +3,7 @@ using SoulRunProject.Audio;
 using SoulRunProject.Framework;
 using UnityEngine;
 using SoulRunProject.InGame;
+using UnityEngine.UI;
 
 namespace SoulRunProject.Title
 {
@@ -35,6 +36,7 @@ namespace SoulRunProject.Title
             optionPanel.interactable = true;
             optionPanel.blocksRaycasts = true;
             optionPanel.alpha = 1f;
+            optionPanel.transform.GetComponentInChildren<Selectable>().Select();
         }
 
         public void CloseOption(CanvasGroup optionPanel, CanvasGroup basePanel)
@@ -44,6 +46,7 @@ namespace SoulRunProject.Title
             optionPanel.interactable = false;
             optionPanel.blocksRaycasts = false;
             optionPanel.alpha = 0f;
+            basePanel.transform.GetComponentInChildren<Selectable>().Select();
         }
 
         public void Exit()

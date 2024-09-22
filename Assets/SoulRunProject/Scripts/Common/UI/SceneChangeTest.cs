@@ -12,7 +12,7 @@ namespace SoulRunProject
     public class SceneChangeTest : MonoBehaviour
     {
         [SerializeField] private string _sceneName;
-        [SerializeField] private InputUIButton _button;
+        [SerializeField] private TweenButton _button;
 
         void Start()
         {

@@ -8,7 +8,7 @@ namespace SoulRun.InGame
 {
     /// <summary> ボタンの表示状態を管理するボタンクラス View</summary>
     [RequireComponent(typeof(CanvasGroup))]
-    public class InputUIButton : InputUIButtonBase
+    public class TweenButton : CustomButtonBase
     {
         [SerializeField] private float _scaleMultiplier = 1.2f;
         private CanvasGroup _button;
@@ -21,6 +21,13 @@ namespace SoulRun.InGame
             _button = GetComponent<CanvasGroup>();
             _originalScale = transform.localScale;
         }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            transform.localScale = _originalScale;
+        }
+
         public override void OnSubmit(BaseEventData eventData)
         {
             base.OnSubmit(eventData);
@@ -43,7 +50,5 @@ namespace SoulRun.InGame
             transform.DOScale(_originalScale, FadeTime).SetLink(gameObject).SetUpdate(UpdateType.Normal, true);
             _button.alpha = 1f;
         }
-        
-        
     }
 }

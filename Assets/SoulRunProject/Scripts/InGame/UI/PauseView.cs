@@ -13,11 +13,11 @@ namespace SoulRunProject.InGame
         [SerializeField] private GameObject _pausePanel;
         [SerializeField] private Text _scoreText;
         [SerializeField] private Text _coinText;
-        [SerializeField] private InputUIButton _resumeButton;
-        [SerializeField] private InputUIButton _exitButton;
+        [SerializeField] private TweenButton _resumeButton;
+        [SerializeField] private TweenButton _exitButton;
 
-        public InputUIButton ResumeButton => _resumeButton;
-        public InputUIButton ExitButton => _exitButton;
+        public TweenButton ResumeButton => _resumeButton;
+        public TweenButton ExitButton => _exitButton;
 
         private void Start()
         {

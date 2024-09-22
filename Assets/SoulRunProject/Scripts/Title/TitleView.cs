@@ -8,18 +8,18 @@ namespace SoulRunProject.Title
 {
     public class TitleView : MonoBehaviour
     {
-        [SerializeField] private InputUIButtonBase _startButton;
-        [SerializeField] private InputUIButtonBase _optionButton;
-        [SerializeField] private InputUIButtonBase _exitButton;
-        [SerializeField] private InputUIButtonBase _optionCloseButton;
+        [SerializeField] private CustomButtonBase _startButton;
+        [SerializeField] private CustomButtonBase _optionButton;
+        [SerializeField] private CustomButtonBase _exitButton;
+        [SerializeField] private CustomButtonBase _optionCloseButton;
         [SerializeField] private Light2D _soulLight2D;
         [SerializeField] private ParticleSystem _particleSystem;
         [SerializeField] private CanvasGroup _optionPanel;
         [SerializeField] private CanvasGroup _basePanel;
-        public InputUIButtonBase StartButton => _startButton;
-        public InputUIButtonBase OptionButton => _optionButton;
-        public InputUIButtonBase OptionCloseButton => _optionCloseButton;
-        public InputUIButtonBase ExitButton => _exitButton;
+        public CustomButtonBase StartButton => _startButton;
+        public CustomButtonBase OptionButton => _optionButton;
+        public CustomButtonBase OptionCloseButton => _optionCloseButton;
+        public CustomButtonBase ExitButton => _exitButton;
         public CanvasGroup OptionPanel => _optionPanel;
         public CanvasGroup BasePanel => _basePanel;
         
