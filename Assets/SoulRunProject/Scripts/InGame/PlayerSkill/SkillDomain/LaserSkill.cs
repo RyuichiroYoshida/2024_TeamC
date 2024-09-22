@@ -18,6 +18,7 @@ namespace SoulRunProject.InGame
         private LaserSkillData SkillData => (LaserSkillData)_skillData;
         private LaserSkillParameter RuntimeParameter => (LaserSkillParameter)_runtimeParameter;
         private Guid _se;
+        private Transform _lazerParent;
 
         public LaserSkill(AbstractSkillData skillData, in PlayerManager playerManager, in Transform playerTransform) :
             base(skillData, in playerManager, in playerTransform)
@@ -36,9 +37,11 @@ namespace SoulRunProject.InGame
 
         public override void StartSkill()
         {
+            _lazerParent = new GameObject("LaserParent").transform;
+            
             for (int i = 0; i < RuntimeParameter.Amount; i++)
             {
-                _laserList.Add(Object.Instantiate(SkillData.Original, _playerTransform));
+                _laserList.Add(Object.Instantiate(SkillData.Original , _lazerParent));
             }
 
             Arrangement();
@@ -47,6 +50,8 @@ namespace SoulRunProject.InGame
 
         public override void UpdateSkill(float deltaTime)
         {
+            if (_lazerParent) //レーザーをxだけ追従させる
+                _lazerParent.position = new Vector3(_playerTransform.position.x, _lazerParent.position.y, _lazerParent.position.z);
             int endCount = 0;
             foreach (var laser in _laserList)
             {
@@ -167,7 +172,7 @@ namespace SoulRunProject.InGame
 
         LaserController AddLaser()
         {
-            var laser = Object.Instantiate(SkillData.Original, _playerTransform);
+            var laser = Object.Instantiate(SkillData.Original , _lazerParent);
             var startPos = _playerTransform.position;
             startPos.x -= RuntimeParameter.Width / 2;
             startPos.z += RuntimeParameter.Height;
@@ -181,14 +186,17 @@ namespace SoulRunProject.InGame
 
         void Arrangement()
         {
-            float angleDiff = 180f / _laserList.Count;
             for (int i = 0; i < _laserList.Count; i++)
             {
                 Vector3 pos = _playerTransform.position;
-                float angle = (180 + angleDiff * i) * Mathf.Deg2Rad;
-                pos.x += SkillData.Radius * Mathf.Cos(angle);
-                pos.y = _playerTransform.position.y + SkillData.OffsetY;
-                pos.z += SkillData.Radius * Mathf.Sin(angle);
+                float rad;
+                if (_laserList.Count == 1)
+                    rad = Mathf.PI / 2;
+                else
+                    rad = Mathf.PI / (_laserList.Count -1 ) * i;
+                pos.x += SkillData.Radius * Mathf.Cos(rad);
+                pos.y =  SkillData.OffsetY;
+                pos.z += SkillData.Radius * - Mathf.Sin(rad)　/ SkillData.LazerRadiusZManipulation　+ SkillData.OffsetZ;
                 var matrix = Matrix4x4.TRS(Vector3.zero, _playerTransform.rotation, Vector3.one);
                 pos = matrix.MultiplyPoint3x4(pos);
                 //  整列前の座標を保存しておく
