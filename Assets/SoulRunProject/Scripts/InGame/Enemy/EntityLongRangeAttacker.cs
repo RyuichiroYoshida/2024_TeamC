@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using SoulRunProject.Audio;
 using SoulRunProject.Common;
 using SoulRunProject.Runtime;
 using UniRx;
@@ -54,6 +55,7 @@ namespace SoulRunProject.InGame
                 await UniTask.WaitForSeconds(_interval, delayTiming: PlayerLoopTiming.Update, cancellationToken: token);
                 StopMove(token).Forget();
                 await PlayAnimation(token);
+                CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_HowkAttack");
                 var bullet = (EnemyBullet)_bulletPool.Rent();
                 bullet.transform.position = myTransform.position + Vector3.back;
                 bullet.InitializeHoming(_isHoming, _homingTime);
