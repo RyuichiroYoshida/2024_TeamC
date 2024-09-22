@@ -67,7 +67,7 @@ MonoBehaviour:
       type: {class: LaserSkillParameter, ns: SoulRunProject.Common, asm: Assembly-CSharp}
       data:
         _damageOverTime: 280
-        _amount: 3
+        _amount: 2
         _width: 70
         _height: 40
         _speed: 1.5
