@@ -2,7 +2,7 @@ using UnityEngine.EventSystems;
 
 namespace SoulRun.InGame
 {
-    public class InputUIButtonNormal : InputUIButtonBase
+    public class CustomButtonNormal : CustomButtonBase
     {
         public override void OnSubmit(BaseEventData eventData)
         {

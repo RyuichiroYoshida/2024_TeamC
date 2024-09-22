@@ -17,8 +17,8 @@ namespace SoulRunProject.InGame
     /// </summary>
     public class ResultView : MonoBehaviour
     {
-        [SerializeField, CustomLabel("リスタート")] private InputUIButton _restartButton;
-        [SerializeField, CustomLabel("終了")] private InputUIButton _exitButton;
+        [SerializeField, CustomLabel("リスタート")] private TweenButton _restartButton;
+        [SerializeField, CustomLabel("終了")] private TweenButton _exitButton;
         [SerializeField, CustomLabel("リザルトパネル")] private GameObject _resultPanel;
         [SerializeField, CustomLabel("スコア数値表示")] private Text _scoreText;
         [SerializeField, CustomLabel("スコア文字表示")] private Text _scoreTitleText;
@@ -30,8 +30,8 @@ namespace SoulRunProject.InGame
         [SerializeField, CustomLabel("ランク表示")] private Image _rankImage;
         [SerializeField] private float _duration;
         
-        public InputUIButton RestartButton => _restartButton;
-        public InputUIButton ExitButton => _exitButton;
+        public TweenButton RestartButton => _restartButton;
+        public TweenButton ExitButton => _exitButton;
 
         private void Start()
         {
@@ -55,7 +55,11 @@ namespace SoulRunProject.InGame
         /// <param name="coin"></param>
         public async void DisplayResult(int score, int coin, Sprite rankSprite)
         {
-            if(_rankImage) _rankImage.sprite = rankSprite;
+            if (_rankImage)
+            {
+                _rankImage.sprite = rankSprite;
+                _rankImage.enabled = false;
+            }
             var targetScore = score;
             var targetCoin = coin;
             var targetHighScore = PlayerPrefs.GetInt("HighScore", 0);
@@ -85,8 +89,8 @@ namespace SoulRunProject.InGame
             sequence.AppendCallback(() => _highScoreText.gameObject.SetActive(true));
             sequence.Append(DOTween.To(() => int.Parse(_highScoreText.text), x => _highScoreText.text = x.ToString(), targetScore > targetHighScore ? targetScore : targetHighScore, 1f));
             // ランク表示のイメージをアクティブにする
-            sequence.AppendCallback(() => _rankImage.gameObject.SetActive(true));
-            sequence.Play().SetUpdate(true).SetLink(this.gameObject).ToUniTask();
+            sequence.AppendCallback(() => _rankImage.enabled = true);
+            sequence.Play().SetUpdate(true).SetLink(gameObject).ToUniTask();
             await sequence;
             EventSystem.current.SetSelectedGameObject(_restartButton.gameObject);
             _restartButton.OnSelect(null);

@@ -508,9 +508,9 @@ GameObject:
   - component: {fileID: 1716627875378700502}
   - component: {fileID: 2215948539826912703}
   - component: {fileID: 2192809636195775988}
-  - component: {fileID: 5791632332491078042}
+  - component: {fileID: 6435170155505689928}
   m_Layer: 5
-  m_Name: Button (Legacy)_2
+  m_Name: ButtonRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -559,14 +559,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: fcd153304beaa4949a5ef4e1dfd1da1c, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -575,7 +575,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 5.5
 --- !u!225 &2192809636195775988
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -588,7 +588,7 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &5791632332491078042
+--- !u!114 &6435170155505689928
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -597,7 +597,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1340998038523257575}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70f75ebff9b6460890cd62d5c5857ddd, type: 3}
+  m_Script: {fileID: 11500000, guid: 28e8dc1f58a845bebb5f0fd6140b3f2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -628,8 +628,9 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
-  _scaleMultiplier: 1.1
+  m_TargetGraphic: {fileID: 2215948539826912703}
+  _outlineImage: {fileID: 2215948539826912703}
+  _fadeDuration: 0.25
 --- !u!1 &1625606652049358681
 GameObject:
   m_ObjectHideFlags: 0
@@ -1101,9 +1102,9 @@ GameObject:
   - component: {fileID: 2238148695803241639}
   - component: {fileID: 4907333874677663522}
   - component: {fileID: 273531514483789151}
-  - component: {fileID: 1819258835793321889}
+  - component: {fileID: 7216281958511722133}
   m_Layer: 5
-  m_Name: Button (Legacy)_1
+  m_Name: ButtonCenter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1152,14 +1153,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: fcd153304beaa4949a5ef4e1dfd1da1c, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1168,7 +1169,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 5.5
 --- !u!225 &273531514483789151
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1181,7 +1182,7 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &1819258835793321889
+--- !u!114 &7216281958511722133
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1190,7 +1191,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1890832260311235185}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70f75ebff9b6460890cd62d5c5857ddd, type: 3}
+  m_Script: {fileID: 11500000, guid: 28e8dc1f58a845bebb5f0fd6140b3f2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -1221,8 +1222,9 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
-  _scaleMultiplier: 1.1
+  m_TargetGraphic: {fileID: 4907333874677663522}
+  _outlineImage: {fileID: 4907333874677663522}
+  _fadeDuration: 0.25
 --- !u!1 &1968889868496182229
 GameObject:
   m_ObjectHideFlags: 0
@@ -2325,15 +2327,15 @@ MonoBehaviour:
   _levelUpPanel: {fileID: 5085733615648644919}
   _popupView: {fileID: 5918284295885211652}
   _upgradeButtons:
-  - _inputUIButton: {fileID: 8044805810187309156}
+  - _customButton: {fileID: 7795164196181985845}
     _nameAndLevelText: {fileID: 5095957716780356062}
     _explanatoryText: {fileID: 4352296004370908218}
     _buttonIconImage: {fileID: 335722970735009290}
-  - _inputUIButton: {fileID: 1819258835793321889}
+  - _customButton: {fileID: 7216281958511722133}
     _nameAndLevelText: {fileID: 2227240725725322841}
     _explanatoryText: {fileID: 2060397921973006070}
     _buttonIconImage: {fileID: 3989352811872846876}
-  - _inputUIButton: {fileID: 5791632332491078042}
+  - _customButton: {fileID: 6435170155505689928}
     _nameAndLevelText: {fileID: 3373564814604579902}
     _explanatoryText: {fileID: 4999993467269840507}
     _buttonIconImage: {fileID: 6894700504570086032}
@@ -4480,9 +4482,9 @@ GameObject:
   - component: {fileID: 3476950224591501844}
   - component: {fileID: 7234926654457078331}
   - component: {fileID: 3975870330864141427}
-  - component: {fileID: 8044805810187309156}
+  - component: {fileID: 7795164196181985845}
   m_Layer: 5
-  m_Name: Button (Legacy)
+  m_Name: ButtonLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4531,14 +4533,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: fcd153304beaa4949a5ef4e1dfd1da1c, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4547,7 +4549,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 5.5
 --- !u!225 &3975870330864141427
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -4560,7 +4562,7 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &8044805810187309156
+--- !u!114 &7795164196181985845
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4569,7 +4571,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7380590693445435490}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70f75ebff9b6460890cd62d5c5857ddd, type: 3}
+  m_Script: {fileID: 11500000, guid: 28e8dc1f58a845bebb5f0fd6140b3f2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -4600,8 +4602,9 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
-  _scaleMultiplier: 1.1
+  m_TargetGraphic: {fileID: 7234926654457078331}
+  _outlineImage: {fileID: 7234926654457078331}
+  _fadeDuration: 0.25
 --- !u!1 &7847075135659516113
 GameObject:
   m_ObjectHideFlags: 0

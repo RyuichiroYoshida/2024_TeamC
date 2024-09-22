@@ -31,8 +31,8 @@ namespace SoulRunProject.InGame
             }
             _levelUpPanel.SetActive(true);
             _popupView.OpenPopup();
-            EventSystem.current.SetSelectedGameObject(_upgradeButtons[0].InputUIButton.gameObject);
-            _upgradeButtons[0].InputUIButton.OnSelect(null);
+            EventSystem.current.SetSelectedGameObject(_upgradeButtons[0].CustomButton.gameObject);
+            _upgradeButtons[0].CustomButton.OnSelect(null);
         }
         
         public void CloseLevelUpPanel()
@@ -47,12 +47,12 @@ namespace SoulRunProject.InGame
         [Serializable]
         public class ButtonAndView
         {
-            [SerializeField] private InputUIButtonBase _inputUIButton;
+            [SerializeField] private CustomButtonBase _customButton;
             [SerializeField] private Text _nameAndLevelText;
             [SerializeField] private Text _explanatoryText;
             [SerializeField] private Image _buttonIconImage;
             
-            public InputUIButtonBase InputUIButton => _inputUIButton;
+            public CustomButtonBase CustomButton => _customButton;
             public Text NameAndLevelText => _nameAndLevelText;
             public Text ExplanatoryText => _explanatoryText;
             public Image ButtonIconImage => _buttonIconImage;
