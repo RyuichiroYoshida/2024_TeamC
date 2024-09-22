@@ -1,0 +1,157 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4697750920984891758
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5625830856605294101}
+  - component: {fileID: 3529860275796571966}
+  m_Layer: 0
+  m_Name: StageManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5625830856605294101
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4697750920984891758}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3529860275796571966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4697750920984891758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abe96d44621be7940878578ce97bf301, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stageData:
+  - _fieldPatterns:
+    - _mode: 0
+      _seconds: 0
+      _fieldSegments:
+        List:
+        - {fileID: 4382749047587651699, guid: 8e41c6cf49444ff4e8f064638217e023, type: 3}
+      _adjacentGraph: {fileID: 0}
+    - _mode: 0
+      _seconds: 10
+      _fieldSegments:
+        List:
+        - {fileID: 4382749047587651699, guid: 165c6878e1c762a40b18a2fa9dd8e1f6, type: 3}
+      _adjacentGraph: {fileID: 0}
+    - _mode: 0
+      _seconds: 10
+      _fieldSegments:
+        List:
+        - {fileID: 4382749047587651699, guid: 6caf25a0543a7b54fa85d5278809cd0b, type: 3}
+      _adjacentGraph: {fileID: 0}
+    - _mode: 0
+      _seconds: 10
+      _fieldSegments:
+        List:
+        - {fileID: 4382749047587651699, guid: 6caf25a0543a7b54fa85d5278809cd0b, type: 3}
+        - {fileID: 4382749047587651699, guid: 24cf2b6555ca60f4baa9ce7d8e92e9f6, type: 3}
+      _adjacentGraph: {fileID: 0}
+    - _mode: 0
+      _seconds: 10
+      _fieldSegments:
+        List:
+        - {fileID: 4382749047587651699, guid: 8a1b996b687d4174485787ef0de0a892, type: 3}
+      _adjacentGraph: {fileID: 0}
+    - _mode: 0
+      _seconds: 10
+      _fieldSegments:
+        List:
+        - {fileID: 4382749047587651699, guid: 7f82bcf8d0799a54384e7c9a6f040e9b, type: 3}
+      _adjacentGraph: {fileID: 0}
+    - _mode: 0
+      _seconds: 10
+      _fieldSegments:
+        List:
+        - {fileID: 4382749047587651699, guid: dc51ee40399f8ac47bf015422e23871a, type: 3}
+      _adjacentGraph: {fileID: 0}
+    - _mode: 0
+      _seconds: 10
+      _fieldSegments:
+        List:
+        - {fileID: 4382749047587651699, guid: 8918773a78100214d8d759f5bcbbde8c, type: 3}
+      _adjacentGraph: {fileID: 0}
+    - _mode: 0
+      _seconds: 10
+      _fieldSegments:
+        List:
+        - {fileID: 4382749047587651699, guid: ec725b2f8ee63db4ba15ba4932252d39, type: 3}
+      _adjacentGraph: {fileID: 0}
+    - _mode: 0
+      _seconds: 20
+      _fieldSegments:
+        List:
+        - {fileID: 4382749047587651699, guid: 65f7665402082ef4cbc0999118ed005c, type: 3}
+      _adjacentGraph: {fileID: 0}
+    - _mode: 0
+      _seconds: 10
+      _fieldSegments:
+        List:
+        - {fileID: 4382749047587651699, guid: 4e9f6abc0e25bf9448125572d46d4c63, type: 3}
+      _adjacentGraph: {fileID: 0}
+    - _mode: 0
+      _seconds: 10
+      _fieldSegments:
+        List:
+        - {fileID: 4382749047587651699, guid: cd3b9aad5edebc84786f6dd0e1bca669, type: 3}
+      _adjacentGraph: {fileID: 0}
+    - _mode: 0
+      _seconds: 10
+      _fieldSegments:
+        List:
+        - {fileID: 4382749047587651699, guid: 5fd2b2fe7b0f5f94d947df605d3d9b08, type: 3}
+      _adjacentGraph: {fileID: 0}
+    - _mode: 0
+      _seconds: 10
+      _fieldSegments:
+        List:
+        - {fileID: 4382749047587651699, guid: 5a5cc85aed9b6d347aff1a1d7d004528, type: 3}
+      _adjacentGraph: {fileID: 0}
+    - _mode: 0
+      _seconds: 10
+      _fieldSegments:
+        List:
+        - {fileID: 4382749047587651699, guid: aef64a554a6dec747ac42ea0dc15ffdd, type: 3}
+      _adjacentGraph: {fileID: 0}
+    - _mode: 0
+      _seconds: 10
+      _fieldSegments:
+        List:
+        - {fileID: 4382749047587651699, guid: ff7b9e991ae2d8c439d219265787a13a, type: 3}
+      _adjacentGraph: {fileID: 0}
+    - _mode: 0
+      _seconds: 10
+      _fieldSegments:
+        List:
+        - {fileID: 4382749047587651699, guid: e4103ecf79f08994886d58b60aa6d69b, type: 3}
+      _adjacentGraph: {fileID: 0}
+    _bossStageField: {fileID: 4382749047587651699, guid: ef4e6dd9e89f20544922b5cb4c210105,
+      type: 3}
+    _delayBossSpawn: 12
+    _bossPrefab: {fileID: 493474759675345639, guid: 530e7ae0b388e9442b9a09368336f357,
+      type: 3}
+  _fieldMover: {fileID: 0}
