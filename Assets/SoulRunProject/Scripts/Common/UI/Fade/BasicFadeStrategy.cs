@@ -29,11 +29,7 @@ namespace HikanyanLaboratory.Fade
 
             // フェードアウト中にRangeを更新しながらアルファをフェード
             await DOTween.To(() => _cutoutRange, x => _cutoutRange = x, 1f, _fadeDuration)
-                .OnUpdate(() =>
-                {
-                    material.SetFloat(Range1, 1 - _cutoutRange);
-                    // Debug.Log($"CutoutRange{_cutoutRange}");
-                })
+                .OnUpdate(() => material.SetFloat(Range1, 1 - _cutoutRange))
                 .SetEase(_ease)
                 .SetUpdate(true); // DeltaTimeの影響を受けない
         }
@@ -53,6 +49,7 @@ namespace HikanyanLaboratory.Fade
             await DOTween.To(() => _cutoutRange, x => _cutoutRange = x, 0f, _fadeDuration)
                 .OnUpdate(() => material.SetFloat(Range1, 1 - _cutoutRange))
                 .SetEase(_ease)
+                .SetUpdate(true)
                 .ToUniTask();
         }
     }
