@@ -1,7 +1,6 @@
 using System.Threading;
 using Cinemachine;
 using Cysharp.Threading.Tasks;
-using DG.Tweening;
 using UnityEngine;
 
 namespace SoulRunProject
@@ -12,16 +11,7 @@ namespace SoulRunProject
     public class PlayerCamera : MonoBehaviour
     {
         [SerializeField] private CinemachineImpulseSource _impulseSource;
-
-        private void Awake()
-        {
-
-        }
-
-        private void Update()
-        {
-
-        }
+        [SerializeField] private float _impulseMagnitude;
 
         public async UniTask DoStartIngameMove(CancellationToken cts)
         {
@@ -30,7 +20,7 @@ namespace SoulRunProject
 
         public void DamageCam()
         {
-            _impulseSource.GenerateImpulse(Vector3.one);
+            _impulseSource.GenerateImpulse(Vector3.one * _impulseMagnitude);
         }
         
         public void StartFollowPlayer()
