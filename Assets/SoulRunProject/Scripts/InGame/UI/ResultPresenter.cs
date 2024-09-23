@@ -31,12 +31,12 @@ namespace SoulRunProject.InGame
                 CriAudioManager.Instance.Play(CriAudioType.CueSheet_ME, _playerManager.CurrentHp.Value > 0 ?
                     "ME_Stage_Clear" : "ME_GameOver");
             };
-            _resultView.RestartButton.OnClick.Subscribe(_ =>
-            {
-                DebugClass.Instance.ShowLog("リスタートボタンが押されました。");
-                _resultView.SetResultPanelVisibility(false);
-                _resultState.RetryStage();
-            });
+            // _resultView.RestartButton.OnClick.Subscribe(_ =>
+            // {
+            //     DebugClass.Instance.ShowLog("リスタートボタンが押されました。");
+            //     _resultView.SetResultPanelVisibility(false);
+            //     _resultState.RetryStage();
+            // });
             _resultView.ExitButton.OnClick.Subscribe(_ =>
             {
                 _resultView.SetResultPanelVisibility(false);
