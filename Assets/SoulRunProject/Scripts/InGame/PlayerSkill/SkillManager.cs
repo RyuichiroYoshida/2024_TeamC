@@ -19,7 +19,8 @@ namespace SoulRunProject.InGame
         /// 現在所持しているスキル名リスト
         /// </summary>
         public List<PlayerSkill> CurrentSkillTypes => _createdSkillList.Select(x => x.SkillType).ToList();
-        public event Action<AbstractSkillData> OnAddSkill;
+        // スキルが追加またはレベルアップしたとき
+        public event Action<AbstractSkillData> OnUpdateSkill;
         public bool CanGetNewSkill => _increaseSkillLevels.Count(level => level <= _playerLevelManager.OnLevelUp.Value) 
             + _initialNumberOfPossessions > _createdSkillList.Count;
         
@@ -69,7 +70,7 @@ namespace SoulRunProject.InGame
                 {
                     _createdSkillList.Add(createdSkill);
                     createdSkill.StartSkill();
-                    OnAddSkill?.Invoke(skill);
+                    OnUpdateSkill?.Invoke(skill);
                 }
             }
             else
@@ -88,6 +89,7 @@ namespace SoulRunProject.InGame
             if (skill != null)
             {
                 skill.LevelUp();
+                OnUpdateSkill?.Invoke(_skillData.FirstOrDefault(x => x.SkillType == skillType));
             }
             else
             {
