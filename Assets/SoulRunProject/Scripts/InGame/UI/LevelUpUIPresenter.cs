@@ -120,7 +120,7 @@ namespace SoulRunProject.InGame
                 .Subscribe(_ =>
                 {
                     selectedStatusUpItems[0].ItemEffect();
-                    _commonView.SetPassiveItemIcon(selectedStatusUpItems[0].ItemIcon);
+                    _commonView.SetPassiveItemIcon(selectedStatusUpItems[0]);
                     _levelUpState.EndSelectSkill();
                 }).AddTo(_disposableOnUpdateUI);
             _levelUpView.UpgradeButtons[1].NameAndLevelText.text = selectedStatusUpItems[0].ItemName;
@@ -130,7 +130,7 @@ namespace SoulRunProject.InGame
                 .Subscribe(_ =>
                 {
                     selectedStatusUpItems[1].ItemEffect();
-                    _commonView.SetPassiveItemIcon(selectedStatusUpItems[1].ItemIcon);
+                    _commonView.SetPassiveItemIcon(selectedStatusUpItems[1]);
                     _levelUpState.EndSelectSkill();
                 }).AddTo(_disposableOnUpdateUI);
             _levelUpView.UpgradeButtons[2].NameAndLevelText.text = selectedStatusUpItems[1].ItemName;
