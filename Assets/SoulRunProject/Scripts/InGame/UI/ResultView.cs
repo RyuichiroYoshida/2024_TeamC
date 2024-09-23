@@ -53,7 +53,7 @@ namespace SoulRunProject.InGame
         /// </summary>
         /// <param name="score"></param>
         /// <param name="coin"></param>
-        public async void DisplayResult(int score, int coin, Sprite rankSprite)
+        public async UniTaskVoid DisplayResult(int score, int coin, Sprite rankSprite)
         {
             if (_rankImage)
             {
@@ -94,9 +94,9 @@ namespace SoulRunProject.InGame
             await sequence;
             EventSystem.current.SetSelectedGameObject(_restartButton.gameObject);
             _restartButton.OnSelect(null);
-            var ctSource = new CancellationTokenSource();
+            var ctSource = CancellationTokenSource.CreateLinkedTokenSource(destroyCancellationToken);
             // exitボタン、または時間でシーン遷移
-            await UniTask.WhenAny(UniTask.WaitForSeconds(_duration, ignoreTimeScale: true, cancellationToken:ctSource.Token), _exitButton.OnClick.First().ToUniTask(cancellationToken: ctSource.Token));
+            await UniTask.WhenAny(UniTask.WaitForSeconds(_duration, ignoreTimeScale: true, cancellationToken: ctSource.Token), _exitButton.OnClick.First().ToUniTask(cancellationToken: ctSource.Token));
             ctSource.Cancel();
             await SceneManager.Instance.LoadSceneWithFade("ThankYouForPlaying");
         }
