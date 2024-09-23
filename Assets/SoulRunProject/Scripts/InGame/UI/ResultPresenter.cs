@@ -27,7 +27,7 @@ namespace SoulRunProject.InGame
             {
                 _resultView.SetResultPanelVisibility(true);
                 var score = ScoreManager.Instance.OnScoreChanged.Value;
-                _resultView.DisplayResult(score, _playerManager.ResourceContainer.Coin, _scoreData.GetSprite(score));
+                _resultView.DisplayResult(score, _playerManager.ResourceContainer.Coin, _scoreData.GetSprite(score)).Forget();
                 CriAudioManager.Instance.Play(CriAudioType.CueSheet_ME, _playerManager.CurrentHp.Value > 0 ?
                     "ME_Stage_Clear" : "ME_GameOver");
             };
