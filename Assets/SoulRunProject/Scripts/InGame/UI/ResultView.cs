@@ -73,6 +73,8 @@ namespace SoulRunProject.InGame
             _highScoreText.gameObject.SetActive(false);
             _highScoreTitleText.gameObject.SetActive(false);
 
+            _rankImage.transform.localScale = new Vector3(0, 0, 0); 
+            
             _popupView.gameObject.SetActive(true);
             await _popupView.OpenResultPopUp();
             var sequence = DOTween.Sequence();
@@ -89,6 +91,19 @@ namespace SoulRunProject.InGame
             sequence.AppendCallback(() => _highScoreText.gameObject.SetActive(true));
             sequence.Append(DOTween.To(() => int.Parse(_highScoreText.text), x => _highScoreText.text = x.ToString(), targetScore > targetHighScore ? targetScore : targetHighScore, 1f));
             // ランク表示のイメージをアクティブにする
+            
+            
+            sequence.AppendCallback(() =>
+            {
+                _rankImage.enabled = true;
+                _rankImage.transform.localScale = new Vector3(20, 20, 0);
+                _rankImage.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            });
+            // スケールダウンアニメーション
+            sequence.Append(_rankImage.transform.DOScale(1f, 1f).SetEase(Ease.OutSine)); // スケールダウン
+            sequence.Join(_rankImage.transform.DORotate(new Vector3(0, 0, 1440), 1f, RotateMode.FastBeyond360).SetEase(Ease.OutSine)); // 回転
+
+            
             sequence.AppendCallback(() => _rankImage.enabled = true);
             sequence.Play().SetUpdate(true).SetLink(gameObject).ToUniTask();
             await sequence;
