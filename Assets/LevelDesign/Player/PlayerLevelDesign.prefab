@@ -65,6 +65,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _impulseSource: {fileID: 3230847165229253650}
+  _impulseMagnitude: 0.2
 --- !u!114 &3230847165229253650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,7 +80,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ImpulseDefinition:
     m_ImpulseChannel: 1
-    m_ImpulseShape: 1
+    m_ImpulseShape: 3
     m_CustomImpulseShape:
       serializedVersion: 2
       m_Curve: []
@@ -117,7 +118,7 @@ MonoBehaviour:
     m_DissipationMode: 2
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
-  m_DefaultVelocity: {x: 0, y: -1, z: 0}
+  m_DefaultVelocity: {x: 0, y: 0, z: 0}
 --- !u!1 &392928014464894764
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,7 +233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _initialLevel: 1
-  _expToNextLevel: 070000000c00000011000000160000001c0000002200000028000000340000003a0000004000000046000000500000005a000000640000007800000096000000aa000000be000000d2000000e6000000fa0000000e01000022010000360100004a010000
+  _expToNextLevel: 070000000c00000011000000160000001c0000002200000028000000340000003a00000040000000460000005a0000006e0000008200000096000000aa000000c8000000fa0000002c0100005e01000090010000c2010000f401000058020000bc020000
 --- !u!114 &3932238436133655523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,7 +263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _currentSoulSkill: {fileID: 7575172253712227642}
   _initialSoul: 0
-  _regenerativePerSec: 100
+  _regenerativePerSec: 0.5
 --- !u!114 &7575172253712227642
 MonoBehaviour:
   m_ObjectHideFlags: 0
