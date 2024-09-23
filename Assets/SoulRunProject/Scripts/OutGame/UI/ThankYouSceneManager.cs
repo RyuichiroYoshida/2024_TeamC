@@ -34,9 +34,8 @@ namespace SoulRunProject
             ObservePlayerInput();
             CriAudioManager.Instance.Play(CriAudioType.CueSheet_BGM, _bgmName);
             CriAudioManager.Instance.Play(CriAudioType.CueSheet_VOICE, _voiceName);
+            _fadePanel.alpha = 0;
             ShowNextMessage(_delayTime);
-            _fadePanel.DOFade(0, 1.0f).SetEase(Ease.Linear);
-
             if (_duration >= 0)
             {
                 Observable.Timer(System.TimeSpan.FromSeconds(_duration))
