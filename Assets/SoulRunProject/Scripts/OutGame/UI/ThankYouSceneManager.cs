@@ -2,7 +2,6 @@ using Cysharp.Threading.Tasks;
 using HikanyanLaboratory.SceneManagement;
 using SoulRunProject.Audio;
 using SoulRunProject.Common;
-using SoulRunProject.InGame;
 using UniRx;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -28,7 +27,7 @@ namespace SoulRunProject
 
         private void Start()
         {
-            _titleButton.onClick.AddListener(ToTitle);
+            _titleButton.onClick.AddListener(()=> ToTitle(default));
             _input = new SoulRunInput();
             _input.Enable();
             ObservePlayerInput();
@@ -40,13 +39,13 @@ namespace SoulRunProject
             {
                 Observable.Timer(System.TimeSpan.FromSeconds(_duration))
                     .TakeUntilDestroy(this) // このコンポーネントが破棄されたらタイマーも停止
-                    .Subscribe(_ => ToTitle());
+                    .Subscribe(_ => ToTitle(default));
             }
         }
 
-        void ToTitle()
-        {
-            _ = SceneManager.Instance.LoadSceneWithFade("Title");
+        void ToTitle(InputAction.CallbackContext context)
+        { 
+            SceneManager.Instance.LoadSceneWithFade("Title").Forget();
         }
 
         async void ShowNextMessage(float value)
@@ -60,16 +59,17 @@ namespace SoulRunProject
         private void ObservePlayerInput()
         {
             // Submitアクションでタイトルに戻る
-            _input.UI.Submit.performed += context => ToTitle();
-
+            _input.UI.Submit.performed += ToTitle;
             // 任意のキー入力でもタイトルに戻る
-            _input.Player.Menu.performed += context => ToTitle();
+            _input.Player.Menu.performed += ToTitle;
         }
 
 
         private void OnDestroy()
         {
             _input.Disable();
+            _input.UI.Submit.performed -= ToTitle;
+            _input.Player.Menu.performed -= ToTitle;
         }
     }
 }
