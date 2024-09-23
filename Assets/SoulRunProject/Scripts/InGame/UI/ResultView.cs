@@ -17,7 +17,7 @@ namespace SoulRunProject.InGame
     /// </summary>
     public class ResultView : MonoBehaviour
     {
-        [SerializeField, CustomLabel("リスタート")] private TweenButton _restartButton;
+        //[SerializeField, CustomLabel("リスタート")] private TweenButton _restartButton;
         [SerializeField, CustomLabel("終了")] private TweenButton _exitButton;
         [SerializeField, CustomLabel("リザルトパネル")] private GameObject _resultPanel;
         [SerializeField, CustomLabel("スコア数値表示")] private Text _scoreText;
@@ -30,13 +30,13 @@ namespace SoulRunProject.InGame
         [SerializeField, CustomLabel("ランク表示")] private Image _rankImage;
         [SerializeField] private float _duration;
         
-        public TweenButton RestartButton => _restartButton;
+        // public TweenButton RestartButton => _restartButton;
         public TweenButton ExitButton => _exitButton;
 
-        private void Start()
-        {
-            _restartButton.OnClick.Subscribe(_ => DebugClass.Instance.ShowLog("リスタートボタンが押されました。"));
-        }
+        // private void Start()
+        // {
+        //     _restartButton.OnClick.Subscribe(_ => DebugClass.Instance.ShowLog("リスタートボタンが押されました。"));
+        // }
         
         /// <summary>
         /// リザルト画面の表示非表示を設定する
@@ -108,8 +108,8 @@ namespace SoulRunProject.InGame
             sequence.AppendCallback(() => _rankImage.enabled = true);
             sequence.Play().SetUpdate(true).SetLink(gameObject).ToUniTask();
             await sequence;
-            EventSystem.current.SetSelectedGameObject(_restartButton.gameObject);
-            _restartButton.OnSelect(null);
+            // EventSystem.current.SetSelectedGameObject(_restartButton.gameObject);
+            // _restartButton.OnSelect(null);
             var ctSource = CancellationTokenSource.CreateLinkedTokenSource(destroyCancellationToken);
             // exitボタン、または時間でシーン遷移
             await UniTask.WhenAny(UniTask.WaitForSeconds(_duration, ignoreTimeScale: true, cancellationToken: ctSource.Token), _exitButton.OnClick.First().ToUniTask(cancellationToken: ctSource.Token));
