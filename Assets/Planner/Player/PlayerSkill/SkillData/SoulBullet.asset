@@ -53,6 +53,11 @@ MonoBehaviour:
         _reduceCoolTime: 20
         _addAmountCount: 0
         _multipleProjectionSpeed: 0
+    - List:
+      - _levelUpType: 1
+        _reduceCoolTime: 20
+        _addAmountCount: 20
+        _multipleProjectionSpeed: 0
   _bullet: {fileID: 2092183155354231575, guid: 93ebba11e021a9d4b92b90f0aeb5ef5b, type: 3}
   _baseRotateY: 20
   _muzzleOffset: {x: 0, y: 1.7, z: 2}

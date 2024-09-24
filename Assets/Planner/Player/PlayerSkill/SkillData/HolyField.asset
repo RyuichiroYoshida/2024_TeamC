@@ -46,6 +46,10 @@ MonoBehaviour:
       - _levelUpType: 0
         _increaseDamage: 100
         _increaseRange: 1
+    - List:
+      - _levelUpType: 0
+        _increaseDamage: 50
+        _increaseRange: 1
   _original: {fileID: 158674725360675817, guid: 75a84e6cba64bf448a7f1dd12ad33ca1,
     type: 3}
   _groundHeight: 0.05
