@@ -108,8 +108,8 @@ namespace SoulRunProject.InGame
             sequence.AppendCallback(() => _rankImage.enabled = true);
             sequence.Play().SetUpdate(true).SetLink(gameObject).ToUniTask();
             await sequence;
-            // EventSystem.current.SetSelectedGameObject(_restartButton.gameObject);
-            // _restartButton.OnSelect(null);
+            EventSystem.current.SetSelectedGameObject(_exitButton.gameObject);
+            _exitButton.OnSelect(null);
             var ctSource = CancellationTokenSource.CreateLinkedTokenSource(destroyCancellationToken);
             // exitボタン、または時間でシーン遷移
             await UniTask.WhenAny(UniTask.WaitForSeconds(_duration, ignoreTimeScale: true, cancellationToken: ctSource.Token), _exitButton.OnClick.First().ToUniTask(cancellationToken: ctSource.Token));
