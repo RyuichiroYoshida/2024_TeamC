@@ -73,7 +73,7 @@ MonoBehaviour:
         _size: 5
         _speed: 60
         _penetration: 1
-        _lifeTime: 3
+        _lifeTime: 1.5
         _knockBack:
           _power: 0.1
         _getSoulValueOnHit: 1
