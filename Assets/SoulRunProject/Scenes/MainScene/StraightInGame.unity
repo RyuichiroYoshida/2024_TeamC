@@ -572,27 +572,27 @@ PrefabInstance:
     - target: {fileID: 3698741979491483856, guid: e711c3a71f9df6b459a265a7a8d925ee,
         type: 3}
       propertyPath: _expToNextLevel.Array.data[18]
-      value: 300
+      value: 280
       objectReference: {fileID: 0}
     - target: {fileID: 3698741979491483856, guid: e711c3a71f9df6b459a265a7a8d925ee,
         type: 3}
       propertyPath: _expToNextLevel.Array.data[19]
-      value: 350
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 3698741979491483856, guid: e711c3a71f9df6b459a265a7a8d925ee,
         type: 3}
       propertyPath: _expToNextLevel.Array.data[20]
-      value: 400
+      value: 330
       objectReference: {fileID: 0}
     - target: {fileID: 3698741979491483856, guid: e711c3a71f9df6b459a265a7a8d925ee,
         type: 3}
       propertyPath: _expToNextLevel.Array.data[21]
-      value: 450
+      value: 360
       objectReference: {fileID: 0}
     - target: {fileID: 3698741979491483856, guid: e711c3a71f9df6b459a265a7a8d925ee,
         type: 3}
       propertyPath: _expToNextLevel.Array.data[22]
-      value: 500
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 3698741979491483856, guid: e711c3a71f9df6b459a265a7a8d925ee,
         type: 3}
@@ -603,6 +603,16 @@ PrefabInstance:
         type: 3}
       propertyPath: _expToNextLevel.Array.data[24]
       value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 3932238436133655523, guid: e711c3a71f9df6b459a265a7a8d925ee,
+        type: 3}
+      propertyPath: _increaseSkillLevels.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3932238436133655523, guid: e711c3a71f9df6b459a265a7a8d925ee,
+        type: 3}
+      propertyPath: _increaseSkillLevels.Array.data[3]
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 7117807622772118339, guid: e711c3a71f9df6b459a265a7a8d925ee,
         type: 3}
