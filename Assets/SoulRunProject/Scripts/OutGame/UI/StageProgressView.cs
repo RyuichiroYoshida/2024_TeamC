@@ -1,10 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using SoulRunProject.InGame;
-using UniRx;
-using UniRx.Triggers;
-using UnityEditor.Build;
 using UnityEngine;
 using UnityEngine.UI;
 
