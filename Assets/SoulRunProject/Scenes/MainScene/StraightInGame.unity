@@ -531,6 +531,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3698741979491483856, guid: e711c3a71f9df6b459a265a7a8d925ee,
         type: 3}
+      propertyPath: _expToNextLevel.Array.size
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 3698741979491483856, guid: e711c3a71f9df6b459a265a7a8d925ee,
+        type: 3}
       propertyPath: _expToNextLevel.Array.data[11]
       value: 90
       objectReference: {fileID: 0}
