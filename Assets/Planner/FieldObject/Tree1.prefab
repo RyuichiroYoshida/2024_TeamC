@@ -56,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 740c135164158644189b2a3a93b52708, type: 2}
+  - {fileID: 2100000, guid: d0581f557e47c534d97a1d2644be855f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 063f7450638bbb1409364195636eb706, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f3ba9a1b318f9eb42a3b344f31a0fdab, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -130,6 +130,7 @@ MonoBehaviour:
     _knockBackTime: 0.5
   _lootTable: {fileID: 0}
   _hitDamageEffectManager: {fileID: 0}
+  _useHitSe: 0
 --- !u!114 &3464868641710493916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,7 +171,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.91560495, y: -4.7058825, z: -1.4232}
-  m_LocalScale: {x: 0.2, y: 0.24, z: 0.22218}
+  m_LocalScale: {x: 0.1022909, y: 0.172116, z: 0.15933637}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4411371263152241223}
@@ -195,7 +196,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 740c135164158644189b2a3a93b52708, type: 2}
+  - {fileID: 2100000, guid: 10bb099e5ce5902478d0af67fba9ccc6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -216,7 +217,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b8da2119e4515f34194f6504a17c992c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 33a15e50a32e0f241ad8c9937be48b24, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -17,19 +17,19 @@ namespace SoulRunProject.Common
         [SerializeField] private SoulSkillManager _soulSkillManager;
         [SerializeField] private SkillManager _skillManager;
         [SerializeField] private LevelUpItemData _levelUpItemData;
-        [SerializeField] private PlayerInput _playerInput;
         [SerializeField] private ResultView _resultView;
         [SerializeField] private CommonView _commonView;
         [SerializeField] private StageNameView _stageNameView;
         [SerializeField] private LevelUpView _levelUpView;
         [SerializeField] private PauseView _pauseView;
+        [SerializeField] private ScoreData _scoreData;
         protected override void Configure(IContainerBuilder builder)
         {
             //ドメイン層
             builder.RegisterInstance(_camera);
             builder.RegisterInstance(_stageManager);
             builder.RegisterInstance(_playerManager);
-            builder.RegisterInstance(_playerInput);
+            builder.RegisterInstance(PlayerInputManager.Instance);
             builder.RegisterInstance(gameObject);
             builder.RegisterInstance(_stageNameView);
             
@@ -48,6 +48,7 @@ namespace SoulRunProject.Common
             builder.RegisterInstance(_skillManager);
             builder.RegisterInstance(_soulSkillManager);
             builder.RegisterInstance(_levelUpItemData);
+            builder.RegisterInstance(_scoreData);
             
             //プレゼンテーション層
             builder.RegisterComponent(_resultView);

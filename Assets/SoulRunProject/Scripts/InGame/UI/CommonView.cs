@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using SoulRunProject.Common;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,12 +15,10 @@ namespace SoulRunProject.InGame
         [SerializeField] private Image _soulGauge;
         [SerializeField] private Text _levelText;
         [SerializeField] private Text _levelStackText;
-        [SerializeField] private List<Image> _skillIcons;
-        [SerializeField] private List<Image> _passiveItemIcons;
+        [SerializeField] private ItemIcon[] _skillIcons;
+        [SerializeField] private ItemIcon[] _passiveItemIcons;
         [SerializeField] private Text _scoreText;
         [SerializeField] private Text _coinText;
-        
-        private int _passiveItemIndex;
 
         public void SetHpGauge(float value, float maxValue)
         {
@@ -41,23 +39,31 @@ namespace SoulRunProject.InGame
         {
             _levelText.text = $"{level}";
         }
-
-        public void SetLevelStackText(int stack)
-        {
-            if (_levelStackText) _levelStackText.text = stack == 0 ? "" : $"{stack}"; // スタックが無ければ表示しない
-        }
         
-        public void SetSkillIcon(Sprite sprite, int index)
+        public void SetSkillIcon(AbstractSkillData getSkillData)
         {
-            _skillIcons[index].sprite = sprite;
+            foreach (var itemIcon in _skillIcons)
+            {
+                // 前から空白か同じアイテムならそこの表示を更新する
+                if (itemIcon.ItemName == "" || itemIcon.ItemName == getSkillData.SkillName)
+                {
+                    itemIcon.GetItem(getSkillData.SkillName, getSkillData.SkillIcon);
+                    return;
+                }
+            }
         }
 
-        public void SetPassiveItemIcon(Sprite sprite)
+        public void SetPassiveItemIcon(StatusUpItem item)
         {
-            // 5つ以上のアイコン表示なし todo パッシブアイテム制限
-            if (_passiveItemIcons.Count <= _passiveItemIndex) return;
-            _passiveItemIcons[_passiveItemIndex].sprite = sprite;
-            _passiveItemIndex++;
+            foreach (var itemIcon in _passiveItemIcons)
+            {
+                // 前から空白か同じアイテムならそこの表示を更新する
+                if (itemIcon.ItemName == "" || itemIcon.ItemName == item.ItemName)
+                {
+                    itemIcon.GetItem(item.ItemName, item.ItemIcon);
+                    return;
+                }
+            }
         }
         
         public void SetScoreText(int score)

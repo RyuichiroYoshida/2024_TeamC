@@ -6,7 +6,7 @@ namespace SoulRunProject.Audio
         CueSheet_BGM,
         CueSheet_ME,
         CueSheet_SE,
-        CueSheet_Voice,
+        CueSheet_VOICE,
         Other
     }
 }

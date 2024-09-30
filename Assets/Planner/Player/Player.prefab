@@ -129,7 +129,6 @@ GameObject:
   - component: {fileID: 7117807622772118339}
   - component: {fileID: 9091037442287400240}
   - component: {fileID: 6519210490737000228}
-  - component: {fileID: 8752523051839283500}
   - component: {fileID: 3698741979491483856}
   - component: {fileID: 3932238436133655523}
   - component: {fileID: 2245462467506778556}
@@ -174,14 +173,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _useGodMode: 0
-  _playerInput: {fileID: 8752523051839283500}
+  _playerInputManager: {fileID: 0}
   _baseStatus: {fileID: 11400000, guid: d50a16b38666d804883e3040b335a638, type: 2}
   _playerCamera: {fileID: 6635071162787831542}
   _hitDamageEffectManager: {fileID: 5236282758698190153}
   _decreaseSpeed: 40
   _deadAnimationTime: 0
+  _playerCenterOffset: {x: 0, y: 0.5, z: 0}
   CurrentPlayerStatus:
-    _hp: 235
+    _hp: 22
     _attackValue: 10
     _defenceValue: 1
     _coolTimeReductionRate: 1.06
@@ -219,18 +219,6 @@ MonoBehaviour:
   _distanceBetweenPivotAndGroundPoint: 1.5
   _xMoveRangeMin: -100
   _xMoveRangeMax: 100
---- !u!114 &8752523051839283500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 392928014464894764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67af9876f0281cf40b526c49962e4dae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3698741979491483856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,7 +232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _initialLevel: 1
-  _expToNextLevel: 05000000080000000a0000000f0000001200000014000000190000001c0000001e000000
+  _expToNextLevel: 01000000080000000a0000000f0000001200000014000000190000001c0000001e00000023000000260000002d000000300000003200000034000000370000003a0000003c000000
 --- !u!114 &3932238436133655523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -651,7 +639,7 @@ Transform:
   m_GameObject: {fileID: 8307241417933691593}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.000000014901159, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.33, z: 0}
   m_LocalScale: {x: 0.20381865, y: 0.20381865, z: 0.20381865}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -710,6 +698,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _duration: 0.1
   _loopCount: 3
+  _hitEffect: {fileID: 0}
+  _dissolveFadeTime: 1
 --- !u!212 &4722900643216877938
 SpriteRenderer:
   m_ObjectHideFlags: 0

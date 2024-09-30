@@ -24,18 +24,19 @@ namespace SoulRunProject
         private void OnEnable()
         {
             _sequence?.Kill();
-            _soulSkillManager = FindAnyObjectByType<SoulSkillManager>();
-            _soulSkillManager.CurrentSoul.Where(currentSoul => currentSoul >= _soulSkillManager.RequiredSoul)
-                .Subscribe(_ => SoulGaugeEffect()).AddTo(this);
-            _soulSkillManager.CurrentSoul.Where(currentSoul => currentSoul < _soulSkillManager.RequiredSoul)
-                .Subscribe(_ => _material.color = _initialColor).AddTo(this);
             _material = _image.material;
-            _initialColor = _material.GetColor(_baseColorParameterID);
 
             if (!_material.HasColor(_baseColorParameterID)) // パラメータ名が存在しているか
             {
                 _baseColorParameterID = Shader.PropertyToID("_BaseColor");
             }
+
+            _initialColor = _material.GetColor(_baseColorParameterID);
+            _soulSkillManager = FindAnyObjectByType<SoulSkillManager>();
+            _soulSkillManager.CurrentSoul.Where(currentSoul => currentSoul >= _soulSkillManager.RequiredSoul)
+                .Subscribe(_ => SoulGaugeEffect()).AddTo(this);
+            _soulSkillManager.CurrentSoul.Where(currentSoul => currentSoul < _soulSkillManager.RequiredSoul)
+                .Subscribe(_ => _material.color = _initialColor).AddTo(this);
         }
 
         private void OnDisable()

@@ -1,12 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using SoulRunProject.Audio;
-using SoulRunProject.Common;
+using SoulRunProject.InGame;
 using SoulRunProject.Title;
 using UniRx;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace SoulRunProject
 {
@@ -14,14 +10,65 @@ namespace SoulRunProject
     {
         [SerializeField] private TitleModel _titleModel;
         [SerializeField] private TitleView _titleView;
+        private SoulRunInput _input;
 
         private void Start()
         {
-            CriAudioManager.Instance.Play(CriAudioType.CueSheet_BGM, "BGM_Title", true);
-            _titleView.StartButton.OnClick.Subscribe(_ => _titleModel.StartGame());
-            _titleView.OptionButton.OnClick.Subscribe(_ => _titleModel.Option(_titleView.OptionPanel));
-            _titleView.ExitButton.OnClick.Subscribe(_ => _titleModel.Exit());
-            _titleView.ReturnButton.OnClick.Subscribe(_ => _titleModel.Return(_titleView.OptionPanel));
+            _input = new SoulRunInput();
+            _input.Enable();
+
+            _titleView.StartButton.OnClick.Subscribe(_ => _titleModel.StartGame()).AddTo(this);
+            _titleView.OptionButton.OnClick
+                .Subscribe(_ => _titleModel.OpenOption(_titleView.OptionPanel, _titleView.BasePanel)).AddTo(this);
+            _titleView.OptionCloseButton.OnClick
+                .Subscribe(_ => _titleModel.CloseOption(_titleView.OptionPanel, _titleView.BasePanel)).AddTo(this);
+            _titleView.ExitButton.OnClick.Subscribe(_ => _titleModel.Exit()).AddTo(this);
+
+
+            _titleModel.CloseOption(_titleView.OptionPanel, _titleView.BasePanel);
+
+            _input.Player.Move.performed += _ => { _titleModel.ResetCountDown(); };
+            _input.Player.Jump.performed += _ => { _titleModel.ResetCountDown(); };
+            _input.UI.Submit.performed   += _ => { _titleModel.ResetCountDown(); };
+            _input.UI.Navigate.performed += _ => { _titleModel.ResetCountDown(); };
+
+
+            _titleModel.OnDemoMoviePlay.Subscribe(_ => { PlayDemoMovie(); }).AddTo(this);
+
+            _titleModel.IsDemoMoviePlaying
+                .Subscribe(isPlaying =>
+                {
+                    if (!isPlaying)
+                    {
+                        // Videoが終了したらカウントダウンを再スタートする
+                        StopDemoMovie();
+                        _titleModel.ResetCountDown();
+                    }
+                    else
+                    {
+                        PlayDemoMovie();
+                    }
+                }).AddTo(this);
+        }
+
+        private void PlayDemoMovie()
+        {
+            _titleView.VideoPlayer.Play();
+            _titleModel.IsDemoMoviePlaying.Value = true;
+            _titleModel.OpenMovie(_titleView.VideoPanel);
+        }
+
+        private void StopDemoMovie()
+        {
+            _titleView.VideoPlayer.Stop();
+            _titleModel.IsDemoMoviePlaying.Value = false;
+            _titleModel.CloseMovie(_titleView.VideoPanel);
+        }
+
+        private void OnDestroy()
+        {
+            // InputSystemを無効化してリソースを解放
+            _input.Disable();
         }
     }
 }

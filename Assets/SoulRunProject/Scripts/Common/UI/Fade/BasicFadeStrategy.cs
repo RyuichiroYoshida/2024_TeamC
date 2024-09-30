@@ -10,35 +10,46 @@ namespace HikanyanLaboratory.Fade
     {
         [SerializeField] private Texture _maskTexture;
         [SerializeField] private float _fadeDuration = 1.0f;
-        [SerializeField, Range(0, 1)] private float _cutoutRange = 0f;
         [SerializeField] private Ease _ease = Ease.Linear;
 
         private static readonly int Range1 = Shader.PropertyToID("_Range");
         private static readonly int MaskTex = Shader.PropertyToID("_MaskTex");
+        private float _cutoutRange;
 
-        public async UniTask FadeOut(Material fadeMaterial)
+        /// <summary>
+        /// DOTweenのFadeを使用してフェードアウトします。
+        /// </summary>
+        public async UniTask FadeOut(Material material)
         {
+            // マスクテクスチャが設定されている場合、それをマテリアルに適用
             if (_maskTexture != null)
             {
-                fadeMaterial.SetTexture(MaskTex, _maskTexture);
+                material.SetTexture(MaskTex, _maskTexture);
             }
 
-            await DOTween.To(() => _cutoutRange, x => _cutoutRange = x, 1, _fadeDuration)
-                .OnUpdate(() => fadeMaterial.SetFloat(Range1, 1 - _cutoutRange))
+            // フェードアウト中にRangeを更新しながらアルファをフェード
+            await DOTween.To(() => _cutoutRange, x => _cutoutRange = x, 1f, _fadeDuration)
+                .OnUpdate(() => material.SetFloat(Range1, 1 - _cutoutRange))
                 .SetEase(_ease)
-                .ToUniTask();
+                .SetUpdate(true); // DeltaTimeの影響を受けない
         }
 
-        public async UniTask FadeIn(Material fadeMaterial)
+        /// <summary>
+        /// DOTweenのFadeを使用してフェードインします。
+        /// </summary>
+        public async UniTask FadeIn(Material material)
         {
+            // マスクテクスチャが設定されている場合、それをマテリアルに適用
             if (_maskTexture != null)
             {
-                fadeMaterial.SetTexture(MaskTex, _maskTexture);
+                material.SetTexture(MaskTex, _maskTexture);
             }
 
-            await DOTween.To(() => _cutoutRange, x => _cutoutRange = x, 0, _fadeDuration)
-                .OnUpdate(() => fadeMaterial.SetFloat(Range1, 1 - _cutoutRange))
+            // フェードイン中にRangeを更新しながらアルファをフェード
+            await DOTween.To(() => _cutoutRange, x => _cutoutRange = x, 0f, _fadeDuration)
+                .OnUpdate(() => material.SetFloat(Range1, 1 - _cutoutRange))
                 .SetEase(_ease)
+                .SetUpdate(true)
                 .ToUniTask();
         }
     }

@@ -26,6 +26,9 @@ namespace SoulRunProject.InGame
         public Action OnBossDead;
         public Action ToBossStage;
         public BossController CurrentBoss => _currentBoss;
+        public int StageDataIndex => _stageDataIndex;
+        public StageDatum[] StageData => _stageData;
+        public int FieldPatternIndex => _fieldPatternIndex;
 
         private void Start()
         {
@@ -154,6 +157,7 @@ namespace SoulRunProject.InGame
         void BossStage()
         {
             _currentStageState = StageState.PlayingBossStage;
+            
             Invoke(nameof(SpawnBoss), _stageData[_stageDataIndex].DelayBossSpawn);
         }
 
@@ -165,6 +169,8 @@ namespace SoulRunProject.InGame
             _currentBoss.InitializePosition(_fieldMover.MoveSegments[^1].transform.TransformPoint(_fieldMover.MoveSegments[^1].StartPos).x);
             _currentBoss.GetComponent<DamageableEntity>().OnDead += () => OnBossDead?.Invoke();
             CriAudioManager.Instance.Play(CriAudioType.CueSheet_BGM, "BGM_Boss", true);
+            Debug.LogError("ボス生成");
+            _fieldPatternIndex+= 2;
         }
         
         /// <summary> 次のステージに移行 </summary>

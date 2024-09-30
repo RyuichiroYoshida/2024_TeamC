@@ -35,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/SoulRunProject/Scenes/DebugScene/SceneChangeTest2.unity
     guid: b33f50fefe05fc246bead68fffb41bd5
+  - enabled: 1
+    path: Assets/SoulRunProject/Scenes/MainScene/ThankYouForPlaying.unity
+    guid: 988e24133f9252140bbb3144c2dba577
   m_configObjects: {}

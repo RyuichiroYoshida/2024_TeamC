@@ -4936,7 +4936,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c87255c3417497147a88ae3c1f608907, type: 2}
+  - {fileID: 2100000, guid: 2df12e2f2733a4d4e918400a4602671e, type: 2}
   - {fileID: 2100000, guid: 7154a27ca4f209047bbd02657bbbc16c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -5002,8 +5002,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useFirePointRotation: 0
   _useFlash: 0
-  _hit: {fileID: 1105495686751570, guid: 4328596502e67c1468c5794bdd5067b4, type: 3}
+  _hit: {fileID: 0}
   _flash: {fileID: 0}
+  _fireCueName: ShootSoulSword
   _detached: []
   _collider: {fileID: 2150742800137183200}
   _light: {fileID: 0}

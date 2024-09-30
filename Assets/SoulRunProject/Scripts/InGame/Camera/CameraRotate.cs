@@ -1,6 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using SoulRunProject.InGame;
+using UniRx;
 using UnityEngine;
 
 namespace SoulRunProject
@@ -11,20 +10,39 @@ namespace SoulRunProject
         [SerializeField, Header("回転制限")] private float _crampRotateZ;
         [SerializeField , Header("上昇率")] private float _improveRate;
         [SerializeField , Header("減衰率")] private float _decreaseRate;
-
         private float _currentRotateZ;
-        private void Update()
+        private Vector2 _inputVector;
+        private void Awake()
         {
-            float input = Input.GetAxis("Horizontal");
-            _currentRotateZ += -input * _improveRate * Time.deltaTime;
-            //回転制限
-            _currentRotateZ = Mathf.Clamp(_currentRotateZ, -_crampRotateZ, _crampRotateZ);
-            //減衰補完
-            _currentRotateZ = Mathf.Lerp(_currentRotateZ, 0f, _decreaseRate * Time.deltaTime);
+            PlayerInputManager.Instance.MoveInput.Subscribe(input => _inputVector = input).AddTo(this);
+        }
 
-            var myRotation = _cameraLookAt.transform.rotation;
+        private void FixedUpdate()
+        {
+            if (_inputVector.x > 0f)
+            {
+                _currentRotateZ = EaseIn(_currentRotateZ,_crampRotateZ, _improveRate * Time.fixedDeltaTime);
+            }
+            else if (_inputVector.x < 0f)
+            {
+                _currentRotateZ = EaseIn(_currentRotateZ, -_crampRotateZ, _improveRate * Time.fixedDeltaTime);
+            }
+            else
+            {
+                //減衰補完
+                _currentRotateZ = EaseIn(_currentRotateZ, 0f, _decreaseRate * Time.fixedDeltaTime);
+            }
+
             _cameraLookAt.transform.rotation  = Quaternion.AngleAxis(_currentRotateZ, Vector3.forward);
             
         }
+
+        private float EaseIn(float start, float end, float t)
+        {
+            t = Mathf.Clamp01(t);  // t を 0 と 1 の間に制限
+            t = t * t;  // 非線形補完のための関数
+            return Mathf.Lerp(start, end, t);
+        }
+        
     }
 }

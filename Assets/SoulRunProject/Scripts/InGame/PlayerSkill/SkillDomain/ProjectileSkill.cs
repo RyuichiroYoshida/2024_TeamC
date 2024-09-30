@@ -56,8 +56,6 @@ namespace SoulRunProject.InGame
                         bullet.GetReference(_playerManagerInstance);
                         bullet.OnFinishedAsync.Take(1).Subscribe(_ => _bulletPool.Return(bullet));
                     }
-
-                    CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Soulbullet");
                 }
             }
         }

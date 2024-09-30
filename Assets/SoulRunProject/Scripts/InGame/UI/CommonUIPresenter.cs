@@ -34,7 +34,7 @@ namespace SoulRunProject.InGame
             _playerLevelManager.OnLevelUp.Subscribe(level => _view.SetLevelText(level)).AddTo(_view);
             _soulSkillManager.CurrentSoul?.Subscribe(current => _view.SetSoulGauge(current, _soulSkillManager.RequiredSoul)).AddTo(_view);
             //TODO: スキル
-            _skillManager.OnAddSkill += skill => _view.SetSkillIcon(skill.SkillIcon, _skillManager.CreatedSkillList.Count - 1);
+            _skillManager.OnUpdateSkill += skill => _view.SetSkillIcon(skill);
             //playerManager.OnSkillIconChanged += (index, sprite) => _view.SetSkillIcon(index, sprite);
             ScoreManager.Instance.OnScoreChanged.Subscribe(score => _view.SetScoreText(score))
                 .AddTo(ScoreManager.Instance);

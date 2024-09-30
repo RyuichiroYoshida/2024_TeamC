@@ -49,9 +49,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraLookAt: {fileID: 3724060668842937376}
-  _crampRotateZ: 5
-  _improveRate: 50
-  _decreaseRate: 6
+  _crampRotateZ: 10
+  _improveRate: 10
+  _decreaseRate: 10
 --- !u!114 &6635071162787831542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,6 +65,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _impulseSource: {fileID: 3230847165229253650}
+  _impulseMagnitude: 0.2
 --- !u!114 &3230847165229253650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,7 +80,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ImpulseDefinition:
     m_ImpulseChannel: 1
-    m_ImpulseShape: 1
+    m_ImpulseShape: 3
     m_CustomImpulseShape:
       serializedVersion: 2
       m_Curve: []
@@ -117,7 +118,7 @@ MonoBehaviour:
     m_DissipationMode: 2
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
-  m_DefaultVelocity: {x: 0, y: -1, z: 0}
+  m_DefaultVelocity: {x: 0, y: 0, z: 0}
 --- !u!1 &392928014464894764
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,10 +130,10 @@ GameObject:
   - component: {fileID: 7117807622772118339}
   - component: {fileID: 9091037442287400240}
   - component: {fileID: 6519210490737000228}
-  - component: {fileID: 8752523051839283500}
   - component: {fileID: 3698741979491483856}
   - component: {fileID: 3932238436133655523}
   - component: {fileID: 2245462467506778556}
+  - component: {fileID: 7575172253712227642}
   - component: {fileID: 6585847965433512431}
   - component: {fileID: 5880127536023217182}
   m_Layer: 0
@@ -174,12 +175,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _useGodMode: 0
-  _playerInput: {fileID: 8752523051839283500}
   _baseStatus: {fileID: 11400000, guid: d50a16b38666d804883e3040b335a638, type: 2}
   _playerCamera: {fileID: 6635071162787831542}
   _hitDamageEffectManager: {fileID: 5236282758698190153}
   _decreaseSpeed: 30
   _deadAnimationTime: 2
+  _playerCenterOffset: {x: 0, y: 0.5, z: 0}
   CurrentPlayerStatus:
     _hp: 530
     _attackValue: 10
@@ -213,24 +214,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerAnimator: {fileID: 6367239660365062107}
   _moveSpeed: 30
-  _jumpPower: 30
+  _jumpPower: 35
   _grav: 80
   _yAxisGroundLine: 0
   _distanceBetweenPivotAndGroundPoint: 0.1
   _xMoveRangeMin: -21
   _xMoveRangeMax: 21
---- !u!114 &8752523051839283500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 392928014464894764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67af9876f0281cf40b526c49962e4dae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3698741979491483856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,7 +233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _initialLevel: 1
-  _expToNextLevel: 070000000c00000011000000160000001c0000002200000028000000340000003a00000040000000460000004a0000004e0000005a000000640000007800000096000000
+  _expToNextLevel: 070000000c00000011000000160000001c0000002200000028000000340000003a00000040000000460000005a0000006e0000008200000096000000aa000000c8000000fa0000002c0100005e01000090010000c2010000f401000058020000bc020000
 --- !u!114 &3932238436133655523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,8 +261,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c77eda4c25f42df42900dfed143ab44a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _currentSoulSkill: {fileID: 7575172253712227642}
   _initialSoul: 0
-  _regenerativePerSec: 0.2
+  _regenerativePerSec: 0.5
+--- !u!114 &7575172253712227642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 392928014464894764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5461754b41f557447a03bf580e1bce57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _skillType: 0
+  _name: "\u30BD\u30A6\u30EB\u30D5\u30EC\u30A4\u30E0"
+  _description: "\u30E1\u30C6\u30AA"
+  _requiredSoul: 100
+  _duration: 3
+  _meteorPrefab: {fileID: 1247631016516920979, guid: 9f96e5b5c8ea06a48a28b24a13e95b2b,
+    type: 3}
+  _hitMeteorPrefab: {fileID: 9136087545407824072, guid: 06efdcd4a7f3f684390c99f113852ccf,
+    type: 3}
+  _hitMeteorLifeTime: 0.5
+  _groundPos: 0.1
+  _attackDelay: 0.4
+  _attackDamage: 1000
+  _giveKnockBack:
+    _power: 0
+  _relativePosition: {x: 0, y: 0, z: 0}
+  _attackPositionOffset: {x: 0, y: 0, z: 30}
+  _attackArea: {x: 30, y: 20, z: 60}
+  _gizmoColor: {r: 1, g: 0, b: 0.14901961, a: 0.19215687}
 --- !u!54 &6585847965433512431
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -437,13 +458,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7271154435157381996}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: -0.000000010536712, z: 0.000000010536712, w: 0.7071068}
+  m_LocalRotation: {x: 0.62728363, y: 0, z: 0, w: 0.77879095}
   m_LocalPosition: {x: -2.3900003, y: 98.1, z: 8.3}
   m_LocalScale: {x: 2.865, y: 2.8649998, z: 2.8649998}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7117807622772118339}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 77.7, y: 0, z: 0}
 --- !u!108 &1570944140317407289
 Light:
   m_ObjectHideFlags: 0
@@ -458,8 +479,8 @@ Light:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 2657.4
   m_Range: 251.5
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
+  m_SpotAngle: 56.698017
+  m_InnerSpotAngle: 25.892603
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -590,8 +611,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.000000014901159, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.49, z: 0}
-  m_LocalScale: {x: 0.20381865, y: 0.20381865, z: 0.20381865}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.27, y: 0.27, z: 0.27}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8143520884389902864}
   m_Father: {fileID: 7117807622772118339}
@@ -648,8 +669,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _duration: 0.1
-  _loopCount: 3
+  _loopCount: 1
   _hitEffect: {fileID: 3726023518174682990}
+  _dissolveFadeTime: 1
 --- !u!212 &4722900643216877938
 SpriteRenderer:
   m_ObjectHideFlags: 0

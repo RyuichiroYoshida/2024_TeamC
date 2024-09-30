@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using SoulRunProject.Audio;
 using SoulRunProject.InGame;
 using SoulRunProject.SoulMixScene;
@@ -15,12 +16,12 @@ namespace SoulRunProject.Common
     public class PlayerManager : MonoBehaviour, IPausable
     {
         [SerializeField] private bool _useGodMode;
-        [SerializeField] private PlayerInput _playerInput;
         [SerializeField] private BaseStatus _baseStatus;
         [SerializeField] private PlayerCamera _playerCamera;
         [SerializeField] private HitDamageEffectManager _hitDamageEffectManager;
         [SerializeField, CustomLabel("ダメージを受けた時の速度減少量")] private float _decreaseSpeed;
         [SerializeField, CustomLabel("死亡アニメーション時間")] private float _deadAnimationTime;
+        [SerializeField, CustomLabel("プレイヤーの中心座標。足元からのオフセット。")] private Vector3 _playerCenterOffset = new(0, 0.5f, 0);
         
         private IPlayerPausable[] _inGameTimes;
         private PlayerLevelManager _pLevelManager;
@@ -32,6 +33,8 @@ namespace SoulRunProject.Common
         private FieldMover _fieldMover;
         public ReadOnlyReactiveProperty<float> CurrentHp => CurrentPlayerStatus.CurrentHpProperty;
         public PlayerResourceContainer ResourceContainer => _resourceContainer;
+        public Vector3 PlayerCenterOffset => _playerCenterOffset;
+        public int PlayerCurrentLevel => _pLevelManager.OnLevelUp.Value;
         //public PlayerStatusManager PlayerStatusManager => _statusManager;
         
         [CustomLabel("現在のプレイヤーのステータス")]　public PlayerStatus CurrentPlayerStatus;
@@ -69,10 +72,11 @@ namespace SoulRunProject.Common
         /// </summary>
         private void InitializeInput()
         {
-            _playerInput.MoveInput.Subscribe(input => _playerMovement.InputMove(input));
-            _playerInput.MoveInput.Subscribe(input => _playerMovement.RotatePlayer(input));
-            _playerInput.JumpInput.Where(x => x).Subscribe(_ => _playerMovement.Jump()).AddTo(this);
-            _playerInput.ShiftInput.Where(x => x).Subscribe(_ => UseSoulSkill()).AddTo(this);
+            var inputManager = PlayerInputManager.Instance;
+            inputManager.MoveInput.Subscribe(input => _playerMovement.InputMove(input)).AddTo(this);
+            inputManager.MoveInput.Subscribe(input => _playerMovement.RotatePlayer(input)).AddTo(this);
+            inputManager.JumpInput.Subscribe(_ => _playerMovement.Jump()).AddTo(this);
+            inputManager.SoulSkillInput.Subscribe(_ => UseSoulSkill()).AddTo(this);
         }
         public void Register()
         {
@@ -118,11 +122,22 @@ namespace SoulRunProject.Common
             }
             _fieldMover.DownSpeed(_decreaseSpeed);
             _playerCamera.DamageCam();
-            CurrentPlayerStatus.CurrentHp -= Calculator.CalcDamage(damage, CurrentPlayerStatus.DefenceValue, 0, 1);
             
             // 白色点滅メソッド
             _hitDamageEffectManager.HitFadeBlinkWhite();
+            CriAudioManager.Instance.Play(CriAudioType.CueSheet_VOICE, "VOICE_Hit");
+            
+            // DeathでCriにStopAllがかかるのでVoiceの後にする
+            CurrentPlayerStatus.CurrentHp -= Calculator.CalcDamage(damage, CurrentPlayerStatus.DefenceValue, 0, 1);
+            
+            // Hit音は出したいのでHp計算の後
             CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Damage");
+        }
+
+        // ノックバックを与える
+        public void TakeKnockBack(float targetPosX, float duration)
+        {
+            transform.DOBlendableMoveBy(new Vector3(targetPosX - transform.position.x, 0, 0), duration);
         }
 
         public void Heal(float value)
@@ -135,8 +150,7 @@ namespace SoulRunProject.Common
         {
             OnDead?.Invoke();
             CriAudioManager.Instance.StopAll();
-            Debug.Log("GameOver");
-            //SwitchPause(true);
+            CriAudioManager.Instance.Play(CriAudioType.CueSheet_VOICE, "VOICE_Death");
         }
 
         #region SoulSkill関連
@@ -148,10 +162,6 @@ namespace SoulRunProject.Common
             _soulSkillManager.UseSoulSkill();
         }
         
-        public void SetSoulSkill(SoulSkillType soulSkillType)
-        {
-            _soulSkillManager.SetSoulSkill(soulSkillType);
-        }
         
         public void AddSoul(float soul)
         {

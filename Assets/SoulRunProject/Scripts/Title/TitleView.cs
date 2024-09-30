@@ -1,28 +1,34 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using SoulRun.InGame;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.Video;
 
 namespace SoulRunProject.Title
 {
     public class TitleView : MonoBehaviour
     {
-        [SerializeField] private InputUIButtonBase _startButton;
-        [SerializeField] private InputUIButtonBase _optionButton;
-        [SerializeField] private InputUIButtonBase _exitSimButton;
-        [SerializeField] private InputUIButtonBase _returnButton;
+        [SerializeField] private CustomButtonBase _startButton;
+        [SerializeField] private CustomButtonBase _optionButton;
+        [SerializeField] private CustomButtonBase _exitButton;
+        [SerializeField] private CustomButtonBase _optionCloseButton;
         [SerializeField] private Light2D _soulLight2D;
         [SerializeField] private ParticleSystem _particleSystem;
-        [SerializeField] private GameObject _optionPanel;
-        public InputUIButtonBase StartButton => _startButton;
-        public InputUIButtonBase OptionButton => _optionButton;
-        public InputUIButtonBase ExitButton => _exitSimButton;
-        public InputUIButtonBase ReturnButton => _returnButton;
-        
-        public GameObject OptionPanel => _optionPanel;
-        
+        [SerializeField] private CanvasGroup _optionPanel;
+        [SerializeField] private CanvasGroup _basePanel;
+        [SerializeField] private CanvasGroup _videoPanel;
+        [SerializeField] private VideoPlayer _videoPlayer;
+        public CustomButtonBase StartButton => _startButton;
+        public CustomButtonBase OptionButton => _optionButton;
+        public CustomButtonBase OptionCloseButton => _optionCloseButton;
+        public CustomButtonBase ExitButton => _exitButton;
+        public CanvasGroup OptionPanel => _optionPanel;
+        public CanvasGroup BasePanel => _basePanel;
+
+        public CanvasGroup VideoPanel => _videoPanel;
+        public VideoPlayer VideoPlayer => _videoPlayer;
+
         public float minFalloffIntensity = 0.5f;
         public float maxFalloffIntensity = 1f;
         public float duration = 2.0f;
@@ -31,7 +37,7 @@ namespace SoulRunProject.Title
         {
             EventSystem.current.SetSelectedGameObject(_startButton.gameObject);
             _startButton.OnSelect(null);
-            Debug.Log(_particleSystem);
+            //Debug.Log(_particleSystem);
             _particleSystem.Play();
             StartCoroutine(AnimateLightFalloff());
         }

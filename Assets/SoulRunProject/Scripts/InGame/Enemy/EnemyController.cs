@@ -1,4 +1,5 @@
-﻿using SoulRunProject.Audio;
+﻿using Cysharp.Threading.Tasks;
+using SoulRunProject.Audio;
 using SoulRunProject.Common;
 using UnityEngine;
 
@@ -9,7 +10,8 @@ namespace SoulRunProject.InGame
     {
         [SerializeReference] [SubclassSelector] [CustomLabel("攻撃処理")]
         protected EntityAttacker _attacker;
-
+        [SerializeReference] [SubclassSelector] [CustomLabel("スタート時移動処理")]
+        protected EntityMover _startMover;
         [SerializeReference] [SubclassSelector] [CustomLabel("移動処理")]
         protected EntityMover _mover;
 
@@ -28,14 +30,26 @@ namespace SoulRunProject.InGame
             Register();
             _animator = GetComponent<Animator>();
             _damageableEntity = GetComponent<DamageableEntity>();
-            
-            if (_mover is not null) _mover.Despawn += _damageableEntity.Despawn;
+            _playerManagerInstance = FindObjectOfType<PlayerManager>();
+            if (_playerManagerInstance) _playerTransform = _playerManagerInstance.transform;
+            if(_attacker != null) _attacker.Animator = _animator;
+            if (_mover is not null) _mover.Complete += _damageableEntity.Despawn;
         }
 
-        private void OnEnable()
+        public async UniTaskVoid Initialize()
         {
             _damageableEntity.OnDead += () => CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Enemy_Dead");
             _timer = 0;
+            var completionSource = new UniTaskCompletionSource();
+
+            if (_startMover != null)
+            {
+                _startMover.OnStart(transform, _playerManagerInstance);
+                _startMover.Complete += () => completionSource.TrySetResult();
+                await completionSource.Task;
+            }
+            _attacker?.OnStart(transform);
+            _mover?.OnStart(transform, _playerManagerInstance);
             _spawnFlag = true;
         }
 
@@ -46,36 +60,22 @@ namespace SoulRunProject.InGame
 
         private void OnDestroy()
         {
-            if (_mover is not null) _mover.Despawn -= _damageableEntity.Despawn;
+            if (_mover is not null) _mover.Complete -= _damageableEntity.Despawn;
             UnRegister();
         }
-
-        /// <summary>
-        ///     各行動の初期化処理を行うメソッド
-        /// </summary>
-        private void Start()
-        {
-            _playerManagerInstance = FindObjectOfType<PlayerManager>();
-            if (_playerManagerInstance) _playerTransform = _playerManagerInstance.transform;
-            Initialize();
-        }
-
-        public void Initialize()
-        {
-            _attacker?.OnStart();
-            _mover?.OnStart(transform, _playerManagerInstance);
-        }
-
         private void Update()
         {
+            _startMover?.OnUpdateMove(transform, _playerTransform);
             if (!_spawnFlag) return;
 
             _timer += Time.deltaTime;
-            _mover?.OnUpdateMove(transform, _playerTransform);
             _attacker?.OnUpdateAttack(transform, _playerTransform);
+            if (_attacker is EntityLongRangeAttacker { CanMove: true } or not EntityLongRangeAttacker)
+            {
+                _mover?.OnUpdateMove(transform, _playerTransform);
+            }
 
             if (_enemyLifeTime < _timer) _damageableEntity.Despawn();
-
             if (_playerTransform.position.z - 5 > gameObject.transform.position.z) _damageableEntity.Despawn();
         }
 

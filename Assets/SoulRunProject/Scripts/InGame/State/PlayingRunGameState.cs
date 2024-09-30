@@ -1,3 +1,5 @@
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using SoulRunProject.Common;
 using SoulRunProject.Framework;
 using UniRx;
@@ -11,7 +13,7 @@ namespace SoulRunProject.InGame
     {
         private StageManager _stageManager;
         private PlayerManager _playerManager;
-        private PlayerInput _playerInput;
+        private PlayerInputManager _playerInputManager;
         private PlayerLevelManager _playerLevelManager;
         private CompositeDisposable _compositeDisposable = new CompositeDisposable();
         
@@ -20,11 +22,11 @@ namespace SoulRunProject.InGame
         public bool IsPlayerDead { get; private set; }
         public bool SwitchToLevelUpState { get; private set; }
         public PlayingRunGameState(StageManager stageManager, PlayerManager playerManager, 
-            PlayerInput playerInput, PlayerLevelManager playerLevelManager)
+            PlayerInputManager playerInputManager, PlayerLevelManager playerLevelManager)
         {
             _stageManager = stageManager;
             _playerManager = playerManager;
-            _playerInput = playerInput;
+            _playerInputManager = playerInputManager;
             _playerLevelManager = playerLevelManager;
         }
         
@@ -34,16 +36,16 @@ namespace SoulRunProject.InGame
             PauseManager.Pause(false);
             SwitchToLevelUpState = false;
             ArrivedBossStagePosition = false;
-            
+            SwitchToPauseState = false;
+
+            var cts = CancellationTokenSource.CreateLinkedTokenSource(_playerManager.destroyCancellationToken);
             // PlayerInputへの購読
-            _playerInput.PauseInput
-                .SkipLatestValueOnSubscribe()
-                .Subscribe(toPause =>
+            _playerInputManager.PauseInput
+                .Subscribe(_ =>
                 {
-                    SwitchToPauseState = toPause;
-                    if (toPause) StateChange();
-                })
-                .AddTo(_compositeDisposable);
+                    SwitchToPauseState = true;
+                    StateChange();
+                }).AddTo(_compositeDisposable).AddTo(cts.Token);
             
             // レベルアップの購読
             _playerLevelManager.OnLevelUp

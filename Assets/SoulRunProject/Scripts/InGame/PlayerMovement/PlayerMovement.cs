@@ -1,11 +1,13 @@
 using System;
 using System.Threading;
+using Cysharp.Threading.Tasks;
 using SoulRunProject.Audio;
 using SoulRunProject.Common;
 using UniRx;
 using UniRx.Triggers;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace SoulRunProject.InGame
 {
@@ -41,13 +43,15 @@ namespace SoulRunProject.InGame
 
         public float DistanceBetweenPivotAndGroundPoint => _distanceBetweenPivotAndGroundPoint;
 
-        private void Awake()
+        private async void Awake()
         {
             _rb = GetComponent<Rigidbody>();
             _rb.useGravity = false;
 
             _isGround.AddTo(this);
             this.OnDestroyAsObservable().Subscribe(_ => OnJumped = null);
+            
+            await UniTask.DelayFrame(3);// ステージが生成されるまで待機
             _isGround.SkipLatestValueOnSubscribe().Subscribe(flag =>
             {
                 if (flag)
@@ -55,6 +59,20 @@ namespace SoulRunProject.InGame
                 else
                     _spin = CriAudioManager.Instance.Play(CriAudioType.CueSheet_SE, "SE_Spin");
             }).AddTo(this);
+        }
+
+        private void Start()
+        {
+            PauseManager.IsPause.Subscribe(isPause =>
+            {
+                if (isPause) CriAudioManager.Instance.Pause(CriAudioType.CueSheet_SE, _spin);
+                else CriAudioManager.Instance.Resume(CriAudioType.CueSheet_SE, _spin);
+            });
+
+            SceneManager.sceneLoaded += (arg0, mode) =>
+            {
+                CriAudioManager.Instance.Stop(CriAudioType.CueSheet_SE, _spin);
+            };
         }
 
         private void Update()

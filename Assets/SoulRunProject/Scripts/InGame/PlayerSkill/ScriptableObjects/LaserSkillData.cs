@@ -12,7 +12,9 @@ namespace SoulRunProject.Common
         private LevelUpEventTable<LaserLevelUpEvent> _levelUpTable;
         [SerializeField, CustomLabel("生成するプレハブ")] private LaserController _original;
         [SerializeField, CustomLabel("高さのオフセット")] private float _offsetY = 10f;
+        [SerializeField, CustomLabel("前方のオフセット")] private float _offsetZ = 10f;
         [SerializeField, CustomLabel("後方に半円状にレーザーを展開する際の円の半径")] private float _radius = 5f;
+        [SerializeField, CustomLabel("後方に半円状にレーザーを展開する際の円の半径のZ補整")] private float _lazerRadiusZManipulation = 5f;
         [SerializeField, CustomLabel("複数レーザーがある際に、次のレーザーを指定した秒数遅れて起動させる")] private float _delay = 0.1f;
         
         private LaserSkillData()
@@ -27,6 +29,8 @@ namespace SoulRunProject.Common
         public LaserController Original => _original;
         public float Delay => _delay;
         public float OffsetY => _offsetY;
+        public float OffsetZ => _offsetZ;
         public float Radius => _radius;
+        public float LazerRadiusZManipulation => _lazerRadiusZManipulation;
     }
 }

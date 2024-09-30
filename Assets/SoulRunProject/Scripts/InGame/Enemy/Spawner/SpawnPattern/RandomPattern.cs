@@ -31,7 +31,7 @@ namespace SoulRunProject.Common.Interface
                     spawnAngle = Random.Range(-60f, 60f);
                 }
 
-                _spawnPositions.Add((new Vector3(GetRandomValue(), 1, GetRandomValue()), spawnAngle));
+                _spawnPositions.Add((new Vector3(GetRandomValue(), 0, GetRandomValue()), spawnAngle));
             }
 
             return _spawnPositions;

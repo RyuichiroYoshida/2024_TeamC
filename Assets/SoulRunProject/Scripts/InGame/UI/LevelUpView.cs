@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using SoulRun.InGame;
 using UnityEngine;
@@ -16,6 +17,7 @@ namespace SoulRunProject.InGame
         [SerializeField] private ButtonAndView[] _upgradeButtons;
 
         public ButtonAndView[] UpgradeButtons => _upgradeButtons;
+        private CancellationTokenSource _cts = new CancellationTokenSource();
 
         /// <summary>
         /// LevelUpPanelの表示を切り替える
@@ -23,18 +25,20 @@ namespace SoulRunProject.InGame
         /// <param name="isShow"></param>
         public void OpenLevelUpPanel()
         {
-            Debug.Log("OpenLevelUpPanel");
+            if (_cts != null)
+            {
+                _cts.Cancel();
+            }
             _levelUpPanel.SetActive(true);
             _popupView.OpenPopup();
-            EventSystem.current.SetSelectedGameObject(_upgradeButtons[0].InputUIButton.gameObject);
-            _upgradeButtons[0].InputUIButton.OnSelect(null);
+            EventSystem.current.SetSelectedGameObject(_upgradeButtons[0].CustomButton.gameObject);
+            _upgradeButtons[0].CustomButton.OnSelect(null);
         }
         
-        public async UniTask CloseLevelUpPanel()
+        public void CloseLevelUpPanel()
         {
-            Debug.Log("CloseLevelUpPanel");
-            await _popupView.ClosePopup();
-            _levelUpPanel.SetActive(false);
+            _cts = new CancellationTokenSource();
+            _popupView.ClosePopup(_cts.Token).Forget();
         }
 
         /// <summary>
@@ -43,12 +47,12 @@ namespace SoulRunProject.InGame
         [Serializable]
         public class ButtonAndView
         {
-            [SerializeField] private InputUIButton _inputUIButton;
+            [SerializeField] private CustomButtonBase _customButton;
             [SerializeField] private Text _nameAndLevelText;
             [SerializeField] private Text _explanatoryText;
             [SerializeField] private Image _buttonIconImage;
             
-            public InputUIButton InputUIButton => _inputUIButton;
+            public CustomButtonBase CustomButton => _customButton;
             public Text NameAndLevelText => _nameAndLevelText;
             public Text ExplanatoryText => _explanatoryText;
             public Image ButtonIconImage => _buttonIconImage;

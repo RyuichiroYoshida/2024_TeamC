@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bca36d16f8ab48209b5ca851d40d6df5, type: 3}
+  m_Name: ScoreData
+  m_EditorClassIdentifier: 
+  _scoreList:
+  - _upperThreshold: 20000
+    _lowerThreshold: -2147483648
+    _rankSprite: {fileID: 21300000, guid: dbd02fefc0e4a89418b559472ab49d72, type: 3}
+  - _upperThreshold: 40000
+    _lowerThreshold: 20001
+    _rankSprite: {fileID: 21300000, guid: d53c5bb177efa24419952bff0ae4b168, type: 3}
+  - _upperThreshold: 70000
+    _lowerThreshold: 40001
+    _rankSprite: {fileID: 21300000, guid: f1481de688cbfb24d99dddf7c4728648, type: 3}
+  - _upperThreshold: 2147483647
+    _lowerThreshold: 70001
+    _rankSprite: {fileID: 21300000, guid: 4a3c3452d2961e44a8c0924f756255f1, type: 3}

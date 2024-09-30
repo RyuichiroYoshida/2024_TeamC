@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using SoulRunProject.Audio;
@@ -22,13 +21,15 @@ namespace SoulRunProject.InGame
         [SerializeField, CustomLabel("デフォルト位置")] private Vector3 _defaultPos;
         [SerializeField] private Image _hpImage;
         [SerializeField] private Animator _bossAnimator;
-        [SerializeField, Tooltip("パワーアップする閾値(%)")] private float[] _powerUpThreshold; 
-        [Header("ボスの行動"), CustomLabel("行動の種類"), SerializeReference, SubclassSelector] List<IBossBehavior> _bossBehaviors;
+        [SerializeField, Tooltip("パワーアップする閾値(%)")] private float _powerUpThreshold; 
+        [Header("ボスの行動"), CustomLabel("行動の種類"), SerializeReference, SubclassSelector] IBossBehavior[] _bossBehaviors;
         [SerializeField, CustomLabel("行動待機時間")] private float _behaviorIntervalTime;
+        [SerializeField, CustomLabel("強化後行動待機時間")] private float _buffedIntervalTime;
         [SerializeField, CustomLabel("死亡アニメーション時間")] private float _deadAnimationTime;
 
         private BossState _currentState = BossState.Animation;
         private int _thresholdIndex;
+        private float _interval;
         private float _intervalTimer;
         /// <summary> 動いている行動 </summary>
         private IBossBehavior _inActionBehavior;
@@ -55,6 +56,7 @@ namespace SoulRunProject.InGame
         private void Start()
         {
             Transform playerTf = FindObjectOfType<PlayerManager>().transform;
+            _interval = _behaviorIntervalTime;
             
             foreach (var behavior in _bossBehaviors)
             {
@@ -71,26 +73,12 @@ namespace SoulRunProject.InGame
             // hp減少により強化される
             bossDamageable.CurrentHp
                 .SkipLatestValueOnSubscribe()
-                .Where(_ => _powerUpThreshold.Length > _thresholdIndex)
+                .Where(hp => _powerUpThreshold > hp / bossDamageable.MaxHp * 100)
+                .Take(1) // 現時点強化は1回だけ
                 .Subscribe(hp =>
                 {
-                    while (_powerUpThreshold.Length > _thresholdIndex)
-                    {
-                        if (bossDamageable.MaxHp * _powerUpThreshold[_thresholdIndex] / 100 >= hp)
-                        {
-                            foreach (var bossBehavior in _bossBehaviors)
-                            {
-                                ((BossBehaviorBase)bossBehavior).PowerUpBejaviors[Mathf.Min(((BossBehaviorBase)bossBehavior)
-                                    .PowerUpBejaviors.Count - 1, _thresholdIndex)]?.Invoke(this);
-                            }
-                            
-                            _thresholdIndex++;
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
+                    foreach (var behavior in _bossBehaviors) behavior.BuffBehavior(this);
+                    _interval = _buffedIntervalTime;
                 })
                 .AddTo(this);
 
@@ -116,7 +104,7 @@ namespace SoulRunProject.InGame
                 case BossState.Standby:
                     _intervalTimer += Time.deltaTime;
                 
-                    if (_intervalTimer >= _behaviorIntervalTime)
+                    if (_intervalTimer >= _interval)
                     {
                         _currentState = BossState.InAction;
                         IBossBehavior[] selectable = _bossBehaviors.Where(behavior => behavior != _inActionBehavior).ToArray();
@@ -139,6 +127,7 @@ namespace SoulRunProject.InGame
             await UniTask.WaitUntil(() => _bossAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f, 
                 cancellationToken: this.GetCancellationTokenOnDestroy());
             _currentState = BossState.Standby;
+            CriAudioManager.Instance.Play(CriAudioType.CueSheet_VOICE, "VOICE_BossLaughing");
         }
 
         private enum BossState
@@ -175,6 +164,8 @@ namespace SoulRunProject.InGame
         public void BeginAction();
         /// <summary> Action中Update </summary>
         public void UpdateAction(float deltaTime);
+        /// <summary> 攻撃強化処理 </summary>
+        public void BuffBehavior(BossController bossController);
     }
 
     /// <summary>
@@ -186,17 +177,10 @@ namespace SoulRunProject.InGame
     {
         /// <summary> Action終了時に呼ばれる </summary>
         public Action OnFinishAction;
-        public List<Action<BossController>> PowerUpBejaviors = new ();
 
         public abstract void Initialize(BossController bossController, Transform playerTf);
         public abstract void BeginAction();
         public abstract void UpdateAction(float deltaTime);
-
-        protected enum PowerUpName
-        {
-            強化1,
-            強化2,
-            強化3
-        }
+        public abstract void BuffBehavior(BossController bossController);
     }
 }

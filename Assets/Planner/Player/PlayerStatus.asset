@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: PlayerStatus
   m_EditorClassIdentifier: 
   _playerStatus:
-    _hp: 250
-    _attackValue: 10
+    _hp: 150
+    _attackValue: 5
     _defenceValue: 0
     _coolTimeReductionRate: 1
     _skillSizeUpRate: 1
@@ -29,5 +29,5 @@ MonoBehaviour:
     _goldLuckRate: 1
     _criticalRate: 0
     _criticalDamageRate: 1.3
-    _attractItemRange: 8
+    _attractItemRange: 18
     _dropIncreasedRate: 5

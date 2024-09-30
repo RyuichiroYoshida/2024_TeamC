@@ -81,7 +81,7 @@ namespace SoulRunProject.InGame
             }
             
             var attractRange = _player.CurrentPlayerStatus.AttractItemRange;
-            var distance = _player.transform.position - transform.position;
+            var distance = _player.transform.position + _player.PlayerCenterOffset - transform.position;
             float attractSpeed = _player.CurrentPlayerStatus.MoveSpeed + attractRange;
             if (distance.sqrMagnitude < attractRange * attractRange)
             {
@@ -107,6 +107,11 @@ namespace SoulRunProject.InGame
             _rotateTween = null;
             _projectileMotionSequence?.Kill();
             _projectileMotionSequence = null;
+            if (Parent && ActiveParent)
+            {
+                Parent.Targets.Remove(transform);
+                ActiveParent = false;
+            }
         }
 
         private void OnTriggerEnter(Collider other)

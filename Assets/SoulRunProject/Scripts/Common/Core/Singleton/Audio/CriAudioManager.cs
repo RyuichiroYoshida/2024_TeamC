@@ -29,7 +29,7 @@ namespace SoulRunProject.Audio
         public IReactiveProperty<float> VoiceVolume { get; private set; } = new ReactiveProperty<float>(1f);
 
 
-        private void Awake()
+        public override void OnAwake()
         {
             // ACF設定
             string path = Application.streamingAssetsPath + $"/{_audioSetting.StreamingAssetsPathAcf}.acf";
@@ -58,9 +58,9 @@ namespace SoulRunProject.Audio
                 {
                     _audioPlayers.Add(CriAudioType.CueSheet_SE, new SEPlayer(cueSheet.CueSheetName, _listener));
                 }
-                else if (cueSheet.CueSheetName == CriAudioType.CueSheet_Voice.ToString())
+                else if (cueSheet.CueSheetName == CriAudioType.CueSheet_VOICE.ToString())
                 {
-                    _audioPlayers.Add(CriAudioType.CueSheet_Voice, new VoicePlayer(cueSheet.CueSheetName, _listener));
+                    _audioPlayers.Add(CriAudioType.CueSheet_VOICE, new VoicePlayer(cueSheet.CueSheetName, _listener));
                 }
                 else if (cueSheet.CueSheetName == CriAudioType.CueSheet_ME.ToString())
                 {
@@ -78,9 +78,7 @@ namespace SoulRunProject.Audio
             BgmVolume.Subscribe(volume => OnVolumeChanged(CriAudioType.CueSheet_BGM, volume)).AddTo(this);
             SeVolume.Subscribe(volume => OnVolumeChanged(CriAudioType.CueSheet_SE, volume)).AddTo(this);
             MeVolume.Subscribe(volume => OnVolumeChanged(CriAudioType.CueSheet_ME, volume)).AddTo(this);
-            VoiceVolume.Subscribe(volume => OnVolumeChanged(CriAudioType.CueSheet_Voice, volume)).AddTo(this);
-
-            SceneManager.sceneUnloaded += Unload;
+            VoiceVolume.Subscribe(volume => OnVolumeChanged(CriAudioType.CueSheet_VOICE, volume)).AddTo(this);
         }
 
         private void OnMasterVolumeChanged(float volume)
@@ -199,6 +197,10 @@ namespace SoulRunProject.Audio
                 float adjustedVolume = Math.Min(volume, MasterVolume.Value * volume);
                 player.SetVolume(adjustedVolume);
             }
+            else if (type == CriAudioType.Master)
+            {
+                //Debug.Log($"MasterVolume: {volume}");
+            }
             else
             {
                 Debug.LogWarning($"Audio type {type} not supported.");
@@ -247,20 +249,11 @@ namespace SoulRunProject.Audio
                 return player.Volume.Value;
             }
 
-            return 1f;
+            return type == CriAudioType.Master ? MasterVolume.Value : 1f;
         }
 
         private void Unload(Scene scene)
         {
-            foreach (var player in _audioPlayers.Values)
-            {
-                player.Dispose();
-            }
-        }
-
-        public void Dispose()
-        {
-            SceneManager.sceneUnloaded -= Unload;
             foreach (var player in _audioPlayers.Values)
             {
                 player.Dispose();
