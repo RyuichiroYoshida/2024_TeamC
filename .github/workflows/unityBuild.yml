@@ -8,5 +8,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: test
-        run: "C:/Users/vantan/Desktop/Runner/unity-build.cmd"
+      # - name: Build
+      #   run: "C:/Users/vantan/Desktop/Runner/unity-build.cmd"
+      - name: Discord Post
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data '{"content":"Unity Build Finished"}' ${{ secrets.DISCORD_WEBHOOK_URL }}
