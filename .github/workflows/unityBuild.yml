@@ -1,5 +1,8 @@
+# このGitHub Actionsの名前定義
 name: Unity Build
+# このGitHub Actionsが実行されるトリガーを定義
 on:
+    # 手動のみで実行する場合はworkflow_dispatchを指定
     workflow_dispatch: {}
 jobs:
   build:
@@ -7,11 +10,15 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Checkout
+        # このGitHub Actionsが実行される前に必要なアクションを指定 (今回はチェックアウトを行うアクション)
         uses: actions/checkout@v2
         with:
+          # クローンする際にローカルリポジトリをクリーンにするかどうかを指定
           clean: false
+          # LFSを使用するかどうかを指定
           lfs: false
       - name: Build
+        # 指定したcmdファイルを実行する
         run: "C:/Users/vantan/Desktop/Runner/unity-build.cmd"
       # - name: Discord Post
       #   run: |
